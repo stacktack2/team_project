@@ -19,77 +19,74 @@
 		let mgender = document.frm.mgender.value;
 		let memail = document.frm.memail.value;
 		
-		let check = true;
 		/* 미입력칸 빨간줄 처리 */
-		if(mid == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
+		let check = true;
+		if(mid == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mpw == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mpwRe == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mnickNm == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mname == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mbirth == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mphone == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(mgender == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(memail == ""){	check = false;	document.frm.mid.style.border="1px solid red";
+		}else{	check = true;	document.frm.mid.removeAttribute("style");}
+		
+		if(check && checkIdFlag){
+			document.frm.submit();
 		}
-		if(mpw == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(mpwRe == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(mnickNm == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(mname == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(mbirth == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(mphone == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(mgender == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
-		if(memail == ""){
-			check = false;
-			document.frm.mid.style.border="1px solid red";
-		}else{
-			check = true;
-			document.frm.mid.removeAttribute("style");
-		}
+	}
+	
+	let checkIdFlag = false;
+	
+//	아이디 중복확인 함수
+	function checkIdFn(){
+		let id = document.frm.mid.value;
+		
+		$.ajax({
+			url : "checkId.jsp",
+			type : "get",
+			data : {id : id},
+			success : function(data){
+				// 0 : 사용가능, 1 : 사용 불가능
+				let result = data.trim();
+				if(result == 0){
+					checkIdFlag = true;
+					alert("사용가능한 아이디입니다.");
+				}else{
+					checkIdFlag = false;
+					alert("이미 존재하는 아이디입니다.");
+				}
+			},error:function(){
+				console.log("eroor");
+				checkIdFlag = false;
+			}
+		});
+	}
+	
+	function resetFn(){
+		checkIdFlag = false;
 	}
 </script>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
-<%@ include file="/include/joinSemantic.jsp" %>
 	<section>
 <!-- 회원가입 폼 -->
 		<article>
@@ -100,8 +97,8 @@
 					<tr>
 						<th align="right">아이디: </th>
 						<td>
-							<input type="text" name="mid">
-							<button type="button">중복확인</button>
+							<input type="text" name="mid" onblur="resetFn()">
+							<button type="button" onclick="checkIdFn()">중복확인</button>
 						</td>
 					</tr>
 <!-- 비밀번호 -->
@@ -117,7 +114,10 @@
 <!-- 닉네임 -->
 					<tr>
 						<th align="right">닉네임: </th>
-						<td><input type="text" name="mnickNm"></td>
+						<td>
+							<input type="text" name="mnickNm">
+							<button type="button" onclick="checkNickNm()">중복확인</button>
+						</td>
 					</tr>
 <!-- 사용자 이름 -->
 					<tr>
@@ -133,9 +133,9 @@
 					<tr>
 						<th align="right">연락처: </th>
 						<td>
-							<input type="text" name="mphone" maxlength="3" class="phone">-
-							<input type="text" name="mphone" maxlength="4" class="phone">-
-							<input type="text" name="mphone" maxlength="4" class="phone">
+							<input type="text" name="mphone1" maxlength="3" id="mphone1">-
+							<input type="text" name="mphone2" maxlength="4" id="mphone2">-
+							<input type="text" name="mphone3" maxlength="4" id="mphone3">
 						</td>
 					</tr>
 <!-- 성별 -->
@@ -153,7 +153,7 @@
 					</tr>
 				</table>
 <!-- 회원가입 버튼 -->
-				<button onclick="clickJoin();return false;">제출하기</button>
+				<button onclick="clickJoin();return false;">가입하기</button>
 			</form>
 		</article>
 	</section>

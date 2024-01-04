@@ -11,10 +11,9 @@
 			<span id="mypagename">이름</span>
 		</div>
 		<div>
-			
-			<a href="">내가 쓴 게시글</a>
-			<a href="">회원 정보 수정</a>
-			<a href="">회원 탈퇴</a>
+			<span class="mypagelist"><a href="#">내가 쓴 게시글</a></span>
+			<span class="mypagelist"><a href="#">회원 정보 수정</a></span>
+			<span class="mypagelist"><a href="#">회원 탈퇴</a></span>
 		</div>
 		
 	</nav>

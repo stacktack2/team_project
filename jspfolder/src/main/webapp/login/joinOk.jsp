@@ -19,8 +19,12 @@
 	String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
-	int insertRow = 0;
+	String mphone1 = request.getParameter("mphone1");
+	String mphone2 = request.getParameter("mphone2");
+	String mphone3 = request.getParameter("mphone3");
+	String mphone = mphone1+mphone2+mphone3;
 	
+	int insertRow = 0;
 	try{
 		// masql drivermanager로 접속
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,7 +44,7 @@
 		psmt.setString(3, member.getMnickNm());
 		psmt.setString(4, member.getMname());
 		psmt.setInt(5, (int)member.getMbirth());
-		psmt.setString(6, member.getMphone());
+		psmt.setString(6, mphone);
 		psmt.setString(7, member.getMgender());
 		psmt.setString(8, member.getMemail());
 		

@@ -24,47 +24,50 @@ int nowPage = 1; */
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/mypage.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
 	<%@ include file="/include/mypageNav.jsp" %>
 	<section>
-		<div>내가 쓴 게시글</div>
+		<div id="boardname">내가 쓴 게시글</div>
 			<form name="frm" action="mypage.jsp" method="get">
-				<select>
+				<select id="select">
 					<option value="late">최신순</option>
 					<option value="hit">인기순</option>
 				</select>
-				
-				<input type="text" name="title" value="제목 검색">
-				<button> 검색</button>
+				<div id="search">
+					<input type="text" id="title" name="title">
+					<button id="button"> 검색</button>
+				</div>
 			</form>
-		<table border="1">
+		<table>
 			<thead>
-				<th>번호</th>
-				<th>카테고리</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일시</th>
-				<th>조회수</th>				
+				<th id="td1">번호</th>
+				<th id="td2">카테고리</th>
+				<th id="td3">제목</th>
+				<th id="td4">작성자</th>
+				<th id="td5">작성일시</th>
+				<th id="td6">조회수</th>				
 			</thead>
 			<tbody>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td id="td1">1</td>
+				<td id="td2">2</td>
+				<td id="td3"></td>
+				<td id="td4"></td>
+				<td id="td5"></td>
+				<td id="td6"></td>
 			</tbody>
 		</table>
 		
 		
 		<!-- 페이징 영역 -->
-		 <div class="paging">
+		 <div id="mainpaging">
 		 	
-		 		<a href="">이전</a>
-		 		<a href="">1</a>
-		 		<a href="">다음</a>
+		 		<span class="paging"><a href="">이전</a></span>
+		 		<span class="pagingnum"><a href="">1</a></span>
+		 		<span class="paging"><a href="">다음</a></span>
+
 
 		 </div>
 		

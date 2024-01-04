@@ -30,14 +30,14 @@
 		System.out.println("연결성공!");
 		
 		// mysql insert query문 작성 -> join.jsp에서 입력한 데이터 처리
-		String sql = " INSERT FORM member "
+		String sql = " INSERT INTO member"
 				   + " (mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)"
 				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, now())";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, member.getMid());
 		psmt.setString(2, member.getMpw());
-		psmt.setString(3, member.getMnicknm());
+		psmt.setString(3, member.getMnickNm());
 		psmt.setString(4, member.getMname());
 		psmt.setInt(5, (int)member.getMbirth());
 		psmt.setString(6, member.getMphone());
@@ -51,7 +51,7 @@
 		e.printStackTrace();
 	}finally{
 		if(conn != null) conn.close();
-		if(psmt != null) conn.close();
+		if(psmt != null) psmt.close();
 	}
 	
 	if(insertRow > 0){

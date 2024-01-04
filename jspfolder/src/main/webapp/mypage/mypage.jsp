@@ -4,6 +4,13 @@
 <%@ page import="tableVo.Member" %>
 <%@ page import="paging.PagingVO" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+
+	String searchType = request.getParameter("searchType");
+	String searchValue = request.getParameter("searchValue");
+	
+	
+	
 /* Member member = (Member)session.getAttribute("member"); */
 /* Connection conn = null;
 PreparedStatement psmt = null;
@@ -50,12 +57,12 @@ int nowPage = 1; */
 	<section>
 		<div id="boardname">내가 쓴 게시글</div>
 			<form name="frm" action="mypage.jsp" method="get">
-				<select id="select">
+				<select id="select" name="searchType">
 					<option value="late">최신순</option>
 					<option value="hit">인기순</option>
 				</select>
 				<div id="search">
-					<input type="text" id="title" name="title">
+					<input type="text" id="title" name="searchValue">
 					<button id="button"> 검색</button>
 				</div>
 			</form>

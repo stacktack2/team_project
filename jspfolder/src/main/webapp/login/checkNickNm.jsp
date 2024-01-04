@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*"%>
 <%
 //	사용자가 입력하여 전달한 아이디 값이 DB에 있는지 확인
-	String id = request.getParameter("id"); // join.jsp id 받아오기
+	String nick = request.getParameter("nick"); // join.jsp id 받아오기
 	
 //	Connection은 conn이 null값으로 변수 생성
 	Connection conn = null;
@@ -14,7 +14,7 @@
 //	url은 mysql에 있는 localhost의 campingWeb Schemas로 연결 및 계정과 비밀번호 입력
 	String url = "jdbc:mysql://192.168.35.148:3306/campingweb";
 	String user = "cteam";
-	String pass ="ezen";
+	String pass = "ezen";
 	
 	
 	try{
@@ -25,10 +25,10 @@
 //	sql query문 작성
 		String sql = " SELECT count(*) AS cnt "
 				   + "   FROM member "
-				   + "  WHERE mid = ?";
+				   + "  WHERE mnickNm = ?";
 
 		psmt = conn.prepareStatement(sql);
-		psmt.setString(1, id);
+		psmt.setString(1, nick);
 		
 		rs = psmt.executeQuery();
 		

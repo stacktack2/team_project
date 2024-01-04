@@ -126,7 +126,7 @@ CREATE TABLE member
 	mnickNm varchar(20) NOT NULL,
 	mname varchar(20) NOT NULL,
 	mbirth int unsigned NOT NULL,
-	mphone varchar(13) NOT NULL,
+	mphone varchar(11) NOT NULL,
 	mgender char(1) NOT NULL,
 	memail varchar(50) NOT NULL,
 	mrdate timestamp NOT NULL,

@@ -120,12 +120,12 @@ CREATE TABLE gear_reply
 
 CREATE TABLE member
 (
-	mno int NOT NULL,
+	mno int unsigned NOT NULL AUTO_INCREMENT,
 	mid varchar(50) NOT NULL,
 	mpw varchar(50) NOT NULL,
 	mnickNm varchar(20) NOT NULL,
 	mname varchar(20) NOT NULL,
-	mbirth int(8) NOT NULL,
+	mbirth int unsigned NOT NULL,
 	mphone varchar(13) NOT NULL,
 	mgender char(1) NOT NULL,
 	memail varchar(50) NOT NULL,

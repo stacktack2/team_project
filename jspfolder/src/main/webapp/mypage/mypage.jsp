@@ -41,8 +41,8 @@ int nowPage = 1; */
 					<button id="button"> 검색</button>
 				</div>
 			</form>
-		<table>
-			<thead>
+		<table id="mypagetable">
+			<thead id="mypagethead">
 				<th id="td1">번호</th>
 				<th id="td2">카테고리</th>
 				<th id="td3">제목</th>
@@ -50,7 +50,7 @@ int nowPage = 1; */
 				<th id="td5">작성일시</th>
 				<th id="td6">조회수</th>				
 			</thead>
-			<tbody>
+			<tbody id="mypagetbody">
 				<td id="td1">1</td>
 				<td id="td2">2</td>
 				<td id="td3"></td>

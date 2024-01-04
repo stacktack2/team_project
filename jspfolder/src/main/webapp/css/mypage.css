@@ -86,19 +86,19 @@ nav{
 /* ***************mypage table****************************** */
 
 
-table{
+#mypagetable{
 	border-collapse:collapse;
 	border-bottom:1px solid black;
 	margin-top:20px;
 	margin-bottom:100px;
 }
 
-thead{
+#mypagethead{
 	background-color:lightgray;
 	border-bottom:1px solid black;
 	height:30px;
 }
-tbody{
+#mypagetbody{
 	height:30px;
 }
 
@@ -141,3 +141,20 @@ tbody{
 	margin:auto;
 }
 
+/* ***************mypagemodify table****************************** */
+
+	#mphone1{
+		width:75px;
+	}
+	#mphone2,#mphone3{
+		width:100px;
+	}
+	
+	#modifybutton{
+		width:150px; height:40px;
+		border-radius:8px;
+		background-color:skyblue;
+		margin-top:50px;
+	}
+	
+	

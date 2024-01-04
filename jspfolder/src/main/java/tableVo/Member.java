@@ -12,37 +12,27 @@ import java.util.Set;
  * @version $Id$
  */
 public class Member implements Serializable {
-
 	/** serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
+	
 	/** 회원번호. */
 	private Integer mno;
-
 	/** 아이디. */
 	private String mid;
-
 	/** 비밀번호. */
 	private String mpw;
-
 	/** 닉네임. */
-	private String mnicknm;
-
+	private String mnickNm;
 	/** 이름. */
 	private String mname;
-
 	/** 생년월일. */
 	private Integer mbirth;
-
 	/** 연락처. */
 	private String mphone;
-
 	/** 성별. */
 	private String mgender;
-
 	/** 이메일. */
 	private String memail;
-
 	/** 회원가입일. */
 	private Date mrdate;
 
@@ -163,8 +153,8 @@ public class Member implements Serializable {
 	 * @param mnicknm
 	 *            닉네임
 	 */
-	public void setMnicknm(String mnicknm) {
-		this.mnicknm = mnicknm;
+	public void setMnickNm(String mnickNm) {
+		this.mnickNm = mnickNm;
 	}
 
 	/**
@@ -172,8 +162,8 @@ public class Member implements Serializable {
 	 * 
 	 * @return 닉네임
 	 */
-	public String getMnicknm() {
-		return this.mnicknm;
+	public String getMnickNm() {
+		return this.mnickNm;
 	}
 
 	/**

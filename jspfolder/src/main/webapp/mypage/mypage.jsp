@@ -4,7 +4,7 @@
 <%@ page import="tableVo.Member" %>
 <%@ page import="paging.PagingVO" %>
 <%
-	/* Member member = (Member)session.getAttribute("member"); */
+/* Member member = (Member)session.getAttribute("member"); */
 /* Connection conn = null;
 PreparedStatement psmt = null;
 ResultSet rs = null;
@@ -25,10 +25,28 @@ int nowPage = 1; */
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/mypage.css" type="text/css" rel="stylesheet">
+<style>
+	#span{
+		font-weight:bold; text-decoration: underline;
+	}
+</style>
 </head>
 <body>
+	
+
 	<%@ include file="/include/header.jsp" %>
-	<%@ include file="/include/mypageNav.jsp" %>
+	<nav>
+		<div id="mypagewelcome">
+			<span id="mypagenickname">닉네임</span>
+			<span id="mypagename">이름</span>
+		</div>
+		<div>
+			<span id="span" class="mypagelist"><a href="mypage.jsp">내가 쓴 게시글</a></span>
+			<span class="mypagelist"><a href="mypagePw.jsp">회원 정보 수정</a></span>
+			<span class="mypagelist"><a href="mypageDel.jsp">회원 탈퇴</a></span>
+		</div>
+		
+	</nav>
 	<section>
 		<div id="boardname">내가 쓴 게시글</div>
 			<form name="frm" action="mypage.jsp" method="get">

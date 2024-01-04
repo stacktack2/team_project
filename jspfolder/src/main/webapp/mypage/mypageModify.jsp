@@ -25,12 +25,26 @@
 	input[type=radio]{
 		width:40px; height:15px;
 	}
+	#span{
+		font-weight:bold; text-decoration: underline;
+	}
 	
 </style>
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
-	<%@ include file="/include/mypageNav.jsp" %>
+	<nav>
+		<div id="mypagewelcome">
+			<span id="mypagenickname">닉네임</span>
+			<span id="mypagename">이름</span>
+		</div>
+		<div>
+			<span class="mypagelist"><a href="mypage.jsp">내가 쓴 게시글</a></span>
+			<span id="span" class="mypagelist"><a href="mypagePw.jsp">회원 정보 수정</a></span>
+			<span class="mypagelist"><a href="mypageDel.jsp">회원 탈퇴</a></span>
+		</div>
+		
+	</nav>
 	<section>
 <!-- 회원가입 폼 -->
 		<article>

@@ -12,7 +12,7 @@
 //	Result는 rs가 null 값으로 변수 생성
 	ResultSet rs = null;
 //	url은 mysql에 있는 localhost의 campingWeb Schemas로 연결 및 계정과 비밀번호 입력
-	String url = "jdbc:mysql://192.168.35.148:3306/campingweb";
+	String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	

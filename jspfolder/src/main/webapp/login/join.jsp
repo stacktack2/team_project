@@ -11,11 +11,10 @@
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
-<%@ include file="/include/header.jsp" %>
+<%@ include file="/include/joinHeader.jsp" %>
 	<section>
 <!-- 회원가입 폼 -->
 		<article>
-			<h2>회원가입</h2>
 			<div id="formDiv">
 			<form name="frm" action="joinOk.jsp" method="post">
 				<table>
@@ -28,7 +27,7 @@
 						</td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="midTd"></td>
+    					<td colspan="2"><a id="midTd"></a></td>
 					</tr>
 <!-- 비밀번호 -->
 					<tr>
@@ -36,7 +35,7 @@
 						<td><input type="password" name="mpw"></td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="mpwTd"></td>
+    					<td colspan="2"><a id="mpwTd"></a></td>
 					</tr>
 <!-- 비밀번호 확인 -->
 					<tr>
@@ -44,7 +43,7 @@
 						<td><input type="password" name="mpwRe"></td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="mpwReTd"></td>
+    					<td colspan="2"><a id="mpwReTd"></a></td>
 					</tr>
 <!-- 닉네임 -->
 					<tr>
@@ -55,7 +54,7 @@
 						</td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="mnickNmTd"></td>
+    					<td colspan="2"><a id="mnickNmTd"></a></td>
 					</tr>
 <!-- 사용자 이름 -->
 					<tr>
@@ -63,7 +62,7 @@
 						<td><input type="text" name="mname"></td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="mnameTd"></td>
+    					<td colspan="2"><a id="mnameTd"></a></td>
 					</tr>
 <!-- 생년월일 -->
 					<tr>
@@ -77,13 +76,13 @@
 					<tr>
 						<th align="right">연락처: </th>
 						<td>
-							<input type="text" name="mphone1" maxlength="3">-
-							<input type="text" name="mphone2" maxlength="4">-
-							<input type="text" name="mphone3" maxlength="4">
+							<input type="text" name="mphone1" maxlength="3" class="phone">-
+							<input type="text" name="mphone2" maxlength="4" class="phone">-
+							<input type="text" name="mphone3" maxlength="4" class="phone">
 						</td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="mphoneTd"></td>
+    					<td colspan="2" align="right"><a id="mphoneTd"></a></td>
 					</tr>
 <!-- 성별 -->
 					<tr>
@@ -94,7 +93,7 @@
 						</td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="mgenderTd"></td>
+    					<td colspan="2"><a id="mgenderTd"></a></td>
 					</tr>
 <!-- 이메일 -->
 					<tr>
@@ -102,11 +101,11 @@
 						<td><input type="email" name="memail"></td>
 					</tr>
 					<tr class="blur">
-    					<td colspan="2" id="memailTd"></td>
+    					<td colspan="2"><a id="memailTd"></a></td>
 					</tr>
 				</table>
 <!-- 회원가입 버튼 -->
-				<button onclick="clickJoin();return false;">가입하기</button>
+				<button onclick="clickJoin();return false;" id="joinButton">가입하기</button>
 			</form>
 			</div>
 		</article>

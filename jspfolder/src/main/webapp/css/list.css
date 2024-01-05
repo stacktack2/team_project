@@ -1,0 +1,52 @@
+@charset "UTF-8";
+section > h2{
+	font-size: 30px;
+	margin-top:40px;
+	margin-bottom:50px;
+}
+.frms::after{content: ''; display: inline-block; clear: both;}
+#frm1{float:left;}
+#frm2{float: right;}
+form>select{
+	width:100px; height:25px;
+}
+
+.frm2 input[type="text"]{
+	width:200px; 
+	/* padding: 20px 10px; line-height: 28px; */
+/* 	font-size: 30px;
+  	padding-top: 10px;
+ 	 padding-bottom: 10px; */
+}
+
+.searchBtn{
+	width:40px; height:25px;
+}
+.btnDiv{ text-align:right;}
+.writerBth{
+	width:60px; height: 30px;
+}
+
+.listTable{
+	border-collapse:collapse;
+	border-bottom:1px solid black;
+	margin:20px 0;
+	width:100%;
+}
+
+.listTable thead tr{
+	background-color:lightgray;
+	border-bottom:1px solid black;
+}
+.listTable tr{height:30px; width:100%;}
+.listTable th:nth-child(1){width:5%;}
+.listTable th:nth-child(2){width:15%;}
+.listTable th:nth-child(3){width:45%;}
+.listTable th:nth-child(4){width:10%;}
+.listTable th:nth-child(5){width:15%;}
+.listTable th:nth-child(6){width:10%;}
+
+.listTable td{text-align:center;}
+.listTable td:nth-child(3){text-align:left;}
+
+

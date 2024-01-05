@@ -234,7 +234,7 @@
 				 }
 			}
 			 	
-		}
+		} 
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>

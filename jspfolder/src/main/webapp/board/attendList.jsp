@@ -53,12 +53,12 @@
 		}
 		psmt = conn.prepareStatement(totalSql);
 		
-		//[검색]
+		//[검색] 
 		if(searchType != null 
 			&& ( searchType.equals("title") || searchType.equals("writer"))){
 			psmt.setString(1, searchValue);
 		}
-		
+		 
 		rs = psmt.executeQuery();
 		
 		//[페이징] 

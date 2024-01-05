@@ -41,11 +41,9 @@ nav{
 	margin-bottom:50px;
 }
 
-#mainpaging{
-	display: inline-block; 
+.mainpaging{ 
 	width: 100%; height:50px;
-	margin:0,auto;
-	text-align:center;
+	text-align: center;
 }
 
 .paging{
@@ -53,6 +51,7 @@ nav{
 	width: 40px; height:25px;
 	border: 1px solid black;
 	text-align: center;
+	
 }
 
 .pagingnum{
@@ -60,6 +59,7 @@ nav{
 	width: 25px; height:25px;
 	border: 1px solid black;
 	text-align: center;
+	
 }
 
 
@@ -89,37 +89,58 @@ nav{
 
 #mypagetable{
 	border-collapse:collapse;
-	border-bottom:1px solid black;
 	margin-top:20px;
 	margin-bottom:100px;
 }
 
 #mypagethead{
 	background-color:lightgray;
-	border-bottom:1px solid black;
-	height:30px;
+	border-bottom:1px solid gray;
+	height:35px;
 }
-#mypagetbody{
-	height:30px;
+#tr{
+	height:35px;
+	border-bottom:1px solid gray;
 }
 
 #td1{
+	text-align: center;
 	width: 60px; 
 }
 #td2{
+	text-align: center;
 	width: 120px;
 }
 #td3{
+	padding-left:20px;
 	width: 450px;
 }
 #td4{
+	text-align: center;
 	width: 90px;
 }
 #td5{
+	text-align: center;
 	width: 160px;
 }
 #td6{
+	text-align: center;
 	width: 90px;
+}
+
+#td{
+	height:300px;
+	text-align:center;
+}
+#replyspan{
+	padding-left:10px;
+	font-weight:bold;
+	color:orange;
+}
+
+#th3{
+	text-align: center;
+	width: 450px;
 }
 
 /* ***************mypage table****************************** */

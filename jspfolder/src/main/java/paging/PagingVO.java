@@ -1,15 +1,15 @@
 package paging;
 
 public class PagingVO {
-	private int nowPage; //���� �������� ��ȣ
-	private int startPage; //���� ���������� ���� ��ȣ
-	private int endPage; //���� ���������� ����ȣ
-	private int total; //��� �Խñ� �� ����
-	private int perPage; //�� �������� ������ �Խñ��� ����
-	private int lastPage; //��ü ���������� ����ȣ
-	private int start; //ȭ�鿡���� �Խñ� ���� ��ȣ
-	private int end; //ȭ�鿡���� �Խñ� ����ȣ
-	private int cntPage =10; //������ ���������� ������ ����
+	private int nowPage; //현재 페이지의 번호
+	private int startPage; //현재 페이지영역 시작 번호
+	private int endPage; //현재 페이지영역 끝번호
+	private int total; //모든 게시글 총 갯수
+	private int perPage; //한 페이지에 노출할 게시글의 개수
+	private int lastPage; //전체 페이지영역 끝번호
+	private int start; //화면에서의 게시글 시작 번호
+	private int end; //화면에서의 게시글 끝번호
+	private int cntPage =10; //보여줄 페이지영역 페이지 갯수
 	
 	public PagingVO() {}
 	public PagingVO(int nowPage, int total, int perPage) {
@@ -18,13 +18,13 @@ public class PagingVO {
 		setTotal(total);
 		setPerPage(perPage);
 
-		//����¡ ����ȣ ���
+		//페이징 끝번호 계산
 		calcLastPage(total,perPage);
 		
-		//�Խñ� ���۹�ȣ, ����ȣ ��� (mysql�� ���۹�ȣ�� �ʿ�)
+		//게시글 시작번호, 끝번호 계산 (mysql은 시작번호만 필요)
 		calcStartEnd(nowPage,perPage);
 		
-		//���������� ������ ������ ����, ���� ��ȣ ���
+		//한페이지당 보여질 페이지 시작, 종료 번호 계산
 		calcStartEndPage(nowPage,cntPage);
 		
 	}
@@ -38,12 +38,12 @@ public class PagingVO {
 		int endPage = (int)Math.ceil((double)nowPage/cntPage)*cntPage;
 		int startPage = endPage-cntPage+1;
 		
-		//���� �� ������ ��ȣ���� ������������ ū ���
+		//계산된 끝 페이지 번호보다 최종페이지가 큰 경우
 		if(endPage > lastPage) { 
 			endPage = lastPage;
 		}
 		
-		//Ȥ�� �� ���� ��Ȳ ó��
+		//혹시 모를 예외 상황 처리
 		if(startPage <1) {
 			startPage = 1;
 		}

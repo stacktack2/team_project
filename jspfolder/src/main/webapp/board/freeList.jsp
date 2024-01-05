@@ -20,7 +20,7 @@
 	if(nowPageParam !=null && !nowPageParam.equals("")){
 		nowPage = Integer.parseInt(nowPageParam);
 	}
-	
+	 
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;

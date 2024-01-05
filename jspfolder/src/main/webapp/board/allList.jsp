@@ -66,7 +66,6 @@
 		if(rs.next()){
 			totalCnt = rs.getInt("cnt");
 		}
-		System.out.println(totalCnt);
 		
 		if(rs !=null)rs.close();
 		if(psmt !=null)psmt.close();

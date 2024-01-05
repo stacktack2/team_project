@@ -36,7 +36,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, pass);
 		
-		//1. [페이징] 전체 게시글 개수
+		//1. [페이징]
 		String totalSql = "SELECT count(*) as cnt"
 						+" FROM board b"
 						+" INNER JOIN member m "
@@ -92,7 +92,7 @@
 		}
 		
 		//번호 역순
-		sql += " ORDER BY b.bno desc ";
+		sql += " ORDER BY bno desc ";
 		//[페이징]
 		sql +=" LIMIT ?, ?";
 		
@@ -127,7 +127,7 @@
 	<section>
 		<h2>자유게시판</h2>
 		<div class="frms">
-			<form name ="frm1" action ="freelist.jsp" method="get" id="frm1">
+			<form name ="frm1" action ="freeList.jsp" method="get" id="frm1">
 				<select name="searchType">
 					<option value="title" <%if(searchType != null 
 						&& searchType.equals("late")) out.print("selected"); %>>최신순</option>
@@ -135,7 +135,7 @@
 						&& searchType.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
-			<form name ="frm2" action ="freelist.jsp" method="get" id="frm2">
+			<form name ="frm2" action ="freeList.jsp" method="get" id="frm2">
 				<select name="searchType">
 					<option value="title" <%if(searchType != null 
 						&& searchType.equals("title")) out.print("selected"); %>>제목</option>
@@ -195,7 +195,7 @@
 	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
-			<a href="freelist.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+			<a href="freeList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">이전</a>
 	<%
@@ -211,13 +211,13 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="freelist.jsp?nowPage=<%=i%>
+					<a href="freeList.jsp?nowPage=<%=i%>
 						&searchType=<%=searchType%>
 						&searchValue=<%=searchValue%>"><%=i %></a>
 				 <%
 				 }else{
 				 %>
-					<a href="freelist.jsp?nowPage=<%=i%>"><%=i  %></a>
+					<a href="freeList.jsp?nowPage=<%=i%>"><%=i  %></a>
 				<%
 				 }
 			}
@@ -226,7 +226,7 @@
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
-			<a href="freelist.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+			<a href="freeList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">다음</a>
 		<%

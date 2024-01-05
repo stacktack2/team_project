@@ -9,19 +9,44 @@
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 	
+	Member member = (Member)session.getAttribute("member");
 	
 	
-/* Member member = (Member)session.getAttribute("member"); */
-/* Connection conn = null;
-PreparedStatement psmt = null;
-ResultSet rs = null;
-
-String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
-String user = "cteam";
-String pass ="ezen"; */
-
-/* PagingVO pagingVO = null;
-int nowPage = 1; */
+	
+	
+	Connection conn = null;
+	PreparedStatement psmt = null;
+	ResultSet rs = null;
+	
+	String url = "jdbc:mysql://192.168.0.26:3306/ezen";
+	String user = "cteam";
+	String pass ="ezen";
+	
+	try{
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection(url,user,pass);
+	
+		String sql= "";
+	
+		psmt = conn.prepareStatement(sql);
+		
+		/* psmt.setInt(1,bno); */
+		
+		rs = psmt.executeQuery();
+		
+		
+		
+		
+		
+		
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		if(conn != null) conn.close();
+		if(psmt != null) psmt.close();
+		if(rs != null) rs.close();
+	}
 %>
 
 
@@ -92,7 +117,6 @@ int nowPage = 1; */
 		 		<span class="paging"><a href="">이전</a></span>
 		 		<span class="pagingnum"><a href="">1</a></span>
 		 		<span class="paging"><a href="">다음</a></span>
-
 
 		 </div>
 		

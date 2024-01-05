@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="tableVo.Member" %>
-<%@ page import="paging.PagingVO" %>
+<%@ page import="paging.PagingVO" %> 
 <%
 	request.setCharacterEncoding("UTF-8");
 

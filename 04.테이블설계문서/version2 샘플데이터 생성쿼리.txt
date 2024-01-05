@@ -1,0 +1,30 @@
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS loopInsert$$
+ 
+CREATE PROCEDURE loopInsert()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+        
+    WHILE i <= 50 DO
+        INSERT INTO member(mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)
+          VALUES(concat('id',i),concat('pw',i),concat('nick',i),concat('이름',i), i, concat('phone',i), 'M',concat('email',i) ,now());
+          
+		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'seoul',i);
+          
+		INSERT INTO reply(rcontent,rrdate,mno,bno)
+          VALUES(concat('rcontent',i),now(),i,i);
+          
+		INSERT INTO uploadfile(frealNm,foriginNm,frdate,bno)
+          VALUES(concat('frealNm',i),concat('foriginNm',i),now(),i);
+          
+		
+        SET i = i + 1;
+    END WHILE;
+END$$
+DELIMITER $$
+
+
+CALL loopInsert;
+

@@ -1,0 +1,62 @@
+select * from gear;
+
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS loopInsert$$
+ 
+CREATE PROCEDURE loopInsert()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+        
+    WHILE i <= 50 DO
+        INSERT INTO member(mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)
+          VALUES(concat('id',i),concat('pw',i),concat('nick',i),concat('이름',i), i, concat('phone',i), 'M',concat('email',i) ,now());
+          
+		INSERT INTO zone(zntitle,zncontent,znrdate,znhit,zntype,mno)
+          VALUES(concat('zntitle',i),concat('zncontent',i),now(),i,'seoul',i);
+		INSERT INTO zone_reply(znrcontent,znrdate,mno,znno)
+          VALUES(concat('znrcontent',i),now(),i,i);
+		INSERT INTO zone_uploadfile(znfrealNm,znforiginNm,znfrdate,znno)
+          VALUES(concat('znfrealNm',i),concat('znforiginNm',i),now(),i);
+          
+		INSERT INTO gear(grtitle,grcontent,grrdate,grhit,grtype,mno)
+          VALUES(concat('grtitle',i),concat('grcontent',i),now(),i,'camp',i);
+		INSERT INTO gear_reply(grcontent,grrdate,mno,grno)
+          VALUES(concat('grrcontent',i),now(),i,i);
+		INSERT INTO gear_uploadfile(grfrealNm,grforiginNm,grrdate,grno)
+          VALUES(concat('grfrealNm',i),concat('grforiginNm',i),now(),i);
+          
+		INSERT INTO qna(qutitle,qucontent,qurdate,quhit,mno)
+          VALUES(concat('qutitle',i),concat('qucontent',i),now(),i,i);
+		INSERT INTO qna_reply(qurcontent,qurdate,mno,quno)
+          VALUES(concat('qurcontent',i),now(),i,i);
+		INSERT INTO qna_uploadfile(qufrealNm,quforiginNm,qufrdate,quno)
+          VALUES(concat('qufrealNm',i),concat('quforiginNm',i),now(),i);
+        
+        INSERT INTO notice(notitle,nocontent,nordate,nohit,mno)
+          VALUES(concat('notitle',i),concat('nocontent',i),now(),i,i);
+		INSERT INTO notice_reply(norcontent,nordate,mno,nono)
+          VALUES(concat('norcontent',i),now(),i,i);
+		INSERT INTO notice_uploadfile(nofrealNm,noforiginNm,nofrdate,nono)
+          VALUES(concat('nofrealNm',i),concat('noforiginNm',i),now(),i);
+          
+		INSERT INTO free(frtitle,frcontent,frdate,frhit,mno)
+          VALUES(concat('frtitle',i),concat('frcontent',i),now(),i,i);
+		INSERT INTO free_reply(frrcontent,frrdate,mno,frno)
+          VALUES(concat('frrcontent',i),now(),i,i);
+		INSERT INTO free_uploadfile(frfrealNm,frforiginNm,frfrdate,frno)
+          VALUES(concat('frfrealNm',i),concat('frforiginNm',i),now(),i);
+        
+		INSERT INTO attendcheck(chtitle,chcontent,chrdate,chhit,mno)
+          VALUES(concat('chtitle',i),concat('chcontent',i),now(),i,i);
+		INSERT INTO attendcheck_reply(chrcontent,chrdate,chno,mno)
+          VALUES(concat('chrcontent',i),now(),i,i);
+        SET i = i + 1;
+    END WHILE;
+END$$
+DELIMITER $$
+
+
+CALL loopInsert;
+
+

@@ -76,7 +76,7 @@ CREATE TABLE free_uploadfile
 (
 	frfno int unsigned NOT NULL AUTO_INCREMENT,
 	frfrealNm varchar(255) NOT NULL,
-	frforignNm varchar(255) NOT NULL,
+	frforiginNm varchar(255) NOT NULL,
 	frfrdate timestamp NOT NULL,
 	frno int unsigned NOT NULL,
 	PRIMARY KEY (frfno)
@@ -140,7 +140,7 @@ CREATE TABLE notice
 	notitle varchar(50) NOT NULL,
 	nocontent text NOT NULL,
 	nordate timestamp DEFAULT now() NOT NULL,
-	nohit int unsigned DEFAULT () NOT NULL,
+	nohit int unsigned DEFAULT 0 NOT NULL,
 	mno int unsigned NOT NULL,
 	PRIMARY KEY (nono)
 );
@@ -208,7 +208,7 @@ CREATE TABLE zone
 	zntitle varchar(50) NOT NULL,
 	zncontent text NOT NULL,
 	znrdate timestamp DEFAULT now() NOT NULL,
-	znhit int unsigned DEFAULT () NOT NULL,
+	znhit int unsigned DEFAULT 0 NOT NULL,
 	zntype varchar(20) NOT NULL,
 	mno int unsigned NOT NULL,
 	PRIMARY KEY (znno)

@@ -11,7 +11,7 @@
 	
 	
 	//[검색]
-	String searchType = request.getParameter("searchType");
+	String searchAlign = request.getParameter("searchAlign");
 	String searchValue = request.getParameter("searchValue");
 	
 	//[페이징]
@@ -26,9 +26,9 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
-	String user = "cteam";
-	String pass ="ezen";
+	String url = "jdbc:mysql://localhost/sys";
+	String user = "root";
+	String pass ="1234";
 	
 	//[페이징]
 	PagingVO pagingVO = null;
@@ -64,13 +64,12 @@
 			totalCnt = rs.getInt("cnt");
 		}
 		
-		System.out.println(totalCnt);
 		
 		if(rs !=null)rs.close();
 		if(psmt !=null)psmt.close();
 		
 		
-		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
+		pagingVO = new PagingVO(nowPage, totalCnt, 2); 
 		
 		rs=null;
 		
@@ -84,10 +83,10 @@
 			sql+= " and b.btitle LIKE CONCAT('%',?,'%') "; 
 		}
 		//[인기순 최신순 정렬]
-		if(searchType != null && !searchType.equals("")){
-			if(searchType.equals("late")){
+		if(searchAlign != null && !searchAlign.equals("")){
+			if(searchAlign.equals("late")){
 				sql += " order by brdate desc ";
-			}else if(searchType.equals("hit")){
+			}else if(searchAlign.equals("hit")){
 				sql += " order by bhit desc ";
 			}
 		}
@@ -148,11 +147,11 @@
 	<section>
 		<div id="boardname">내가 쓴 게시글</div>
 			<form name="frm" action="mypage.jsp" method="get">
-				<select id="select" name="searchType" onchange="document.frm.submit()">
-					<option value="late"<%if(searchType != null 
-						&& searchType.equals("late")) out.print("selected"); %>>최신순</option>
-					<option value="hit"<%if(searchType != null 
-						&& searchType.equals("hit")) out.print("selected"); %>>인기순</option>
+				<select id="select" name="searchAlign" onchange="document.frm.submit()">
+					<option value="late"<%if(searchAlign != null 
+						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
+					<option value="hit"<%if(searchAlign != null 
+						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 				
 				<div id="search">
@@ -217,7 +216,7 @@
 	%>
 			<span class="paging">
 		 		<a href="mypage.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-				&searchType=<%=searchType%>
+				&searchAlign=<%=searchAlign%>
 				&searchValue=<%=searchValue%>">이전</a>
 			</span>
 	<%
@@ -231,10 +230,10 @@
 			 <%
 			 }else{
 				 		
-				 if(searchType != null){
+				 if(searchAlign != null){
 				 %>
 					<span class="pagingnum"><a href="mypage.jsp?nowPage=<%=i%>
-						&searchType=<%=searchType%>
+						&searchAlign=<%=searchAlign%>
 						&searchValue=<%=searchValue%>"><%=i %></a></span>
 				 <%
 				 }else{
@@ -250,7 +249,7 @@
 		%>
 			<span class="paging">
 			<a href="mypage.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
-				&searchType=<%=searchType%>
+				&searchAlign=<%=searchAlign%>
 				&searchValue=<%=searchValue%>">다음</a>
 			</span>
 		<%

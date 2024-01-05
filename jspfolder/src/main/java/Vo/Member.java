@@ -26,7 +26,7 @@ public class Member implements Serializable {
 	private String mpw;
 
 	/** 닉네임. */
-	private String mnicknm;
+	private String mnickNm;
 
 	/** 이름. */
 	private String mname;
@@ -123,8 +123,8 @@ public class Member implements Serializable {
 	 * @param mnicknm
 	 *            닉네임
 	 */
-	public void setMnicknm(String mnicknm) {
-		this.mnicknm = mnicknm;
+	public void setMnickNm(String mnickNm) {
+		this.mnickNm = mnickNm;
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class Member implements Serializable {
 	 * 
 	 * @return 닉네임
 	 */
-	public String getMnicknm() {
-		return this.mnicknm;
+	public String getMnickNm() {
+		return this.mnickNm;
 	}
 
 	/**

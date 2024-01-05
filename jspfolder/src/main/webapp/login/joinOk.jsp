@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <!-- tableVo에 있는 Member 클래스를 useBean과 setProperty로 받아옴 -->
-<jsp:useBean id="member" class="tableVo.Member" /> <!-- Member member = new Member(); -->
+<jsp:useBean id="member" class="Vo.Member" /> <!-- Member member = new Member(); -->
 <jsp:setProperty name="member" property="*" />
 <%
 	// Connection은 conn이 null값으로 변수 생성

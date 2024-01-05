@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>0.8</zoom>
-	<x>370</x>
+	<x>387</x>
 	<y>0</y>
 	<default_color>
 		<r>128</r>
@@ -95,10 +95,10 @@
 				<is_open_after_saved>true</is_open_after_saved>
 			</export_image_setting>
 			<export_java_setting>
-				<java_output></java_output>
-				<package_name></package_name>
+				<java_output>jspfolder\src\main\java</java_output>
+				<package_name>Vo</package_name>
 				<class_name_suffix></class_name_suffix>
-				<src_file_encoding></src_file_encoding>
+				<src_file_encoding>UTF-8</src_file_encoding>
 				<with_hibernate>false</with_hibernate>
 			</export_java_setting>
 			<export_testdata_setting>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2024-01-03 13:21:29</creation_date>
-			<updated_date>2024-01-05 11:06:10</updated_date>
+			<updated_date>2024-01-05 11:27:57</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>

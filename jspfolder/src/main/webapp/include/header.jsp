@@ -26,7 +26,7 @@
 		%>
 			</div>
 		</div>
-		<h1 id="logo"><a href="index.jsp">캠핑 여행 커뮤니티</a></h1>
+		<h1 id="logo"><a href="<%=request.getContextPath()%>">캠핑 여행 커뮤니티</a></h1>
 		<div class="clearfix">
 			<div id="top_menu" class="left">
 				<a href="<%=request.getContextPath()%>/board/alllist.jsp">전체글보기</a> | 

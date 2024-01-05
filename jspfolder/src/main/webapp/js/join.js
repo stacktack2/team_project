@@ -36,9 +36,6 @@
 			document.getElementById("midTd").innerText = "";
 		}
 
-		if(check && checkIdFlag){
-			document.frm.submit();
-		}
 		
 //		비밀번호
 		if(mpw == ""){	
@@ -79,11 +76,12 @@
 			check = true;
 			document.frm.mnickNm.removeAttribute("style");
 			document.getElementById("mnickNmTd").innerText = "";
-		}if(!checkNickNmFlag){
+		}
+		if(!checkNickNmFlag){
 			check = false;
 			document.frm.mid.mnickNm.border="1px solid red";
 			document.getElementById("mnickNmTd").innerText = "*닉네임 중복확인을 해주세요.";
-			
+			return;
 		}else{
 			check = true;
 			document.frm.mnickNm.removeAttribute("style");
@@ -152,6 +150,9 @@
 			document.getElementById("memailTd").innerText = "";
 		}
 		
+		if(check && checkIdFlag){
+			document.frm.submit();
+		}
 		
 		if(check && checkNickNmFlag){
 			document.frm.submit();

@@ -1,4 +1,5 @@
-function searchId(){
+function searchPw(){
+	let mid = document.frm.mid.value;
 	let mname = document.frm.mname.value;
 	let mbirth = document.frm.mbirth.value;
 	let mphone1 = document.frm.mphone1.value; // 핸드폰1
@@ -6,6 +7,16 @@ function searchId(){
 	let mphone3 = document.frm.mphone3.value;
 	
 	let check = true;
+	if(mid == ""){
+			check = false;	
+			document.frm.mid.style.border="1px solid red";
+			document.getElementById("midTd").innerText = "*아이디를 입력해주세요.";
+			return;
+		}else{
+			check = true;
+			document.frm.mid.removeAttribute("style");
+			document.getElementById("midTd").innerText = "";
+		}
 	if(mname == ""){	
 			check = false;	
 			document.frm.mname.style.border="1px solid red";

@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member" %>
 <%@ page import="java.sql.*"%>
+<%@ page import="java.util.UUID"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <%
 	Connection conn = null;
 	PreparedStatement psmt= null;
@@ -12,9 +16,10 @@
 	String pass ="ezen";
 	
 	String mid = request.getParameter("mid");
+	String mpw = "";
 	String mname = request.getParameter("mname");
-	String mbirth = request.getParameter("mbirth");
-	int mbirth2 = Integer.parseInt(mbirth);
+	String mbirth2 = request.getParameter("mbirth");
+	int mbirth = Integer.parseInt(mbirth2);
 	String mphone1 = request.getParameter("mphone1");
 	String mphone2 = request.getParameter("mphone2");
 	String mphone3 = request.getParameter("mphone3");
@@ -38,7 +43,7 @@
 		
 		psmt.setString(1, mid);
 		psmt.setString(2, mname);
-		psmt.setInt(3, mbirth2);
+		psmt.setInt(3, mbirth);
 		psmt.setString(4, mphone);
 		
 		rs = psmt.executeQuery();
@@ -50,6 +55,8 @@
 			member.setMname(rs.getString("mname"));
 			member.setMbirth(rs.getInt("mbirth"));
 			member.setMphone(rs.getString("mphone"));
+			
+			mpw = rs.getString("mpw");
 			
 			session.setAttribute("findPw", member);
 			isfindPw = true;
@@ -67,9 +74,6 @@
 %>
 		<script>
 			alert('비밀번호는 <%=mpw%>입니다.');
-<%
-	
-%>
 			location.href="login.jsp";
 		</script>
 <%

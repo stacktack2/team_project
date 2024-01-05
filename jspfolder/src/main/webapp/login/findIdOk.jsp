@@ -5,18 +5,17 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="member" class="Vo.Member" />
-<jsp:setProperty name="member" property="*" />
 <%
-	
+	String mid = "";
 	String mname = request.getParameter("mname");
-	int mbirth = Integer.parseInt("mbirth");
+	String mbirth2 = request.getParameter("mbirth");
+	int mbirth = Integer.parseInt(mbirth2);
 	String mphone1 = request.getParameter("mphone1");
 	String mphone2 = request.getParameter("mphone2");
 	String mphone3 = request.getParameter("mphone3");
 	String mphone = mphone1+mphone2+mphone3;
 	
-	boolean isFindId = false;
+	boolean isfindId = false;
 	
 	Connection conn = null;
 	PreparedStatement psmt= null;
@@ -44,8 +43,22 @@
 		
 		rs = psmt.executeQuery();
 		
+		if(rs.next()){
+			Member member = new Member();
+			member.setMno(rs.getInt("mno"));
+			member.setMname(rs.getString("mname"));
+			member.setMbirth(rs.getInt("mbirth"));
+			member.setMphone(rs.getString("mphone"));
+			member.setMid(rs.getString("mid"));
+			
+			mid = rs.getString("mid");
 		
+			session.setAttribute("findId", member);
+			isfindId = true;
+		}
 		
+	}catch(NumberFormatException e){
+		e.printStackTrace();
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{
@@ -54,10 +67,10 @@
 		if(rs != null) rs.close();
 	}
 	
-	if(){
+	if(isfindId){
 %>
 		<script>
-			alert('회원님의 아이디는 입니다.');
+			alert('회원님의 아이디는 <%=mid%>입니다.');
 			location.href="login.jsp";
 		</script>
 <%

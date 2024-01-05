@@ -24,6 +24,9 @@
     					<input type="text" name="mname">
     				</td>
     			</tr>
+    			<tr class="blur">
+    					<td colspan="2" align="right"><a id="mnameTd"></a></td>
+					</tr>
 <!-- 생년월일 -->
     			<tr>
     				<th align="right">생년월일</th>
@@ -31,6 +34,9 @@
     					<input type="text" name="mbirth">
     				</td>
     			</tr>
+    			<tr class="blur">
+    					<td colspan="2" align="right"><a id="mbirthTd"></a></td>
+					</tr>
 <!-- 연락처 -->
     			<tr>
     				<th align="right">연락처</th>
@@ -39,9 +45,11 @@
 						<input type="text" name="mphone2" maxlength="4" class="phone">-
 						<input type="text" name="mphone3" maxlength="4" class="phone">
 					</td>
-    			</tr>
+					<tr class="blur">
+    					<td colspan="2" align="right"><a id="mphoneTd"></a></td>
+					</tr>
     		</table>
-    		<button onclick="searchId()" id="searchId">아이디 조회하기</button>
+    		<button type="button" onclick="searchId()">아이디 조회하기</button>
     	</form>
 <!-- 비밀번호 찾기 -->
     	<div>비밀번호를 찾으시나요?</div>

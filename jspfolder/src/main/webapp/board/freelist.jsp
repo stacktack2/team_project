@@ -1,10 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Vo.*" %>
+<%@ page import="paging.PagingVO" %>
+<%@ page import="java.sql.*"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	
+	//(등록버튼)
+	Member member = (Member)session.getAttribute("login");
+	
+	//[검색]
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
+	
+	//[페이징]
+	String nowPageParam = request.getParameter("nowPage");
+	
+	int nowPage = 1;	
+	if(nowPageParam !=null && !nowPageParam.equals("")){
+		nowPage = Integer.parseInt(nowPageParam);
+	}
+	
+	Connection conn = null;
+	PreparedStatement psmt = null;
+	ResultSet rs = null;
+	
+	String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
+	String user = "cteam";
+	String pass ="ezen";
+	
+	//[페이징]
+	PagingVO pagingVO = null;
+	
+	try{
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection(url, user, pass);
+		
+		//1. [페이징] 전체 게시글 개수
+		String totalSql = "SELECT count(*) as cnt"
+						+" FROM board b"
+						+" INNER JOIN member m "
+						+" ON b.mno = m.mno"
+						+" WHERE btype = '자유게시판'";
+		
+		//[검색]
+		if(searchType != null){
+			if(searchType.equals("title")){
+				totalSql += " AND btitle LIKE CONCAT('%',?,'%')";
+			}else if(searchType.equals("writer")){
+				totalSql += " AND m.mnickNm LIKE CONCAT('%',?,'%')";
+			}
+		}
+		psmt = conn.prepareStatement(totalSql);
+		
+		//[검색]
+		if(searchType != null 
+			&& ( searchType.equals("title") || searchType.equals("writer"))){
+			psmt.setString(1, searchValue);
+		}
+		
+		rs = psmt.executeQuery();
+		
+		//[페이징] 전체게시글 개수
+		int totalCnt =0;
+		if(rs.next()){
+			totalCnt = rs.getInt("cnt");
+		}
+		//닫기
+		if(rs !=null)rs.close();
+		if(psmt !=null)psmt.close();
+		
+		//[페이징] *paging 객체생성
+		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
+		
+		rs=null;
+		
+		//2. [게시글]
+			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm,brdate ,bhit, btype"
+					+" FROM board b "
+					+" INNER JOIN member m "
+					+" ON b.mno = m.mno";
+		
+		//[검색]
+		if(searchType != null){
+			if(searchType.equals("title")){
+				sql += " AND btitle LIKE CONCAT('%',?,'%')";
+			}else if(searchType.equals("writer")){
+				sql += " AND m.mname LIKE CONCAT('%',?,'%')";
+			}			
+		}
+		
+		//번호 역순
+		sql += " ORDER BY b.bno desc ";
+		//[페이징] limit 시작페이지, 한화면당페이지수
+		sql +=" LIMIT ?, ?";
+		
+		psmt = conn.prepareStatement(sql);
+		
+		//[검색][페이징]
+		if(searchType != null 
+				&&(searchType.equals("title") 
+						||searchType.equals("writer"))){
+			psmt.setString(1,searchValue);
+			psmt.setInt(2, pagingVO.getStart()-1);
+			psmt.setInt(3, pagingVO.getPerPage());
+		}else{
+			psmt.setInt(1, pagingVO.getStart()-1);
+			psmt.setInt(2, pagingVO.getPerPage());
+		}
+		
+		rs = psmt.executeQuery();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -53,20 +159,93 @@
 				</tr>
 			</thead>
 			<tbody>
+			<% 
+				while (rs.next()) { 
+					int bno = rs.getInt("bno");
+					String btype = rs.getString("btype");
+					String btitle = rs.getString("btitle");
+					String mnickNm = rs.getString("mnickNm");
+					String brdate = rs.getString("brdate");
+					int bhit = rs.getInt("bhit");
+			%>
 				<tr>
-					<td>1</td>
-					<td>자유게시판</td>
-					<td>제목입니다</td>
-					<td>닉네임</td>
-					<td>2024-01-05</td>
-					<td>10</td>
+					<td><%=bno %></td>
+					<td><%=btype %></td>
+					<td><%=btitle %></td>
+					<td><%=mnickNm %></td>
+					<td><%=brdate %></td>
+					<td><%=bhit %></td>
 				</tr>
+				<%
+					}
+				%>
 			</tbody>
 		</table>
+	<%
+	if(member != null){ //로그인이 돼있는 경우에만 글쓰기 버튼 보이게
+	%>
 		<div class="btnDiv">
 			<button class="writeBtn">글쓰기</button>
 		</div>
+	<%	
+		}
+	%>
+	
+	<%//페이징 영역 %>	
+	<div class="paging">
+	<%	//시작페이지 번호 > 화면에서 보여주고자 하는 페이징번호 개수
+		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
+	%>
+			<a href="freelist.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+				&searchType=<%=searchType%>
+				&searchValue=<%=searchValue%>">이전</a>
+	<%
+		 }
+		
+		//시작페이지~끝페이지 반복문으로 접근
+		for(int i = pagingVO.getStartPage(); i<=pagingVO.getEndPage(); i++){
+			 		
+			if(nowPage == i){	//현재페이지=i면 굵게 출력
+			 %>
+			 	<b><%=i %></b>
+			 <%
+			 }else{
+				 		
+				 if(searchType != null){
+				 %>
+					<a href="freelist.jsp?nowPage=<%=i%>
+						&searchType=<%=searchType%>
+						&searchValue=<%=searchValue%>"><%=i %></a>
+				 <%
+				 }else{
+				 %>
+					<a href="freelist.jsp?nowPage=<%=i%>"><%=i  %></a>
+				<%
+				 }
+			}
+			 	
+		}
+		
+		//화면에서 보여지는 페이지 끝번호 < 전체페이지 끝번호
+		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
+		%>
+			<a href="freelist.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+				&searchType=<%=searchType%>
+				&searchValue=<%=searchValue%>">다음</a>
+		<%
+		}
+		%>
+		 </div>
 	</section>
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>
+	<%
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (psmt != null) psmt.close();
+			if (rs != null) rs.close();
+		}
+	%>

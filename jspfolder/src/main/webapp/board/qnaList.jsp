@@ -71,7 +71,7 @@
 		if(psmt !=null)psmt.close();
 		
 		//[페이징]
-		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
+		pagingVO = new PagingVO(nowPage, totalCnt, 10); //10개씩 노출
 		
 		rs=null;
 		

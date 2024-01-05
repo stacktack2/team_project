@@ -10,9 +10,9 @@
 		<right_margin>30</right_margin>
 	</page_setting>
 	<category_index>0</category_index>
-	<zoom>1.0</zoom>
-	<x>291</x>
-	<y>851</y>
+	<zoom>0.8</zoom>
+	<x>0</x>
+	<y>0</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path>04.테이블설계문서\table 구조2.sql</output_path>
+				<output_path>04.테이블설계문서\table 파일명 수정.sql</output_path>
 				<encoding>UTF-8</encoding>
 				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2024-01-03 13:21:29</creation_date>
-			<updated_date>2024-01-03 15:29:18</updated_date>
+			<updated_date>2024-01-05 09:20:58</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -706,7 +706,7 @@
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
-			<unsigned>false</unsigned>
+			<unsigned>true</unsigned>
 			<zerofill>false</zerofill>
 			<binary>false</binary>
 			<args></args>
@@ -802,7 +802,7 @@
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
-			<unsigned>false</unsigned>
+			<unsigned>true</unsigned>
 			<zerofill>false</zerofill>
 			<binary>false</binary>
 			<args></args>
@@ -1734,7 +1734,7 @@
 					<type>integer</type>
 					<constraint></constraint>
 					<default_value></default_value>
-					<auto_increment>false</auto_increment>
+					<auto_increment>true</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
@@ -2104,7 +2104,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>free_file</physical_name>
+			<physical_name>free_uploadfile</physical_name>
 			<logical_name>자유게시판 첨부파일</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -3610,7 +3610,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>gear_file</physical_name>
+			<physical_name>gear_uploadfile</physical_name>
 			<logical_name>장비게시판 첨부파일</logical_name>
 			<description></description>
 			<constraint></constraint>
@@ -5037,7 +5037,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>QnA_file</physical_name>
+			<physical_name>QnA_uploadfile</physical_name>
 			<logical_name>질문게시판 첨부파일</logical_name>
 			<description></description>
 			<constraint></constraint>

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/css/login.css" type="text/css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/findId.js"></script>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
@@ -20,14 +21,14 @@
     			<tr>
     				<th align="right">이름</th>
     				<td>
-    					<input type="text" name="mname" id="name">
+    					<input type="text" name="mname">
     				</td>
     			</tr>
 <!-- 생년월일 -->
     			<tr>
     				<th align="right">생년월일</th>
     				<td>
-    					<input type="text" name="mbirth" id="birth">
+    					<input type="text" name="mbirth">
     				</td>
     			</tr>
 <!-- 연락처 -->
@@ -40,7 +41,7 @@
 					</td>
     			</tr>
     		</table>
-    		<button>제출하기</button>
+    		<button onclick="searchId()" id="searchId">아이디 조회하기</button>
     	</form>
 <!-- 비밀번호 찾기 -->
     	<div>비밀번호를 찾으시나요?</div>

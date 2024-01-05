@@ -27,7 +27,7 @@
 		conn = DriverManager.getConnection(url,user,pass);
 		System.out.println("연결성공!");
 		
-		String sql = " SELECT mid, mname, mbirth, mphone, mno"
+		String sql = " SELECT mid, mname, mbirth, mphone, mno, mpw"
 				   + "   FROM member"
 				   + "  WHERE mid = ?"
 				   + "    AND mname = ?"
@@ -66,7 +66,10 @@
 	if(isfindPw){
 %>
 		<script>
-			alert("회원님의 임시비밀번호는 <%=mname%>입니다.");
+			alert('비밀번호는 <%=mpw%>입니다.');
+<%
+	
+%>
 			location.href="login.jsp";
 		</script>
 <%

@@ -16,11 +16,15 @@
 	PreparedStatement psmt= null;
 	
 	// url은 mysql에 있는 localhost의 campingWeb Schemas로 연결 및 계정과 비밀번호 입력
-	String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
+	String url = "jdbc:mysql://192.168.35.148:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
-	int insertRow = 0;
+	String mphone1 = request.getParameter("mphone1");
+	String mphone2 = request.getParameter("mphone2");
+	String mphone3 = request.getParameter("mphone3");
+	String mphone = mphone1+mphone2+mphone3;
 	
+	int insertRow = 0;
 	try{
 		// masql drivermanager로 접속
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -30,17 +34,17 @@
 		System.out.println("연결성공!");
 		
 		// mysql insert query문 작성 -> join.jsp에서 입력한 데이터 처리
-		String sql = " INSERT FORM member "
+		String sql = " INSERT INTO member"
 				   + " (mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)"
 				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, now())";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, member.getMid());
 		psmt.setString(2, member.getMpw());
-		psmt.setString(3, member.getMnicknm());
+		psmt.setString(3, member.getMnickNm());
 		psmt.setString(4, member.getMname());
 		psmt.setInt(5, (int)member.getMbirth());
-		psmt.setString(6, member.getMphone());
+		psmt.setString(6, mphone);
 		psmt.setString(7, member.getMgender());
 		psmt.setString(8, member.getMemail());
 		
@@ -51,7 +55,7 @@
 		e.printStackTrace();
 	}finally{
 		if(conn != null) conn.close();
-		if(psmt != null) conn.close();
+		if(psmt != null) psmt.close();
 	}
 	
 	if(insertRow > 0){

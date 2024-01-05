@@ -84,15 +84,27 @@
 		
 		//[검색]
 		if(searchType != null){
+			
 			if(searchType.equals("title")){
 				sql += " AND btitle LIKE CONCAT('%',?,'%')";
 			}else if(searchType.equals("writer")){
-				sql += " AND m.mname LIKE CONCAT('%',?,'%')";
-			}			
+				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%')";
+			}
+			
+					
 		}
 		
-		//번호 역순
-		sql += " ORDER BY bno desc ";
+		//[인기순 최신순 정렬]
+		if(searchType != null){
+			if(searchType.equals("hit")){
+				//최신순
+				sql += " ORDER By bhit desc ";
+			}else{
+				//번호 역순
+				sql += " ORDER BY bno desc ";
+			}
+		}
+		
 		//[페이징]
 		sql +=" LIMIT ?, ?";
 		
@@ -128,10 +140,10 @@
 		<h2>자유게시판</h2>
 		<div class="frms">
 			<form name ="frm1" action ="freeList.jsp" method="get" id="frm1">
-				<select name="searchType">
-					<option value="title" <%if(searchType != null 
+				<select name="searchType" onchange="document.frm1.submit()">
+					<option value="late" <%if(searchType != null 
 						&& searchType.equals("late")) out.print("selected"); %>>최신순</option>
-					<option value="writer"<%if(searchType != null 
+					<option value="hit"<%if(searchType != null 
 						&& searchType.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
@@ -171,7 +183,7 @@
 				<tr>
 					<td><%=bno %></td>
 					<td><%=btype %></td>
-					<td><%=btitle %></td>
+					<td><a href="view.jsp?bno=<%=bno%>"><%=btitle %></a></td>
 					<td><%=mnickNm %></td>
 					<td><%=brdate %></td>
 					<td><%=bhit %></td>

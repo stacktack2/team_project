@@ -5,6 +5,7 @@
 <%@ page import="java.util.UUID"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	Member member = new Member();
 %>
 <%
 	Connection conn = null;
@@ -16,7 +17,6 @@
 	String pass ="ezen";
 	
 	String mid = request.getParameter("mid");
-	String mpw = "";
 	String mname = request.getParameter("mname");
 	String mbirth2 = request.getParameter("mbirth");
 	int mbirth = Integer.parseInt(mbirth2);
@@ -26,6 +26,7 @@
 	String mphone = mphone1+mphone2+mphone3;
 	
 	boolean isfindPw = false;
+	int result = 0;
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -49,31 +50,39 @@
 		rs = psmt.executeQuery();
 		
 		if(rs.next()){
-			Member member = new Member();
 			member.setMno(rs.getInt("mno"));
 			member.setMid(rs.getString("mid"));
 			member.setMname(rs.getString("mname"));
 			member.setMbirth(rs.getInt("mbirth"));
 			member.setMphone(rs.getString("mphone"));
 			
-			mpw = rs.getString("mpw");
+			String tempPw = UUID.randomUUID().toString().replace("-","").substring(0,8);
+			member.setMpw(tempPw);
 			
 			session.setAttribute("findPw", member);
 			isfindPw = true;
 		}
 		
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		if(conn != null) conn.close();
-		if(psmt != null) psmt.close();
-		if(rs != null) rs.close();
-	}
+	if(psmt != null) psmt.close();
+	if(rs != null) rs.close();
+
 	
 	if(isfindPw){
 %>
 		<script>
-			alert('비밀번호는 <%=mpw%>입니다.');
+			let tempPw = '<%=((Member)session.getAttribute("findPw")).getMpw()%>';
+			alert('임시비밀번호는'+tempPw+'입니다.');
+<%		
+		sql = " UPDATE member"
+			+ "    SET mpw = ?"
+			+ "  WHERE mno = ?";
+
+		psmt = conn.prepareStatement(sql);
+		psmt.setString(1, ((Member)session.getAttribute("findPw")).getMpw());
+		psmt.setInt(2, member.getMno());
+		
+		result = psmt.executeUpdate();
+%>
 			location.href="login.jsp";
 		</script>
 <%
@@ -86,4 +95,11 @@
 <%		
 	}
 	
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		if(conn != null) conn.close();
+		if(psmt != null) psmt.close();
+		if(rs != null) rs.close();
+	}
 %>

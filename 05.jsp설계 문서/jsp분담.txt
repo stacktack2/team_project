@@ -1,40 +1,49 @@
 정다희
 
-index.jsp
+index.jsp 메인페이지
 header.css
 nav.css
 section.css
 footer.css
 section.js
+
+freeList.jsp
+attendList.jsp
+qnaList.jsp
 ----------------
 이준택
 
-join.jsp
+join.jsp 회원가입
 joinOk.jsp
 
-login.jsp
+login.jsp 로그인
 loginOk.jsp
 
-idfind.jsp
+idfind.jsp 아이디 찾기
 idfindOk.jsp
 
-pwfind.jsp
+pwfind.jsp 비밀번호 찾기 
 pwfindOk.jsp
+
+allList.jsp
+hotList.jsp
+noticeList.jsp
 ----------------
 전용휘
 
-mypage.jsp
-mypagePw.jsp
+mypage.jsp 마이페이지
+mypagePw.jsp 마이페이지비밀번호
 mypagePwOk.jsp
-mypageModify.jsp
+mypageModify.jsp 마이페이지수정
 mypageModifyOk.jsp
-mypageDelete.jsp
+mypageDelete.jsp 
 mypageDeleteOk.jsp
 mypage.css
+
+zoneList.jsp
+gearList.jsp
 ----------------
 끝나고 난뒤 다시 
-
-list.jsp
 
 write.jsp
 uploadfileOk.jsp

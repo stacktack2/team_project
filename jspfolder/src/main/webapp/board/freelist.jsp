@@ -61,16 +61,16 @@
 		
 		rs = psmt.executeQuery();
 		
-		//[페이징] 전체게시글 개수
+		//[페이징] 
 		int totalCnt =0;
 		if(rs.next()){
 			totalCnt = rs.getInt("cnt");
 		}
-		//닫기
+		
 		if(rs !=null)rs.close();
 		if(psmt !=null)psmt.close();
 		
-		//[페이징] *paging 객체생성
+		//[페이징]
 		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
 		
 		rs=null;
@@ -79,7 +79,8 @@
 			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm,brdate ,bhit, btype"
 					+" FROM board b "
 					+" INNER JOIN member m "
-					+" ON b.mno = m.mno";
+					+" ON b.mno = m.mno"
+					+" WHERE btype = '자유게시판'";
 		
 		//[검색]
 		if(searchType != null){
@@ -92,7 +93,7 @@
 		
 		//번호 역순
 		sql += " ORDER BY b.bno desc ";
-		//[페이징] limit 시작페이지, 한화면당페이지수
+		//[페이징]
 		sql +=" LIMIT ?, ?";
 		
 		psmt = conn.prepareStatement(sql);
@@ -126,7 +127,6 @@
 	<section>
 		<h2>자유게시판</h2>
 		<div class="frms">
-			<%//검색의 action: 나 자신(도로 나 자신에게 옴)%>
 			<form name ="frm1" action ="freelist.jsp" method="get" id="frm1">
 				<select name="searchType">
 					<option value="title" <%if(searchType != null 
@@ -182,7 +182,7 @@
 			</tbody>
 		</table>
 	<%
-	if(member != null){ //로그인이 돼있는 경우에만 글쓰기 버튼 보이게
+	if(member != null){
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn">글쓰기</button>
@@ -190,10 +190,9 @@
 	<%	
 		}
 	%>
-	
-	<%//페이징 영역 %>	
+		
 	<div class="paging">
-	<%	//시작페이지 번호 > 화면에서 보여주고자 하는 페이징번호 개수
+	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
 			<a href="freelist.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
@@ -202,10 +201,9 @@
 	<%
 		 }
 		
-		//시작페이지~끝페이지 반복문으로 접근
 		for(int i = pagingVO.getStartPage(); i<=pagingVO.getEndPage(); i++){
 			 		
-			if(nowPage == i){	//현재페이지=i면 굵게 출력
+			if(nowPage == i){	
 			 %>
 			 	<b><%=i %></b>
 			 <%
@@ -226,7 +224,6 @@
 			 	
 		}
 		
-		//화면에서 보여지는 페이지 끝번호 < 전체페이지 끝번호
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
 			<a href="freelist.jsp?nowPage=<%=pagingVO.getEndPage()+1%>

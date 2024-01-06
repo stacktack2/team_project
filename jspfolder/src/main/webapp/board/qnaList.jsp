@@ -135,6 +135,7 @@
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
+	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
 		<h2>출석체크</h2>
@@ -246,6 +247,7 @@
 		%>
 		 </div>
 	</section>
+	</div>
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

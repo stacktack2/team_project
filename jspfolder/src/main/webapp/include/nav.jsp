@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="Vo.*" %>
+<%@ page import="java.sql.*"%>
+<%
+	Member memberNav = (Member)session.getAttribute("login");
+	
+ 	//[검색]
+	String navValue = request.getParameter("navValue");
+ 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +16,25 @@
 <body>
 	<nav>
 		<div id="welcome">
-			마이페이지
+	<%
+		if(memberNav != null){	//로그인이 돼있다면
+	%>
+			<p><%=memberNav.getMname() %>님, <span class="block">환영합니다.</span></p>
+			<a href="<%=request.getContextPath()%>/mypage/mapage.jsp">마이페이지</a>
+	<%		
+		}else{
+	%>
+			<p>로그인 및 회원가입을 <span class="block">해주세요</span></p>
+	<%	
+		}
+	%>	
 		</div>
 		<div class=searchMain>
-			<input type="text"> 
-			<button>검색</button>
+			<form name="navFrm" action="allList.jsp" method="get">
+				<input type="text" name="navValue"
+					value="<%if(navValue!=null) out.print(navValue); %>"> 
+				<button>검색</button>
+			</form>
 		</div>
 		<ul class="menu">
 			<li><a href="<%=request.getContextPath()%>/board/allList.jsp">전체글보기</a></li>

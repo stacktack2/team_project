@@ -33,6 +33,7 @@
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
+	<div class="container">
 	<nav>
 		<div id="mypagewelcome">
 			<span id="mypagenickname">닉네임</span>
@@ -119,6 +120,7 @@
 			</form>
 		</article>
 	</section>
+	</div>
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

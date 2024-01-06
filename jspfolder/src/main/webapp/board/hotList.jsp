@@ -88,6 +88,7 @@
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
+	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
 		<div id="boardname">인기글</div>
@@ -177,6 +178,7 @@
 		 </div>
 		
 	</section>
+	</div>
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

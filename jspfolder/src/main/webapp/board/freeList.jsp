@@ -89,15 +89,13 @@
 				sql += " AND btitle LIKE CONCAT('%',?,'%')";
 			}else if(searchType.equals("writer")){
 				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%')";
-			}
-			
-					
+			}		
 		}
 		
 		//[인기순 최신순 정렬]
 		if(searchType != null){
 			if(searchType.equals("hit")){
-				//최신순
+				//인기순
 				sql += " ORDER By bhit desc ";
 			}else{
 				//번호 역순

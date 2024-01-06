@@ -17,7 +17,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, pass);
 		
-		String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm,brdate ,bhit, btype"
+		String sql = "SELECT bno, btitle, b.mno, brdate, btype"
 				+" FROM board b "
 				+" INNER JOIN member m "
 				+" ON b.mno = m.mno"
@@ -72,40 +72,46 @@
 						</li>
 					<%
 						}
+						if(rs !=null)rs.close();
+						if(psmt !=null)psmt.close();
+						
+						rs=null;
+	
 					%>	
 					</ul>
 				</div>
 				<div id="mboard2">
 					<div class="mboardmn clearfix">
 						<h3>전체게시글</h3>
-						<a href=# class="mainmore">더보기 +</a>
+						<a href="<%=request.getContextPath()%>/board/allList.jsp" 
+							class="mainmore">더보기 +</a>
 					</div>
 					<ul class="mainlist">
+					<% 
+						sql = " SELECT b.* "
+								+" FROM board b INNER JOIN member m "
+								+" ON b.mno = m.mno "
+								+" WHERE (btype = '자유게시판' or btype='캠핑지역' "
+								+" or btype='캠핑장비' or btype='공지사항') "
+								+" ORDER BY bno desc "
+								+" LIMIT 6";
+							
+							psmt = conn.prepareStatement(sql);
+							rs = psmt.executeQuery();
+						
+						while (rs.next()) { 
+							int bno = rs.getInt("bno");
+							String btitle = rs.getString("btitle");
+							String brdate = rs.getString("brdate");
+					%>
 						<li>
-							<a href="#">전체게시글리스트입니다.</a>
-							<span class="mlistdate">2023.10.06</span>
+							<a href="<%=request.getContextPath()%>/board/
+								view.jsp?bno=<%=bno%>"><%=btitle %></a>
+							<span class="mlistdate"><%=brdate %></span>
 						</li>
-						<li>
-							<a href="#">전체게시글리스트입니다.</a>
-							<span class="mlistdate">2023.10.06</span>
-						</li>
-						<li>
-							<a href="#">전체게시글리스트입니다.</a>
-							<span class="mlistdate">2023.10.06</span>
-						</li>
-						<li>
-							<a href="#">전체게시글리스트입니다.</a>
-							<span class="mlistdate">2023.10.06</span>
-						</li>
-						<li>
-							<a href="#">전체게시글리스트입니다.</a>
-							<span class="mlistdate">2023.10.06</span>
-						</li>
-						<li>
-							<a href="#">전체게시글리스트입니다.</a>
-							<span class="mlistdate">2023.10.06</span>
-						</li>
-	
+					<%
+						}
+					%>
 					</ul>
 				</div>
 			</div>

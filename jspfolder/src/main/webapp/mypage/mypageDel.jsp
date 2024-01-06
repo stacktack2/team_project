@@ -20,7 +20,7 @@
 	<section>
 		<form name="frm">
 			<input type="text" id="mypagePwinput" placeholder="비밀번호를 입력하세요.">
-			<button id="mypagePwbutton">탈퇴하기</button>
+			<button id="mypagePwbutton">회원 탈퇴</button>
 		</form>
 	</section>
 <%@ include file="/include/footer.jsp" %>

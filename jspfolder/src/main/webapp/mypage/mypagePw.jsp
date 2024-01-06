@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/mypage.css" type="text/css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/mypagePw.js"></script>
 <style>
 	
 	section{
@@ -18,7 +20,7 @@
 <body>
 <%@ include file="/include/header.jsp" %>
 	<section>
-		<form name="frm">
+		<form name="frm" method="post" action="#">
 			<input type="text" id="mypagePwinput" placeholder="비밀번호를 입력하세요.">
 			<button id="mypagePwbutton">확인</button>
 		</form>

@@ -58,17 +58,17 @@
 								<button type="button">중복확인</button>
 							</td>
 						</tr>
-	<!-- 비밀번호 -->
+<!-- 비밀번호 -->
 						<tr>
 							<th align="right">비밀번호: </th>
 							<td><input type="password" name="mpw"></td>
 						</tr>
-	<!-- 비밀번호 확인 -->
+<!-- 비밀번호 확인 -->
 						<tr>
 							<th align="right">비밀번호 확인: </th>
 							<td><input type="password" name="mpwRe"></td>
 						</tr>
-	<!-- 닉네임 -->
+<!-- 닉네임 -->
 						<tr>
 							<th align="right">닉네임: </th>
 							<td>
@@ -76,17 +76,17 @@
 								<button type="button">중복확인</button>
 							</td>
 						</tr>
-	<!-- 사용자 이름 -->
+<!-- 사용자 이름 -->
 						<tr>
 							<th align="right">이름: </th>
 							<td><input type="text" name="mname"></td>
 						</tr>
-	<!-- 생년월일 -->
+<!-- 생년월일 -->
 						<tr>
 							<th align="right">생년월일: </th>
 							<td><input type="text" name="mbirth" maxlength="8"></td>
 						</tr>
-	<!-- 연락처 -->
+<!-- 연락처 -->
 						<tr>
 							<th align="right">연락처: </th>
 							<td>
@@ -95,7 +95,7 @@
 								<input type="text" name="mphone3" maxlength="4" id="mphone3">
 							</td>
 						</tr>
-	<!-- 성별 -->
+<!-- 성별 -->
 						<tr>
 							<th align="right">성별: </th>
 							<td>
@@ -103,7 +103,7 @@
 								<input type="radio" name="mgender" value="W">여
 							</td>
 						</tr>
-	<!-- 이메일 -->
+<!-- 이메일 -->
 						<tr>
 							<th align="right">이메일: </th>
 							<td><input type="email" name="memail"></td>

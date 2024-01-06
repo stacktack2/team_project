@@ -9,7 +9,7 @@
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
-	String url = "jdbc:mysql://192.168.0.26:3306/campingweb";
+	String url = "jdbc:mysql://localhost:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	

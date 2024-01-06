@@ -47,7 +47,7 @@ nav{
 #welcome p, #welcome span{
 	text-align:center; color:#8c3b0e; font-weight: bold;
 	}
-#welcome a{font-weight: bold; text-align:center; color:#dd6d2f; }
+#welcome a{font-weight: bold; margin-left: 55px; color:#dd6d2f; }
 #welcome a:hover{color: brown;}
 .searchMain{margin:10px 20px;}
 .menu{padding:20px 10px;}

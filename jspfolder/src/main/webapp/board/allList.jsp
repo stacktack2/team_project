@@ -27,7 +27,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost/sys";
+	String url = "jdbc:mysql://localhost:3306/sys";
 	String user = "root";
 	String pass ="1234";
 	

@@ -11,6 +11,7 @@
 	
 	//[검색]
 	String searchType = request.getParameter("searchType");
+	String searchType1 = request.getParameter("searchType1");
 	String searchValue = request.getParameter("searchValue");
 	
 	//[페이징]
@@ -93,8 +94,8 @@
 		}
 		
 		//[인기순 최신순 정렬]
-		if(searchType != null){
-			if(searchType.equals("hit")){
+		if(searchType1 != null){
+			if(searchType1.equals("hit")){
 				//인기순
 				sql += " ORDER By bhit desc ";
 			}else{
@@ -138,11 +139,11 @@
 		<h2>자유게시판</h2>
 		<div class="frms">
 			<form name ="frm1" action ="freeList.jsp" method="get" id="frm1">
-				<select name="searchType" onchange="document.frm1.submit()">
-					<option value="late" <%if(searchType != null 
-						&& searchType.equals("late")) out.print("selected"); %>>최신순</option>
-					<option value="hit"<%if(searchType != null 
-						&& searchType.equals("hit")) out.print("selected"); %>>인기순</option>
+				<select name="searchType1" onchange="document.frm1.submit()">
+					<option value="late" <%if(searchType1 != null 
+						&& searchType1.equals("late")) out.print("selected"); %>>최신순</option>
+					<option value="hit"<%if(searchType1 != null 
+						&& searchType1.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
 			<form name ="frm2" action ="freeList.jsp" method="get" id="frm2">

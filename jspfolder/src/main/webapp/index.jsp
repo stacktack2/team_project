@@ -9,7 +9,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost/campingweb";
+	String url = "jdbc:mysql://localhost:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	

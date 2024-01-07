@@ -10,6 +10,7 @@
 	Member member = (Member)session.getAttribute("login");
 	
 	//[검색]
+	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 	
@@ -25,7 +26,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
+	String url = "jdbc:mysql://localhost:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	
@@ -71,12 +72,13 @@
 		if(psmt !=null)psmt.close();
 		
 		//[페이징]
-		pagingVO = new PagingVO(nowPage, totalCnt, 10); //10개씩 노출
+		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
 		
 		rs=null;
 		
-		//2. [게시글]
+		//2. [게시글] [댓글]
 			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm, brdate ,bhit, btype"
+					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"
@@ -95,13 +97,11 @@
 		}
 		
 		//[인기순 최신순 정렬]
-		if(searchType != null){
-			if(searchType.equals("hit")){
-				//최신순
-				sql += " ORDER By bhit desc ";
-			}else{
-				//번호 역순
-				sql += " ORDER BY bno desc ";
+		if(searchAlign != null){
+			if(searchAlign.equals("late")){
+				sql += " order by brdate desc ";
+			}else if(searchAlign.equals("hit")){
+				sql += " order by bhit desc ";
 			}
 		}
 		
@@ -141,11 +141,11 @@
 		<h2>출석체크</h2>
 		<div class="frms">
 			<form name ="frm1" action ="qnaList.jsp" method="get" id="frm1">
-				<select name="searchType" onchange="document.frm1.submit()">
-					<option value="late" <%if(searchType != null 
-						&& searchType.equals("late")) out.print("selected"); %>>최신순</option>
-					<option value="hit"<%if(searchType != null 
-						&& searchType.equals("hit")) out.print("selected"); %>>인기순</option>
+				<select name="searchAlign" onchange="document.frm1.submit()">
+					<option value="late" <%if(searchAlign != null 
+						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
+					<option value="hit"<%if(searchAlign != null 
+						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
 			<form name ="frm2" action ="qnaList.jsp" method="get" id="frm2">
@@ -184,7 +184,10 @@
 				<tr>
 					<td><%=bno %></td>
 					<td><%=btype %></td>
-					<td><a href="view.jsp?bno=<%=bno%>"><%=btitle %></a></td>
+					<td>
+						<a href="view.jsp?bno=<%=bno%>"><%=btitle %></a>
+						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
+					</td>
 					<td><%=mnickNm %></td>
 					<td><%=brdate %></td>
 					<td><%=bhit %></td>
@@ -209,6 +212,7 @@
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
 			<a href="qnaList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">이전</a>
 	<%
@@ -225,6 +229,7 @@
 				 if(searchType != null){
 				 %>
 					<a href="qnaList.jsp?nowPage=<%=i%>
+						&searchAlign=<%=searchAlign%>
 						&searchType=<%=searchType%>
 						&searchValue=<%=searchValue%>"><%=i %></a>
 				 <%
@@ -235,11 +240,12 @@
 				 }
 			}
 			 	
-		} 
+		}
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
 			<a href="qnaList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">다음</a>
 		<%

@@ -14,6 +14,7 @@
 <%@ include file="/include/loginHeader.jsp" %>
 <!-- 섹션 -->
 	<section>
+		<div id="formDiv">
     	<form name="frm" action="loginOk.jsp" method="post">
     	<h2>반갑습니다!</h2><br>
     		<table>
@@ -28,6 +29,7 @@
     		</table>
     		<button>로그인</button>
     	</form>
+    	</div>
 <!-- 계정찾기 버튼 -->
     	<div><a href="findId.jsp">아이디 찾기</a> | <a href="findPw.jsp">비밀번호 찾기</a></div>
 <!-- 회원가입 버튼 -->

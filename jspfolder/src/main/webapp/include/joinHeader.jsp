@@ -6,7 +6,7 @@
 </head>
 <body>
 	<header>
-		<h1 id="logo"><a href="#">회원가입</a></h1>
+		<h1 id="logo"><a href="../index.jsp">캠핑 여행 커뮤니티</a></h1>
 	</header>
 </body>
 </html>

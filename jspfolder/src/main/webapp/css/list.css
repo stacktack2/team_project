@@ -1,8 +1,8 @@
 @charset "UTF-8";
 section > h2{
+	font-weight: 400;
 	font-size: 30px;
-	margin-top:40px;
-	margin-bottom:50px;
+	margin: 40px 0 50px;
 }
 .frms::after{content: ''; display: inline-block; clear: both;}
 #frm1{float:left;}
@@ -29,24 +29,39 @@ form>select{
 
 .listTable{
 	border-collapse:collapse;
-	border-bottom:1px solid black;
-	margin:20px 0;
+	margin:20px 0 100px;
 	width:100%;
 }
-
+.listTable tr{
+	height:35px; width:100%;
+	border-bottom:1px solid gray;
+}
 .listTable thead tr{
 	background-color:lightgray;
-	border-bottom:1px solid black;
 }
-.listTable tr{height:30px; width:100%;}
-.listTable th:nth-child(1){width:5%;}
-.listTable th:nth-child(2){width:15%;}
-.listTable th:nth-child(3){width:45%;}
-.listTable th:nth-child(4){width:10%;}
-.listTable th:nth-child(5){width:15%;}
-.listTable th:nth-child(6){width:10%;}
+
+.listTable th:nth-child(1){width:55px;}
+.listTable th:nth-child(2){width:110px;}
+.listTable th:nth-child(3){width:410px;}
+.listTable th:nth-child(4){width:90px;}
+.listTable th:nth-child(5){width:150px;}
+.listTable th:nth-child(6){width:85px;}
 
 .listTable td{text-align:center;}
-.listTable td:nth-child(3){text-align:left;}
+.listTable td:nth-child(3){text-align:left;  padding-left: 20px;}
+
+/* 댓글 */
+#replyspan{
+	padding-left:10px;
+	font-weight:bold;
+	color:orange;
+}
+/* 페이징 */
+.paging{text-align:center;}
+.paging a{
+	display: inline-block;
+	width: 25px; height:25px;
+	border: 1px solid black;	
+}
 
 

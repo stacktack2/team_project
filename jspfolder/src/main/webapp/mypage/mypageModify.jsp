@@ -1,5 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%
+	
+// 	[비인증 접근 제한]
+// 	if(session.getAttribute("isAutFlag")){
+	boolean isAutFlag = false;
+	if(isAutFlag){
+		response.sendRedirect("mypage.jsp")	;
+	}
+	
+	/* Member member = session.getAttribute("member"); */
+// 	int mno = member.getMno();
+	int mno=7;
+	
+
+	Connection conn = null;
+	PreparedStatement psmt = null;
+	ResultSet rs = null;
+	
+	String url = "jdbc:mysql://localhost/sys";
+	String user = "root";
+	String pass ="1234";
+	
+	
+	try{
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		conn = DriverManager.getConnection(url, user, pass);
+		
+		String sql ="select * from member where mno = ?";
+		
+		psmt = conn.prepareStatement(sql);
+		
+		psmt.setInt(1,mno);
+		
+		rs = psmt.executeQuery();
+		
+		rs.next();
+		
+		String mid = rs.getString("mid");
+		String mpw = rs.getString("mpw");
+		String mnickNm = rs.getString("mnickNm");
+		String mname = rs.getString("mname");
+		int mbirth = rs.getInt("mbirth");
+		String mphone = rs.getString("mphone");
+		String mgender = rs.getString("mgender");
+		String memail = rs.getString("memail");
+		
+	
+
+%>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +83,7 @@
 	}
 	
 </style>
+<script src="<%=request.getContextPath()%>/js/mypageModify.js"></script>
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
@@ -49,14 +103,13 @@
 	<section>
 <!-- 회원가입 폼 -->
 		<article>
-			<form name="frm" action="joinOk.jsp" method="post">
+			<form name="frm" action="mypageModifyOk.jsp" method="post">
 				<table>
 <!-- 아이디 -->		<tbody>
 						<tr>
 							<th align="right">아이디: </th>
 							<td>
-								<input type="text" name="mid">
-								<button type="button">중복확인</button>
+								<div id ="disabledinput"><%=mid %></div>
 							</td>
 						</tr>
 <!-- 비밀번호 -->
@@ -80,12 +133,12 @@
 <!-- 사용자 이름 -->
 						<tr>
 							<th align="right">이름: </th>
-							<td><input type="text" name="mname"></td>
+							<td><div id ="disabledinput"><%=mname %></div></td>
 						</tr>
 <!-- 생년월일 -->
 						<tr>
 							<th align="right">생년월일: </th>
-							<td><input type="text" name="mbirth" maxlength="8"></td>
+							<td><div id ="disabledinput"><%=mbirth %></div></td>
 						</tr>
 <!-- 연락처 -->
 						<tr>
@@ -100,8 +153,7 @@
 						<tr>
 							<th align="right">성별: </th>
 							<td>
-								<input type="radio" name="mgender" value="M">남
-								<input type="radio" name="mgender" value="W">여
+								<div id ="disabledinput"><%=mgender %></div>
 							</td>
 						</tr>
 <!-- 이메일 -->
@@ -111,7 +163,7 @@
 						</tr>
 						<tr>
 							<th></th>
-							<td><button id="modifybutton">가입하기</button></td>
+							<td><button id="modifybutton">수정하기</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -124,3 +176,13 @@
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>
+
+<%
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		if(conn != null) conn.close();
+		if(psmt != null) psmt.close();
+		if(rs != null) rs.close();
+	}
+%>

@@ -51,6 +51,8 @@ public class Member implements Serializable {
 
 	/** 지역 댓글 목록. */
 	private Set<Reply> replySet;
+	
+	
 
 	/**
 	 * 생성자.

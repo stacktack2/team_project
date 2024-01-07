@@ -32,7 +32,7 @@ public class Member implements Serializable {
 	private String mname;
 
 	/** 생년월일. */
-	private Integer mbirth;
+	private int mbirth;
 
 	/** 연락처. */
 	private String mphone;
@@ -163,7 +163,7 @@ public class Member implements Serializable {
 	 * @param mbirth
 	 *            생년월일
 	 */
-	public void setMbirth(Integer mbirth) {
+	public void setMbirth(int mbirth) {
 		this.mbirth = mbirth;
 	}
 
@@ -172,7 +172,7 @@ public class Member implements Serializable {
 	 * 
 	 * @return 생년월일
 	 */
-	public Integer getMbirth() {
+	public int getMbirth() {
 		return this.mbirth;
 	}
 

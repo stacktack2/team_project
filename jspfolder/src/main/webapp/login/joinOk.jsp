@@ -43,7 +43,7 @@
 		psmt.setString(2, member.getMpw());
 		psmt.setString(3, member.getMnickNm());
 		psmt.setString(4, member.getMname());
-		psmt.setInt(5, (int)member.getMbirth());
+		psmt.setInt(5, member.getMbirth());
 		psmt.setString(6, mphone);
 		psmt.setString(7, member.getMgender());
 		psmt.setString(8, member.getMemail());

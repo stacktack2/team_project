@@ -21,7 +21,7 @@ public class Regular {
 	}
 	
 	public static boolean isKor(String str,int max) {
-		return Pattern.matches("^[가-힣]$", str);
+		return Pattern.matches("^[가-힣]{0,"+max+"}$", str);
 	}
 	
 	public static boolean isEmail(String str) {

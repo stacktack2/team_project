@@ -4,6 +4,7 @@
 <%@ page import="java.sql.*"%> <!-- java.sql import문 통합 -->
 <%@ page import="Vo.Member"%> <!-- encoding UTF-8로 설정 -->
 <%@ page import="regular.Regular"%>
+<%request.setCharacterEncoding("UTF-8"); %>
 <!-- tableVo에 있는 Member 클래스를 useBean과 setProperty로 받아옴 -->
 <jsp:useBean id="member" class="Vo.Member" /> <!-- Member member = new Member(); -->
 <jsp:setProperty name="member" property="*" />
@@ -14,7 +15,7 @@
 		response.sendRedirect("join.jsp");
 	}
 	
-	request.setCharacterEncoding("UTF-8");
+	
 	
 	
 

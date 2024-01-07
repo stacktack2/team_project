@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="regular.Regular"%>
 <%
 //	사용자가 입력하여 전달한 아이디 값이 DB에 있는지 확인
 	String nick = request.getParameter("nick"); // join.jsp id 받아오기
@@ -40,6 +41,8 @@
 		
 		if(nick == null || (nick != null && nick.equals(""))){
 			cnt = -1;
+		}else if(!Regular.isNumEngKor(nick,10)){
+			cnt = -2;
 		}
 		
 		out.print(cnt);

@@ -223,13 +223,18 @@
 			data : {id : id},
 			success : function(data){
 				let result = data.trim();
-				// 0 : 사용가능, 1 : 사용 불가능, -1: 빈문자열 또는 null
+				// 0 : 사용가능, 1 : 사용 불가능, -1: 빈문자열 또는 null -2: 유효성 탈락
 				if(result == 0){
 					checkIdFlag = true;
 					alert("사용가능한 아이디입니다.");
 				}else if(result == -1){
 					checkIdFlag = false;
 					midTd.innerHTML = '아이디를 입력해주세요.';
+					midTd.style.color = 'red';
+				}else if(result == -2){
+					checkIdFlag = false;
+					alert('영문만 사용가능합니다.');
+					midTd.innerHTML = '영문만 사용가능합니다.';
 					midTd.style.color = 'red';
 				}else{
 					checkIdFlag = false;
@@ -260,7 +265,7 @@
 			data : {nick : nick},
 			success : function(data){
 			let result = data.trim();
-			// 0 : 사용가능, 1 : 사용 불가능, -1: 빈문자열 또는 null
+			// 0 : 사용가능, 1 : 사용 불가능, -1: 빈문자열 또는 null -2: 유효성 탈락
 			if(result == 0){
 				checkNickNmFlag = true;
 				alert("사용가능한 닉네임입니다.");
@@ -268,7 +273,12 @@
 				checkNickNmFlag = false;
 				mnickNmTd.innerHTML = '닉네임을 입력해주세요';
 				mnickNmTd.style.color = 'red';
-			}else if(result ==1){
+			}else if(result == -2){
+				checkNickNmFlag = false;
+				alert('한글과 영문,숫자만 사용가능합니다.');
+				mnickNmTd.innerHTML = '한글과 영문,숫자만 사용가능합니다.';
+				mnickNmTd.style.color = 'red';
+			}else{
 				checkNickNmFlag = false;
 				alert("이미 존재하는 닉네임입니다.");
 				mnickNmTd.innerHTML = '다른 닉네임을 입력해주세요';

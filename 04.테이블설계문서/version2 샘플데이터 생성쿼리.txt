@@ -11,8 +11,20 @@ BEGIN
           VALUES(concat('id',i),concat('pw',i),concat('nick',i),concat('이름',i), i, concat('phone',i), 'M',concat('email',i) ,now());
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'seoul',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'자유게시판',i);
           
+		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'공지사항',i);
+          
+		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'캠핑지역',i);
+        
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'캠핑장비',i);
+		
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'QnA',i);
+		
 		INSERT INTO reply(rcontent,rrdate,mno,bno)
           VALUES(concat('rcontent',i),now(),i,i);
           

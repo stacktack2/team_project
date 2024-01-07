@@ -69,7 +69,7 @@
 		if(psmt !=null)psmt.close();
 		
 		
-		pagingVO = new PagingVO(nowPage, totalCnt, 2); 
+		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
 		
 		rs=null;
 		

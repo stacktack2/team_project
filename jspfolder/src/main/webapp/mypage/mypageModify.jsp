@@ -3,7 +3,7 @@
 <%@ page import="java.sql.*" %>
 <%
 	
-// 	[비인증 접근 제한]
+// 	[비인증 접근 제한] OK 마지막에서 인증해제 해야함
 // 	if(session.getAttribute("isAutFlag")){
 	boolean isAutFlag = false;
 	if(isAutFlag){

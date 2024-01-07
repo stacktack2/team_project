@@ -1,3 +1,6 @@
+	//유효성 검사 개수제한 추가해야함 개수 정해지면 {} 붙이기
+	
+	
 	let mid = document.frm.mid; 
 	let mpw = document.frm.mpw; 
 	let mpwRe = document.frm.mpwRe; 
@@ -212,7 +215,8 @@
 	
 	function checkIdFn(){
 		let id = document.frm.mid.value;
-		
+		let midTd = document.getElementById("midTd");
+			
 		$.ajax({
 			url : "checkId.jsp",
 			type : "get",
@@ -225,6 +229,8 @@
 				}else{
 					checkIdFlag = false;
 					alert("이미 존재하는 아이디입니다.");
+					midTd.innerHTML = '다른 아이디를 입력해주세요.';
+					midTd.style.color = 'red';
 				}
 			},error:function(){
 				console.log("error");
@@ -241,7 +247,8 @@
 	
 	function checkNickFn(){
 		let nick = document.frm.mnickNm.value;
-		
+		let mnickNmTd = document.getElementById("mnickNmTd"); 
+			
 		$.ajax({
 			url : "checkNickNm.jsp",
 			type : "get",
@@ -254,6 +261,8 @@
 			}else{
 				checkNickNmFlag = false;
 				alert("이미 존재하는 닉네임입니다.");
+				mnickNmTd.innerHTML = '다른 닉네임을 입력해주세요';
+				mnickNmTd.style.color = 'red';
 			}
 		},error:function(){
 			console.log("error");

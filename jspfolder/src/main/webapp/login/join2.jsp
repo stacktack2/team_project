@@ -18,7 +18,7 @@
 		<article>
 			<div id="formDiv">
 				<div id="hello"><h2>회원가입</h2></div>
-			<form name="frm" action="joinOk.jsp" method="post" onsubmit="return false;" >
+			<form name="frm" action="joinOk2.jsp" method="post" >
 				<table>
 
 					<tr id="trTitle">
@@ -131,7 +131,7 @@
     					<td colspan="2"><a id="memailTd"></a></td>
 					</tr>
 				</table>
-				<input type="submit" id="joinButton" onclick="validation()" value="가입하기">
+				<input type="submit" id="joinButton" onclick="return validation();" value="가입하기">
 			</form>
 			</div>
 			<div id="loginbutton">

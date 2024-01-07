@@ -19,9 +19,9 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost/sys";
-	String user = "root";
-	String pass ="1234";
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
+	String user = "cteam";
+	String pass ="ezen";
 	
 	
 	try{

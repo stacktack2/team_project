@@ -10,8 +10,8 @@
 	Member member = (Member)session.getAttribute("login");
 	
 	//[검색]
+	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
-	String searchType1 = request.getParameter("searchType1");
 	String searchValue = request.getParameter("searchValue");
 	
 	//[페이징]
@@ -21,16 +21,16 @@
 	if(nowPageParam !=null && !nowPageParam.equals("")){
 		nowPage = Integer.parseInt(nowPageParam);
 	}
-	 
+	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
+	String url = "jdbc:mysql://localhost:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	
-	//[페이징]
+	//[페이징] 
 	PagingVO pagingVO = null;
 	
 	try{
@@ -76,8 +76,9 @@
 		
 		rs=null;
 		
-		//2. [게시글]
-			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm,brdate ,bhit, btype"
+		//2. [게시글][댓글]
+		String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm,brdate ,bhit, btype"
+					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"
@@ -90,17 +91,17 @@
 				sql += " AND btitle LIKE CONCAT('%',?,'%')";
 			}else if(searchType.equals("writer")){
 				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%')";
-			}		
+			}
+			
+					
 		}
 		
 		//[인기순 최신순 정렬]
-		if(searchType1 != null){
-			if(searchType1.equals("hit")){
-				//인기순
-				sql += " ORDER By bhit desc ";
-			}else{
-				//번호 역순
-				sql += " ORDER BY bno desc ";
+		if(searchAlign != null){
+			if(searchAlign.equals("late")){
+				sql += " order by brdate desc ";
+			}else if(searchAlign.equals("hit")){
+				sql += " order by bhit desc ";
 			}
 		}
 		
@@ -134,16 +135,17 @@
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
+	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
 		<h2>자유게시판</h2>
 		<div class="frms">
 			<form name ="frm1" action ="freeList.jsp" method="get" id="frm1">
-				<select name="searchType1" onchange="document.frm1.submit()">
-					<option value="late" <%if(searchType1 != null 
-						&& searchType1.equals("late")) out.print("selected"); %>>최신순</option>
-					<option value="hit"<%if(searchType1 != null 
-						&& searchType1.equals("hit")) out.print("selected"); %>>인기순</option>
+				<select name="searchAlign" onchange="document.frm1.submit()">
+					<option value="late" <%if(searchAlign != null 
+						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
+					<option value="hit"<%if(searchAlign != null 
+						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
 			<form name ="frm2" action ="freeList.jsp" method="get" id="frm2">
@@ -182,7 +184,10 @@
 				<tr>
 					<td><%=bno %></td>
 					<td><%=btype %></td>
-					<td><a href="view.jsp?bno=<%=bno%>"><%=btitle %></a></td>
+					<td>
+						<a href="view.jsp?bno=<%=bno%>"><%=btitle %></a>
+						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
+					</td>
 					<td><%=mnickNm %></td>
 					<td><%=brdate %></td>
 					<td><%=bhit %></td>
@@ -207,6 +212,7 @@
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
 			<a href="freeList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">이전</a>
 	<%
@@ -223,12 +229,13 @@
 				 if(searchType != null){
 				 %>
 					<a href="freeList.jsp?nowPage=<%=i%>
+						&searchAlign=<%=searchAlign%>
 						&searchType=<%=searchType%>
-						&searchValue=<%=searchValue%>"><%=i %></a>
+						&searchValue=<%=searchValue%>"><%=i%></a>
 				 <%
 				 }else{
 				 %>
-					<a href="freeList.jsp?nowPage=<%=i%>"><%=i  %></a>
+					<a href="freeList.jsp?nowPage=<%=i%>"><%=i %></a>
 				<%
 				 }
 			}
@@ -238,6 +245,7 @@
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
 			<a href="freeList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">다음</a>
 		<%
@@ -245,6 +253,7 @@
 		%>
 		 </div>
 	</section>
+	</div>
 	<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

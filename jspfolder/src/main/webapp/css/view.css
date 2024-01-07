@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.viewTable{
+	width:100%; margin: 10px 0;
+	border-collapse:collapse;
+}
+.viewTable tr{height: 40px;}
+.viewTable th{
+	text-align:center;
+	background-color:#e8e8e8;
+}
+.viewTable tr:first-child th{
+	width: 100px;
+}
+.viewTable tr:nth-child(3){
+	height:400px; padding: 20px;
+}
+.viewTable td{padding-left:10px;}
+.viewBtn{
+	padding: 2px 5px;
+	font-size: 17px;
+}
+
+.replyfrm{margin-top: 20px;}
+.replyfrm input[type="text"]{
+	width: 800px; padding: 5px;
+}
+.replyfrm button{
+	padding: 2px 5px; font-size: 17px;
+}
+.replyArea{
+	margin-top: 10px;
+}

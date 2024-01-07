@@ -11,25 +11,22 @@ form>select{
 	width:100px; height:25px;
 }
 
-.frm2 input[type="text"]{
+#frm2 input[type="text"]{
 	width:200px; 
-	/* padding: 20px 10px; line-height: 28px; */
-/* 	font-size: 30px;
-  	padding-top: 10px;
- 	 padding-bottom: 10px; */
+	 padding:5px 0;
 }
-
+/* 버튼 */
 .searchBtn{
 	width:40px; height:25px;
 }
 .btnDiv{ text-align:right;}
-.writerBth{
-	width:60px; height: 30px;
+.writeBtn{
+	padding: 5px 10px;
 }
-
+/* 리스트테이블 */
 .listTable{
 	border-collapse:collapse;
-	margin:20px 0 100px;
+	margin:20px 0;
 	width:100%;
 }
 .listTable tr{
@@ -57,7 +54,7 @@ form>select{
 	color:orange;
 }
 /* 페이징 */
-.paging{text-align:center;}
+.paging{text-align:center; margin-top: 50px;}
 .paging a{
 	display: inline-block;
 	width: 25px; height:25px;

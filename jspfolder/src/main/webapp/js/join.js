@@ -15,12 +15,11 @@
 		let check = true;
 		
 //		아이디
-		if(mid == ""){
+		if(mid == "" && mid == null){
 			check = false;	
 			document.frm.mid.style.border="1px solid red";
-			document.getElementById("midTd").innerText = "*아이디를 입력해주세요.";
-			mid.focus();
-			return false;
+			document.getElementById("midTd").innerText = "아이디를 입력해주세요.";
+			return;
 		}else{
 			check = true;
 			document.frm.mid.removeAttribute("style");
@@ -29,7 +28,7 @@
 		if(!checkIdFlag){
 			check = false;
 			document.frm.mid.style.border="1px solid red";
-			document.getElementById("midTd").innerText = "*아이디 중복확인을 해주세요.";
+			document.getElementById("midTd").innerText = "아이디 중복확인을 해주세요.";
 			return false;
 		}else{
 			check = true;
@@ -42,9 +41,8 @@
 		if(mpw == ""){	
 			check = false;	
 			document.frm.mpw.style.border="1px solid red";
-			document.getElementById("mpwTd").innerText = "*비밀번호를 입력해주세요.";
-			mpw.focus();
-			return false;
+			document.getElementById("mpwTd").innerText = "비밀번호를 입력해주세요.";
+			return;
 		}else{	
 			check = true;	
 			document.frm.mpw.removeAttribute("style");
@@ -55,28 +53,25 @@
 		if(mpwRe == ""){
 			check = false;
 			document.frm.mpwRe.style.border="1px solid red";
-			document.getElementById("mpwReTd").innerText = "*비밀번호를 재입력해주세요.";
-			mpwRe.focus();
-			return false;
+			document.getElementById("mpwReTd").innerText = "비밀번호를 재입력해주세요.";
+			return;
 		}else if(mpwRe !== mpw){
 			check = false;
 			document.frm.mpwRe.style.border="1px solid red";
-			document.getElementById("mpwReTd").innerText = "*비밀번호가 같지 않습니다.";
-			return false;
+			document.getElementById("mpwReTd").innerText = "비밀번호가 같지 않습니다.";
+			return;
 		}else{	
 			check = true;
 			document.frm.mpwRe.removeAttribute("style");
 			document.getElementById("mpwReTd").innerText = "";
-			
 		}
 		
 //		닉네임
 		if(mnickNm == ""){	
 			check = false;	
 			document.frm.mnickNm.style.border="1px solid red";
-			document.getElementById("mnickNmTd").innerText = "*닉네임을 입력해주세요.";
-			mnickNm.focus();
-			return false;
+			document.getElementById("mnickNmTd").innerText = "닉네임을 입력해주세요.";
+			return;
 		}else{	
 			check = true;
 			document.frm.mnickNm.removeAttribute("style");
@@ -85,8 +80,8 @@
 		if(!checkNickNmFlag){
 			check = false;
 			document.frm.mid.mnickNm.border="1px solid red";
-			document.getElementById("mnickNmTd").innerText = "*닉네임 중복확인을 해주세요.";
-			return false;
+			document.getElementById("mnickNmTd").innerText = "닉네임 중복확인을 해주세요.";
+			return;
 		}else{
 			check = true;
 			document.frm.mnickNm.removeAttribute("style");
@@ -97,9 +92,8 @@
 		if(mname == ""){	
 			check = false;	
 			document.frm.mname.style.border="1px solid red";
-			document.getElementById("mnameTd").innerText = "*이름을 입력해주세요.";
-			mname.focus();
-			return false;
+			document.getElementById("mnameTd").innerText = "이름을 입력해주세요.";
+			return;
 		}else{	
 			check = true;	
 			document.frm.mname.removeAttribute("style");
@@ -110,9 +104,8 @@
 		if(mbirth == ""){	
 			check = false;	
 			document.frm.mbirth.style.border="1px solid red";
-			document.getElementById("mbirthTd").innerText = "*생년월일을 입력해주세요.";
-			mbirth.focus();
-			return false;
+			document.getElementById("mbirthTd").innerText = "생년월일을 입력해주세요.";
+			return;
 		}else{	
 			check = true;	
 			document.frm.mbirth.removeAttribute("style");
@@ -125,11 +118,8 @@
 			document.frm.mphone1.style.border="1px solid red";
 			document.frm.mphone2.style.border="1px solid red";
 			document.frm.mphone3.style.border="1px solid red";
-			document.getElementById("mphoneTd").innerText = "*연락처를 입력해주세요.";
-			mphone1.focus();
-			mphone2.focus();
-			mphone3.focus();
-			return false;
+			document.getElementById("mphoneTd").innerText = "연락처를 입력해주세요.";
+			return;
 		}else{	
 			check = true;	
 			document.frm.mphone1.removeAttribute("style");
@@ -139,10 +129,10 @@
 		}
 		
 //		성별
-		if(mgender.checked != ""){	
+		if(mgender == ""){	
 			check = false;
-			document.getElementById("mgenderTd").innerText = "*성별을 선택해주세요.";
-			return false;
+			document.getElementById("mgenderTd").innerText = "성별을 선택해주세요.";
+			return;
 		}else{	
 			check = true;
 			document.getElementById("mgenderTd").innerText = "";
@@ -152,8 +142,8 @@
 		if(memail == ""){	
 			check = false;	
 			document.frm.memail.style.border="1px solid red";
-			document.getElementById("memailTd").innerText = "*이메일을 입력해주세요.";
-			return false;
+			document.getElementById("memailTd").innerText = "이메일을 입력해주세요.";
+			return;
 		}else{	
 			check = true;	
 			document.frm.memail.removeAttribute("style");

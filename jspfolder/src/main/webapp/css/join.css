@@ -45,7 +45,7 @@ table{
 	margin:50px auto;
 }
 #trTitle{
-   width: auto;
+   width: 200px;
    height: 40px;
    padding-top: 10px;
    padding-right: 110px;
@@ -56,11 +56,11 @@ table{
 	font-size: 21px;
 }
 .textbox{
-	width:300px; height:25px;
+	width:308px; height:25px;
 	font-size: 18px;
 }
 .phone{
-	width: 80px; height:25px;
+	width: 90px; height:25px;
 }
 input[type=radio]{
 	width:40px; height:15px;
@@ -77,8 +77,8 @@ input[type=radio]{
 	background-color:skyblue;
 	display:block;			
 	border-radius:9px;	
-	width:100px; height:40px;
-	margin:auto;
+	width:100px; height:35px;
+	margin-left: 285px;
 	font-size : 20px;
 }
 /* 테이블 버튼 */
@@ -88,6 +88,21 @@ table button{
 	border-radius:5px;
 	margin:5px;
 	font-size : 15px;
+}
+#loginbutton{
+	padding-top:20px;
+	margin-right: 220px;
+	text-align: center;
+}
+#loginbutton p{
+	font-size: 18px;
+}
+#loginbutton a{
+	display: block;
+	padding-top: 5px;
+	font-weight: bold;
+	font-size: 20px;
+	border-style: 1px solid black;
 }
 
 /* *************************푸터******************************** */

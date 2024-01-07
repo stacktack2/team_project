@@ -138,6 +138,11 @@
 				<button onclick="clickJoin();return false;" id="joinButton">가입하기</button>
 			</form>
 			</div>
+			<div id="loginbutton">
+				<p>계정이 있나요?</p>
+				<a href="login.jsp">로그인</a>
+			</div>
+    		
 		</article>
 	</section>
 <%@ include file="/include/footer.jsp" %>

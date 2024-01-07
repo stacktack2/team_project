@@ -16,7 +16,7 @@
 	PreparedStatement psmt= null;
 	
 	// url은 mysql에 있는 localhost의 campingWeb Schemas로 연결 및 계정과 비밀번호 입력
-	String url = "jdbc:mysql://localhost:3306/campingweb";
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	String mphone1 = request.getParameter("mphone1");

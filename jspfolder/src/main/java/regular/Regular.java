@@ -9,19 +9,19 @@ public class Regular {
 	}
 	
 	public static boolean isEng(String str,int max) {
-		return Pattern.matches("^[a-zA-Z]{0,\"+max+\"}$", str);
+		return Pattern.matches("^[a-zA-Z]{0,"+ max +"}$", str);
 	}
 	
 	public static boolean isNumEng(String str,int max) {
-		return Pattern.matches("^[a-zA-Z0-9]{0,\"+max+\"}$", str);
+		return Pattern.matches("^[a-zA-Z0-9]{0,"+max+"}$", str);
 	}
 	
 	public static boolean isNumEngKor(String str,int max) {
-		return Pattern.matches("^[a-zA-Z0-9가-힣]{0,\"+max+\"}$", str);
+		return Pattern.matches("^[a-zA-Z0-9가-힣]{0,"+max+"}$", str);
 	}
 	
 	public static boolean isKor(String str,int max) {
-		return Pattern.matches("^[가-힣]{0,\"+max+\"}$", str);
+		return Pattern.matches("^[가-힣]$", str);
 	}
 	
 	public static boolean isEmail(String str) {

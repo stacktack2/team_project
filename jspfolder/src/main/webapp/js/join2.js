@@ -223,9 +223,14 @@
 			data : {id : id},
 			success : function(data){
 				let result = data.trim();
+				// 0 : 사용가능, 1 : 사용 불가능, -1: 빈문자열 또는 null
 				if(result == 0){
 					checkIdFlag = true;
 					alert("사용가능한 아이디입니다.");
+				}else if(result == -1){
+					checkIdFlag = false;
+					midTd.innerHTML = '아이디를 입력해주세요.';
+					midTd.style.color = 'red';
 				}else{
 					checkIdFlag = false;
 					alert("이미 존재하는 아이디입니다.");
@@ -255,10 +260,15 @@
 			data : {nick : nick},
 			success : function(data){
 			let result = data.trim();
+			// 0 : 사용가능, 1 : 사용 불가능, -1: 빈문자열 또는 null
 			if(result == 0){
 				checkNickNmFlag = true;
 				alert("사용가능한 닉네임입니다.");
-			}else{
+			}else if(result == -1){
+				checkNickNmFlag = false;
+				mnickNmTd.innerHTML = '닉네임을 입력해주세요';
+				mnickNmTd.style.color = 'red';
+			}else if(result ==1){
 				checkNickNmFlag = false;
 				alert("이미 존재하는 닉네임입니다.");
 				mnickNmTd.innerHTML = '다른 닉네임을 입력해주세요';
@@ -278,12 +288,23 @@
 	
 	
 	function validation(){
-		if(checkId(mid) & checkPw(mpw) & checkPwRe(mpwRe) & checkNickNm(mnickNm)
-		& checkName(mname) & checkBirth(mbirth) & checkPhone1(mphone1)
-		& checkPhone2(mphone2) & checkPhone3(mphone3) & checkGender(mgender)
-		& checkEmail(memail) & checkIdFlag & checkNickNmFlag){
-			document.frm.submit();
-		}	
+		if(!checkIdFlag){
+			alert("아이디 중복확인을 해 주세요.");
+			document.getElementById("midTd").innerHTML = '';
+		}else{
+			if(!checkNickNmFlag){
+				alert("닉네임 중복확인을 해 주세요.");
+				document.getElementById("mnickNmTd").innerHTML = '';
+			}else{
+				if(checkId(mid) & checkPw(mpw) & checkPwRe(mpwRe) & checkNickNm(mnickNm)
+				& checkName(mname) & checkBirth(mbirth) & checkPhone1(mphone1)
+				& checkPhone2(mphone2) & checkPhone3(mphone3) & checkGender(mgender)
+				& checkEmail(memail) & checkIdFlag & checkNickNmFlag){
+					document.frm.submit();
+				}	
+			}
+		}
+		
 		
 	
 	}

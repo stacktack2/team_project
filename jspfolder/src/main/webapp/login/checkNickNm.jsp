@@ -38,6 +38,10 @@
 			cnt = rs.getInt("cnt");
 		}
 		
+		if(nick == null || (nick != null && nick.equals(""))){
+			cnt = -1;
+		}
+		
 		out.print(cnt);
 		
 	}catch(Exception e){

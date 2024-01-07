@@ -38,6 +38,10 @@
 			cnt = rs.getInt("cnt");
 		}
 		
+		if(id == null || (id != null && id.equals(""))){
+			
+			cnt = -1;
+		}
 		out.print(cnt);
 		
 	}catch(Exception e){

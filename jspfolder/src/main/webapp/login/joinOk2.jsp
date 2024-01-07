@@ -15,6 +15,8 @@
 	}
 	
 	request.setCharacterEncoding("UTF-8");
+	
+	
 
 	String mphone1 = request.getParameter("mphone1");
 	String mphone2 = request.getParameter("mphone2");
@@ -56,68 +58,62 @@
 		//[유효성 검사]
 		boolean isPass = true;
 		
-		if(member.getMid() != null && !Regular.isEng(member.getMid(),10)){
-			isPass = false;
+		if(!Regular.isEng(member.getMid(),10)){
+			isPass = false;System.out.println(1);
 		}
-		if(member.getMpw() != null && !Regular.isNumEng(member.getMpw(),10)){
-			isPass = false;
+		if(!Regular.isNumEng(member.getMpw(),10)){
+			isPass = false;System.out.println(2);
 		}
-		if(member.getMnickNm() != null && !Regular.isNumEngKor(member.getMnickNm(),10)){
-			isPass = false;
+		if(!Regular.isNumEngKor(member.getMnickNm(),10)){
+			isPass = false;System.out.println(3);
 		}
-		if(member.getMname() != null && !Regular.isKor(member.getMname(),10)){
-			isPass = false;
+		if(!Regular.isKor(member.getMname(),10)){
+			isPass = false; System.out.println(4);
 		}
 		if(!Regular.isNum(""+member.getMbirth(),13)){
-			isPass = false; 
+			isPass = false; System.out.println(5);
 		}
-		if(member.getMphone() != null && !Regular.isNum(mphone,13)){
-			isPass = false; 
+		if(!Regular.isNum(mphone,13)){
+			isPass = false; System.out.println(6);
 		}
-		if(member.getMemail() != null && !Regular.isEmail(member.getMemail())){
-			isPass = false; 
+		if(!Regular.isEmail(member.getMemail())){
+			isPass = false; System.out.println(7);
 		}
 		if(rs.next()){
-			isPass = false;
+			isPass = false; System.out.println(8);
 		}
+		
+		if(rs != null) rs.close();
+		if(psmt != null) psmt.close();
 		
 		if(!isPass){
 			
 			%>
 			<script>
 				alert("회원가입에 실패했습니다. 다시 시도하세요.");
-				location.href="<%=request.getContextPath()%>";
+				
 			</script>
 			<%		
-	
+		}else{
+
+			// mysql insert query문 작성 -> join.jsp에서 입력한 데이터 처리
+			sql = " INSERT INTO member"
+					   + " (mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)"
+					   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, now())";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, member.getMid());
+			psmt.setString(2, member.getMpw());
+			psmt.setString(3, member.getMnickNm());
+			psmt.setString(4, member.getMname());
+			psmt.setInt(5, member.getMbirth());
+			psmt.setString(6, mphone);
+			psmt.setString(7, member.getMgender());
+			psmt.setString(8, member.getMemail());
+			
+			insertRow = psmt.executeUpdate();
+			
 		}
-
-
-		if(rs != null) rs.close();
-		if(psmt != null) psmt.close();
-		
-
-
-
-
-	
-		// mysql insert query문 작성 -> join.jsp에서 입력한 데이터 처리
-		sql = " INSERT INTO member"
-				   + " (mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)"
-				   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, now())";
-		
-		psmt = conn.prepareStatement(sql);
-		psmt.setString(1, member.getMid());
-		psmt.setString(2, member.getMpw());
-		psmt.setString(3, member.getMnickNm());
-		psmt.setString(4, member.getMname());
-		psmt.setInt(5, member.getMbirth());
-		psmt.setString(6, mphone);
-		psmt.setString(7, member.getMgender());
-		psmt.setString(8, member.getMemail());
-		
-		insertRow = psmt.executeUpdate();
-		
 		
 	}catch(Exception e){
 		e.printStackTrace();

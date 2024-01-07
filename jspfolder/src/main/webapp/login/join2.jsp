@@ -18,7 +18,7 @@
 		<article>
 			<div id="formDiv">
 				<div id="hello"><h2>회원가입</h2></div>
-			<form name="frm" action="joinOk2.jsp" method="post" >
+			<form name="frm" action="joinOk2.jsp" method="post" onsubmit="return false;" >
 				<table>
 
 					<tr id="trTitle">
@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mid" id="mid" onblur="checkId(this);resetIdFn();" class="textbox">
+							<input type="text" name="mid" id="mid" oninput="checkId(this);resetIdFn();" class="textbox">
 							<button type="button" onclick="checkIdFn()">중복확인</button>
 						</td>
 					</tr>
@@ -39,7 +39,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="password" name="mpw" onblur="checkPw(this)" class="textbox">
+							<input type="password" name="mpw" oninput="checkPw(this);checkPwRe(this);" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -51,7 +51,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="password" name="mpwRe" onblur="checkPwRe(this)" class="textbox">
+							<input type="password" name="mpwRe" oninput="checkPwRe(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -63,7 +63,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mnickNm" onblur="checkNickNm(this);resetNickFn();" class="textbox">
+							<input type="text" name="mnickNm" oninput="checkNickNm(this);resetNickFn();" class="textbox">
 							<button type="button" onclick="checkNickFn()">중복확인</button>
 						</td>
 					</tr>
@@ -76,7 +76,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mname" onblur="checkName(this)" class="textbox">
+							<input type="text" name="mname" oninput="checkName(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -88,7 +88,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mbirth" onblur="checkBirth(this)" maxlength="8" class="textbox">
+							<input type="text" name="mbirth" oninput="checkBirth(this)" maxlength="8" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -99,9 +99,9 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mphone1" onblur="checkPhone1(this)" maxlength="3" class="phone"> -
-							<input type="text" name="mphone2" onblur="checkPhone2(this)" maxlength="4" class="phone"> -
-							<input type="text" name="mphone3" onblur="checkPhone3(this)" maxlength="4" class="phone">
+							<input type="text" name="mphone1" oninput="checkPhone1(this)" maxlength="3" class="phone"> -
+							<input type="text" name="mphone2" oninput="checkPhone2(this)" maxlength="4" class="phone"> -
+							<input type="text" name="mphone3" oninput="checkPhone3(this)" maxlength="4" class="phone">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -124,14 +124,14 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="email" name="memail" onblur="checkEmail(this)" class="textbox">
+							<input type="email" name="memail" oninput="checkEmail(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
     					<td colspan="2"><a id="memailTd"></a></td>
 					</tr>
 				</table>
-				<input type="submit" id="joinButton" onclick="return validation();" value="가입하기">
+				<input type="submit" id="joinButton" onclick="validation();" value="가입하기">
 			</form>
 			</div>
 			<div id="loginbutton">

@@ -142,6 +142,6 @@
 			</div>
 		</article>
 	</section>
-<script src="<%=request.getContextPath()%>/js/join.js"></script> 
+<script src="<%=request.getContextPath()%>/js/join.js"></script>
 </body>
 </html>

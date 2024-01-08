@@ -1,5 +1,6 @@
 	//유효성 검사 개수제한 추가해야함 개수 정해지면 {} 붙이기
-	let mid = document.frm.mid; 
+	
+	let mid = document.frm.mid;
 	let mpw = document.frm.mpw; 
 	let mpwRe = document.frm.mpwRe; 
 	let mnickNm = document.frm.mnickNm;
@@ -14,15 +15,15 @@
 	let checkNickNmFlag = false;
 	
 	function checkId(obj){
-		let regId = /[^0-9a-zA-Z]/g;
+		let regId = /^[a-z][a-z0-9]{4,20}$/g;
 		let regRs = regId.test(obj.value); 
 		let midTd = document.getElementById("midTd");
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			midTd.innerHTML = '아이디를 입력해주세요';
 			midTd.style.color = 'red';
 			return false;
-		}else if(regRs){
-			midTd.innerHTML = '영문 및 숫자만 사용가능합니다.';
+		}else if(!regRs){
+			midTd.innerHTML = '4자 이상, 20이하의 영문(소문자) 및 숫자만 사용가능합니다.';
 			midTd.style.color = 'red';
 			return false;
 		}else{
@@ -202,9 +203,15 @@
 	}
 	
 	function checkEmail(obj){
+		let regEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+		let regRs = regEmail.test(obj.value); 
 		let memailTd = document.getElementById("memailTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			memailTd.innerHTML = '이메일을 입력해주세요.';
+			memailTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			memailTd.innerHTML = '이메일 형식에 맞춰 입력해주쉐요.';
 			memailTd.style.color = 'red';
 			return false;
 		}else{

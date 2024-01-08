@@ -55,7 +55,7 @@
 		//[유효성 검사]
 		boolean isPass = true;
 		
-		if(!Regular.isEng(member.getMid(),10)){
+		if(!Regular.isNumEng(member.getMid(),10)){
 			isPass = false;System.out.println(1);
 		}
 		if(!Regular.isNumEng(member.getMpw(),10)){

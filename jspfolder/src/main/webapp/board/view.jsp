@@ -222,11 +222,12 @@
 		</table>
 		<button onclick="location.href='list.jsp'" class="viewBtn">목록</button>
 		
+		<div id="writeBtns">
 		<%	// 로그인한 유저가 쓴 게시글에서만 수정, 삭제 버튼 노출
 		if(member != null && member.getMno() == board.getMno()){
 		%>
-			<button onclick="location.href='modify.jsp?bno=<%=board.getBno()%>'">수정</button>
-			<button onclick="delFn()">삭제</button>
+			<button onclick="location.href='modify.jsp?bno=<%=board.getBno()%>'" class="viewBtn">수정</button>
+			<button onclick="delFn()" class="viewBtn">삭제</button>
 			<script>
 				function delFn(){
 					let isDel = confirm("정말 삭제하시겠습니까?");
@@ -241,7 +242,8 @@
 		%>
 		<form name="delfrm" action="delete.jsp" method="post">
 			<input type="hidden" name="bno" value="<%=bno%>">
-		</form>	
+		</form>
+		</div>	
 
 		<!-- 댓글영역 -->
 		<!-- <form name="replyfrm" action="replyWriteOk.jsp" method="post"> -->

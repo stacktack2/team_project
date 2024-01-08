@@ -20,7 +20,7 @@
 		if(memberNav != null){	//로그인이 돼있다면
 	%>
 			<p><%=memberNav.getMname() %>님, <span class="block">환영합니다.</span></p>
-			<a href="<%=request.getContextPath()%>/mypage/mapage.jsp">마이페이지</a>
+			<a href="<%=request.getContextPath()%>/mypage/mypage.jsp">마이페이지</a>
 	<%		
 		}else{
 	%>

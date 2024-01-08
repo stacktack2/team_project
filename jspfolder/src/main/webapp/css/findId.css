@@ -43,71 +43,57 @@ section{
 	margin-bottom: 20px;
 }
 /* 테이블 */
-input{
-	width:200px; height:25px;
+table{
+	border-collapse:collapse;
+	margin:50px 210px;
+}
+#trTitle{
+   width: 200px;
+   height: 40px;
+   padding-top: 10px;
+   padding-right: 110px;
+   padding-bottom: 10px;
+}
+#trTitle th{
+	text-align: left;
+	font-size: 21px;
+}
+.textbox{
+	width:295px; height:25px;
 	font-size: 18px;
-	margin-left: 250px;
 }
-#idBox{
-	width:308px; height:30px;
-	font-size: 25px;
-	padding-top: 20px;
-	padding-bottom: 10px;
-	margin-left: 355px;
-}
-#pwBox{
-	width:308px; height: 30px;
-	font-size: 25px;
-	padding-top: 10px;
-	padding-bottom: 40px;
-	margin-left: 355px;
+.phone{
+	width: 90px; height:25px;
 }
 
-/* 로그인 버튼 */
-#loginbutton{
+/* 경고문 */
+.blur td{
+	text-align: left;
+	color: red;
+	font-size: 15px;
+}
+/* 아이디 조회 버튼 */
+#idSearchButton{
 	font-weight:bold;
 	background-color:skyblue;
 	display:block;			
 	border-radius:9px;	
-	width:100px; height:35px;
-	margin-left: 300px;
-	margin-top: 30px;
-	margin-bottom: 30px;
+	width: 200px; height:40px;
+	margin-left: 250px;
 	font-size : 20px;
 }
-#idpwFind{
-	margin: 0 auto;
-}
-#idpwFind a:first-child{
-	display: inline-block;
-	margin-left: 255px;
-	padding: 5px;
-	font-weight: bold;
-	font-size: 15px;
-	border-radius: 10px;
-	color: #404040;
-}
-#idpwFind a:nth-child(2){
-	display: inline-block;
-	margin-left: 10px;
-	padding: 5px;
-	font-weight: bold;
-	font-size: 15px;
-	border-radius: 10px;
-	color: #404040;
-}
-
-#joinQus{
+/* 버튼 */
+#findPwQus{
 	text-align: center;
-	margin-right: 190px;
-	padding-top:20px;
+	margin-right: 195px;
+	padding-top: 40px;
 }
-#joinbutton a{
+#findPwButton a{
 	display: block;
 	padding-top: 10px;
 	font-weight: bold;
 	font-size: 15px;
-	margin-left: 325px;
+	margin-left: 300px;
 	color: #a50021;
 }
 

@@ -8,17 +8,16 @@
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/join.css" type="text/css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/join.js"></script>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 <%@ include file="/include/joinHeader.jsp" %>
 	<section>
-<!-- 회원가입 폼 -->
 		<article>
+<!-- 회원가입 폼 -->
 			<div id="formDiv">
 				<div id="hello"><h2>회원가입</h2></div>
-			<form name="frm" action="joinOk.jsp" method="post">
+			<form name="frm" action="joinOk.jsp" method="post" onsubmit="return false;" >
 				<table>
 <!-- 아이디 -->
 					<tr id="trTitle">
@@ -26,7 +25,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mid" onblur="resetFn()" class="textbox">
+							<input type="text" name="mid" id="mid" oninput="checkId(this);resetIdFn();" class="textbox">
 							<button type="button" onclick="checkIdFn()">중복확인</button>
 						</td>
 					</tr>
@@ -39,7 +38,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="password" name="mpw" class="textbox">
+							<input type="password" name="mpw" oninput="checkPw(this);checkPwRe(this);" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -51,7 +50,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="password" name="mpwRe" class="textbox">
+							<input type="password" name="mpwRe" oninput="checkPwRe(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -63,20 +62,20 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mnickNm" onblur="resetNickFn()" class="textbox">
-							<button type="button" onclick="checkNickNm()">중복확인</button>
+							<input type="text" name="mnickNm" oninput="checkNickNm(this);resetNickFn();" class="textbox">
+							<button type="button" onclick="checkNickFn()">중복확인</button>
 						</td>
 					</tr>
 					<tr class="blur">
     					<td colspan="2"><a id="mnickNmTd"></a></td>
 					</tr>
-<!-- 사용자 이름 -->
+<!-- 이름 -->
 					<tr id="trTitle">
 						<th>이름</th>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mname" class="textbox">
+							<input type="text" name="mname" oninput="checkName(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -88,7 +87,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mbirth" maxlength="8" class="textbox">
+							<input type="text" name="mbirth" oninput="checkBirth(this)" maxlength="8" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -100,9 +99,9 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="mphone1" maxlength="3" class="phone"> -
-							<input type="text" name="mphone2" maxlength="4" class="phone"> -
-							<input type="text" name="mphone3" maxlength="4" class="phone">
+							<input type="text" name="mphone1" oninput="checkPhone1(this)" maxlength="3" class="phone"> -
+							<input type="text" name="mphone2" oninput="checkPhone2(this)" maxlength="4" class="phone"> -
+							<input type="text" name="mphone3" oninput="checkPhone3(this)" maxlength="4" class="phone">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -114,8 +113,8 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="radio" name="mgender" value="M">남
-							<input type="radio" name="mgender" value="W">여
+							<input type="radio" name="mgender" onclick="checkGender(this)" value="M">남
+							<input type="radio" name="mgender" onclick="checkGender(this)" value="F">여
 						</td>
 					</tr>
 					<tr class="blur">
@@ -127,24 +126,22 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="email" name="memail" class="textbox">
+							<input type="email" name="memail" oninput="checkEmail(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
     					<td colspan="2"><a id="memailTd"></a></td>
 					</tr>
 				</table>
-<!-- 회원가입 버튼 -->
-				<button onclick="clickJoin();return false;" id="joinButton">가입하기</button>
+				<input type="submit" id="joinButton" onclick="validation();" value="가입하기">
 			</form>
 			</div>
 			<div id="loginbutton">
 				<p>계정이 있나요?</p>
 				<a href="login.jsp">로그인</a>
 			</div>
-    		
 		</article>
 	</section>
-<%@ include file="/include/footer.jsp" %>
+<script src="<%=request.getContextPath()%>/js/join.js"></script> 
 </body>
 </html>

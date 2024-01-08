@@ -3,12 +3,28 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="Vo.*" %>
 <%@ page import="paging.PagingVO" %> 
+<!DOCTYPE html>
+<html>
+<head>
 <%
 	request.setCharacterEncoding("UTF-8");
 	
-	Member memberSession = (Member)session.getAttribute("login");
-	int mno = memberSession.getMno();
 	
+	
+	
+	int mno=0;
+	Member memberSession = (Member)session.getAttribute("login");
+	if(memberSession != null){
+		mno = memberSession.getMno();
+	}
+	if(mno ==0){
+		%>
+		<script>
+			alert("오류가 발생해 메인페이지로 이동합니다.");
+			location.href="/jspfolder/index.jsp";
+		</script>
+		<%
+	}
 	
 	//[검색]
 	String searchAlign = request.getParameter("searchAlign");
@@ -115,9 +131,7 @@
 %>
 
 
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">

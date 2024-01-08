@@ -17,7 +17,7 @@
 	
 	
 	function checkPw(obj){
-		let regId = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,24}$/;
+		let regId = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/g;
 		let regRs = !regId.test(obj.value); 
 		let mpwTd = document.getElementById("mpwTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -25,7 +25,7 @@
 			mpwTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			mpwTd.innerHTML ='영문,숫자,특수기호를 사용하여 8글자 이상 작성해 주세요.';
+			mpwTd.innerHTML ='영문(소문자, 대문자), 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
 			mpwTd.style.color = 'red';
 			return false;
 		}else{
@@ -117,7 +117,7 @@
 	
 	
 	function checkEmail(obj){
-		let regId = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		let regId = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 		let regRs = !regId.test(obj.value); 
 		let memailTd = document.getElementById("memailTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -125,7 +125,7 @@
 			memailTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			memailTd.innerHTML = '이메일 형식을 맞춰주세요.';
+			memailTd.innerHTML = '이메일 형식에 맞춰 입력해주쉐요.';
 			memailTd.style.color = 'red';
 			return false;
 		}else{

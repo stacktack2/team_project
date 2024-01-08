@@ -16,9 +16,19 @@
 	String checkmpw = request.getParameter("checkmpw");
 	
 	
+	int mno=0;
 	Member memberSession = (Member)session.getAttribute("login");
-	int mno = memberSession.getMno();
-	
+	if(memberSession != null){
+		mno = memberSession.getMno();
+	}
+	if(mno ==0){
+		%>
+		<script>
+			alert("오류가 발생해 메인페이지로 이동합니다.");
+			location.href="/jspfolder/index.jsp";
+		</script>
+		<%
+	}
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;

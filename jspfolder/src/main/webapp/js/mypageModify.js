@@ -12,20 +12,20 @@
 	
 	let memail = document.frm.memail;
 	
-	let checkNickNmFlag = false;
+	
 	
 	
 	
 	function checkPw(obj){
-		let regId = /[^0-9a-zA-Z]/g;
-		let regRs = regId.test(obj.value); 
+		let regId = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,24}$/;
+		let regRs = !regId.test(obj.value); 
 		let mpwTd = document.getElementById("mpwTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mpwTd.innerHTML = '비밀번호를 입력해주세요';
 			mpwTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			mpwTd.innerHTML ='영문과 숫자만 사용가능합니다.';
+			mpwTd.innerHTML ='영문,숫자,특수기호를 사용하여 8글자 이상 작성해 주세요.';
 			mpwTd.style.color = 'red';
 			return false;
 		}else{
@@ -58,15 +58,15 @@
 	
 	
 	function checkPhone1(obj){
-		let regId = /[^0-9]/g;
-		let regRs = regId.test(obj.value); 
+		let regId = /^\d{3}/g;
+		let regRs = !regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '3자리숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{
@@ -77,15 +77,15 @@
 	}
 	
 	function checkPhone2(obj){
-		let regId = /[^0-9]/g;
-		let regRs = regId.test(obj.value); 
+		let regId = /^\d{4}/g;
+		let regRs = !regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '4자리 숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{
@@ -96,15 +96,15 @@
 	}
 	
 	function checkPhone3(obj){
-		let regId = /[^0-9]/g;
-		let regRs = regId.test(obj.value); 
+		let regId = /^\d{4}/g;
+		let regRs = !regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '4자리 숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{
@@ -117,9 +117,15 @@
 	
 	
 	function checkEmail(obj){
+		let regId = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		let regRs = !regId.test(obj.value); 
 		let memailTd = document.getElementById("memailTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			memailTd.innerHTML = '이메일을 입력해주세요.';
+			memailTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			memailTd.innerHTML = '이메일 형식을 맞춰주세요.';
 			memailTd.style.color = 'red';
 			return false;
 		}else{
@@ -137,3 +143,14 @@
 				document.frm.submit();	
 			}
 	}
+
+
+
+
+
+
+
+
+
+
+

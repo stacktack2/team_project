@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
@@ -48,7 +49,10 @@
 			String mphone = rs.getString("mphone");
 			String mgender = rs.getString("mgender");
 			String memail = rs.getString("memail");
-	
+			
+			String mphone1 = mphone.substring(0,3);
+			String mphone2 = mphone.substring(3,7);
+			String mphone3 = mphone.substring(7);
 
 		
 %>
@@ -186,9 +190,9 @@
 					</tr>
 					<tr>
 						<td>
-							<input value="<%=mphone %>" type="text" name="mphone1" oninput="checkPhone1(this)" maxlength="3" class="phone"> -
-							<input type="text" name="mphone2" oninput="checkPhone2(this)" maxlength="4" class="phone"> -
-							<input type="text" name="mphone3" oninput="checkPhone3(this)" maxlength="4" class="phone">
+							<input value="<%=mphone1 %>" type="text" name="mphone1" oninput="checkPhone1(this)" maxlength="3" class="phone"> -
+							<input value="<%=mphone2 %>" type="text" name="mphone2" oninput="checkPhone2(this)" maxlength="4" class="phone"> -
+							<input value="<%=mphone3 %>" type="text" name="mphone3" oninput="checkPhone3(this)" maxlength="4" class="phone">
 						</td>
 					</tr>
 					<tr class="blur">

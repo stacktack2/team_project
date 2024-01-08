@@ -14,15 +14,23 @@
 	}
 
 </style>
+
 </head>
 <body>
 <%@ include file="/include/header.jsp" %>
 	<section>
-		<form name="frm">
+		<form name="frm" method="post" action="mypageDelOk.jsp" onsubmit="return false">
 			<input type="text" id="mypagePwinput" placeholder="비밀번호를 입력하세요.">
-			<button id="mypagePwbutton">회원 탈퇴</button>
+			<button id="mypagePwbutton" onclick="confirmFn()">회원 탈퇴</button>
 		</form>
 	</section>
 <%@ include file="/include/footer.jsp" %>
+<script>
+	function confirmFn(){
+		if(confirm("정말 탈퇴하시겠습니까?")){
+			document.frm.submit();	
+		}
+	}
+</script>
 </body>
 </html>

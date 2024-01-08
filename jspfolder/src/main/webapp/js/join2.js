@@ -53,10 +53,10 @@
 		}
 	}
 	
-	function checkPwRe(obj){
-		let confirmPw = mpw.value == obj.value;
+	function checkPwRe(){
+		let confirmPw = mpw.value == mpwRe.value;
 		let mpwReTd = document.getElementById("mpwReTd"); 
-		if(obj.value == "" || obj.value === null || obj.value === undefined){
+		if(mpwRe.value == "" || mpwRe.value === null || mpwRe.value === undefined){
 			mpwReTd.innerHTML = '비밀번호를 입력해주세요';
 			mpwReTd.style.color = 'red';
 			return false;

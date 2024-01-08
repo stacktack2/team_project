@@ -11,9 +11,14 @@
 	int mno =7;
 	
 	//[검색]
+	
 	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
+	if(searchAlign ==null || (searchAlign !=null && searchAlign.equals(""))){
+		searchAlign = "late";
+	}
+	
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
@@ -229,7 +234,7 @@
 			 <%
 			 }else{
 				 		
-				 if(searchAlign != null){
+				 
 				 %>
 					<span class="pagingnum"><a href="allList.jsp?nowPage=<%=i%>
 						<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
@@ -237,11 +242,7 @@
 						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
 						%> "> <%=i %></a></span>
 				 <%
-				 }else{
-				 %>
-					<span class="pagingnum"><a href="allList.jsp?nowPage=<%=i%>"><%=i  %></a></span>
-				<%
-				 }
+				 
 			}
 			 	
 		}

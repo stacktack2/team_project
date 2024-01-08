@@ -14,6 +14,11 @@
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 	
+	//searchAlign이 null일때 초기값 최신순으로 고정하기
+	if(searchAlign==null){
+		searchAlign="late";
+	}
+	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
 	
@@ -26,7 +31,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost:3306/campingweb";
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	
@@ -42,7 +47,7 @@
 						+" FROM board b"
 						+" INNER JOIN member m "
 						+" ON b.mno = m.mno"
-						+" WHERE btype = '출석체크'";
+						+" WHERE btype = 'QnA'";
 		
 		//[검색]
 		if(searchType != null){
@@ -82,7 +87,7 @@
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"
-					+" WHERE btype = '출석체크'";
+					+" WHERE btype = 'QnA'";
 		
 		//[검색]
 		if(searchType != null){
@@ -138,9 +143,9 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2>출석체크</h2>
+		<h2>질문게시판</h2>
 		<div class="frms">
-			<form name ="frm1" action ="attendList.jsp" method="get" id="frm1">
+			<form name ="frm1" action ="qnaList.jsp" method="get" id="frm1">
 				<select name="searchAlign" onchange="document.frm1.submit()">
 					<option value="late" <%if(searchAlign != null 
 						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
@@ -148,7 +153,7 @@
 						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
-			<form name ="frm2" action ="attendList.jsp" method="get" id="frm2">
+			<form name ="frm2" action ="qnaList.jsp" method="get" id="frm2">
 				<select name="searchType">
 					<option value="title" <%if(searchType != null 
 						&& searchType.equals("title")) out.print("selected"); %>>제목</option>
@@ -157,6 +162,7 @@
 				</select>
 				<input type="text" name="searchValue" 
 				  value="<%if(searchValue!=null) out.print(searchValue); %>">
+				<input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
@@ -187,7 +193,7 @@
 					<td>
 						<a href="view.jsp?bno=<%=bno%>"><%=btitle %></a>
 						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
-						</td>
+					</td>
 					<td><%=mnickNm %></td>
 					<td><%=brdate %></td>
 					<td><%=bhit %></td>
@@ -211,7 +217,7 @@
 	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
-			<a href="attendList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+			<a href="qnaList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">이전</a>
@@ -228,14 +234,15 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="attendList.jsp?nowPage=<%=i%>
+					<a href="qnaList.jsp?nowPage=<%=i%>
 						&searchAlign=<%=searchAlign%>
 						&searchType=<%=searchType%>
 						&searchValue=<%=searchValue%>"><%=i %></a>
 				 <%
 				 }else{
 				 %>
-					<a href="attendList.jsp?nowPage=<%=i%>"><%=i  %></a>
+					<a href="qnaList.jsp?nowPage=<%=i%>
+						&searchAlign=<%=searchAlign%>"><%=i  %></a>
 				<%
 				 }
 			}
@@ -244,7 +251,7 @@
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
-			<a href="attendList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+			<a href="qnaList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
 				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
 				&searchValue=<%=searchValue%>">다음</a>

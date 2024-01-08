@@ -14,6 +14,11 @@
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 	
+	//searchAlign이 null일때 초기값 최신순으로 고정하기
+	if(searchAlign==null){
+		searchAlign="late";
+	}
+	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
 	
@@ -26,7 +31,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost:3306/campingweb";
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	
@@ -157,6 +162,8 @@
 				</select>
 				<input type="text" name="searchValue" 
 				  value="<%if(searchValue!=null) out.print(searchValue); %>">
+				  <!-- 최신순/인기순정렬 파라미터 히든으로 보내기 -->
+				  <input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
@@ -228,15 +235,15 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="freeList.jsp?nowPage=<%=i%>
+					<a href="freeList.jsp?nowPage1=<%=i%>
 						&searchAlign=<%=searchAlign%>
 						&searchType=<%=searchType%>
 						&searchValue=<%=searchValue%>"><%=i%></a>
 				 <%
 				 }else{
-				 %>
-					<a href="freeList.jsp?nowPage=<%=i%>"><%=i %></a>
-				<%
+				 %>	
+					<a href="freeList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>"><%=i %></a>
+				<%	//searchAlign 파라미터값 같이 넘기기
 				 }
 			}
 			 	

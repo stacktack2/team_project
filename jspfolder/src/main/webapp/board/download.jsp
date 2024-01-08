@@ -7,8 +7,8 @@
 	request.setCharacterEncoding("UTF-8");
 
 	//실제이름, 원래이름 파라미터로 가져오기
-	String realNM = request.getParameter("realNM");
-	String originNM = request.getParameter("originNM");
+	String frealnm = request.getParameter("frealnm");
+	String foriginnm = request.getParameter("foriginnm");
 	
 	//웹앱 하위에 있는 업로드폴더 위치
 	String root = "D:/dahee/AWS/JAVA/workspace/PracticeJsp/src/main/webapp/upload";
@@ -23,7 +23,7 @@
 		// 파일을 읽어 스트림에 담기
 		try{
 			//-file객체에 업로드폴더, 실제이름 넣어 생성
-			file = new File(root, realNM);
+			file = new File(root, frealnm);
 			
 			//-InputStream 객체에 file객체 넣어 생성
 			in = new FileInputStream(file);
@@ -45,13 +45,13 @@
 			
 			// IE
 			if(client.indexOf("MSIE") != -1){
-				response.setHeader ("Content-Disposition", "attachment; filename="+new String(originNM.getBytes("KSC5601"),"ISO8859_1"));
+				response.setHeader ("Content-Disposition", "attachment; filename="+new String(foriginnm.getBytes("KSC5601"),"ISO8859_1"));
 
 			}else{
 				// 한글 파일명 처리
-				originNM = new String(originNM.getBytes("utf-8"),"iso-8859-1");
+				foriginnm = new String(foriginnm.getBytes("utf-8"),"iso-8859-1");
 
-				response.setHeader("Content-Disposition", "attachment; filename=\"" + originNM + "\"");
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + foriginnm + "\"");
 				response.setHeader("Content-Type", "application/octet-stream; charset=utf-8");
 			}  
 			

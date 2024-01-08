@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="Vo.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -13,15 +14,12 @@
 		response.sendRedirect("mypage.jsp");
 	}
 // 	[비인증 접근 제한]
-// 	if(session.getAttribute("isAutFlag")){
-	boolean isAutFlag = false;
-	if(isAutFlag){
+ 	if(!(boolean)session.getAttribute("isAutFlag")){
 		response.sendRedirect("mypage.jsp")	;
 	}
 	
-	/* Member member = session.getAttribute("member"); */
-// 	int mno = member.getMno();
-	int mno=7;
+	Member memberSession = (Member)session.getAttribute("login");
+	int mno = memberSession.getMno();
 
 
 	Connection conn = null;
@@ -69,7 +67,7 @@
 	if(result > 0){
 %>
 		<script>
-			alert("정보 수정이 완료되었습니다. 로그인을 시도하세요.");
+			alert("정보 수정이 완료되었습니다.");
 			location.href="<%=request.getContextPath()%>";
 		</script>
 <%

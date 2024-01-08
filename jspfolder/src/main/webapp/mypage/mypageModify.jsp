@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="Vo.*" %>
 <%
 	
 
@@ -13,9 +14,7 @@
 		String pass ="ezen";
 	try{
 //	 	[비인증 접근 제한] OK 마지막에서 인증해제 해야함
-//	 	if(session.getAttribute("isAutFlag")){
-		boolean isAutFlag = true;
-		if(!isAutFlag){
+	 	if(!(boolean)session.getAttribute("isAutFlag")){
 			%>
 			<script>
 				alert("비정상적인 접근입니다.");
@@ -24,9 +23,8 @@
 			<%
 		}else{
 			
-			/* Member member = session.getAttribute("member"); */
-		// 	int mno = member.getMno();
-			int mno=7;
+			Member memberSession = (Member)session.getAttribute("login");
+			int mno = memberSession.getMno();
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
@@ -219,7 +217,7 @@
     					<td colspan="2"><a id="memailTd"></a></td>
 					</tr>
 				</table>
-				<input type="submit" id="joinButton" onclick="validation();" value="가입하기">
+				<input type="submit" id="joinButton" onclick="validation();" value="수정하기">
 			</form>
 		</article>
 	</section>

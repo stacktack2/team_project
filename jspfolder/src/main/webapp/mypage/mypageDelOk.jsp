@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="Vo.*" %>
 <%	
 	
 	
@@ -15,10 +16,8 @@
 	String checkmpw = request.getParameter("checkmpw");
 	
 	
-	/* Member member = session.getAttribute("member");
-	int mno = member.getMno();
-	*/
-	int mno=7;
+	Member memberSession = (Member)session.getAttribute("login");
+	int mno = memberSession.getMno();
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;

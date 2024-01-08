@@ -6,8 +6,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	
-	/* Member member = session.getAttribute("member"); */
-	int mno=7;
+	Member memberSession = (Member)session.getAttribute("login");
+	int mno = memberSession.getMno();
 	
 	
 	//[검색]

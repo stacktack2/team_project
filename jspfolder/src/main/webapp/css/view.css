@@ -20,7 +20,7 @@
 	padding: 2px 5px;
 	font-size: 17px;
 }
-
+#writeBtns{float:right;}
 .replyfrm{margin-top: 20px;}
 .replyfrm input[type="text"]{
 	width: 800px; padding: 5px;

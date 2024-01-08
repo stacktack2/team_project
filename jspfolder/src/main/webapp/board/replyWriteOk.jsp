@@ -30,7 +30,7 @@
 			conn=DriverManager.getConnection(url,user,pass);
 			
 			//SQL
-			String sql = " INSERT INTO reply(bno, mno, rcontent, rdate)"
+			String sql = " INSERT INTO reply(bno, mno, rcontent, rrdate)"
 						+" VALUES(?,?,?,now())";
 			
 			psmt=conn.prepareStatement(sql);
@@ -71,7 +71,7 @@
 				//출력내용(아래)
 			%>
 				<div class="replyRow">
-					<%=member.getMnickNm() %>: 
+					<%=reply.getMnickNm() %>: 
 					<span>
 						<%=reply.getRcontent() %>
 						</span>

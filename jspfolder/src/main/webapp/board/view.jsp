@@ -130,7 +130,7 @@
 		if(rs != null) rs.close();
 		
  		//[댓글] 전체게시글의 댓글
-		sql = "SELECT r.rno, r.bno, m.mnickNm, m.mno, r.rcontent "
+		sql = "SELECT r.*, m.mnickNm, m.mno "
 				+" from reply r"
 				+" inner join member m"
 				+" on r.mno = m.mno"
@@ -150,6 +150,7 @@
 			reply.setMno(rs.getInt("mno"));
 			reply.setMnickNm(rs.getString("mnickNm"));
 			reply.setRcontent(rs.getString("rcontent"));
+			reply.setRrdate(rs.getString("rrdate"));
 			
 			//댓글 목록변수에 댓글원소객체 추가
 			rlist.add(reply);
@@ -266,6 +267,7 @@
 					<button onclick="modifyFn(this,<%=reply.getRno()%>)">수정</button>
 					<button onclick="replyDelFn(<%=reply.getRno()%>, this)">삭제</button>
 				</span>
+				<span><%=reply.getRrdate() %></span>
 			</div>
 		<%
 			}	

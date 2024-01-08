@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member" %>
 <%
-	//---------------게시글 작성------------------------
 	
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
@@ -39,13 +38,13 @@
 			<table border="1" class="writeTable">
 				<tbody>
 					<tr>
-						<th align="right">제목</th>
+						<th >제목</th>
 						<td>
 							<input type="text" name="btitle">
 						</td>
-						<th align="right">카테고리</th>
+						<th>카테고리</th>
 						<td>
-							<select name="type">
+							<select name="btype">
 								<option> 자유게시판</option>
 								<option> 캠핑지역</option>
 								<option> 캠핑장비</option>

@@ -11,7 +11,7 @@
 	request.setCharacterEncoding("UTF-8");
 
 	//[첨부파일] 업로드 위치 지정
-	String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\jspfolder\\src\\main\\webapp\\upload";
+	String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	
 	//[첨부파일] 사이즈정하기
 	int sizeLimit = 100*1024*1024;	//100mb제한
@@ -38,6 +38,7 @@
 	//파라미터값 받아오기
 	board.setBtitle(multi.getParameter("btitle"));
 	board.setBcontent(multi.getParameter("bcontent"));
+	board.setBtype(multi.getParameter("btype"));
 
 	Connection conn = null;
 	PreparedStatement psmt = null;
@@ -51,12 +52,27 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
 		//1.[게시글] 작성 
-		String sql= "INSERT INTO board(btitle, bcontent, mno, rdate)"
-					+" VALUES(?,?,?,NOW())";
+		String sql= "INSERT INTO board(btitle, bcontent, mno, brdate,btype)"
+					+" VALUES(?,?,?,NOW(),?)";
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, board.getBtitle());
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
+		// btype 분기점
+		if(board.getBtype().equals("자유게시판")){
+			psmt.setString(4, "자유게시판");
+		}else if(board.getBtype().equals("캠핑지역")){
+			psmt.setString(4, "캠핑지역");
+		}else if(board.getBtype().equals("캠핑장비")){
+			psmt.setString(4, "캠핑장비");
+		}else if(board.getBtype().equals("출석체크")){
+			psmt.setString(4, "출석체크");
+		}else if(board.getBtype().equals("Q&A")){
+			psmt.setString(4, "Q&A");
+		}else if(board.getBtype().equals("공지사항")){
+			psmt.setString(4, "공지사항");
+		}
+			
 
 		//삽입된 행 수 반환
 		result = psmt.executeUpdate();
@@ -92,7 +108,7 @@
 		//System.out.println("원본파일명: "+originFileNM);
 		
 		//3. [첨부파일]삽입
-		sql ="INSERT INTO boardFile(bno,bfrealnm,bforiginnm,rdate)"
+		sql ="INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
 			+" VALUES(?,?,?, now())";
 		
 		
@@ -116,14 +132,14 @@
 		%>
 			<script>
 				alert("게시물이 등록되었습니다.");
-				location.href='list.jsp';
+				location.href='allList.jsp';
 			</script>
 			<%
 			}else{
 			%>
 			<script>
 				alert("게시글 등록되지 않았습니다.");
-				location.href='list.jsp';
+				location.href='allList.jsp';
 			</script>
 			<%	
 				

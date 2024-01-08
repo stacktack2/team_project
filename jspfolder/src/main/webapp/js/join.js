@@ -34,15 +34,15 @@
 	}
 
 	function checkPw(obj){
-		let regId = /[^0-9a-zA-Z]/g;
+		let regId = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/g;
 		let regRs = regId.test(obj.value); 
 		let mpwTd = document.getElementById("mpwTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mpwTd.innerHTML = '비밀번호를 입력해주세요';
 			mpwTd.style.color = 'red';
 			return false;
-		}else if(regRs){
-			mpwTd.innerHTML ='영문과 숫자만 사용가능합니다.';
+		}else if(!regRs){
+			mpwTd.innerHTML ='영문(소문자, 대문자), 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
 			mpwTd.style.color = 'red';
 			return false;
 		}else{
@@ -71,15 +71,15 @@
 	}
 	
 	function checkNickNm(obj){
-		let regId = /[^0-9a-zA-Z가-힣]/g;
+		let regId = /^[a-zA-Z가-힣][a-zA-Z가-힣0-9]{3,14}$/g;
 		let regRs = regId.test(obj.value); 
 		let mnickNmTd = document.getElementById("mnickNmTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mnickNmTd.innerHTML = '닉네임을 입력해주세요';
 			mnickNmTd.style.color = 'red';
 			return false;
-		}else if(regRs){
-			mnickNmTd.innerHTML = '한글과 영문,숫자만 사용가능합니다.';
+		}else if(!regRs){
+			mnickNmTd.innerHTML = '4자 이상 한글, 영문, 숫자만 사용가능합니다.';
 			mnickNmTd.style.color = 'red';
 			return false;
 		}else{
@@ -90,14 +90,14 @@
 	}
 	
 	function checkName(obj){
-		let regId = /[^가-힣]/g;
+		let regId = /^[가-힣]{2,8}$/;
 		let regRs = regId.test(obj.value); 
 		let mnameTd = document.getElementById("mnameTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mnameTd.innerHTML = '이름을 입력해주세요';
 			mnameTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mnameTd.innerHTML = '한글만 사용가능합니다.';
 			mnameTd.style.color = 'red';
 			return false;
@@ -109,15 +109,15 @@
 	}
 	
 	function checkBirth(obj){
-		let regId = /[^0-9]/g;
+		let regId = /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 		let regRs = regId.test(obj.value); 
 		let mbirthTd = document.getElementById("mbirthTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mbirthTd.innerHTML = '생년월일을 입력해주세요.';
 			mbirthTd.style.color = 'red';
 			return false;
-		}else if(regRs){
-			mbirthTd.innerHTML = '숫자만 사용가능합니다.';
+		}else if(!regRs){
+			mbirthTd.innerHTML = '숫자만 사용가능하고 생년월일 입력양식을 맞춰주세요.';
 			mbirthTd.style.color = 'red';
 			return false;
 		}else{
@@ -210,7 +210,7 @@
 			memailTd.innerHTML = '이메일을 입력해주세요.';
 			memailTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			memailTd.innerHTML = '이메일 형식에 맞춰 입력해주쉐요.';
 			memailTd.style.color = 'red';
 			return false;

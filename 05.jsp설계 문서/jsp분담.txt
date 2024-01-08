@@ -15,6 +15,14 @@ qnaList.jsp
 
 join.jsp 회원가입
 joinOk.jsp
+	아이디 -  4자 이상 / 영어소문자, 숫자 O / 영어대문자, 한글 X, 특수기호  X
+	비밀번호 - 8자리 이상 / 영어소, 대문자, 숫자, 특수기호 O / 한글 X
+	닉네임 - 4자 이상 15글자 이하 / 영어소, 대문자, 한글, 숫자 O / 특수기호 X
+	사용자이름 - 2글자 이상 8글자 이하 / 한글 O / 영어소, 대문자, 특수기호 X, 숫자 X
+	생년월일 - 8글자 고정 / 숫자만
+	핸드폰 - 3글자, 3~4글자, 4글자 고정 / 숫자만
+	이메일 - 형식 그대로
+
 
 login.jsp 로그인
 loginOk.jsp
@@ -25,9 +33,8 @@ idfindOk.jsp
 pwfind.jsp 비밀번호 찾기 
 pwfindOk.jsp
 
-allList.jsp
-hotList.jsp
-noticeList.jsp
+zoneList.jsp
+gearList.jsp
 ----------------
 전용휘
 
@@ -40,21 +47,23 @@ mypageDelete.jsp
 mypageDeleteOk.jsp
 mypage.css
 
-zoneList.jsp
-gearList.jsp
+
+allList.jsp
+hotList.jsp
+noticeList.jsp
 ----------------
 끝나고 난뒤 다시 
 
-write.jsp
+write.jsp 정다희
 uploadfileOk.jsp
 writeSaveOk.jsp
 writeModifyOk.jsp
 
-view.jsp
-deleteOk.jsp
-downloadOk.jsp
-replyWriteOk.jsp
-replyModifyOk.jsp
-replyDeleteOk.jsp
+view.jsp 정다희
+deleteOk.jsp 정다희
+downloadOk.jsp 정다희
+replyWriteOk.jsp 정다희
+replyModifyOk.jsp 정다희
+replyDeleteOk.jsp 정다희
 
 

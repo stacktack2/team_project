@@ -69,14 +69,14 @@
 	if(result > 0){
 %>
 		<script>
-			alert("회원가입이 완료되었습니다. 로그인을 시도하세요.");
+			alert("정보 수정이 완료되었습니다. 로그인을 시도하세요.");
 			location.href="<%=request.getContextPath()%>";
 		</script>
 <%
 	}else{
 %>
 		<script>
-			alert("회원가입에 실패했습니다. 다시 시도하세요.");
+			alert("정보 수정에 실패했습니다. 다시 시도하세요.");
 			location.href="<%=request.getContextPath()%>";
 		</script>
 <%		

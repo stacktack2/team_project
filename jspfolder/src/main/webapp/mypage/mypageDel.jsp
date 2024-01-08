@@ -20,7 +20,7 @@
 <%@ include file="/include/header.jsp" %>
 	<section>
 		<form name="frm" method="post" action="mypageDelOk.jsp" onsubmit="return false">
-			<input type="text" id="mypagePwinput" placeholder="비밀번호를 입력하세요.">
+			<input type="text" id="mypagePwinput" name="checkmpw" placeholder="비밀번호를 입력하세요.">
 			<button id="mypagePwbutton" onclick="confirmFn()">회원 탈퇴</button>
 		</form>
 	</section>

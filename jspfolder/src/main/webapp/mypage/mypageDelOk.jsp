@@ -44,7 +44,7 @@
 			%>
 			<script>
 				alert("탈퇴되었습니다.");
-				location.href="/jspboard/index.jsp";
+				location.href="/jspfolder/index.jsp";
 			</script>
 		<%
 		}else{

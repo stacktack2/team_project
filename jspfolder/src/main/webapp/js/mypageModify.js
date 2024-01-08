@@ -18,13 +18,13 @@
 	
 	function checkPw(obj){
 		let regId = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/g;
-		let regRs = !regId.test(obj.value); 
+		let regRs = regId.test(obj.value); 
 		let mpwTd = document.getElementById("mpwTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mpwTd.innerHTML = '비밀번호를 입력해주세요';
 			mpwTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mpwTd.innerHTML ='영문(소문자, 대문자), 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
 			mpwTd.style.color = 'red';
 			return false;

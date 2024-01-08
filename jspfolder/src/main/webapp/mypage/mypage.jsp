@@ -20,7 +20,7 @@
 	if(mno ==0){
 		%>
 		<script>
-			alert("오류가 발생해 메인페이지로 이동합니다.");
+			alert("오랫동안 연결이 되지 않아 로그아웃됩니다.");
 			location.href="/jspfolder/index.jsp";
 		</script>
 		<%

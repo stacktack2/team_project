@@ -6,7 +6,11 @@
 
 	request.setCharacterEncoding("UTF-8");
 
-
+//[get방식 차단]
+	String method = request.getMethod();
+	if(method.equals("GET")){
+		response.sendRedirect("mypage.jsp");
+	}
 //자바빈즈: 댓글 reply
 %>
 <jsp:useBean id="reply" class="Vo.Reply"/>
@@ -85,7 +89,7 @@
 					</span>
 				</div>	
 			<%
-			
+				
 			}else{ //삽입(댓글등록)이 안됐다면
 				out.print("FAIL");
 			}

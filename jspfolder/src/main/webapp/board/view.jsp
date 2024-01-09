@@ -199,6 +199,8 @@
 			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
 		}else if(blist=="qna"){
 			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
+		}else{
+			location.href="<%=request.getContextPath() %>/index.jsp";
 		}
 	}
 </script>
@@ -276,8 +278,8 @@
 		</div>	
 
 		<!-- 댓글영역 -->
-		<!-- <form name="replyfrm" action="replyWriteOk.jsp" method="post"> -->
-		<form name="replyfrm" class="replyfrm">
+		
+		<form name="replyfrm" class="replyfrm" >
 			<input type="hidden" name="bno" value="<%=board.getBno() %>">
 			<input type="text" name="rcontent">
 			<button type="button" onclick="replyInsertFn()">댓글</button>

@@ -64,7 +64,7 @@
 			
 		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
 				 +" from board b inner join member m on b.mno = m.mno "
-				 +" WHERE (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비') order by bhit desc ";
+				 +" WHERE (btype = '자유게시판' or btype LIKE '%캠핑장비%' or  btype LIKE '%캠핑지역%') order by bhit desc ";
 		
 		
 		sql += " limit ?,? ";
@@ -122,7 +122,7 @@
 								<td id="td1"><%=pagingVO.getStart()+num %></td>
 								<td id="td2"><%=rs.getString("btype") %></td>
 								<td id="td3">
-									<a href="<%=request.getContextPath() %>/board/view.jsp?bno=<%=rs.getInt("bno")%>"><%=rs.getString("btitle") %></a>
+									<a href="<%=request.getContextPath() %>/board/view.jsp?bno=<%=rs.getInt("bno")%>&blist=free"><%=rs.getString("btitle") %></a>
 									<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 								</td>
 								<td id="td4"><%=rs.getString("mnickNm") %></td>

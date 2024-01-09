@@ -30,19 +30,19 @@
 	%>	
 		</div>
 		<div class=searchMain>
-			<form name="navFrm" action="allList.jsp" method="get">
+			<form name="navFrm" action="<%=request.getContextPath()%>allList.jsp" method="get">
 				<input type="text" name="navValue"
 					value="<%if(navValue!=null) out.print(navValue); %>"> 
 				<button>검색</button>
 			</form>
 		</div>
 		<ul class="menu">
-			<li><a href="<%=request.getContextPath()%>/board/allList.jsp">전체글보기</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/noticeList.jsp">공지사항</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/hotList.jsp">인기글</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/freeList.jsp">자유게시판</a></li>
+			<li><a href="<%=request.getContextPath()%>/list/allList.jsp">전체글보기</a></li>
+			<li><a href="<%=request.getContextPath()%>/list/noticeList.jsp">공지사항</a></li>
+			<li><a href="<%=request.getContextPath()%>/list/hotList.jsp">인기글</a></li>
+			<li><a href="<%=request.getContextPath()%>/list/freeList.jsp">자유게시판</a></li>
 			<li>
-				<a href="<%=request.getContextPath()%>/board/zoneList.jsp">캠핑지역 소개/리뷰</a>
+				<a href="<%=request.getContextPath()%>/list/zoneList.jsp">캠핑지역 소개/리뷰</a>
 				<ul class="submenu">
 					<li><a href="#">서울</a></li>
 					<li><a href="#">경기권</a></li>
@@ -54,7 +54,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="<%=request.getContextPath()%>/board/gearList.jsp">캠핑장비 소개/리뷰</a>
+				<a href="<%=request.getContextPath()%>/list/gearList.jsp">캠핑장비 소개/리뷰</a>
 				<ul class="submenu">
 					<li><a href="#">텐트/타프</a></li>
 					<li><a href="#">침낭/매트</a></li>
@@ -63,8 +63,8 @@
 					<li><a href="#">차박</a></li>
 				</ul>
 			</li>
-			<li><a href="<%=request.getContextPath()%>/board/attendList.jsp">출석체크</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/qnaList.jsp">Q&A</a></li>
+			<li><a href="<%=request.getContextPath()%>/list/attendList.jsp">출석체크</a></li>
+			<li><a href="<%=request.getContextPath()%>/list/qnaList.jsp">Q&A</a></li>
 		</ul>
 		<div id="thecheat">더치트</div>
 	</nav>

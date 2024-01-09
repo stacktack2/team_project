@@ -82,7 +82,7 @@
 		rs=null;
 		
 		//2. [게시글] [댓글]
-			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm, brdate ,bhit, btype"
+			String sql = "SELECT b.*, m.mnickNm"
 					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
 					+" FROM board b "
 					+" INNER JOIN member m "
@@ -207,7 +207,8 @@
 	if(member != null){
 	%>
 		<div class="btnDiv">
-			<button class="writeBtn" onclick="location.href='write.jsp';">글쓰기</button>
+			<button class="writeBtn" 
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
 		</div>
 	<%	
 		}

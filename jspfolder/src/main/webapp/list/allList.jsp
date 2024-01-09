@@ -7,7 +7,7 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	//(등록버튼)
-// 	Member member = (Member)session.getAttribute("member");
+	// 	Member member = (Member)session.getAttribute("member");
 	int mno =7;
 	
 	//[검색]

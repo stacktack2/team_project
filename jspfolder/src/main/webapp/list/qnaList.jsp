@@ -77,7 +77,7 @@
 		rs=null;
 		
 		//2. [게시글] [댓글]
-			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm, brdate ,bhit, btype"
+			String sql = "SELECT b.*, m.mnickNm"
 					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
 					+" FROM board b "
 					+" INNER JOIN member m "
@@ -157,6 +157,8 @@
 				</select>
 				<input type="text" name="searchValue" 
 				  value="<%if(searchValue!=null) out.print(searchValue); %>">
+				   <!-- 최신순/인기순정렬 파라미터 히든으로 보내기 -->
+				  <input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
@@ -201,7 +203,8 @@
 	if(member != null){
 	%>
 		<div class="btnDiv">
-			<button class="writeBtn" onclick="location.href='write.jsp';">글쓰기</button>
+			<button class="writeBtn" 
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
 		</div>
 	<%	
 		}
@@ -235,7 +238,8 @@
 				 <%
 				 }else{
 				 %>
-					<a href="qnaList.jsp?nowPage=<%=i%>"><%=i  %></a>
+					<a href="qnaList.jsp?nowPage=<%=i%>
+						&searchAlign=<%=searchAlign%>"><%=i  %></a>
 				<%
 				 }
 			}

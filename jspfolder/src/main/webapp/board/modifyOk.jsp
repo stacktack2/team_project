@@ -97,15 +97,15 @@
 		//System.out.println("원본파일명: "+originFileNM);
 		
 		//3. [첨부파일] 수정
-		sql ="UPDATE uploadfile SET bno,frealnm,foriginnm,frdate)"
-			+" VALUES(?,?,?, now())";
+		sql ="UPDATE uploadfile SET frealnm = ?,foriginnm = ?,frdate = now())"
+			+" WHERE bno = ?";
 		
 		
 		psmt = conn.prepareStatement(sql);
 		
-		psmt.setInt(1, bno);
-		psmt.setString(2,realFileNM );
-		psmt.setString(3,originFileNM );
+		psmt.setString(1,realFileNM );
+		psmt.setString(2,originFileNM );
+		psmt.setInt(3, bno);
 		
 		psmt.executeUpdate();
 		

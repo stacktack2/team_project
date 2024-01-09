@@ -246,10 +246,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="6">이전글 ▲ </td>
+					<td colspan="6">이전글 ▲ <a href="#"></a> </td>
 				</tr>
 				<tr>
-					<td colspan="6">다음글 ▼ </td>
+					<td colspan="6">다음글 ▼ <a href="#"></a></td>
 				</tr>
 			</tbody>
 		</table>

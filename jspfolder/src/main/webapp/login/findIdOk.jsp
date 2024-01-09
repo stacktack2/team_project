@@ -2,14 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member" %>
 <%@ page import="java.sql.*"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-%>
-<%
+
+//	[get방식 차단]
+	String method = request.getMethod();
+	if(method.equals("GET")){
+		response.sendRedirect("findId.jsp");
+	}
+
 	String mid = "";
 	String mname = request.getParameter("mname");
-	String mbirth2 = request.getParameter("mbirth");
-	int mbirth = Integer.parseInt(mbirth2);
+	String mbirthStr = request.getParameter("mbirth");
+	int mbirth = Integer.parseInt(mbirthStr);
 	String mphone1 = request.getParameter("mphone1");
 	String mphone2 = request.getParameter("mphone2");
 	String mphone3 = request.getParameter("mphone3");
@@ -43,6 +49,15 @@
 		
 		rs = psmt.executeQuery();
 		
+//		생년월일 입력값 string을 int로 바꾸고 null, 빈문자열이 아니면 integer로 변환
+		if(mbirthStr != null && !mbirthStr.isEmpty()) {
+		    try{
+		        mbirth = Integer.parseInt(mbirthStr);
+		    }catch(NumberFormatException e) {
+		        e.printStackTrace(); // 또는 로깅 등의 예외 처리
+		    }
+		}
+		
 		if(rs.next()){
 			Member member = new Member();
 			member.setMno(rs.getInt("mno"));
@@ -57,16 +72,6 @@
 			isfindId = true;
 		}
 		
-	}catch(NumberFormatException e){
-		e.printStackTrace();
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		if(conn != null) conn.close();
-		if(psmt != null) psmt.close();
-		if(rs != null) rs.close();
-	}
-	
 	if(isfindId){
 %>
 		<script>
@@ -83,4 +88,13 @@
 <%		
 	}
 	
+	}catch(NumberFormatException e){
+		e.printStackTrace();
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		if(conn != null) conn.close();
+		if(psmt != null) psmt.close();
+		if(rs != null) rs.close();
+	}
 %>

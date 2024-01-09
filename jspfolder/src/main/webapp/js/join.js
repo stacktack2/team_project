@@ -15,7 +15,7 @@
 	let checkNickNmFlag = false;
 	
 	function checkId(obj){
-		let regId = /^[a-z][a-z0-9]{4,20}$/g;
+		let regId = /^[a-z][a-z0-9]{3,20}$/g;
 		let regRs = regId.test(obj.value); 
 		let midTd = document.getElementById("midTd");
 		if(obj.value == "" || obj.value === null || obj.value === undefined){

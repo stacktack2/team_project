@@ -38,21 +38,14 @@
 		if(rs.next()){
 			cnt = rs.getInt("cnt");
 		}
-		
-		
-		
+//	cnt = -1 은 null, 빈문자열일때 		
 		if(id == null || (id != null && id.equals(""))){
-			
 			cnt = -1;
-		}else if(!Regular.isEng(id,10)){
+// isID는 join.js id 정규식이랑 똑같음.			
+		}else if(!Regular.isId(id)){
 			cnt = -2;
 		}
 			
-			
-		
-		
-		
-		
 		out.print(cnt);
 		
 	}catch(Exception e){

@@ -20,7 +20,7 @@
 		conn = DriverManager.getConnection(url,user,pass);
 		System.out.println("연결성공!");
 		
-		String sql = " SELECT mid, mpw, mno, mname"
+		String sql = " SELECT mid, mpw, mno, mname, mnickNm"
 				   + "   FROM member"
 				   + "  WHERE mid = ?"
 				   + "    AND mpw = ?";
@@ -37,6 +37,7 @@
 			member.setMno(rs.getInt("mno"));
 			member.setMid(rs.getString("mid"));
 			member.setMname(rs.getString("mname"));
+			member.setMnickNm(rs.getString("mnickNm"));
 			
 			session.setAttribute("login", member);
 			isLogin = true;

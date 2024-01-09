@@ -7,8 +7,7 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	//(등록버튼)
-// 	Member member = (Member)session.getAttribute("member");
-	int mno =7;
+	Member member = (Member)session.getAttribute("login");
 	
 	
 	
@@ -139,6 +138,16 @@
 			</tbody>
 		</table>
 		
+		
+	<%
+	if(member != null){
+	%>
+		<div class="btnDiv">
+			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
+		</div>
+	<%	
+		}
+	%>
 		
 		<!-- 페이징 영역 -->
 		 

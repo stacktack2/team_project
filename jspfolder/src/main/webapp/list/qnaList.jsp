@@ -14,11 +14,6 @@
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 	
-	//searchAlign이 null일때 초기값 최신순으로 고정하기
-	if(searchAlign==null){
-		searchAlign="late";
-	}
-	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
 	
@@ -31,7 +26,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
+	String url = "jdbc:mysql://localhost:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	
@@ -143,7 +138,7 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2>질문게시판</h2>
+		<h2>출석체크</h2>
 		<div class="frms">
 			<form name ="frm1" action ="qnaList.jsp" method="get" id="frm1">
 				<select name="searchAlign" onchange="document.frm1.submit()">
@@ -162,7 +157,6 @@
 				</select>
 				<input type="text" name="searchValue" 
 				  value="<%if(searchValue!=null) out.print(searchValue); %>">
-				<input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
@@ -220,7 +214,7 @@
 			<a href="qnaList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
-				&searchValue=<%=searchValue%>">이전</a>
+				&searchValue=<%=searchValue%>" class="pluspage">이전</a>
 	<%
 		 }
 		
@@ -241,8 +235,7 @@
 				 <%
 				 }else{
 				 %>
-					<a href="qnaList.jsp?nowPage=<%=i%>
-						&searchAlign=<%=searchAlign%>"><%=i  %></a>
+					<a href="qnaList.jsp?nowPage=<%=i%>"><%=i  %></a>
 				<%
 				 }
 			}
@@ -254,7 +247,7 @@
 			<a href="qnaList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
 				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
-				&searchValue=<%=searchValue%>">다음</a>
+				&searchValue=<%=searchValue%>" class="pluspage">다음</a>
 		<%
 		}
 		%>

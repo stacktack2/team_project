@@ -32,6 +32,7 @@
 			<%
 			
 		}else{
+			
 			int mno=0;
 			Member memberSession = (Member)session.getAttribute("login");
 			if(memberSession != null){

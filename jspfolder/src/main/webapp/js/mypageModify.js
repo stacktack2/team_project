@@ -25,7 +25,7 @@
 			mpwTd.style.color = 'red';
 			return false;
 		}else if(!regRs){
-			mpwTd.innerHTML ='영문(소문자, 대문자), 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
+			mpwTd.innerHTML ='영문소문자, 영문대문자, 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
 			mpwTd.style.color = 'red';
 			return false;
 		}else{
@@ -124,7 +124,7 @@
 			memailTd.innerHTML = '이메일을 입력해주세요.';
 			memailTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			memailTd.innerHTML = '이메일 형식에 맞춰 입력해주쉐요.';
 			memailTd.style.color = 'red';
 			return false;

@@ -7,18 +7,12 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	//(등록버튼)
-// 	Member member = (Member)session.getAttribute("member");
-	int mno =7;
+	Member member = (Member)session.getAttribute("login");
 	
 	//[검색]
-	
 	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
-	if(searchAlign ==null || (searchAlign !=null && searchAlign.equals(""))){
-		searchAlign = "late";
-	}
-	
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
@@ -48,7 +42,7 @@
 						+" FROM board b"
 						+" INNER JOIN member m "
 						+" ON b.mno = m.mno"
-						+"  WHERE (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') ";
+						+"  WHERE btype='공지사항' ";
 		
 		//[검색]
 		if(searchType != null){
@@ -84,7 +78,7 @@
 			
 		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
 				 +" from board b inner join member m on b.mno = m.mno "
-				 +" WHERE (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') ";
+				 +" WHERE btype='공지사항' ";
 				
 				
 		//[검색]
@@ -127,7 +121,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체게시판 목록</title>
+<title>공지사항 목록</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/mypage.css" type="text/css" rel="stylesheet">
 </head>
@@ -136,9 +130,9 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<div id="boardname">전체게시판</div>
+		<div id="boardname">공지사항</div>
 		
-			<form name ="frm1" action ="allList.jsp" method="get" id="frm1">
+			<form name ="frm1" action ="noticeList.jsp" method="get" id="frm1">
 				<select name="searchAlign" onchange="document.frm1.submit()" id="select">
 					<option value="late" <%if(searchAlign != null 
 						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
@@ -148,7 +142,7 @@
 			</form>
 			
 			
-			<form name ="frm2" action ="allList.jsp" method="get" id="frm2">
+			<form name ="frm2" action ="noticeList.jsp" method="get" id="frm2">
 				<select name="searchType" id="select">
 					<option value="title" <%if(searchType != null 
 						&& searchType.equals("title")) out.print("selected"); %>>제목</option>
@@ -208,6 +202,16 @@
 		</table>
 		
 		
+	<%
+	if(member != null){
+	%>
+		<div class="btnDiv">
+			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
+		</div>
+	<%	
+		}
+	%>
+		
 		<!-- 페이징 영역 -->
 		 
 	
@@ -217,7 +221,7 @@
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
 			<span class="paging">
-		 		<a href="allList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+		 		<a href="noticeList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
@@ -234,15 +238,19 @@
 			 <%
 			 }else{
 				 		
-				 
+				 if(searchAlign != null){
 				 %>
-					<span class="pagingnum"><a href="allList.jsp?nowPage=<%=i%>
+					<span class="pagingnum"><a href="noticeList.jsp?nowPage=<%=i%>
 						<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
 						%> "> <%=i %></a></span>
 				 <%
-				 
+				 }else{
+				 %>
+					<span class="pagingnum"><a href="noticeList.jsp?nowPage=<%=i%>"><%=i  %></a></span>
+				<%
+				 }
 			}
 			 	
 		}
@@ -250,7 +258,7 @@
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
 			<span class="paging">
-			<a href="allList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+			<a href="noticeList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
 				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);

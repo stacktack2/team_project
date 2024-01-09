@@ -226,9 +226,6 @@
 	
 	
 		<!-- 페이징 영역 -->
-		 
-	
-		
 	<div class="mainpaging">
 	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){

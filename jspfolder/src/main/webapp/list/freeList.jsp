@@ -101,9 +101,9 @@
 		//[인기순 최신순 정렬]
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " ODER BY brdate DESC ";
+				sql += " ORDER BY brdate DESC ";
 			}else if(searchAlign.equals("hit")){
-				sql += " ODER BY bhit DESC ";
+				sql += " ORDER BY bhit DESC ";
 			}
 		}
 		

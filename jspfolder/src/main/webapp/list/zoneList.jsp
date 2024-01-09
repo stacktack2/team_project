@@ -20,6 +20,14 @@
 		searchAlign = "late";
 	}
 
+//	페이징
+	String nowPageParam = request.getParameter("nowPage"); // nowPage 파라미터 생성
+
+	int nowPage = 1;
+	if(nowPageParam != null && !nowPageParam.equals("")){
+		nowPage = Integer.parseInt(nowPageParam); // 페이지 번호를 현재페이지로 변경
+	}
+
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
@@ -28,10 +36,51 @@
 	String user = "cteam";
 	String pass ="ezen";
 	
+	PagingVO pagingVO = null;
+	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url,user,pass);
 		
+//		페이징 쿼리문
+		String totalSql = " SELECT COUNT(*) AS cnt "
+						+ "   FROM board b "
+						+ "  INNER JOIN member m "
+						+ "     ON b.mno = m.mno "
+						+ "  WHERE btype = '캠핑지역'";
+		
+//		제목, 작성자 검색
+		if(searchType != null){
+			if(searchType.equals("title")){
+				totalSql = " AND btitle LIKE CONCAT('%',?,'%')";
+			}else if(searchType.equals("writer")){
+				totalSql = " AND m.mnickNm LIKE CONCAT('%',?,'%')";
+			}
+		}
+
+		psmt = conn.prepareStatement(totalSql);
+		
+		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
+			psmt.setString(1, searchValue);
+		}
+		
+		rs = psmt.executeQuery();
+		
+//		페이징
+		int totalCnt = 0;
+		if(rs.next()){
+			totalCnt = rs.getInt("cnt");
+		}
+		
+		if(rs != null) rs.close();
+		if(psmt != null) psmt.close();
+		
+//		페이징VO 생성
+		pagingVO = new PagingVO(nowPage, totalCnt, 10);
+		
+		rs = null;
+		
+//		게시글 list 쿼리문
 		String sql = " SELECT b.*, m.mnickNm, "
 				   + " (SELECT COUNT(*) FROM reply r WHERE r.bno = b.bno) AS rcnt"
 				   + "   FROM board b"
@@ -39,19 +88,43 @@
 				   + "     ON b.mno = m.mno"
 				   + "  WHERE btype = '캠핑지역'";
 		
-		psmt = conn.prepareStatement(sql);
-		
 //	option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " ODER BY brdate DESC ";
+				sql += " ORDER BY brdate DESC ";
 			}else if(searchAlign.equals("hit")){
-				sql += " ODER BY bhit DESC ";
+				sql += " ORDER BY bhit DESC ";
+			}else if(searchAlign.equals("Seoul")){
+				sql += " ORDER BY btype DESC ";
+			}else if(searchAlign.equals("GG")){
+				sql += " ORDER BY btype DESC ";
+			}else if(searchAlign.equals("GW")){
+				sql += " ORDER BY btype DESC ";
+			}else if(searchAlign.equals("CC")){
+				sql += " ORDER BY btype DESC ";
+			}else if(searchAlign.equals("YN")){
+				sql += " ORDER BY btype DESC ";
+			}else if(searchAlign.equals("HN")){
+				sql += " ORDER BY btype DESC ";
+			}else if(searchAlign.equals("JJ")){
+				sql += " ORDER BY btype DESC ";
 			}
+		}
+
+		sql += " LIMIT ?, ? ";
+		
+		psmt = conn.prepareStatement(sql);
+		
+		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
+			psmt.setString(1,searchValue);
+			psmt.setInt(2, pagingVO.getStart()-1);
+			psmt.setInt(3, pagingVO.getPerPage());
+		}else{
+			psmt.setInt(1, pagingVO.getStart()-1);
+			psmt.setInt(2, pagingVO.getPerPage());
 		}
 	
 		rs = psmt.executeQuery();
-
 %>
 <!DOCTYPE html>
 <html>
@@ -59,51 +132,98 @@
 <meta charset="UTF-8">
 <title>캠핑지역 게시판</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/mypage.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/list.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="/include/header.jsp" %>
-	<div class="frms">
+	<div class="container">
 <%@ include file="/include/nav.jsp" %>
 	<section>
 <!-- 게시판페이지 이름 -->
-		<div>캠핑지역 게시판</div>
+		<h2>캠핑지역 게시판</h2>
+		<div class="frms">
 <!-- 게시글 정렬폼 -->
 		<form name="frm1" action="zoneList.jsp" method="get" id="frm1">
 <!-- 게시글 정렬종류 -->
-			<select name="searchAlign" id="select">
-				<option value="late">최신순</option>
-				<option value="hit">인기순</option>
-				<option value="Seoul">서울</option>
-				<option value="GG">경기권</option>
-				<option value="GW">강원권</option>
-				<option value="CC">충청권</option>
-				<option value="YN">영남권</option>
-				<option value="HN">호남권</option>
-				<option value="JJ">제주</option>
+			<select name="searchAlign" onchange="document.frm1.submit()" id="select">
+				<option value="late" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("late"))out.print("selected"); 
+					%>>최신순
+				</option>
+				<option value="hit"
+					<%if(searchAlign != null && 
+						searchAlign.equals("hit"))out.print("selected"); 
+					%>>인기순
+				</option>
+				<option value="Seoul" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("Seoul"))out.print("selected"); 
+					%>>서울
+				</option>
+				<option value="GG" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("GG"))out.print("selected"); 
+					%>>경기권
+				</option>
+				<option value="GW" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("GW"))out.print("selected"); 
+					%>>강원권
+				</option>
+				<option value="CC" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("CC"))out.print("selected"); 
+					%>>충청권
+				</option>
+				<option value="YN" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("YN"))out.print("selected"); 
+					%>>영남권</option>
+				<option value="HN" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("HN"))out.print("selected"); 
+					%>>호남권</option>
+				<option value="JJ" 
+					<%if(searchAlign != null && 
+						searchAlign.equals("JJ"))out.print("selected"); 
+					%>>제주
+				</option>
 			</select>
 		</form>
 <!-- 게시글 검색폼 -->
 		<form name="frm2" action="zoneList.jsp" method="get" id="frm2">
-			<select name="searchType" id="select">
-				<option value="title">제목</option>
-				<option value="writer">작성자</option>
+			<select name="searchType">
+				<option value="title" 
+					<%if(searchType != null && 
+						searchType.equals("title")) out.print("selected"); 
+					%>>제목
+				</option>
+				<option value="writer" 
+					<%if(searchType != null && 
+						searchType.equals("title")) out.print("selected"); 
+					%>>작성자
+				</option>
 			</select>
 <!-- 게시글 검색칸 -->
-			<input type="text" name="searchValue">
-			<button>검색</button>
+			<input type="text" name="searchValue" 
+				value="<%if(searchValue != null) out.print(searchValue); %>">
+			<input type="hidden" name="searchAlign"
+				 value="<%if(searchAlign != null) out.print(searchAlign); %>">
+			<button class="searchBtn">검색</button>
 		</form>
+		</div>
 <!-- 게시글 리스트 -->
-		<table>
+		<table class="listTable">
 <!-- 테이블 헤드 -->
 		<thead>
 			<tr>
-				<th id="td1">번호</th>
-				<th id="td2">카테고리</th>
-				<th id="th3">제목</th>
-				<th id="td4">작성자</th>
-				<th id="td5">작성일시</th>
-				<th id="td6">조회수</th>	
+				<th>번호</th>
+				<th>카테고리</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일시</th>
+				<th>조회수</th>	
 			</tr>
 		</thead>
 <!-- 게시글 목록 -->
@@ -111,22 +231,27 @@
 <%
 			if(!rs.next()){
 %>
-			<tr><td colspan="6">아무것도 검색되지 않았습니다.</td></tr>
+			<tr><td id="td" colspan="6">아무것도 검색되지 않았습니다.</td></tr>
 <%	
 			}else{			
 			while(rs.next()){
 				int bno = rs.getInt("bno");
 				String btype = rs.getString("btype");
 				String btitle = rs.getString("btitle");
-				String writer = rs.getString("mnickNm");
+				String mnickNm = rs.getString("mnickNm");
 				String brdate = rs.getString("brdate");
 				int bhit = rs.getInt("bhit");
 %>
 			<tr>
 				<td><%=bno %></td>
 				<td><%=btype %></td>
-				<td><%=btitle %></td>
-				<td><%=writer %></td>
+				<td>
+					<!-- 제목 클릭시 view.jsp 이동 및 blist 파라미터 넘기기 -->
+					<a href="<%=request.getContextPath()%>
+							/board/view.jsp?bno=<%=bno%>&blist=zone"><%=btitle %></a>
+					<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
+				</td>
+				<td><%=mnickNm %></td>
 				<td><%=brdate %></td>
 				<td><%=bhit %></td>
 			</tr>
@@ -136,6 +261,69 @@
 %>
 		</tbody>
 		</table>
+<!-- 글쓰기 버튼 -->
+<%
+	if(member != null){
+%>
+	<div class="btnDiv">
+	<!-- 글쓰기 버튼: blist파라미터 넘기기 -->
+		<button class="writeBtn" 
+		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=zone'">글쓰기
+		</button>
+	</div>
+<% 
+	}
+%>
+<!-- 페이징 영역 -->
+	<div class="paging">
+<%
+	if(pagingVO.getStartPage() > pagingVO.getCntPage()){
+%>
+		<span class="paging">
+		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+					&searchAlign=<%=searchAlign%>
+					&searchType=<%=searchType%>
+					&searchValue=<%=searchValue%>" class="pluspage">이전</a>
+		</span>
+<%
+	}
+
+	for(int i = pagingVO.getStartPage(); i<=pagingVO.getEndPage(); i++){
+		if(nowPage == i){
+%>
+			<b><%=i %></b>
+<%
+		}else{
+			if(searchType != null){
+%>
+				<span class="pagingnum">
+				<a href="zoneList.jsp?nowPage1=<%=i%>
+					&searchAlign=<%=searchAlign%>
+					&searchType=<%=searchType%>
+					&searchValue=<%=searchValue%>"><%=i %></a>
+				</span>
+<%
+			}else{
+%>
+				<a href="zoneList.jsp?nowPage1=<%=i%>
+					&searchAlign=<%=searchAlign%>"><%=i %></a>
+<%
+			}
+		}
+	}
+	
+	if(pagingVO.getEndPage() < pagingVO.getLastPage()){
+%>
+		<span class="paging">
+		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
+					&searchAlign=<%=searchAlign%>
+					&searchType=<%=searchType%>
+					&searchValue=<%=searchValue%>" class="pluspage">다음</a>
+		</span>
+<%
+	}
+%>
+	</div>
 	</section>
 	</div>
 <%@ include file="/include/footer.jsp" %>

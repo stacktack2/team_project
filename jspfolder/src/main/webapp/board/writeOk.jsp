@@ -7,12 +7,11 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%	
-	
 	request.setCharacterEncoding("UTF-8");
 
 	//[첨부파일] 업로드 위치 지정
-	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+	String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+	//String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	
 	//[첨부파일] 사이즈정하기
 	int sizeLimit = 100*1024*1024;	//100mb제한
@@ -109,8 +108,8 @@
 		//System.out.println("원본파일명: "+originFileNM);
 		
 		//3. [첨부파일]삽입
-		sql ="INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
-			+" VALUES(?,?,?, now())";
+		sql = " INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
+			+ " VALUES(?,?,?, now())";
 		
 		
 		psmt = conn.prepareStatement(sql);
@@ -124,7 +123,6 @@
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-
 			if(conn != null) conn.close();
 			if(psmt != null) psmt.close();
 		}

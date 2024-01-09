@@ -85,7 +85,7 @@
 						</td>
 						<th>카테고리</th>
 						<td>
-							<select name="btype">
+							<select name="btype" id="mainSelect" onchange="showSubSelect()">
 								<option> 자유게시판</option>
 								<option> 캠핑지역</option>
 								<option> 캠핑장비</option>
@@ -94,11 +94,12 @@
 								<%
 								if(member.getMid().equals("admin")){
 								%>
-									<option> 공지사항</option>
+									<option>공지사항</option>
 								<%
 								}
 								%>
-							</select>	
+							</select>
+							<select name="btype" id="subSelect" ></select>
 						</td>
 					</tr>
 					<tr>
@@ -122,6 +123,30 @@
 	</section>
 	</div>
 	<%@ include file ="/include/footer.jsp" %>
-	
+<script>
+	function showSubSelect() {
+	    let mainSelect = document.getElementById("mainSelect");
+	    let subSelect = document.getElementById("subSelect");
+	    
+	    console.log("mainSelect:", mainSelect);  // 확인용 로그
+	    console.log("subSelect:", subSelect);    // 확인용 로그
+
+	    // 서브카테고리를 초기화
+	    subSelect.innerHTML = "";
+
+	    // 선택한 메인카테고리에 따라 서브카테고리를 설정
+	    if (mainSelect.value === "캠핑지역") {
+	        let options = ["서울", "경기권", "강원권", "충청권", "영남권", "호남권", "제주"];
+	        for (let i = 0; i < options.length; i++) {
+	            let option = document.createElement("option");
+	            option.text = options[i];
+	            subSelect.add(option);
+	        }
+	    }
+	}
+
+	// mainCategory의 변경 이벤트를 감지하여 showSubCategory 함수 호출
+	document.getElementById("mainSelect").addEventListener("change", showSubSelect);
+</script>
 </body>
 </html>

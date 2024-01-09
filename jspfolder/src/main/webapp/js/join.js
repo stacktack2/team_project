@@ -152,7 +152,7 @@
 	}
 	
 	function checkPhone2(obj){
-		let regId = /[^0-9]{4}/g;
+		let regId = /[^0-9]{3,4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){

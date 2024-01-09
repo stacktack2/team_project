@@ -38,7 +38,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="password" name="mpw" oninput="checkPw(this);checkPwRe(this);" class="textbox">
+							<input type="password" name="mpw" oninput="checkPw(this)" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">

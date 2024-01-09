@@ -208,7 +208,8 @@
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn" 
-				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp'blist=attend;">글쓰기</button>
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp
+				?'blist=attend;">글쓰기</button>
 		</div>
 	<%	
 		}

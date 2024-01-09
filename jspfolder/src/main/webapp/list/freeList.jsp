@@ -209,7 +209,8 @@
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn" 
-				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=free';">글쓰기</button>
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp
+				?blist=free';">글쓰기</button>
 		</div>
 	<%	
 		}
@@ -243,8 +244,7 @@
 				 <%
 				 }else{
 				 %>	
-					<a href="freeList.jsp?nowPage=<%=i%>
-						&searchAlign=<%=searchAlign%>"><%=i %></a>
+					<a href="freeList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>"><%=i %></a>
 				<%	//searchAlign 파라미터값 같이 넘기기
 				 }
 			}

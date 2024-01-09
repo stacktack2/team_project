@@ -44,6 +44,7 @@ nav{
 .mainpaging{ 
 	width: 100%; height:50px;
 	text-align: center;
+	margin-top:50px;
 }
 
 .paging{
@@ -90,7 +91,7 @@ nav{
 #mypagetable{
 	border-collapse:collapse;
 	margin-top:20px;
-	margin-bottom:100px;
+	margin-bottom:20px;
 }
 
 #mypagethead{
@@ -188,6 +189,14 @@ nav{
 #frm2{
 	display:inline-block;
 	float:right;
+}
+.btnDiv{
+	text-align:right;
+	
+}
+.writeBtn{
+	padding: 5px 10px;
+
 }
 
 /* ***************mypageModify****************************** */

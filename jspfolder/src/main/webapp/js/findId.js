@@ -104,7 +104,7 @@
 	}
 	
 	
-	function validation(){
+	function searchId(){
 		if(checkNickNm(mnickNm)
 				& checkName(mname) & checkBirth(mbirth) & checkPhone1(mphone1)
 				& checkPhone2(mphone2) & checkPhone3(mphone3)){

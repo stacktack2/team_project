@@ -5,6 +5,8 @@
 <%
 
 	request.setCharacterEncoding("UTF-8");
+
+
 //자바빈즈: 댓글 reply
 %>
 <jsp:useBean id="reply" class="Vo.Reply"/>
@@ -68,10 +70,12 @@
 				}
 				if(rs != null) rs.close();
 				
+				
+				
 				//출력내용(아래)
 			%>
 				<div class="replyRow">
-					<%=reply.getMnickNm() %>: 
+					<%=member.getMnickNm() %>: 
 					<span>
 						<%=reply.getRcontent() %>
 						</span>

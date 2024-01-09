@@ -6,7 +6,7 @@
 <%
 	
 	Member member = (Member)session.getAttribute("login");
-
+	
 	String bnoParam = request.getParameter("bno");
 	
 	int bno=0;
@@ -276,5 +276,7 @@
 	</section>
 	</div>
 	<%@ include file="/include/footer.jsp" %>
+	
 </body>
+
 </html>

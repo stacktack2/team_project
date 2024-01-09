@@ -35,7 +35,7 @@
 	String user = "cteam";
 	String pass ="ezen";
 	
-	//[페이징] 
+	//[페이징]
 	PagingVO pagingVO = null;
 	
 	try{
@@ -47,7 +47,7 @@
 						+" FROM board b"
 						+" INNER JOIN member m "
 						+" ON b.mno = m.mno"
-						+" WHERE btype = '자유게시판'";
+						+" WHERE btype = 'QnA'";
 		
 		//[검색]
 		if(searchType != null){
@@ -81,13 +81,13 @@
 		
 		rs=null;
 		
-		//2. [게시글][댓글]
-		String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm,brdate ,bhit, btype"
+		//2. [게시글] [댓글]
+			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm, brdate ,bhit, btype"
 					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"
-					+" WHERE btype = '자유게시판'";
+					+" WHERE btype = 'QnA'";
 		
 		//[검색]
 		if(searchType != null){
@@ -134,7 +134,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 목록</title>
+<title>출석체크게시판 목록</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/list.css" type="text/css" rel="stylesheet">
 </head>
@@ -143,9 +143,9 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2>자유게시판</h2>
+		<h2>질문게시판</h2>
 		<div class="frms">
-			<form name ="frm1" action ="freeList.jsp" method="get" id="frm1">
+			<form name ="frm1" action ="qnaList.jsp" method="get" id="frm1">
 				<select name="searchAlign" onchange="document.frm1.submit()">
 					<option value="late" <%if(searchAlign != null 
 						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
@@ -153,7 +153,7 @@
 						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
-			<form name ="frm2" action ="freeList.jsp" method="get" id="frm2">
+			<form name ="frm2" action ="qnaList.jsp" method="get" id="frm2">
 				<select name="searchType">
 					<option value="title" <%if(searchType != null 
 						&& searchType.equals("title")) out.print("selected"); %>>제목</option>
@@ -162,8 +162,7 @@
 				</select>
 				<input type="text" name="searchValue" 
 				  value="<%if(searchValue!=null) out.print(searchValue); %>">
-				  <!-- 최신순/인기순정렬 파라미터 히든으로 보내기 -->
-				  <input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
+				<input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>
@@ -218,10 +217,10 @@
 	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
-			<a href="freeList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+			<a href="qnaList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
-				&searchValue=<%=searchValue%>">이전</a>
+				&searchValue=<%=searchValue%>" class="pluspage">이전</a>
 	<%
 		 }
 		
@@ -235,15 +234,16 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="freeList.jsp?nowPage1=<%=i%>
+					<a href="qnaList.jsp?nowPage=<%=i%>
 						&searchAlign=<%=searchAlign%>
 						&searchType=<%=searchType%>
-						&searchValue=<%=searchValue%>"><%=i%></a>
+						&searchValue=<%=searchValue%>"><%=i %></a>
 				 <%
 				 }else{
-				 %>	
-					<a href="freeList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>"><%=i %></a>
-				<%	//searchAlign 파라미터값 같이 넘기기
+				 %>
+					<a href="qnaList.jsp?nowPage=<%=i%>
+						&searchAlign=<%=searchAlign%>"><%=i  %></a>
+				<%
 				 }
 			}
 			 	
@@ -251,10 +251,10 @@
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
-			<a href="freeList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+			<a href="qnaList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
 				&searchAlign=<%=searchAlign%>
 				&searchType=<%=searchType%>
-				&searchValue=<%=searchValue%>">다음</a>
+				&searchValue=<%=searchValue%>" class="pluspage">다음</a>
 		<%
 		}
 		%>

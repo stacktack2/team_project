@@ -192,7 +192,8 @@
 					<td><%=bno %></td>
 					<td><%=btype %></td>
 					<td>
-						<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>"><%=btitle %></a>
+						<a href="<%=request.getContextPath()%>/board/view.jsp
+							?bno=<%=bno%>&blist=free"><%=btitle %></a>
 						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 					</td>
 					<td><%=mnickNm %></td>

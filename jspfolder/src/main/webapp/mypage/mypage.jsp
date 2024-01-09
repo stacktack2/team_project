@@ -20,11 +20,13 @@
 	if(mno ==0){
 		%>
 		<script>
-			alert("오랫동안 연결이 되지 않아 로그아웃됩니다.");
+			alert("로그인을 하고 마이페이지를 접속해주세요.");
 			location.href="/jspfolder/index.jsp";
 		</script>
 		<%
 	}
+	
+	
 	
 	//[검색]
 	String searchAlign = request.getParameter("searchAlign");

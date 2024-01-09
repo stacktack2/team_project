@@ -13,7 +13,10 @@
 	}
 	
 	request.setCharacterEncoding("UTF-8");
+	
 	String checkmpw = request.getParameter("checkmpw");
+	
+	
 	
 	
 	int mno=0;
@@ -29,6 +32,8 @@
 		</script>
 		<%
 	}
+	
+	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
@@ -50,12 +55,17 @@
 		
 		
 		if(psmt.executeUpdate() > 0){
+			/* 회원정보 세션 제거 */
+			session.removeAttribute("login");
 			%>
+			
 			<script>
 				alert("탈퇴되었습니다.");
 				location.href="/jspfolder/index.jsp";
 			</script>
+			
 		<%
+		
 		}else{
 			%>
 			<script>

@@ -24,48 +24,6 @@
 	</script>
 <%
 	}else{
-	
-	//예외처리 - 자신이 작성하지 않은 글 조회 방지
-	Connection conn = null;	
-	PreparedStatement psmt = null;
-	ResultSet rs = null;
-	String url = "jdbc:mysql://localhost:3306/campingweb";
-	String user = "cteam";
-	String pass ="ezen";
-	
-	try{
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn=DriverManager.getConnection(url,user,pass);
-		
-		String sql = "select bno from board where bno=? && mno=?";
-		psmt = conn.prepareStatement(sql);
-		psmt.setInt(1, bno);
-		psmt.setInt(2, member.getMno());
-		
-		rs = psmt.executeQuery();
-		
-		if(!rs.next()){
-			%>
-			<script>
-				alert("잘못된 접근입니다");
-				location.href='/jspfolder/index.jsp';
-			</script>
-			<%
-		}
-		
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		if(conn != null) conn.close();
-		if(psmt != null) psmt.close();
-		if(rs != null) rs.close();
-	}
-	
-	
-	
-	
-	
 %>
 
 <meta charset="UTF-8">

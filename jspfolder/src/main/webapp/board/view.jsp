@@ -137,7 +137,7 @@
 				+" from reply r"
 				+" inner join member m"
 				+" on r.mno = m.mno"
-				+" where r.bno = ?";
+				+" where r.bno = ? order by r.rno desc";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setInt(1, board.getBno());
@@ -158,6 +158,7 @@
 			//댓글 목록변수에 댓글원소객체 추가
 			rlist.add(reply);
 		} 
+		
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{
@@ -289,15 +290,22 @@
 	<%
 		for(Reply reply: rlist){
 	%>
-			<div>
+			<div class="replyRow">
 				<%=reply.getMnickNm() %> : 
 				<span>
 					<%=reply.getRcontent() %>
 				</span>
+				<%
+					//로그인이 되어있는 상태에서, 자기가 작성한 댓글만 보이는 제어문
+					if(member != null && reply.getMno() == member.getMno()){
+				%>
 				<span>
 					<button onclick="modifyFn(this,<%=reply.getRno()%>)">수정</button>
 					<button onclick="replyDelFn(<%=reply.getRno()%>, this)">삭제</button>
 				</span>
+				<%
+					}
+				%>
 				<span><%=reply.getRrdate() %></span>
 			</div>
 		<%

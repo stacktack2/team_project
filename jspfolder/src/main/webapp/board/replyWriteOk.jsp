@@ -9,7 +9,7 @@
 //[get방식 차단]
 	String method = request.getMethod();
 	if(method.equals("GET")){
-		response.sendRedirect("mypage.jsp");
+		response.sendRedirect("/jspfolder/index.jsp");
 	}
 //자바빈즈: 댓글 reply
 %>
@@ -25,6 +25,7 @@
 		
 		Connection conn = null;	
 		PreparedStatement psmt = null;
+		ResultSet rs = null;
 	
 		String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 		String user = "cteam";
@@ -35,6 +36,8 @@
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn=DriverManager.getConnection(url,user,pass);
 			
+			
+				
 			//SQL
 			String sql = " INSERT INTO reply(bno, mno, rcontent, rrdate)"
 						+" VALUES(?,?,?,now())";
@@ -63,16 +66,19 @@
 				//max를 쓰는 이유는 auto_increment기떄문
 				//현재 등록된 댓글의 rno(PK)는 rno의 최댓값(max(rno))
 				//현재 등록된 댓글의 PK값(rno)을 가져와 reply객체의 rno필드에 값을 추가 
-				sql = "SELECT max(rno) as rno from reply";
+				sql = "select rno, rrdate from reply where rno = (SELECT max(rno) from reply);";
 				psmt = conn.prepareStatement(sql);
-				ResultSet rs = psmt.executeQuery();
+				rs = psmt.executeQuery();
 				
 				//rno구하기
 				int rno=0;
+				String rrdate = "";
 				if(rs.next()){
 					rno=rs.getInt("rno");
+					rrdate = rs.getString("rrdate");
 				}
 				if(rs != null) rs.close();
+				
 				
 				
 				
@@ -87,12 +93,14 @@
 						<button onclick="modifyFn(this,<%=rno%>)">수정</button>
 						<button onclick="replyDelFn(<%=rno%>, this)">삭제</button>
 					</span>
+					<span><%=rrdate%></span>
 				</div>	
 			<%
 				
 			}else{ //삽입(댓글등록)이 안됐다면
 				out.print("FAIL");
 			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

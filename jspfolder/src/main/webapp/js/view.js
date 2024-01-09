@@ -54,7 +54,7 @@
 		
 		if(!isModify){	//수정중이라면
 			//입력양식 초기값 얻어오기
-			let value = $(obj).parent().prev("span").text().trim();	//부모의 형 span
+			let value = $(obj).parent().prev("span").text().trim();	//부모의 형 span 기존 rcontent
 			
 			let html = "<input type='text' name = 'rcontent' value='"+value+"'>";
 			html += "<input type='hidden' name='rno' value='"+rno+"'>";

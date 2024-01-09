@@ -6,20 +6,17 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	Member member = new Member();
-%>
-<%
-	Connection conn = null;
-	PreparedStatement psmt= null;
-	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
-	String user = "cteam";
-	String pass ="ezen";
+//	[get방식 차단]
+	String method = request.getMethod();
+	if(method.equals("GET")){
+		response.sendRedirect("findId.jsp");
+	}
 	
 	String mid = request.getParameter("mid");
 	String mname = request.getParameter("mname");
-	String mbirth2 = request.getParameter("mbirth");
-	int mbirth = Integer.parseInt(mbirth2);
+	String mbirthStr = request.getParameter("mbirth");
+	int mbirth = Integer.parseInt(mbirthStr);
 	String mphone1 = request.getParameter("mphone1");
 	String mphone2 = request.getParameter("mphone2");
 	String mphone3 = request.getParameter("mphone3");
@@ -27,6 +24,14 @@
 	
 	boolean isfindPw = false;
 	int result = 0;
+
+	Connection conn = null;
+	PreparedStatement psmt= null;
+	ResultSet rs = null;
+	
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
+	String user = "cteam";
+	String pass ="ezen";
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -48,6 +53,15 @@
 		psmt.setString(4, mphone);
 		
 		rs = psmt.executeQuery();
+		
+//		생년월일 입력값 string을 int로 바꾸고 null, 빈문자열이 아니면 integer로 변환
+		if(mbirthStr != null && !mbirthStr.isEmpty()) {
+		    try{
+		        mbirth = Integer.parseInt(mbirthStr);
+		    }catch(NumberFormatException e) {
+		        e.printStackTrace(); // 또는 로깅 등의 예외 처리
+		    }
+		}
 		
 		if(rs.next()){
 			member.setMno(rs.getInt("mno"));
@@ -83,7 +97,7 @@
 		
 		result = psmt.executeUpdate();
 %>
-			location.href="login.jsp";
+		location.href="login.jsp";
 		</script>
 <%
 	}else{

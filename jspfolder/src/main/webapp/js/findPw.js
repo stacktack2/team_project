@@ -7,15 +7,15 @@
 	let mphone3 = document.frm.mphone3;
 	
 	function checkId(obj){
-		let regId = /[^0-9a-zA-Z]/g;
+		let regId = /^[a-z][a-z0-9]{4,20}$/g;
 		let regRs = regId.test(obj.value); 
 		let midTd = document.getElementById("midTd");
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			midTd.innerHTML = '아이디를 입력해주세요';
 			midTd.style.color = 'red';
 			return false;
-		}else if(regRs){
-			midTd.innerHTML = '영문 및 숫자만 사용가능합니다.';
+		}else if(!regRs){
+			midTd.innerHTML = '4자 이상, 20이하의 영문(소문자) 및 숫자만 사용가능합니다.';
 			midTd.style.color = 'red';
 			return false;
 		}else{
@@ -26,14 +26,14 @@
 	}
 	
 	function checkName(obj){
-		let regId = /[^가-힣]/g;
+		let regId = /^[가-힣]{2,8}$/;
 		let regRs = regId.test(obj.value); 
 		let mnameTd = document.getElementById("mnameTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mnameTd.innerHTML = '이름을 입력해주세요';
 			mnameTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mnameTd.innerHTML = '한글만 사용가능합니다.';
 			mnameTd.style.color = 'red';
 			return false;
@@ -45,15 +45,15 @@
 	}
 	
 	function checkBirth(obj){
-		let regId = /[^0-9]/g;
+		let regId = /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 		let regRs = regId.test(obj.value); 
 		let mbirthTd = document.getElementById("mbirthTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mbirthTd.innerHTML = '생년월일을 입력해주세요.';
 			mbirthTd.style.color = 'red';
 			return false;
-		}else if(regRs){
-			mbirthTd.innerHTML = '숫자만 사용가능합니다.';
+		}else if(!regRs){
+			mbirthTd.innerHTML = '숫자만 입력가능, 생년월일을 다시 입력해주세요.';
 			mbirthTd.style.color = 'red';
 			return false;
 		}else{
@@ -64,7 +64,7 @@
 	}
 	
 	function checkPhone1(obj){
-		let regId = /[^0-9]/g;
+		let regId = /[^0-9]{3}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -86,7 +86,7 @@
 	}
 	
 	function checkPhone2(obj){
-		let regId = /[^0-9]/g;
+		let regId = /[^0-9]{4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -105,7 +105,7 @@
 	}
 	
 	function checkPhone3(obj){
-		let regId = /[^0-9]/g;
+		let regId = /[^0-9]{4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -123,11 +123,11 @@
 		}
 	}
 	
-	
-	function validation(){
-		if(checkNickNm(mnickNm)
-				& checkName(mname) & checkBirth(mbirth) & checkPhone1(mphone1)
-				& checkPhone2(mphone2) & checkPhone3(mphone3)){
-					document.frm.submit();
+	function searchPw(){
+		if(checkId(mid) & checkName(mname) & checkBirth(mbirth) & 
+		   checkPhone1(mphone1)	& checkPhone2(mphone2) & checkPhone3(mphone3)){
+			document.frm.submit();
+		}else{
+			return checkName;
 		}
 	}

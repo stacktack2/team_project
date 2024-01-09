@@ -52,10 +52,10 @@
 		}
 	}
 	
-	function checkPwRe(obj){
-		let confirmPw = mpw.value == obj.value;
+	function checkPwRe(){
+		let confirmPw = mpw.value == mpwRe.value;
 		let mpwReTd = document.getElementById("mpwReTd"); 
-		if(obj.value == "" || obj.value === null || obj.value === undefined){
+		if(mpwRe.value == "" || mpwRe.value === null || mpwRe.value === undefined){
 			mpwReTd.innerHTML = '비밀번호를 입력해주세요';
 			mpwReTd.style.color = 'red';
 			return false;
@@ -130,7 +130,7 @@
 	}
 	
 	function checkPhone1(obj){
-		let regId = /[^0-9]/g;
+		let regId = /[^0-9]{3}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -152,7 +152,7 @@
 	}
 	
 	function checkPhone2(obj){
-		let regId = /[^0-9]/g;
+		let regId = /[^0-9]{4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -171,7 +171,7 @@
 	}
 	
 	function checkPhone3(obj){
-		let regId = /[^0-9]/g;
+		let regId = /[^0-9]{4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){

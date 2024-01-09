@@ -55,29 +55,42 @@
 		//[유효성 검사]
 		boolean isPass = true;
 		
-		if(!Regular.isNumEng(member.getMid(),10)){
-			isPass = false;System.out.println(1);
+		if(!Regular.isId(member.getMid())){
+			isPass = false; System.out.println(1);
 		}
-		if(!Regular.isNumEng(member.getMpw(),10)){
+		
+		if(!Regular.isPw(member.getMpw())){
 			isPass = false;System.out.println(2);
 		}
-		if(!Regular.isNumEngKor(member.getMnickNm(),10)){
+		
+		if(!Regular.isNickNm(member.getMnickNm())){
 			isPass = false;System.out.println(3);
 		}
-		if(!Regular.isKor(member.getMname(),10)){
+		
+		if(!Regular.isName(member.getMname())){
 			isPass = false; System.out.println(4);
 		}
-		if(!Regular.isNum(""+member.getMbirth(),13)){
+		
+		if(!Regular.isBirth(""+member.getMbirth())){
 			isPass = false; System.out.println(5);
 		}
-		if(!Regular.isNum(mphone,13)){
+		
+		if(!Regular.isNum3(mphone1)){
 			isPass = false; System.out.println(6);
 		}
-		if(!Regular.isEmail(member.getMemail())){
+		if(!Regular.isNum4(mphone2)){
 			isPass = false; System.out.println(7);
 		}
-		if(rs.next()){
+		if(!Regular.isNum4(mphone2)){
 			isPass = false; System.out.println(8);
+		}
+		
+		if(!Regular.isEmail(member.getMemail())){
+			isPass = false; System.out.println(9);
+		}
+		
+		if(rs.next()){
+			isPass = false; System.out.println(10);
 		}
 		
 		if(rs != null) rs.close();

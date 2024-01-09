@@ -91,22 +91,19 @@
 		
 		//[검색]
 		if(searchType != null){
-			
 			if(searchType.equals("title")){
 				sql += " AND btitle LIKE CONCAT('%',?,'%')";
 			}else if(searchType.equals("writer")){
 				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%')";
 			}
-			
-					
 		}
 		
 		//[인기순 최신순 정렬]
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " order by brdate desc ";
+				sql += " ODER BY brdate DESC ";
 			}else if(searchAlign.equals("hit")){
-				sql += " order by bhit desc ";
+				sql += " ODER BY bhit DESC ";
 			}
 		}
 		

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Vo.*" %>
+<%@ page import="paging.PagingVO" %>
+<%@ page import="java.sql.*"%>
 <%
 //	페이지 인코딩
 	request.setCharacterEncoding("UTF-8");
@@ -29,23 +32,26 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url,user,pass);
 		
-		String sql = " SELECT b.bno, btitle, b.mno, m.mickNm, brdate, bhit, btype"
-				   + " , (select count(*) from reply r where r.bno = b.bno) as rcnt"
-				   + " FROM board b"
-				   + " INNER JOIN member m"
-				   + " ON b.mno = m.mno"
-				   + " WHERE btype = '캠핑지역'";
+		String sql = " SELECT b.*, m.mnickNm, "
+				   + " (SELECT COUNT(*) FROM reply r WHERE r.bno = b.bno) AS rcnt"
+				   + "   FROM board b"
+				   + "  INNER JOIN member m"
+				   + "     ON b.mno = m.mno"
+				   + "  WHERE btype = '캠핑지역'";
+		
+		psmt = conn.prepareStatement(sql);
 		
 //	option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " order by brdate desc ";
+				sql += " ODER BY brdate DESC ";
 			}else if(searchAlign.equals("hit")){
-				sql += " order by bhit desc ";
+				sql += " ODER BY bhit DESC ";
 			}
 		}
-		
-		
+	
+		rs = psmt.executeQuery();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -64,7 +70,7 @@
 		<div>캠핑지역 게시판</div>
 <!-- 게시글 정렬폼 -->
 		<form name="frm1" action="zoneList.jsp" method="get" id="frm1">
-<%-- 게시글 정렬종류 --%>
+<!-- 게시글 정렬종류 -->
 			<select name="searchAlign" id="select">
 				<option value="late">최신순</option>
 				<option value="hit">인기순</option>
@@ -100,8 +106,34 @@
 				<th id="td6">조회수</th>	
 			</tr>
 		</thead>
-<!-- 테이블 바디 -->
+<!-- 게시글 목록 -->
 		<tbody>
+<%
+			if(!rs.next()){
+%>
+			<tr><td colspan="6">아무것도 검색되지 않았습니다.</td></tr>
+<%	
+			}else{			
+			while(rs.next()){
+				int bno = rs.getInt("bno");
+				String btype = rs.getString("btype");
+				String btitle = rs.getString("btitle");
+				String writer = rs.getString("mnickNm");
+				String brdate = rs.getString("brdate");
+				int bhit = rs.getInt("bhit");
+%>
+			<tr>
+				<td><%=bno %></td>
+				<td><%=btype %></td>
+				<td><%=btitle %></td>
+				<td><%=writer %></td>
+				<td><%=brdate %></td>
+				<td><%=bhit %></td>
+			</tr>
+<%
+				}
+			}
+%>
 		</tbody>
 		</table>
 	</section>

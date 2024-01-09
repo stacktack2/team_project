@@ -16,15 +16,16 @@
 		bno = Integer.parseInt(bnoParam);
 	}
 	
-	if(member == null){	//로그인이 안돼있다면
+	
+	if(member == null)
+	{	//로그인이 안돼있다면
 %>
 	<script>
 		alert("잘못된 접근입니다");
-		location.href='<%=request.getContextPath() %>/index.jsp';
+		location.href="<%= request.getContextPath() %>/index.jsp";
 	</script>
 <%
-	}else{
-	
+	}
 	//예외처리 - 자신이 작성하지 않은 글 조회 방지
 	Connection conn = null;	
 	PreparedStatement psmt = null;
@@ -44,7 +45,7 @@
 		
 		rs = psmt.executeQuery();
 		
-		if(!rs.next()){
+		if(rs.next()){
 			%>
 			<script>
 				alert("잘못된 접근입니다");
@@ -160,6 +161,3 @@
 	
 </body>
 </html>
-<%
-	}
-%>

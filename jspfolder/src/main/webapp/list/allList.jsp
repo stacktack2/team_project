@@ -191,7 +191,10 @@
 							<tr id ="tr">
 								<td id="td1"><%=pagingVO.getStart()+num %></td>
 								<td id="td2"><%=rs.getString("btype") %></td>
-								<td id="td3"><%=rs.getString("btitle") %><span id="replyspan">[<%=rs.getInt("rcnt") %>]</span></td>
+								<td id="td3">
+									<a href="<%=request.getContextPath() %>/board/view.jsp?bno=<%=rs.getInt("bno")%>"><%=rs.getString("btitle") %></a>
+									<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
+								</td>
 								<td id="td4"><%=rs.getString("mnickNm") %></td>
 								<td id="td5"><%=rs.getString("brdate") %></td>
 								<td id="td6"><%=rs.getInt("bhit") %></td>

@@ -2,16 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member" %>
 <%
-	
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
+	//blist
+	String blist = request.getParameter("blist");
 	
 	//Get방식으로 작성(접근) 못하게 하기
 	if(member == null){	//로그인이 안돼있다면
 %>
 	<script>
 		alert("잘못된 접근입니다");
-		location.href='list.jsp';
+		location.href='<%=request.getContextPath() %>/index.jsp';
 	</script>
 <%
 	}
@@ -23,6 +24,33 @@
 <title>게시글 작성</title>
 <link href="<%=request.getContextPath() %>/css/base.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/css/write.css" rel="stylesheet">
+<script>
+/*  blist 파라미터값을 가져오기 위해선 html에 미리 변수로 선언해줘야 하는데
+ 	(파라미터로 받아왔다고 html에서 바로 쓸 수 없음)
+	표현식이라 문자열로 받아와야 변수로 사용할 수 있다.
+*/
+ let blist='<%=blist%>';
+	
+	function wCancleFn(){
+		if(blist=="all"){
+			location.href="<%=request.getContextPath() %>/list/allList.jsp";
+		}else if(blist=="notice"){
+			location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
+		}else if(blist=="hot"){
+			location.href="<%=request.getContextPath() %>/list/hotList.jsp";
+		}else if(blist=="free"){
+			location.href="<%=request.getContextPath() %>/list/freeList.jsp";
+		}else if(blist=="zone"){
+			location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
+		}else if(blist=="gear"){
+			location.href="<%=request.getContextPath() %>/list/gearList.jsp";
+		}else if(blist=="attend"){
+			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
+		}else if(blist=="qna"){
+			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
+		}
+	}
+</script>
 </head>
 <body>
 	<%@ include file ="/include/header.jsp" %>
@@ -74,10 +102,13 @@
 					</tr>
 				</tbody>
 			</table>
+			<button type="button" class="cancleBtn" onclick="wCancleFn()">취소</button>
 			<button class="saveBtn">저장</button>
+			
 		</form>
 	</section>
 	</div>
 	<%@ include file ="/include/footer.jsp" %>
+	
 </body>
 </html>

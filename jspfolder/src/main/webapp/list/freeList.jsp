@@ -5,16 +5,16 @@
 <%@ page import="java.sql.*"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	
+
 	//(등록버튼)
-	Member member = (Member)session.getAttribute("login");
+	Member member = (Member)session.getAttribute("login"); 
 	
 	//[검색]
 	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 	
-	//searchAlign이 null일때 초기값 최신순으로 고정하기
+	//[정렬] 초기값 최신순으로 고정
 	if(searchAlign==null){
 		searchAlign="late";
 	}
@@ -82,8 +82,8 @@
 		rs=null;
 		
 		//2. [게시글][댓글]
-		String sql = "SELECT b.*m.mnickNm"
-					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
+		String sql = "SELECT b.*, m.mnickNm"
+					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"	//댓글수
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"
@@ -192,7 +192,7 @@
 					<td><%=bno %></td>
 					<td><%=btype %></td>
 					<td>
-						<a href="view.jsp?bno=<%=bno%>"><%=btitle %></a>
+						<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>"><%=btitle %></a>
 						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 					</td>
 					<td><%=mnickNm %></td>
@@ -205,11 +205,11 @@
 			</tbody>
 		</table>
 	<%
-	if(member != null){
+	if(member != null){	//로그인했을 경우에만 노출
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn" 
-				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=free';">글쓰기</button>
 		</div>
 	<%	
 		}

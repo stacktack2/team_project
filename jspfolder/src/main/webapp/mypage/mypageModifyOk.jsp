@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="Vo.*" %>
+<%@ page import="regular.Regular" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -13,14 +14,37 @@
 	if(method.equals("GET")){
 		response.sendRedirect("mypage.jsp");
 	}
-// 	[비인증 접근 제한]
- 	if(!(boolean)session.getAttribute("isAutFlag")){
-		response.sendRedirect("mypage.jsp")	;
-	}
-	
-	Member memberSession = (Member)session.getAttribute("login");
-	int mno = memberSession.getMno();
-
+// 	[비인증 접근 제한] OK 마지막에서 인증해제 해야함
+ 	if(session.getAttribute("isAutFlag") == null){
+ 		
+		%>
+		<script>
+			alert("비정상적인 접근입니다.");
+			location.href="/jspfolder/index.jsp";
+		</script>
+		<%
+	}else if(!(boolean)session.getAttribute("isAutFlag")){
+		%>
+		<script>
+			alert("비정상적인 접근입니다.");
+			location.href="/jspfolder/index.jsp";
+		</script>
+		<%
+		
+	}else{
+		int mno=0;
+		Member memberSession = (Member)session.getAttribute("login");
+		if(memberSession != null){
+			mno = memberSession.getMno();
+		}
+		if(mno ==0){
+			%>
+			<script>
+				alert("오류가 발생해 메인페이지로 이동합니다.");
+				location.href="/jspfolder/index.jsp";
+			</script>
+			<%
+		}
 
 	Connection conn = null;
 	PreparedStatement psmt= null;
@@ -36,8 +60,29 @@
 	
 	//[유효성 검사]
 	boolean isPass = true;
-			
-	
+	if(!Regular.isPass(member.getMpw())){
+		isPass = false; System.out.println(1);
+	}
+	if(!Regular.isNum3(mphone1)){
+		isPass = false; System.out.println(2);
+	}
+	if(!Regular.isNum4(mphone2)){
+		isPass = false; System.out.println(3);
+	}
+	if(!Regular.isNum4(mphone2)){
+		isPass = false; System.out.println(4);
+	}
+	if(!Regular.isEmail(member.getMemail())){
+		isPass = false; System.out.println(5);
+	}
+	if(!isPass){
+		%>
+		<script>
+			alert("오류가 발생해 메인페이지로 이동합니다.");
+			location.href="/jspfolder/index.jsp";
+		</script>
+		<%
+	}
 	
 	
 	
@@ -97,5 +142,5 @@
 <%		
 		}
 	}
-	
+}
 %>

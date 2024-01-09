@@ -84,7 +84,7 @@
 	<%@ include file="/include/nav.jsp" %>
 	<section>
 		<h2 class="hidden">게시글 수정</h2>
-		<form name="frm" action="modifyOk.jsp" method="post">
+		<form name="frm" action="modifyOk.jsp" method="post" enctype="multipart/form-data">
 			<!-- hidden으로 bno값 보내기 -->
 			<input type="hidden" name="bno" value="<%=board.getBno()%>">
 			
@@ -103,7 +103,9 @@
 					</tr>
 					<tr>
 						<th>첨부파일</th>
-						<td colspan="3"></td>
+						<td colspan="3">
+							<input type="file" name="uploadFile">
+						</td>
 					</tr>
 				</tbody>
 			</table>

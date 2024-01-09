@@ -8,6 +8,7 @@
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
 	String bnoParam = request.getParameter("bno");
+	
 	//blist
 	String blist = request.getParameter("blist");
 	
@@ -17,8 +18,7 @@
 	}
 	
 	
-	if(member == null)
-	{	//로그인이 안돼있다면
+	if(member == null){	//로그인이 안돼있다면
 %>
 	<script>
 		alert("잘못된 접근입니다");

@@ -234,8 +234,7 @@
 					<%
 						for(Uploadfile tempf: flist){
 					%>		
-							<a href="download.jsp?frealnm=<%=tempf.getFrealnm()%>
-								&foriginnm=<%=tempf.getForiginnm()%>">
+							<a href="download.jsp?frealnm=<%=tempf.getFrealnm()%>&foriginnm=<%=tempf.getForiginnm()%>">
 								<%= tempf.getForiginnm()%>
 							</a><br>
 					<%

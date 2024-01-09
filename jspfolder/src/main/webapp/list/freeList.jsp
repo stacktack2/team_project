@@ -210,7 +210,9 @@
 	if(member != null){
 	%>
 		<div class="btnDiv">
-			<button class="writeBtn" onclick="location.href='write.jsp';">글쓰기</button>
+			<button class="writeBtn" 
+			onclick="location.href='<%=request.getContextPath()%>/board/write.jsp
+			?blist=free';">글쓰기</button>
 		</div>
 	<%	
 		}

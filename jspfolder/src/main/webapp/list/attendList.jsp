@@ -191,7 +191,8 @@
 					<td><%=bno %></td>
 					<td><%=btype %></td>
 					<td>
-						<a href="view.jsp?bno=<%=bno%>"><%=btitle %></a>
+						<a href="<%=request.getContextPath()%>/board/view.jsp
+							?bno=<%=bno%>&blist=attend"><%=btitle %></a>
 						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 					</td>
 					<td><%=mnickNm %></td>
@@ -207,7 +208,9 @@
 	if(member != null){
 	%>
 		<div class="btnDiv">
-			<button class="writeBtn" onclick="location.href='write.jsp';">글쓰기</button>
+			<button class="writeBtn" 
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp
+				?blist=attend';">글쓰기</button>
 		</div>
 	<%	
 		}

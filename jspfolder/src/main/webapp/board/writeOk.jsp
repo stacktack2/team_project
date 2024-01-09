@@ -30,7 +30,7 @@
 	//타입체크: GET방식으로 접근하는것 방지 
 	String method = request.getMethod();
 	if(method.equals("GET") || member == null){	//get방식이라면
-		response.sendRedirect("allList.jsp");	//전체게시글로 리다이렉트
+		response.sendRedirect(request.getContextPath());	
 	}
 	
 	//파라미터를 담을 VO생성(import필요)
@@ -132,14 +132,46 @@
 		%>
 			<script>
 				alert("게시물이 등록되었습니다.");
-				location.href='allList.jsp';
+				if(blist=="all"){
+					location.href="<%=request.getContextPath() %>/list/allList.jsp";
+				}else if(blist=="notice"){
+					location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
+				}else if(blist=="hot"){
+					location.href="<%=request.getContextPath() %>/list/hotList.jsp";
+				}else if(blist=="free"){
+					location.href="<%=request.getContextPath() %>/list/freeList.jsp";
+				}else if(blist=="zone"){
+					location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
+				}else if(blist=="gear"){
+					location.href="<%=request.getContextPath() %>/list/gearList.jsp";
+				}else if(blist=="attend"){
+					location.href="<%=request.getContextPath() %>/list/attendList.jsp";
+				}else if(blist=="qna"){
+					location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
+				}
 			</script>
 			<%
 			}else{
 			%>
 			<script>
 				alert("게시글 등록되지 않았습니다.");
-				location.href='allList.jsp';
+				if(blist=="all"){
+					location.href="<%=request.getContextPath() %>/list/allList.jsp";
+				}else if(blist=="notice"){
+					location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
+				}else if(blist=="hot"){
+					location.href="<%=request.getContextPath() %>/list/hotList.jsp";
+				}else if(blist=="free"){
+					location.href="<%=request.getContextPath() %>/list/freeList.jsp";
+				}else if(blist=="zone"){
+					location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
+				}else if(blist=="gear"){
+					location.href="<%=request.getContextPath() %>/list/gearList.jsp";
+				}else if(blist=="attend"){
+					location.href="<%=request.getContextPath() %>/list/attendList.jsp";
+				}else if(blist=="qna"){
+					location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
+				}
 			</script>
 			<%	
 				

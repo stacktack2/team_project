@@ -7,8 +7,9 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	//(등록버튼)
+
  	Member member = (Member)session.getAttribute("login");
-	
+
 	
 	//[검색]
 	

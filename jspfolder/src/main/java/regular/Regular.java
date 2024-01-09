@@ -32,6 +32,10 @@ public class Regular {
 	public static boolean isNum3(String str) {
 		return Pattern.matches("^[0-9]{3}$", str);
 	}
+	// 핸드폰 번호 - 3_4자리 숫자에 대한 정규식
+		public static boolean isNum3_4(String str) {
+			return Pattern.matches("^[0-9]{3,4}$", str);
+	}
 	// 핸드폰 번호 - 4자리 숫자에 대한 정규식
 	public static boolean isNum4(String str) {
 		return Pattern.matches("^[0-9]{4}$", str);

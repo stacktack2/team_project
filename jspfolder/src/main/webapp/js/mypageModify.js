@@ -77,7 +77,7 @@
 	}
 	
 	function checkPhone2(obj){
-		let regId = /^\d{4}/g;
+		let regId = /^\d{3,4}/g;
 		let regRs = !regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -85,7 +85,7 @@
 			mphoneTd.style.color = 'red';
 			return false;
 		}else if(regRs){
-			mphoneTd.innerHTML = '4자리 숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '3,4자리 숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{

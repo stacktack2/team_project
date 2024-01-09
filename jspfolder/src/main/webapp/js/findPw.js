@@ -1,61 +1,133 @@
-function searchPw(){
-	let mid = document.frm.mid.value;
-	let mname = document.frm.mname.value;
-	let mbirth = document.frm.mbirth.value;
-	let mphone1 = document.frm.mphone1.value; // 핸드폰1
-	let mphone2 = document.frm.mphone2.value; // 핸드폰2
-	let mphone3 = document.frm.mphone3.value;
+	//유효성 검사 개수제한 추가해야함 개수 정해지면 {} 붙이기
+	let mid = document.frm.mid;
+	let mname = document.frm.mname; 
+	let mbirth = document.frm.mbirth; 
+	let mphone1 = document.frm.mphone1; 
+	let mphone2 = document.frm.mphone2; 
+	let mphone3 = document.frm.mphone3;
 	
-	let check = true;
-	if(mid == ""){
-			check = false;	
-			document.frm.mid.style.border="1px solid red";
-			document.getElementById("midTd").innerText = "*아이디를 입력해주세요.";
-			return;
+	function checkId(obj){
+		let regId = /[^0-9a-zA-Z]/g;
+		let regRs = regId.test(obj.value); 
+		let midTd = document.getElementById("midTd");
+		if(obj.value == "" || obj.value === null || obj.value === undefined){
+			midTd.innerHTML = '아이디를 입력해주세요';
+			midTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			midTd.innerHTML = '영문 및 숫자만 사용가능합니다.';
+			midTd.style.color = 'red';
+			return false;
+		}else{
+			midTd.innerHTML = '사용가능합니다.';
+			midTd.style.color = 'green';
+			return true;
+		}
+	}
+	
+	function checkName(obj){
+		let regId = /[^가-힣]/g;
+		let regRs = regId.test(obj.value); 
+		let mnameTd = document.getElementById("mnameTd"); 
+		if(obj.value == "" || obj.value === null || obj.value === undefined){
+			mnameTd.innerHTML = '이름을 입력해주세요';
+			mnameTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			mnameTd.innerHTML = '한글만 사용가능합니다.';
+			mnameTd.style.color = 'red';
+			return false;
+		}else{
+			mnameTd.innerHTML = '사용가능합니다.';
+			mnameTd.style.color = 'green';
+			return true;
+		}
+	}
+	
+	function checkBirth(obj){
+		let regId = /[^0-9]/g;
+		let regRs = regId.test(obj.value); 
+		let mbirthTd = document.getElementById("mbirthTd"); 
+		if(obj.value == "" || obj.value === null || obj.value === undefined){
+			mbirthTd.innerHTML = '생년월일을 입력해주세요.';
+			mbirthTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			mbirthTd.innerHTML = '숫자만 사용가능합니다.';
+			mbirthTd.style.color = 'red';
+			return false;
+		}else{
+			mbirthTd.innerHTML = '사용가능합니다.';
+			mbirthTd.style.color = 'green';
+			return true;
+		}
+	}
+	
+	function checkPhone1(obj){
+		let regId = /[^0-9]/g;
+		let regRs = regId.test(obj.value); 
+		let mphoneTd = document.getElementById("mphoneTd"); 
+		if(obj.value == "" || obj.value === null || obj.value === undefined){
+			check = false;
+			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
+			mphoneTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			check = false;
+			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.style.color = 'red';
+			return false;
 		}else{
 			check = true;
-			document.frm.mid.removeAttribute("style");
-			document.getElementById("midTd").innerText = "";
+			mphoneTd.innerHTML = '사용가능합니다.';
+			mphoneTd.style.color = 'green';
+			return true;
 		}
-	if(mname == ""){	
-			check = false;	
-			document.frm.mname.style.border="1px solid red";
-			document.getElementById("mnameTd").innerText = "*이름을 입력해주세요.";
-			return;
-		}else{	
-			check = true;	
-			document.frm.mname.removeAttribute("style");
-			document.getElementById("mnameTd").innerText = "";
-		}
-		
-	if(mbirth == ""){	
-			check = false;
-			document.frm.mbirth.style.border="1px solid red";
-			document.getElementById("mbirthTd").innerText = "*생년월일을 입력해주세요.";
-			return;
-		}else{	
-			check = true;	
-			document.frm.mbirth.removeAttribute("style");
-			document.getElementById("mbirthTd").innerText = "";
-		}
+	}
 	
-	if(mphone1 == "" || mphone2 == "" || mphone3 == ""){	
-			check = false;	
-			document.frm.mphone1.style.border="1px solid red";
-			document.frm.mphone2.style.border="1px solid red";
-			document.frm.mphone3.style.border="1px solid red";
-			document.getElementById("mphoneTd").innerText = "*연락처를 입력해주세요.";
-			return;
-		}else{	
-			check = true;	
-			document.frm.mphone1.removeAttribute("style");
-			document.frm.mphone2.removeAttribute("style");
-			document.frm.mphone3.removeAttribute("style");
-			document.getElementById("mphoneTd").innerText = "";
+	function checkPhone2(obj){
+		let regId = /[^0-9]/g;
+		let regRs = regId.test(obj.value); 
+		let mphoneTd = document.getElementById("mphoneTd"); 
+		if(obj.value == "" || obj.value === null || obj.value === undefined){
+			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
+			mphoneTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.style.color = 'red';
+			return false;
+		}else{
+			mphoneTd.innerHTML = '사용가능합니다.';
+			mphoneTd.style.color = 'green';
+			return true;
 		}
-		
-	if(check == true){
-		document.frm.submit();
-	}	
+	}
 	
-}
+	function checkPhone3(obj){
+		let regId = /[^0-9]/g;
+		let regRs = regId.test(obj.value); 
+		let mphoneTd = document.getElementById("mphoneTd"); 
+		if(obj.value == "" || obj.value === null || obj.value === undefined){
+			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
+			mphoneTd.style.color = 'red';
+			return false;
+		}else if(regRs){
+			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.style.color = 'red';
+			return false;
+		}else{
+			mphoneTd.innerHTML = '사용가능합니다.';
+			mphoneTd.style.color = 'green';
+			return true;
+		}
+	}
+	
+	
+	function validation(){
+		if(checkNickNm(mnickNm)
+				& checkName(mname) & checkBirth(mbirth) & checkPhone1(mphone1)
+				& checkPhone2(mphone2) & checkPhone3(mphone3)){
+					document.frm.submit();
+		}
+	}

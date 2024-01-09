@@ -24,7 +24,7 @@
 				</tr>
     			<tr>
     				<td>
-    					<input type="text" name="mname" class="textbox">
+    					<input type="text" name="mname" oninput="checkName(this)" class="textbox">
     				</td>
     			</tr>
     			<tr class="blur">
@@ -36,7 +36,7 @@
 				</tr>
     			<tr>
     				<td>
-    					<input type="text" name="mbirth" class="textbox">
+    					<input type="text" name="mbirth" oninput="checkBirth(this)" class="textbox">
     				</td>
     			</tr>
     			<tr class="blur">

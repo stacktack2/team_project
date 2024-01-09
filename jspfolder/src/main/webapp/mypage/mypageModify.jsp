@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
@@ -14,17 +15,37 @@
 		String pass ="ezen";
 	try{
 //	 	[비인증 접근 제한] OK 마지막에서 인증해제 해야함
-	 	if(!(boolean)session.getAttribute("isAutFlag")){
+	 	if(session.getAttribute("isAutFlag") == null){
+	 		
 			%>
 			<script>
 				alert("비정상적인 접근입니다.");
-				location.href="mypagePw.jsp";
+				location.href="/jspfolder/index.jsp";
 			</script>
 			<%
-		}else{
+		}else if(!(boolean)session.getAttribute("isAutFlag")){
+			%>
+			<script>
+				alert("비정상적인 접근입니다.");
+				location.href="/jspfolder/index.jsp";
+			</script>
+			<%
 			
+		}else{
+			int mno=0;
 			Member memberSession = (Member)session.getAttribute("login");
-			int mno = memberSession.getMno();
+			if(memberSession != null){
+				mno = memberSession.getMno();
+			}
+			if(mno ==0){
+				%>
+				<script>
+					alert("오류가 발생해 메인페이지로 이동합니다.");
+					location.href="/jspfolder/index.jsp";
+				</script>
+				<%
+			}
+			
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
@@ -48,8 +69,16 @@
 			String mphone = rs.getString("mphone");
 			String mgender = rs.getString("mgender");
 			String memail = rs.getString("memail");
-	
-
+			
+			String mphone1 = "000";
+			String mphone2 = "0000";
+			String mphone3 = "0000";
+			
+			if(mphone != null && mphone.length()>8){
+				mphone1 = mphone.substring(0,3);
+				mphone2 = mphone.substring(3,7);
+				mphone3 = mphone.substring(7);
+			}
 		
 %>
     
@@ -186,9 +215,9 @@
 					</tr>
 					<tr>
 						<td>
-							<input value="<%=mphone %>" type="text" name="mphone1" oninput="checkPhone1(this)" maxlength="3" class="phone"> -
-							<input type="text" name="mphone2" oninput="checkPhone2(this)" maxlength="4" class="phone"> -
-							<input type="text" name="mphone3" oninput="checkPhone3(this)" maxlength="4" class="phone">
+							<input value="<%=mphone1 %>" type="text" name="mphone1" oninput="checkPhone1(this)" maxlength="3" class="phone"> -
+							<input value="<%=mphone2 %>" type="text" name="mphone2" oninput="checkPhone2(this)" maxlength="4" class="phone"> -
+							<input value="<%=mphone3 %>" type="text" name="mphone3" oninput="checkPhone3(this)" maxlength="4" class="phone">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -229,7 +258,7 @@
 
 
 <%
-		}	
+		}
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

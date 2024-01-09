@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/join.css" type="text/css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>

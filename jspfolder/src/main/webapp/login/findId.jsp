@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기</title>
 <link href="<%=request.getContextPath()%>/css/findId.css" type="text/css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 </head>

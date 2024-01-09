@@ -130,7 +130,7 @@
 	}
 	
 	function checkPhone1(obj){
-		let regId = /[^0-9]{3}/g;
+		let regId = /^\d{3}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
@@ -138,7 +138,7 @@
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			check = false;
 			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
@@ -152,14 +152,14 @@
 	}
 	
 	function checkPhone2(obj){
-		let regId = /[^0-9]{4}/g;
+		let regId = /^\d{3,4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
@@ -171,14 +171,14 @@
 	}
 	
 	function checkPhone3(obj){
-		let regId = /[^0-9]{4}/g;
+		let regId = /^\d{4}/g;
 		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;

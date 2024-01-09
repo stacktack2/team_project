@@ -7,15 +7,15 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	//(등록버튼)
-// 	Member member = (Member)session.getAttribute("member");
-	int mno =7;
+ 	Member member = (Member)session.getAttribute("login");
+	
 	
 	//[검색]
 	
 	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
-	if(searchAlign ==null || (searchAlign !=null && searchAlign.equals(""))){
+	if(searchAlign ==null ){
 		searchAlign = "late";
 	}
 	
@@ -208,6 +208,19 @@
 		</table>
 		
 		
+	
+	<%
+	if(member != null){
+	%>
+		<div class="btnDiv">
+			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
+		</div>
+	<%	
+		}
+	%>
+	
+	
+	
 		<!-- 페이징 영역 -->
 		 
 	

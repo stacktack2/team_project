@@ -23,7 +23,8 @@
 		location.href='<%=request.getContextPath() %>/index.jsp';
 	</script>
 <%
-	}
+	}else{
+	
 	//예외처리 - 자신이 작성하지 않은 글 조회 방지
 	Connection conn = null;	
 	PreparedStatement psmt = null;
@@ -159,3 +160,6 @@
 	
 </body>
 </html>
+<%
+	}
+%>

@@ -68,7 +68,7 @@
 		
 		if(psmt != null) psmt.close();	
 		
-		//2.[첨부파일]* 현재 게시글의 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
+		//2.[첨부파일]* 현재 게시글의 PK값(기본키 bno) 가져오기
 		//(as bno이기에 bno로 찾음)
 		sql = "select max(bno) as bno from board";
 		psmt = conn.prepareStatement(sql);
@@ -96,8 +96,8 @@
 		//System.out.println("실제파일명: "+realFileNM);
 		//System.out.println("원본파일명: "+originFileNM);
 		
-		//3. [첨부파일]삽입
-		sql ="INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
+		//3. [첨부파일] 수정
+		sql ="UPDATE uploadfile SET bno,frealnm,foriginnm,frdate)"
 			+" VALUES(?,?,?, now())";
 		
 		

@@ -57,7 +57,7 @@
     					<td colspan="2" align="right"><a id="mphoneTd"></a></td>
 				</tr>
     		</table>
-    		<button type="button" onclick="searchId()" id="idSearchButton">아이디 조회하기</button>
+    		<button onclick="searchId()" id="idSearchButton">아이디 조회하기</button>
     	</form>
     	</div>
 <!-- 비밀번호 찾기 -->

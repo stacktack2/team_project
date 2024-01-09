@@ -42,7 +42,7 @@
 			mpwTd.style.color = 'red';
 			return false;
 		}else if(!regRs){
-			mpwTd.innerHTML ='영문(소문자, 대문자), 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
+			mpwTd.innerHTML ='비밀번호는 8자 이상 영문 소문자, 영문 대문자, 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
 			mpwTd.style.color = 'red';
 			return false;
 		}else{
@@ -63,10 +63,12 @@
 			mpwReTd.innerHTML = '비밀번호가 같지 않습니다.';
 			mpwReTd.style.color = 'red';
 			return false;
-		}else{
-			mpwReTd.innerHTML = '사용가능합니다.';
+		}else if(confirmPw){
+			mpwReTd.innerHTML = '비밀번호가 같습니다.';
 			mpwReTd.style.color = 'green';
 			return true;
+		}else{
+			return !confirmPw;
 		}
 	}
 	
@@ -188,7 +190,6 @@
 	}
 	
 	function checkGender(mgender){
-		
 		let mgenderTd = document.getElementById("mgenderTd"); 
 		if(mgender.value == "" || mgender.value === null || mgender.value === undefined){
 			check = false;
@@ -244,8 +245,8 @@
 					midTd.style.color = 'red';
 				}else if(result == -2){
 					checkIdFlag = false;
-					alert('영문 및 숫자만 사용가능합니다.');
-					midTd.innerHTML = '영문 및 숫자만 사용가능합니다.';
+					alert('4자 이상, 20이하의 영문(소문자) 및 숫자만 사용가능합니다.');
+					midTd.innerHTML = '4자 이상, 20이하의 영문(소문자) 및 숫자만 사용가능합니다.';
 					midTd.style.color = 'red';
 				}else{
 					checkIdFlag = false;

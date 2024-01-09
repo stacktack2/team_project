@@ -28,7 +28,6 @@ public class Regular {
 		return Pattern.matches("^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]*$", str);
 	}
 	
-	
 	// 사용자 패스워드에 대한 정규식 - 대소문자 + 숫자 + 특수문자 조합으로 8 ~ 24자리로 정의 한다.
     public static boolean isPass(String str) {
 		return Pattern.matches("^(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{8,24}+$", str);
@@ -40,5 +39,9 @@ public class Regular {
 	// 핸드폰 번호 - 4자리 숫자에 대한 정규식
 	public static boolean isNum4(String str) {
 		return Pattern.matches("^[0-9]{4}$", str);
+	}
+	
+	public static boolean isId(String str) {
+		return Pattern.matches("^[a-z][a-z0-9]{4,20}$", str);
 	}
 }

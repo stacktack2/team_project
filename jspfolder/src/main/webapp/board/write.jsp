@@ -17,7 +17,7 @@
 		bno = Integer.parseInt(bnoParam);
 	}
 	
-	
+	 
 	if(member == null){	//로그인이 안돼있다면
 %>
 	<script>
@@ -25,9 +25,12 @@
 		location.href="<%= request.getContextPath() %>/index.jsp";
 	</script>
 <%
-
-	}else{
-
+	}
+	
+	
+	
+	
+	
 %>
 
 <meta charset="UTF-8">
@@ -103,7 +106,7 @@
 							<textarea name="bcontent"></textarea>
 						</td>
 					</tr>
-					 <!-- 첨부파일 :브라우저에서 접근할 수 있도록 wepapp하위에 첨부파일 만듦 -->
+					<% // 첨부파일 :브라우저에서 접근할 수 있도록 wepapp하위에 첨부파일 만듦%>
 					<tr>
 						<th>첨부파일 </th>
 						<td colspan="3">
@@ -122,6 +125,3 @@
 	
 </body>
 </html>
-<%
-	}
-%>

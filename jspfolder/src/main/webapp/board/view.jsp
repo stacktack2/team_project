@@ -34,6 +34,7 @@
 		//[조회수]
 		//쿠키를 사용하여 게시글 무한증식 방지
 		
+		
 		//1. 쿠키목록 가져오기
 		boolean isBnoCookie = false;
 		//2. 쿠키배열 생성
@@ -239,7 +240,7 @@
 				}
 			</script>
 		<%
-			}
+		}
 		%>
 		<form name="delfrm" action="delete.jsp" method="post">
 			<input type="hidden" name="bno" value="<%=bno%>">

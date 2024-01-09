@@ -10,15 +10,11 @@
 	
 	request.setCharacterEncoding("UTF-8");
 
-	//blist
-	String blist = request.getParameter("blist");
-	
 	//[첨부파일] 업로드 위치 지정
-	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+	String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	
-	//[첨부파일] 사이즈100mb제한
-	int sizeLimit = 100*1024*1024;	
+	//[첨부파일] 사이즈정하기
+	int sizeLimit = 100*1024*1024;	//100mb제한
 	
 	//[첨부파일]multipart request로 바꿈 -> import필요(위 2개)
 	//MultipartRequest 객체 생성() - 파라미터를 겟할수 x -> 멀티파트 리퀘스트로 가져와야함 
@@ -62,7 +58,6 @@
 		psmt.setString(1, board.getBtitle());
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
-		
 		// btype 분기점
 		if(board.getBtype().equals("자유게시판")){
 			psmt.setString(4, "자유게시판");
@@ -72,8 +67,8 @@
 			psmt.setString(4, "캠핑장비");
 		}else if(board.getBtype().equals("출석체크")){
 			psmt.setString(4, "출석체크");
-		}else if(board.getBtype().equals("QnA")){
-			psmt.setString(4, "QnA");
+		}else if(board.getBtype().equals("Q&A")){
+			psmt.setString(4, "Q&A");
 		}else if(board.getBtype().equals("공지사항")){
 			psmt.setString(4, "공지사항");
 		}
@@ -137,54 +132,14 @@
 		%>
 			<script>
 				alert("게시물이 등록되었습니다.");
-				 let blist='<%=blist%>';
-					
-					function wCancleFn(){
-						if(blist=="all"){
-							location.href="<%=request.getContextPath() %>/list/allList.jsp";
-						}else if(blist=="notice"){
-							location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-						}else if(blist=="hot"){
-							location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-						}else if(blist=="free"){
-							location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-						}else if(blist=="zone"){
-							location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-						}else if(blist=="gear"){
-							location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-						}else if(blist=="attend"){
-							location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-						}else if(blist=="qna"){
-							location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-						}
-					}
+				location.href='allList.jsp';
 			</script>
 			<%
 			}else{
 			%>
 			<script>
 				alert("게시글 등록되지 않았습니다.");
-				 let blist='<%=blist%>';
-					
-					function wCancleFn(){
-						if(blist=="all"){
-							location.href="<%=request.getContextPath() %>/list/allList.jsp";
-						}else if(blist=="notice"){
-							location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-						}else if(blist=="hot"){
-							location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-						}else if(blist=="free"){
-							location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-						}else if(blist=="zone"){
-							location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-						}else if(blist=="gear"){
-							location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-						}else if(blist=="attend"){
-							location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-						}else if(blist=="qna"){
-							location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-						}
-					}
+				location.href='allList.jsp';
 			</script>
 			<%	
 				

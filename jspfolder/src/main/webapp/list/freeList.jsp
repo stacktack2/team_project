@@ -192,9 +192,8 @@
 					<td><%=bno %></td>
 					<td><%=btype %></td>
 					<td>
-
-						<a href="<%=request.getContextPath()%>/board/view.jsp
-							?bno=<%=bno%>&blist=free"><%=btitle %></a>
+						<!-- view버튼: blist 파라미터 넘기기 -->
+						<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>&blist=free"><%=btitle %></a>
 						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 					</td>
 					<td><%=mnickNm %></td>
@@ -214,7 +213,7 @@
 			onclick="location.href='<%=request.getContextPath()%>/board/write.jsp
 			?blist=free';">글쓰기</button>
 		</div>
-	<%	
+	<%	//글쓰기버튼: blist 파라미터 넘기기
 		}
 	%>
 		

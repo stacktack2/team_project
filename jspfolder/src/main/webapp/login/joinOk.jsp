@@ -78,7 +78,7 @@
 		if(!Regular.isNum3(mphone1)){
 			isPass = false; System.out.println(6);
 		}
-		if(!Regular.isNum3_4(mphone2)){
+		if(!Regular.isNum4(mphone2)){
 			isPass = false; System.out.println(7);
 		}
 		if(!Regular.isNum4(mphone2)){

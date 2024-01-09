@@ -96,7 +96,6 @@
 		psmt.setInt(2, member.getMno());
 		
 		result = psmt.executeUpdate();
-		session.removeAttribute("findPw");
 %>
 		location.href="login.jsp";
 		</script>

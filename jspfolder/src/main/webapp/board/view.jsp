@@ -1,3 +1,6 @@
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.*" %>
@@ -234,8 +237,7 @@
 					<%
 						for(Uploadfile tempf: flist){
 					%>		
-							<a href="download.jsp?frealnm=<%=tempf.getFrealnm()%>
-								&foriginnm=<%=tempf.getForiginnm()%>">
+							<a href="download.jsp?frealnm=<%=tempf.getFrealnm()%>&foriginnm=<%=tempf.getForiginnm()%>">
 								<%= tempf.getForiginnm()%>
 							</a><br>
 					<%

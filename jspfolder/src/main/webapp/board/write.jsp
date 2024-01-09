@@ -8,6 +8,7 @@
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
 	String bnoParam = request.getParameter("bno");
+	
 	//blist
 	String blist = request.getParameter("blist");
 	
@@ -16,56 +17,17 @@
 		bno = Integer.parseInt(bnoParam);
 	}
 	
+	
 	if(member == null){	//로그인이 안돼있다면
 %>
 	<script>
 		alert("잘못된 접근입니다");
-		location.href='<%=request.getContextPath() %>/index.jsp';
+		location.href="<%= request.getContextPath() %>/index.jsp";
 	</script>
 <%
+
 	}else{
-	
-	//예외처리 - 자신이 작성하지 않은 글 조회 방지
-	Connection conn = null;	
-	PreparedStatement psmt = null;
-	ResultSet rs = null;
-	String url = "jdbc:mysql://localhost:3306/campingweb";
-	String user = "cteam";
-	String pass ="ezen";
-	
-	try{
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		conn=DriverManager.getConnection(url,user,pass);
-		
-		String sql = "select bno from board where bno=? && mno=?";
-		psmt = conn.prepareStatement(sql);
-		psmt.setInt(1, bno);
-		psmt.setInt(2, member.getMno());
-		
-		rs = psmt.executeQuery();
-		
-		if(!rs.next()){
-			%>
-			<script>
-				alert("잘못된 접근입니다");
-				location.href='/jspfolder/index.jsp';
-			</script>
-			<%
-		}
-		
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		if(conn != null) conn.close();
-		if(psmt != null) psmt.close();
-		if(rs != null) rs.close();
-	}
-	
-	
-	
-	
-	
+
 %>
 
 <meta charset="UTF-8">
@@ -141,7 +103,7 @@
 							<textarea name="bcontent"></textarea>
 						</td>
 					</tr>
-					<% // 첨부파일 :브라우저에서 접근할 수 있도록 wepapp하위에 첨부파일 만듦%>
+					 <!-- 첨부파일 :브라우저에서 접근할 수 있도록 wepapp하위에 첨부파일 만듦 -->
 					<tr>
 						<th>첨부파일 </th>
 						<td colspan="3">

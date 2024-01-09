@@ -52,7 +52,7 @@
  			session.setAttribute("isAutFlag",true);
  			session.setMaxInactiveInterval(300);
 			
-			response.sendRedirect("mypageModify.jsp?");
+			response.sendRedirect("mypageModify.jsp");
 
 			
 		}else{

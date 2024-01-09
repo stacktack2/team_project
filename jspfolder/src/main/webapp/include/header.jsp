@@ -26,13 +26,13 @@
 		%>
 			</div>
 		</div>
-		<h1 id="logo"><a href="<%=request.getContextPath()%>">캠핑 여행 커뮤니티</a></h1>
+		<h1 id="logo"><a href="<%=request.getContextPath()%>/index.jsp">캠핑 여행 커뮤니티</a></h1>
 		<div class="clearfix">
 			<div id="top_menu" class="left">
-				<a href="<%=request.getContextPath()%>/board/allList.jsp">전체글보기</a> | 
-				<a href="<%=request.getContextPath()%>/board/hotList.jsp">인기글</a> | 
-				<a href="<%=request.getContextPath()%>/board/zoneList.jsp">캠핑지역</a> | 
-				<a href="<%=request.getContextPath()%>/board/gearList.jsp">캠핑장비</a>
+				<a href="<%=request.getContextPath()%>/list/allList.jsp">전체글보기</a> | 
+				<a href="<%=request.getContextPath()%>/list/hotList.jsp">인기글</a> | 
+				<a href="<%=request.getContextPath()%>/list/zoneList.jsp">캠핑지역</a> | 
+				<a href="<%=request.getContextPath()%>/list/gearList.jsp">캠핑장비</a>
 			</div>
 			<div id="webserch" class="right"></div>
 		</div>

@@ -210,7 +210,8 @@
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn" 
-			onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=free'">글쓰기</button>
+			onclick="location.href='<%=request.getContextPath()%>/board/write.jsp
+			?blist=free';">글쓰기</button>
 		</div>
 	<%	//글쓰기버튼: blist 파라미터 넘기기
 		}
@@ -220,7 +221,10 @@
 	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
-			<a href="freeList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>" class="pluspage">이전</a>
+			<a href="freeList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+				&searchAlign=<%=searchAlign%>
+				&searchType=<%=searchType%>
+				&searchValue=<%=searchValue%>" class="pluspage">이전</a>
 	<%
 		 }
 		
@@ -234,7 +238,10 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="freeList.jsp?nowPage1=<%=i%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i%></a>
+					<a href="freeList.jsp?nowPage1=<%=i%>
+						&searchAlign=<%=searchAlign%>
+						&searchType=<%=searchType%>
+						&searchValue=<%=searchValue%>"><%=i%></a>
 				 <%
 				 }else{
 				 %>	
@@ -247,7 +254,10 @@
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
-			<a href="freeList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>" class="pluspage">다음</a>
+			<a href="freeList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+				&searchAlign=<%=searchAlign%>
+				&searchType=<%=searchType%>
+				&searchValue=<%=searchValue%>" class="pluspage">다음</a>
 		<%
 		}
 		%>

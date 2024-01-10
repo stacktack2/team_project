@@ -34,7 +34,23 @@ pwfind.jsp 비밀번호 찾기
 pwfindOk.jsp
 
 zoneList.jsp
+sub카테고리
+	- 서울 value="zone_Seoul"
+	- 경기권 value="zone_GG"
+	- 강원권 value="zone_GW"
+	- 충청권 value="zone_CC"
+	- 영남권 value="zone_YN"
+	- 호남권 value="zone_HN"
+	- 제주 value="zone_JJ"
 gearList.jsp
+sub카테고리
+	- 서울 value="zone_Seoul"
+	- 경기권 value="zone_GG"
+	- 강원권 value="zone_GW"
+	- 충청권 value="zone_CC"
+	- 영남권 value="zone_YN"
+	- 호남권 value="zone_HN"
+	- 제주 value="zone_JJ"
 ----------------
 전용휘
 

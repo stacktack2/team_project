@@ -63,8 +63,19 @@
 			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
 		}
 	}
+	
+	function showSubSelect() {
+		let mainSelect = document.getElementById("mainSelect");
+		let subSelect = document.getElementById("subSelect");
+		
+		if(mainSelect.value === "zone"){
+			console.log(mainSelect.value);
+			
+		}
+	}	
 </script>
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 	<%@ include file ="/include/header.jsp" %>
 	<div class="container">
@@ -139,12 +150,6 @@
 		</form>
 	</section>
 	</div>
-	<script>
-		function showSubSelect(){
-			let mainSelect = document.getElementById("mainSelect");
-			let subSelect = document.getElementById("subSelect");
-		}
-	</script>
 	<%@ include file ="/include/footer.jsp" %>
 </body>
 </html>

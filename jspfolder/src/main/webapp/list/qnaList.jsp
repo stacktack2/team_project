@@ -185,7 +185,7 @@
 					<td><%=bno %></td>
 					<td><%=btype %></td>
 					<td>
-						<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>&blist=qna"><%=btitle %></a>
+						<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>&blist=QnA"><%=btitle %></a>
 						<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 					</td>
 					<td><%=mnickNm %></td>
@@ -202,7 +202,7 @@
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn" 
-				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=qna'">글쓰기</button>
+				onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=QnA'">글쓰기</button>
 		</div>
 	<%	
 		}

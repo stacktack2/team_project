@@ -56,16 +56,6 @@
 			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
 		}
 	}
-	
-	function showSubSelect() {
-		let mainSelect = document.getElementById("mainSelect");
-		let subSelect = document.getElementById("subSelect");
-		
-		if(mainSelect.value === "zone"){
-			console.log(mainSelect.value);
-			
-		}
-	}	
 </script>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -84,9 +74,9 @@
 				<tbody>
 					<tr>
 						<th >제목</th>
-						<td>
-							<input type="text" name="btitle">
-						</td>
+							<td>
+								<input type="text" name="btitle">
+							</td>
 						<th>카테고리</th>
 						<td>
 							<select name="btype" id="mainSelect" onchange="showSubSelect()">
@@ -103,27 +93,24 @@
 							}
 							%>
 							</select>
-					<%
-					   	String mainSelect = request.getParameter("btype");
-						String subSelect = request.getParameter("subtype");
-					
-						if("zone".equals(mainSelect)){
-					%>
-						<select name="subtype" id="subSelect">
-							<option value="zone_Seoul">서울</option>
-							<option value="zone_GG">경기권</option>
-							<option value="zone_GW">강원권</option>
-							<option value="zone_CC">충청권</option>
-							<option value="zone_YN">영남권</option>
-							<option value="zone_HN">호남권</option>
-							<option value="zone_JJ">제주</option>
-						</select>
-					<%
-						}
-					%>					
 						</td>
 					</tr>
-
+					<tr>
+						<th id="writerTh">작성자</th>
+							<td id="writerTd"><%=member.getMnickNm()%></td>
+						<th id="subSelectTh">세부카테고리</th>
+						<td id="subSelectTd">
+							<select name="subtype" id="subSelect">
+								<option value="zone_Seoul">서울</option>
+								<option value="zone_GG">경기권</option>
+								<option value="zone_GW">강원권</option>
+								<option value="zone_CC">충청권</option>
+								<option value="zone_YN">영남권</option>
+								<option value="zone_HN">호남권</option>
+								<option value="zone_JJ">제주</option>
+							</select>
+						</td>
+					</tr>
 					<tr>
 						<td colspan="5">
 							<textarea name="bcontent"></textarea>
@@ -143,6 +130,7 @@
 		</form>
 	</section>
 	</div>
+	<script src="<%=request.getContextPath()%>/js/write.js"></script>
 	<%@ include file ="/include/footer.jsp" %>
 </body>
 </html>

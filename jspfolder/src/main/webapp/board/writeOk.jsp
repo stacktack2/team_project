@@ -125,7 +125,7 @@
 		//System.out.println("원본파일명: "+originFileNM);
 		
 		//3. [첨부파일]삽입
-		sql = " INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
+		sql = " INSERT INTO uploadfile(bno,frealNm,foriginNm,frdate)"
 			+ " VALUES(?,?,?, now())";
 		
 		

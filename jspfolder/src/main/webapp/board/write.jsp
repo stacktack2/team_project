@@ -86,35 +86,49 @@
 						<th>카테고리</th>
 						<td>
 							<select name="btype" id="mainSelect" onchange="showSubSelect()">
-								<option value= "null" > 자유게시판</option>
-								<option> 캠핑지역</option>
-								<option> 캠핑장비</option>
-								<option> 출석체크</option>
-								<option> QnA</option>
-								<%
-								if(member != null && member.getMid().equals("admin")){ // member 메소드 사용 전 null체크 추가
-								%>
-									<option>공지사항</option>
-								<%
-								}
-								%>
+								<option value="free"> 자유게시판</option>
+								<option value="zone"> 캠핑지역</option>
+								<option value="gear"> 캠핑장비</option>
+								<option value="attend"> 출석체크</option>
+								<option value="qna"> QnA</option>
+							<%
+							if(member != null && member.getMid().equals("admin")){ // member 메소드 사용 전 null체크 추가
+							%>
+								<option value="notice">공지사항</option>
+							<%
+							}
+							%>
 							</select>
-							
-							<select name="btype" id="subSelect" >
-								<option> 자유게시판</option>
-							</select>
-							
+					<%
+					   	String mainSelect = request.getParameter("btype");
+						String subSelect = request.getParameter("subtype");
+					
+						if("zone".equals(mainSelect)){
+					%>
+						<select name="subtype" id="subSelect">
+							<option value="zone_Seoul">서울</option>
+							<option value="zone_GG">경기권</option>
+							<option value="zone_GW">강원권</option>
+							<option value="zone_CC">충청권</option>
+							<option value="zone_YN">영남권</option>
+							<option value="zone_HN">호남권</option>
+							<option value="zone_JJ">제주</option>
+						</select>
+					<%
+						}
+					%>					
 						</td>
 					</tr>
+
 					<tr>
-						<td colspan="4">
+						<td colspan="5">
 							<textarea name="bcontent"></textarea>
 						</td>
 					</tr>
 					<% // 첨부파일 :브라우저에서 접근할 수 있도록 wepapp하위에 첨부파일 만듦%>
 					<tr>
 						<th>첨부파일 </th>
-						<td colspan="3">
+						<td colspan="5">
 							<input type="file" name="uploadFile">
 						</td>
 					</tr>
@@ -122,60 +136,15 @@
 			</table>
 			<button type="button" class="cancleBtn" onclick="wCancleFn()">취소</button>
 			<button class="saveBtn">저장</button>
-			
 		</form>
 	</section>
 	</div>
+	<script>
+		function showSubSelect(){
+			let mainSelect = document.getElementById("mainSelect");
+			let subSelect = document.getElementById("subSelect");
+		}
+	</script>
 	<%@ include file ="/include/footer.jsp" %>
-<script>
-	function showSubSelect() {
-	    let mainSelect = document.getElementById("mainSelect");
-	    let subSelect = document.getElementById("subSelect");
-	    
-	    console.log("mainSelect:", mainSelect);  // 확인용 로그
-	    console.log("subSelect:", subSelect);    // 확인용 로그
-
-	    // 서브카테고리를 초기화
-	    subSelect.innerHTML = "";
-	    
-	    
-
-	    // 선택한 메인카테고리에 따라 서브카테고리를 설정
-	    if (mainSelect.value === "캠핑지역") {
-	        let options = ["서울", "경기권", "강원권", "충청권", "영남권", "호남권", "제주"];
-	        for (let i = 0; i < options.length; i++) {
-	            let option = document.createElement("option");
-	            option.text = options[i];
-	            subSelect.add(option);
-	        }
-	    }else if(mainSelect.value === "캠핑장비") {
-	        let options = ["텐트/타프", "침낭/매트", "의자/테이블", "화기/기타", "차박"];
-	        for (let i = 0; i < options.length; i++) {
-	            let option = document.createElement("option");
-	            option.text = options[i];
-	            subSelect.add(option);
-	        }
-	    }else if (mainSelect.value === "자유게시판") {
-            let option = document.createElement("option");
-            option.text = "자유게시판";
-            subSelect.add(option);
-	    }else if (mainSelect.value === "출석체크") {
-            let option = document.createElement("option");
-            option.text = "출석체크";
-            subSelect.add(option);
-	    }else if (mainSelect.value === "QnA") {
-            let option = document.createElement("option");
-            option.text = "QnA";
-            subSelect.add(option);
-	    }else if (mainSelect.value === "공지사항") {
-            let option = document.createElement("option");
-            option.text = "공지사항";
-            subSelect.add(option);
-	    }
-	}
-	
-	// mainCategory의 변경 이벤트를 감지하여 showSubCategory 함수 호출
-	document.getElementById("mainSelect").addEventListener("change", showSubSelect); // 이유 설명 필요
-</script>
 </body>
 </html>

@@ -40,6 +40,9 @@
 	board.setBcontent(multi.getParameter("bcontent"));
 	board.setBtype(multi.getParameter("btype"));
 
+//	캠핑지역 값 받아오기
+	String subtype = request.getParameter("subtype");
+	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	
@@ -52,25 +55,39 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
 		//1.[게시글] 작성 
-		String sql= "INSERT INTO board(btitle, bcontent, mno, brdate,btype)"
-					+" VALUES(?,?,?,NOW(),?)";
+		String sql = " INSERT INTO board(btitle, bcontent, mno, brdate, btype) "
+				   + " VALUES(?,?,?,NOW(),?) ";
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, board.getBtitle());
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
 		// btype 분기점
-		if(board.getBtype().equals("자유게시판")){
-			psmt.setString(4, "자유게시판");
-		}else if(board.getBtype().equals("캠핑지역")){
-			psmt.setString(4, "캠핑지역");
-		}else if(board.getBtype().equals("캠핑장비")){
-			psmt.setString(4, "캠핑장비");
-		}else if(board.getBtype().equals("출석체크")){
-			psmt.setString(4, "출석체크");
-		}else if(board.getBtype().equals("Q&A")){
-			psmt.setString(4, "Q&A");
-		}else if(board.getBtype().equals("공지사항")){
-			psmt.setString(4, "공지사항");
+		if(board.getBtype().equals("free")){
+			psmt.setString(4, "free");
+		}else if(board.getBtype().equals("zone")){
+			psmt.setString(4, "zone");
+			}else if(board.getBtype().equals("zone_Seoul")){
+				psmt.setString(4, "zone_Seoul");
+			}else if(board.getBtype().equals("zone_GG")){
+				psmt.setString(4, "zone_GG");
+			}else if(board.getBtype().equals("zone_GW")){
+				psmt.setString(4, "zone_GW");
+			}else if(board.getBtype().equals("zone_CC")){
+				psmt.setString(4, "zone_CC");
+			}else if(board.getBtype().equals("zone_YN")){
+				psmt.setString(4, "zone_YN");
+			}else if(board.getBtype().equals("zone_HN")){
+				psmt.setString(4, "zone_HN");
+			}else if(board.getBtype().equals("zone_JJ")){
+				psmt.setString(4, "zone_JJ");
+		}else if(board.getBtype().equals("gear")){
+			psmt.setString(4, "gear");
+		}else if(board.getBtype().equals("attend")){
+			psmt.setString(4, "attend");
+		}else if(board.getBtype().equals("qna")){
+			psmt.setString(4, "qna");
+		}else if(board.getBtype().equals("notice")){
+			psmt.setString(4, "notice");
 		}
 			
 

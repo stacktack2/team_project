@@ -98,8 +98,8 @@
 					<tr>
 						<th id="writerTh">작성자</th>
 						
-						<td id="writerTd" colspan="3"><%=member.getMnickNm()%></td>
-						<!-- 
+						<td id="writerTd"><%=member.getMnickNm()%></td>
+						
 						<th id="subSelectTh">세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="subtype" id="subSelect">
@@ -112,7 +112,7 @@
 								<option value="zone_JJ">제주</option>
 							</select>
 						</td>
-						 -->
+						
 					</tr>
 					<tr>
 						<td colspan="5">
@@ -133,7 +133,24 @@
 		</form>
 	</section>
 	</div>
-	<script src="<%=request.getContextPath()%>/js/write.js"></script>
+	<script>
+//		세부카테고리 이벤트
+		let writerTd = document.getElementById("writerTd");
+		let subSelectTh = document.getElementById("subSelectTh");
+		let subSelectTd = document.getElementById("subSelectTd");
+			
+		function showSubSelect(){
+			if(mainSelect.value != "zone"){
+				writerTd.parentNode.removeChild(subSelectTh);
+				writerTd.parentNode.removeChild(subSelectTd);
+				writerTd.setAttribute("colspan", 3);
+			}else{
+				writerTd.removeAttribute("colspan");
+				writerTd.parentElement.appendChild(subSelectTh);
+				writerTd.parentElement.appendChild(subSelectTd);
+			}
+		}
+	</script>
 	<%@ include file ="/include/footer.jsp" %>
 </body>
 </html>

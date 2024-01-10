@@ -23,12 +23,12 @@
 	    }
 	}*/
 	
-function showSubSelect(){
+/*function showSubSelect(){
+	if(mainSelect.value === "zone"){
 		let writerTd = document.getElementById("writerTd");
 		let th = document.createElement("th");
 		let td = document.createElement("td");
 		
-	if(mainSelect.value === "zone"){
 		writerTd.removeAttribute("colspan");
 		th.textContent = "세부카테고리";
 		writerTd.parentElement.appendChild(th);
@@ -43,8 +43,6 @@ function showSubSelect(){
 							'<option value="zone_JJ">제주</option>'+
 						'</select>';
 		writerTd.parentElement.appendChild(td);
-	}else{
-		
-		writerTd.setAttribute("colspan", 3);
 	}
-}
+}*/
+

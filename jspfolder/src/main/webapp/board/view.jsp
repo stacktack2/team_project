@@ -279,13 +279,18 @@
 		</div>	
 
 		<!-- 댓글영역 -->
-		
+		<%
+					//로그인이 되어있는 상태에서만 보이는 제어문
+			if(member != null){
+		%>
 		<form name="replyfrm" class="replyfrm" >
 			<input type="hidden" name="bno" value="<%=board.getBno() %>">
 			<input type="text" name="rcontent">
 			<button type="button" onclick="replyInsertFn()">댓글</button>
 		</form>
-		
+		<%
+			}
+		%>
 		<div class="replyArea">
 	<%
 		for(Reply reply: rlist){

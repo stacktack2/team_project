@@ -13,6 +13,9 @@
 	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
+	if(searchAlign ==null ){
+		searchAlign = "late";
+	}
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");

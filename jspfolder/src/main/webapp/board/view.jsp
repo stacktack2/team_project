@@ -1,3 +1,6 @@
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.io.File"%>
+<%@page import="java.awt.image.BufferedImage"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.*" %>
@@ -313,15 +316,29 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<%-- <%
+					<% //파일이 이미지인지 체크 후 이미지면 출력
 						for(Uploadfile tempf: flist){
 							
-					%>	
-							<img src="<%=request.getContextPath()%>/upload/<%=tempf.getFrealNm()%>" alt="사진">
-					<%
-							
+							boolean result = false;
+					        File f = new File(request.getContextPath()+"/upload/"+tempf.getFrealNm());
+					        try {
+					            BufferedImage buf = ImageIO.read(f);
+					            if(buf == null){
+					                result = false;
+					            } else {
+					                result = true;	
+					            }
+					        } catch (Exception e) {
+					            e.printStackTrace();
+					        }	
+					        if(result){
+								%>		
+									<img src="<%=request.getContextPath()%>/upload/<%=tempf.getFrealNm()%>">
+								<%
+								}
+					        }
 					%> 
-					<%=board.getBcontent() %> --%>
+					<%=board.getBcontent() %>
 					</td>
 				</tr>
 				<tr>
@@ -330,9 +347,6 @@
 					<%
 						for(Uploadfile tempf: flist){
 					%>		
-					
-					
-					
 							<a href="download.jsp?frealNm=<%=tempf.getFrealNm()%>&foriginNm=<%=tempf.getForiginNm()%>">
 								<%= tempf.getForiginNm()%>
 							</a><br>

@@ -62,32 +62,32 @@
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
 		// btype 분기점
-		if(board.getBtype().equals("free")){
-			psmt.setString(4, "free");
-		}else if(board.getBtype().equals("zone")){
-			psmt.setString(4, "zone");
-			}else if(board.getBtype().equals("zone_Seoul")){
-				psmt.setString(4, "zone_Seoul");
-			}else if(board.getBtype().equals("zone_GG")){
-				psmt.setString(4, "zone_GG");
-			}else if(board.getBtype().equals("zone_GW")){
-				psmt.setString(4, "zone_GW");
-			}else if(board.getBtype().equals("zone_CC")){
-				psmt.setString(4, "zone_CC");
-			}else if(board.getBtype().equals("zone_YN")){
-				psmt.setString(4, "zone_YN");
-			}else if(board.getBtype().equals("zone_HN")){
-				psmt.setString(4, "zone_HN");
-			}else if(board.getBtype().equals("zone_JJ")){
-				psmt.setString(4, "zone_JJ");
-		}else if(board.getBtype().equals("gear")){
-			psmt.setString(4, "gear");
-		}else if(board.getBtype().equals("attend")){
-			psmt.setString(4, "attend");
-		}else if(board.getBtype().equals("qna")){
-			psmt.setString(4, "qna");
-		}else if(board.getBtype().equals("notice")){
-			psmt.setString(4, "notice");
+		if(board.getBtype().equals("자유게시판")){
+			psmt.setString(4, "자유게시판");
+		}else if(board.getBtype().equals("캠핑지역")){
+			psmt.setString(4, "캠핑지역");
+			}else if(board.getBtype().equals("캠핑지역서울")){
+				psmt.setString(4, "캠핑지역서울");
+			}else if(board.getBtype().equals("캠핑지역경기권")){
+				psmt.setString(4, "캠핑지역경기권");
+			}else if(board.getBtype().equals("캠핑지역강원권")){
+				psmt.setString(4, "캠핑지역강원권");
+			}else if(board.getBtype().equals("캠핑지역충청권")){
+				psmt.setString(4, "캠핑지역충청권");
+			}else if(board.getBtype().equals("캠핑지역영남권")){
+				psmt.setString(4, "캠핑지역영남권");
+			}else if(board.getBtype().equals("캠핑지역호남권")){
+				psmt.setString(4, "캠핑지역호남권");
+			}else if(board.getBtype().equals("캠핑지역제주")){
+				psmt.setString(4, "캠핑지역제주");
+		}else if(board.getBtype().equals("캠핑장비")){
+			psmt.setString(4, "캠핑장비");
+		}else if(board.getBtype().equals("출석체크")){
+			psmt.setString(4, "출석체크");
+		}else if(board.getBtype().equals("QnA")){
+			psmt.setString(4, "QnA");
+		}else if(board.getBtype().equals("공지사항")){
+			psmt.setString(4, "공지사항");
 		}
 			
 
@@ -125,7 +125,7 @@
 		//System.out.println("원본파일명: "+originFileNM);
 		
 		//3. [첨부파일]삽입
-		sql = " INSERT INTO uploadfile(bno,frealNm,foriginNm,frdate)"
+		sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
 			+ " VALUES(?,?,?, now())";
 		
 		

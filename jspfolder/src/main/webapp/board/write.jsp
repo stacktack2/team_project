@@ -16,7 +16,6 @@
 	if(bnoParam != null && bnoParam.equals("")){
 		bno = Integer.parseInt(bnoParam);
 	}
-	
 	 
 	if(member == null){	//로그인이 안되어있는 경우 예외처리, 참고->( 이 경우 if문 아래의 자바코드도 실행되므로 아래 코드에서 member의 메소드를 null체크없이 사용하면 에러가 뜰 가능성이 있다.)
 %>
@@ -26,13 +25,7 @@
 	</script>
 <%
 	}
-	
-	
-	
-	
-	
 %>
-
 <meta charset="UTF-8">
 <title>게시글 작성</title>
 <link href="<%=request.getContextPath() %>/css/base.css" rel="stylesheet">

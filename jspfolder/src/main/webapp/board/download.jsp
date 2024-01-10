@@ -7,8 +7,8 @@
 	request.setCharacterEncoding("UTF-8");
 
 	//실제이름, 원래이름 파라미터로 가져오기
-	String frealnm = request.getParameter("frealnm");
-	String foriginnm = request.getParameter("foriginnm");
+	String frealNm = request.getParameter("frealNm");
+	String foriginNm = request.getParameter("foriginNm");
 	
 	//웹앱 하위에 있는 업로드폴더 위치
 	String root = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
@@ -24,7 +24,7 @@
 		// 파일을 읽어 스트림에 담기
 		try{
 			//-file객체에 업로드폴더, 실제이름 넣어 생성
-			file = new File(root, frealnm);
+			file = new File(root, frealNm);
 			
 			//-InputStream 객체에 file객체 넣어 생성
 			in = new FileInputStream(file);
@@ -46,13 +46,13 @@
 			
 			// IE
 			if(client.indexOf("MSIE") != -1){
-				response.setHeader ("Content-Disposition", "attachment; filename="+new String(foriginnm.getBytes("KSC5601"),"ISO8859_1"));
+				response.setHeader ("Content-Disposition", "attachment; filename="+new String(foriginNm.getBytes("KSC5601"),"ISO8859_1"));
 
 			}else{
 				// 한글 파일명 처리
-				foriginnm = new String(foriginnm.getBytes("utf-8"),"iso-8859-1");
+				foriginNm = new String(foriginNm.getBytes("utf-8"),"iso-8859-1");
 
-				response.setHeader("Content-Disposition", "attachment; filename=\"" + foriginnm + "\"");
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + foriginNm + "\"");
 				response.setHeader("Content-Type", "application/octet-stream; charset=utf-8");
 			}  
 			

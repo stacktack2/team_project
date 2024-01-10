@@ -313,7 +313,7 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<%
+					<%-- <%
 						for(Uploadfile tempf: flist){
 							
 					%>	
@@ -321,7 +321,7 @@
 					<%
 							
 					%> 
-					<%=board.getBcontent() %>
+					<%=board.getBcontent() %> --%>
 					</td>
 				</tr>
 				<tr>
@@ -422,4 +422,5 @@
 </html>
 
 <%
+						
 %>

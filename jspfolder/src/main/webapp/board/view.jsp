@@ -168,8 +168,14 @@
 		} 
 		
 		//이전글 bno 받아오기
+		if(blist == "qna")
+			sql = "select bno,btitle from board where bno < ? && btype='QnA' order by bno desc limit 1 ";
+			sql = "select bno,btitle from board where bno < ? && (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') order by bno desc limit 1 ";
+			
 		
-		sql = "select bno,btitle from board where bno < ? && (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') order by bno desc limit 1 ";
+		
+		
+		
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setInt(1, board.getBno());

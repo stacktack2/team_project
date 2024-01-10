@@ -9,21 +9,32 @@
 	Member member = (Member)session.getAttribute("login");
 	String bnoParam = request.getParameter("bno");
 	
-	//blist
 	String blist = request.getParameter("blist");
+	//null체크를 했어도(비정상 접근 차단 이유) 아래에서 메소드 사용시마다 널체크 해야함. if로 전체를 감싸지 않는이상 무조건 아래까지 실행되기 때문.
+	if(blist==null){
+		%>
+		<script>
+			alert("잘못된 접근입니다");
+			location.href="<%= request.getContextPath() %>/index.jsp";
+		</script>
+		<%
+	}
 	
 	int bno = 0 ; //받아오는 이유 설명 필요
 	if(bnoParam != null && bnoParam.equals("")){
 		bno = Integer.parseInt(bnoParam);
 	}
-	 
+	String mnickNm ="";
 	if(member == null){	//로그인이 안되어있는 경우 예외처리, 참고->( 이 경우 if문 아래의 자바코드도 실행되므로 아래 코드에서 member의 메소드를 null체크없이 사용하면 에러가 뜰 가능성이 있다.)
+	
 %>
 	<script>
 		alert("잘못된 접근입니다");
 		location.href="<%= request.getContextPath() %>/index.jsp";
 	</script>
 <%
+	}else{
+		mnickNm = member.getMnickNm();
 	}
 %>
 <meta charset="UTF-8">
@@ -70,6 +81,7 @@
 			//라이브러리필요: cos.jar를 lib파일에 이게 있어야 알아서 bulid됨 
 		%>
 		<form action="writeOk.jsp" method="post" name="frm" enctype="multipart/form-data">
+			<input type="hidden" name="blist" value="<%=blist%>">
 			<table border="1" class="writeTable">
 				<tbody>
 					<tr>
@@ -80,15 +92,15 @@
 						<th>카테고리</th>
 						<td>
 							<select name="btype" id="mainSelect" onchange="showSubSelect()">
-								<option value="free"> 자유게시판</option>
-								<option value="zone"> 캠핑지역</option>
-								<option value="gear"> 캠핑장비</option>
-								<option value="attend"> 출석체크</option>
+								<option value="자유게시판"> 자유게시판</option>
+								<option> 캠핑지역</option>
+								<option> 캠핑장비</option>
+								<option value="출석체크"> 출석체크</option>
 								<option value="QnA"> QnA</option>
 							<%
 							if(member != null && member.getMid().equals("admin")){ // member 메소드 사용 전 null체크 추가
 							%>
-								<option value="notice">공지사항</option>
+								<option value="공지사항">공지사항</option>
 							<%
 							}
 							%>
@@ -98,18 +110,18 @@
 					<tr>
 						<th id="writerTh">작성자</th>
 						
-						<td id="writerTd"><%=member.getMnickNm()%></td>
+						<td id="writerTd"><%=mnickNm%></td>
 						
 						<th id="subSelectTh">세부카테고리</th>
 						<td id="subSelectTd">
-							<select name="subtype" id="subSelect">
-								<option value="zone_Seoul">서울</option>
-								<option value="zone_GG">경기권</option>
-								<option value="zone_GW">강원권</option>
-								<option value="zone_CC">충청권</option>
-								<option value="zone_YN">영남권</option>
-								<option value="zone_HN">호남권</option>
-								<option value="zone_JJ">제주</option>
+							<select name="btype" id="subSelect">
+								<option value="캠핑지역_서울">서울</option>
+								<option value="캠핑지역_경기권">경기권</option>
+								<option value="캠핑지역_강원권">강원권</option>
+								<option value="캠핑지역_충청권">충청권</option>
+								<option value="캠핑지역_영남권">영남권</option>
+								<option value="캠핑지역_호남권">호남권</option>
+								<option value="캠핑지역_제주">제주</option>
 							</select>
 						</td>
 						

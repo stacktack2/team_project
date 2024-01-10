@@ -312,7 +312,17 @@
 					<td><%=board.getBtype() %></td>
 				</tr>
 				<tr>
-					<td colspan="6"><%=board.getBcontent() %></td>
+					<td colspan="6">
+					<%
+						for(Uploadfile tempf: flist){
+							
+					%>	
+							<img src="<%=request.getContextPath()%>/upload/<%=tempf.getFrealNm()%>" alt="사진">
+					<%
+							
+					%> 
+					<%=board.getBcontent() %>
+					</td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
@@ -320,6 +330,9 @@
 					<%
 						for(Uploadfile tempf: flist){
 					%>		
+					
+					
+					
 							<a href="download.jsp?frealNm=<%=tempf.getFrealNm()%>&foriginNm=<%=tempf.getForiginNm()%>">
 								<%= tempf.getForiginNm()%>
 							</a><br>

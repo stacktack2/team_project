@@ -84,7 +84,7 @@
 								<option value="zone"> 캠핑지역</option>
 								<option value="gear"> 캠핑장비</option>
 								<option value="attend"> 출석체크</option>
-								<option value="qna"> QnA</option>
+								<option value="QnA"> QnA</option>
 							<%
 							if(member != null && member.getMid().equals("admin")){ // member 메소드 사용 전 null체크 추가
 							%>
@@ -97,7 +97,9 @@
 					</tr>
 					<tr>
 						<th id="writerTh">작성자</th>
-							<td id="writerTd"><%=member.getMnickNm()%></td>
+						
+						<td id="writerTd" colspan="3"><%=member.getMnickNm()%></td>
+						<!-- 
 						<th id="subSelectTh">세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="subtype" id="subSelect">
@@ -110,6 +112,7 @@
 								<option value="zone_JJ">제주</option>
 							</select>
 						</td>
+						 -->
 					</tr>
 					<tr>
 						<td colspan="5">

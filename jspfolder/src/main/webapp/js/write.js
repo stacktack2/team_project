@@ -24,22 +24,27 @@
 	}*/
 	
 function showSubSelect(){
-	// 메인 카테고리
-	let mainSelect = document.getElementById("mainSelect");
-	// 작성자 th
-	let writerTh = document.getElementById("writerTh");
-	// 작성자 닉네임 td
-	let writerTd = document.getElementById("writerTd");
-	// 세부카테고리 th
-	let subSelectTh = document.getElementById("subSelectTh");
-	// 세부카테고리 td
-	let subSelectTd = document.getElementById("subSelectTd");
-	// 세부카테고리 select
-	let subSelect = document.getElementById("subSelect");
-	
-	if(mainSelect.value != "zone"){
-		console.log(mainSelect.value);
-		document.getElementById("subSelectTh").style.disply = "block";
-		document.getElementById("writerTd").colspan = "2";
+		let writerTd = document.getElementById("writerTd");
+		let th = document.createElement("th");
+		let td = document.createElement("td");
+		
+	if(mainSelect.value === "zone"){
+		writerTd.removeAttribute("colspan");
+		th.textContent = "세부카테고리";
+		writerTd.parentElement.appendChild(th);
+		
+		td.innerHTML = '<select name="subtype" id="subSelect">'+
+							'<option value="zone_Seoul">서울</option>'+
+							'<option value="zone_GG">경기권</option>'+
+							'<option value="zone_GW">강원권</option>'+
+							'<option value="zone_CC">충청권</option>'+
+							'<option value="zone_YN">영남권</option>'+
+							'<option value="zone_HN">호남권</option>'+
+							'<option value="zone_JJ">제주</option>'+
+						'</select>';
+		writerTd.parentElement.appendChild(td);
+	}else{
+		
+		writerTd.setAttribute("colspan", 3);
 	}
 }

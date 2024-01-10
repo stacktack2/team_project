@@ -3,15 +3,23 @@
 <%@ page import="Vo.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*" %>
-<%
+<%	
+	//이전글 다음글
 	
+
 	Member member = (Member)session.getAttribute("login");
 	
 	String bnoParam = request.getParameter("bno");
 	int bno=0;
 	if(bnoParam != null && !bnoParam.equals("")){
 		bno = Integer.parseInt(bnoParam);
+	}else{
+		response.sendRedirect("/jspfolder/index.jsp");
 	}
+	
+	//이전글 다음글
+	int prebno=bno , nextbno=bno;
+	String prebnoTitle ="", nextbnoTitle=""; 
 	
 	//blist
 	String blist = request.getParameter("blist");
@@ -159,6 +167,34 @@
 			rlist.add(reply);
 		} 
 		
+		//이전글 bno 받아오기
+		
+		sql = "select bno,btitle from board where bno < ? && (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') order by bno desc limit 1 ";
+		
+		psmt = conn.prepareStatement(sql);
+		psmt.setInt(1, board.getBno());
+		
+		rs = psmt.executeQuery();
+		if(rs.next()){
+			prebno = rs.getInt("bno");
+			prebnoTitle = rs.getString("btitle");
+		}
+		if(psmt != null) psmt.close();
+		if(rs != null) rs.close();
+		
+		//다음글 bno 받아오기
+		sql = "select bno,btitle from board where bno > ? && (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') order by bno limit 1 ";
+		psmt = conn.prepareStatement(sql);
+		psmt.setInt(1, board.getBno());
+		
+		rs = psmt.executeQuery();
+		if(rs.next()){
+			nextbno = rs.getInt("bno");
+			nextbnoTitle = rs.getString("btitle");
+		}
+		if(psmt != null) psmt.close();
+		if(rs != null) rs.close();
+		
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{
@@ -246,10 +282,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="6">이전글 ▲ <a href="#"></a> </td>
+					<td colspan="6"> <a href="view.jsp?bno=<%=nextbno%>">다음글 ▲ <%=nextbnoTitle %></a></td>
 				</tr>
 				<tr>
-					<td colspan="6">다음글 ▼ <a href="#"></a></td>
+					<td colspan="6"> <a href="view.jsp?bno=<%=prebno%>">이전글 ▼ <%=prebnoTitle %></a> </td>
 				</tr>
 			</tbody>
 		</table>
@@ -324,3 +360,6 @@
 </body>
 
 </html>
+
+<%
+%>

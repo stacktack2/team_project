@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="Vo.Member" %>
 <%	
 	//**삭제: 반드시 POST
 		//타입체크:GET방식으로 접근하는것 방지
@@ -13,17 +14,30 @@
 		</script>
 	<%
 	}
-	
-	//bno
+	//로그인 하지 않고 들어왔을때 차단 (버튼이 보이지 않아도 post방식으로 보내는 방법 있음)
+	int mno=0;
+	Member member = (Member)session.getAttribute("login");
+	if(member != null){
+		mno = member.getMno();
+	}
+	if(mno ==0){
+		response.sendRedirect("/jspfolder/index.jsp");
+	}
+	//bno 없이 들어왔을때 차단
 	String bnoParam = request.getParameter("bno");
 	//null체크->빈칸체크
 	int bno=0;
 	if(bnoParam != null && !bnoParam.equals("")){
 		bno = Integer.parseInt(bnoParam);
 	}
+	if(bno ==0 ){
+		response.sendRedirect("/jspfolder/index.jsp");
+	}
+	
 
 	Connection conn = null;	
 	PreparedStatement psmt = null;
+	ResultSet rs = null;
 	
 	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 	String user = "cteam";
@@ -36,15 +50,41 @@
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
+		//세션의 맴버 mno와 현재 bno의 mno가 일치하는 지 확인해야함.
+		// 확인하는 이유: 주소를 알고 파라미터를 알면 내가 작성하지 않더라도 삭제 요청을 보낼 수 있다.
+		String sql =" select mno from board where bno = ?";
 		
-		//게시글 삭제
-		String sql = "DELETE from board WHERE bno = ?";
-		psmt = conn.prepareStatement(sql);
-		
+		psmt=conn.prepareStatement(sql);
 		psmt.setInt(1,bno);
+		rs = psmt.executeQuery();
 		
-		result = psmt.executeUpdate();	
+		if(!rs.next()){
+			response.sendRedirect("/jspfolder/index.jsp");
+			//존재하지 않는 게시물 삭제 요청 - 비정상 접근 차단
+		}else{
+			if(rs.getInt("mno") != member.getMno()){
+				response.sendRedirect("/jspfolder/index.jsp");
+				// 세션의 맴버 mno와 현재 bno의 mno가 불일치. 비정상 접근 차단
+			}else{
+				
+				if(psmt != null) psmt.close();
+				if(rs != null) rs.close();
+				
+				
+				
+				//게시글 삭제
+				sql = "DELETE from board WHERE bno = ?";
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setInt(1,bno);
+				
+				result = psmt.executeUpdate();	
 		
+			}
+		}
+				
+				
+				
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{
@@ -52,19 +92,22 @@
 		if(psmt != null) psmt.close();
 	}
 	
+	
+	
+	
 	//리다이렉트
 	if(result >0){ //삭제완료시
 		%>
 		<script>
 			alert("삭제가 완료되었습니다.");
-			location.href='allList.jsp';
+			location.href='/jspfolder/list/allList.jsp';
 		</script>
 		<%
 		}else{
 		%>
 		<script>
 			alert("삭제가 완료되지 않았습니다.");
-			location.href='allList.jsp';
+			location.href='/jspfolder/list/allList.jsp';
 		</script>
 		<%
 		}

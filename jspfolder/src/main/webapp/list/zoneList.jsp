@@ -91,7 +91,7 @@
 //	option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " ORDER BY brdate DESC ";
+				sql += " ORDER BY bno DESC ";
 			}else if(searchAlign.equals("hit")){
 				sql += " ORDER BY bhit DESC ";
 			}else if(searchAlign.equals("Seoul")){

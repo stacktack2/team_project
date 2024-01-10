@@ -16,8 +16,8 @@
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, pass);
-		
-		String sql = "SELECT bno, btitle, b.mno, brdate, btype"
+		//공지사항
+		String sql = "SELECT b.*"
 				+" FROM board b "
 				+" INNER JOIN member m "
 				+" ON b.mno = m.mno"
@@ -55,7 +55,7 @@
 				<div id="mboard1">
 					<div class="mboardmn clearfix">
 						<h3>공지사항</h3>
-						<a href="<%=request.getContextPath()%>/board/noticeList.jsp" 
+						<a href="<%=request.getContextPath()%>/list/noticeList.jsp" 
 							class="mainmore">더보기 +</a>
 					</div>
 					<ul class="mainlist">
@@ -66,8 +66,7 @@
 							String brdate = rs.getString("brdate");
 					%>
 						<li>
-							<a href="<%=request.getContextPath()%>/board/
-								view.jsp?bno=<%=bno%>"><%=btitle %></a>
+							<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>"><%=btitle %></a>
 							<span class="mlistdate"><%=brdate %></span>
 						</li>
 					<%
@@ -83,11 +82,11 @@
 				<div id="mboard2">
 					<div class="mboardmn clearfix">
 						<h3>전체게시글</h3>
-						<a href="<%=request.getContextPath()%>/board/allList.jsp" 
+						<a href="<%=request.getContextPath()%>/list/allList.jsp" 
 							class="mainmore">더보기 +</a>
 					</div>
 					<ul class="mainlist">
-					<% 
+					<% //전체게시판
 						sql = " SELECT b.* "
 								+" FROM board b INNER JOIN member m "
 								+" ON b.mno = m.mno "
@@ -105,8 +104,7 @@
 							String brdate = rs.getString("brdate");
 					%>
 						<li>
-							<a href="<%=request.getContextPath()%>/board/
-								view.jsp?bno=<%=bno%>"><%=btitle %></a>
+							<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>"><%=btitle %></a>
 							<span class="mlistdate"><%=brdate %></span>
 						</li>
 					<%

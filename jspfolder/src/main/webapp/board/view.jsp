@@ -10,7 +10,7 @@
 <html>
 <head>
 <%	
-
+	
 	
 
 	Member member = (Member)session.getAttribute("login");
@@ -316,28 +316,15 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<% //파일이 이미지인지 체크 후 이미지면 출력
+					
+					<%-- <% 이미지파일작업중
 						for(Uploadfile tempf: flist){
+					%>
+							<img src="<%=request.getContextPath()%>/upload/<%=java.net.URLEncoder.encode(tempf.getForiginNm(),"") %>" >
+					<%
 							
-							boolean result = false;
-					        File f = new File(request.getContextPath()+"/upload/"+tempf.getFrealNm());
-					        try {
-					            BufferedImage buf = ImageIO.read(f);
-					            if(buf == null){
-					                result = false;
-					            } else {
-					                result = true;	
-					            }
-					        } catch (Exception e) {
-					            e.printStackTrace();
-					        }	
-					        if(result){
-								%>		
-									<img src="<%=request.getContextPath()%>/upload/<%=tempf.getFrealNm()%>">
-								<%
-								}
-					        }
-					%> 
+				       }
+					%>  --%>
 					<%=board.getBcontent() %>
 					</td>
 				</tr>

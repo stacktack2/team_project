@@ -129,8 +129,8 @@
 			
 			uf.setFno(rs.getInt("fno"));
 			uf.setBno(rs.getInt("bno"));
-			uf.setFrealnm(rs.getString("frealnm"));
-			uf.setForiginnm(rs.getString("foriginnm"));
+			uf.setFrealNm(rs.getString("frealNm"));
+			uf.setForiginNm(rs.getString("foriginNm"));
 			uf.setFrdate(rs.getString("frdate"));
 			
 			//첨부파일 목록변수에 첨부파일원소 추가
@@ -279,8 +279,8 @@
 					<%
 						for(Uploadfile tempf: flist){
 					%>		
-							<a href="download.jsp?frealnm=<%=tempf.getFrealnm()%>&foriginnm=<%=tempf.getForiginnm()%>">
-								<%= tempf.getForiginnm()%>
+							<a href="download.jsp?frealNm=<%=tempf.getFrealNm()%>&foriginNm=<%=tempf.getForiginNm()%>">
+								<%= tempf.getForiginNm()%>
 							</a><br>
 					<%
 						}

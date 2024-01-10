@@ -4,8 +4,8 @@ public class Uploadfile {
 
 	//필드명
 	private int fno;
-	private String frealnm;
-	private String foriginnm;
+	private String frealNm;
+	private String foriginNm;
 	private String frdate;	//Date->String
 	private int bno;	//게시글번호 FK
 	
@@ -16,17 +16,19 @@ public class Uploadfile {
 	public void setFno(int fno) {
 		this.fno = fno;
 	}
-	public String getFrealnm() {
-		return frealnm;
+
+	public String getFrealNm() {
+		return frealNm;
 	}
-	public void setFrealnm(String frealnm) {
-		this.frealnm = frealnm;
+	public void setFrealNm(String frealNm) {
+		this.frealNm = frealNm;
 	}
-	public String getForiginnm() {
-		return foriginnm;
+
+	public String getForiginNm() {
+		return foriginNm;
 	}
-	public void setForiginnm(String foriginnm) {
-		this.foriginnm = foriginnm;
+	public void setForiginNm(String foriginNm) {
+		this.foriginNm = foriginNm;
 	}
 	public String getFrdate() {
 		return frdate;

@@ -8,13 +8,10 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%	
 	request.setCharacterEncoding("UTF-8");
-	//blist
-	String blist = request.getParameter("blist");
 
 	//[첨부파일] 업로드 위치 지정
-	/* String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload"; */
+	String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	//String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
 	
 	//[첨부파일] 사이즈정하기
 	int sizeLimit = 100*1024*1024;	//100mb제한
@@ -43,6 +40,9 @@
 	board.setBcontent(multi.getParameter("bcontent"));
 	board.setBtype(multi.getParameter("btype"));
 
+//	캠핑지역 값 받아오기
+	String subtype = request.getParameter("subtype");
+	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	
@@ -55,25 +55,39 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
 		//1.[게시글] 작성 
-		String sql= "INSERT INTO board(btitle, bcontent, mno, brdate,btype)"
-					+" VALUES(?,?,?,NOW(),?)";
+		String sql = " INSERT INTO board(btitle, bcontent, mno, brdate, btype) "
+				   + " VALUES(?,?,?,NOW(),?) ";
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, board.getBtitle());
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
 		// btype 분기점
-		if(board.getBtype().equals("자유게시판")){
-			psmt.setString(4, "자유게시판");
-		}else if(board.getBtype().equals("캠핑지역")){
-			psmt.setString(4, "캠핑지역");
-		}else if(board.getBtype().equals("캠핑장비")){
-			psmt.setString(4, "캠핑장비");
-		}else if(board.getBtype().equals("출석체크")){
-			psmt.setString(4, "출석체크");
-		}else if(board.getBtype().equals("Q&A")){
-			psmt.setString(4, "Q&A");
-		}else if(board.getBtype().equals("공지사항")){
-			psmt.setString(4, "공지사항");
+		if(board.getBtype().equals("free")){
+			psmt.setString(4, "free");
+		}else if(board.getBtype().equals("zone")){
+			psmt.setString(4, "zone");
+			}else if(board.getBtype().equals("zone_Seoul")){
+				psmt.setString(4, "zone_Seoul");
+			}else if(board.getBtype().equals("zone_GG")){
+				psmt.setString(4, "zone_GG");
+			}else if(board.getBtype().equals("zone_GW")){
+				psmt.setString(4, "zone_GW");
+			}else if(board.getBtype().equals("zone_CC")){
+				psmt.setString(4, "zone_CC");
+			}else if(board.getBtype().equals("zone_YN")){
+				psmt.setString(4, "zone_YN");
+			}else if(board.getBtype().equals("zone_HN")){
+				psmt.setString(4, "zone_HN");
+			}else if(board.getBtype().equals("zone_JJ")){
+				psmt.setString(4, "zone_JJ");
+		}else if(board.getBtype().equals("gear")){
+			psmt.setString(4, "gear");
+		}else if(board.getBtype().equals("attend")){
+			psmt.setString(4, "attend");
+		}else if(board.getBtype().equals("qna")){
+			psmt.setString(4, "qna");
+		}else if(board.getBtype().equals("notice")){
+			psmt.setString(4, "notice");
 		}
 			
 
@@ -133,7 +147,6 @@
 		if(result>0){ //insert 성공시
 		%>
 			<script>
-			let blist = <%=blist%>
 				alert("게시물이 등록되었습니다.");
 				if(blist=="all"){
 					location.href="<%=request.getContextPath() %>/list/allList.jsp";
@@ -151,15 +164,12 @@
 					location.href="<%=request.getContextPath() %>/list/attendList.jsp";
 				}else if(blist=="qna"){
 					location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-				}else{
-					location.href="<%=request.getContextPath() %>";
 				}
 			</script>
 			<%
 			}else{
 			%>
 			<script>
-			let blist = <%=blist%>
 				alert("게시글 등록되지 않았습니다.");
 				if(blist=="all"){
 					location.href="<%=request.getContextPath() %>/list/allList.jsp";
@@ -177,8 +187,6 @@
 					location.href="<%=request.getContextPath() %>/list/attendList.jsp";
 				}else if(blist=="qna"){
 					location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-				}else{
-					location.href="<%=request.getContextPath() %>";
 				}
 			</script>
 			<%	

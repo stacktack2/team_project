@@ -99,7 +99,7 @@
 		
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " order by brdate desc ";
+				sql += " order by bno desc ";
 			}else if(searchAlign.equals("hit")){
 				sql += " order by bhit desc ";
 			}

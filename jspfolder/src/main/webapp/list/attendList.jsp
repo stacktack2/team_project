@@ -47,7 +47,7 @@
 						+" FROM board b"
 						+" INNER JOIN member m "
 						+" ON b.mno = m.mno"
-						+" WHERE btype = 'QnA'";
+						+" WHERE btype = '출석체크'";
 		
 		//[검색]
 		if(searchType != null){
@@ -87,7 +87,7 @@
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"
-					+" WHERE btype = 'QnA'";
+					+" WHERE btype = '출석체크'";
 		
 		//[검색]
 		if(searchType != null){
@@ -143,9 +143,9 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2>질문게시판</h2>
+		<h2>출석체크</h2>
 		<div class="frms">
-			<form name ="frm1" action ="qnaList.jsp" method="get" id="frm1">
+			<form name ="frm1" action ="attendList.jsp" method="get" id="frm1">
 				<select name="searchAlign" onchange="document.frm1.submit()">
 					<option value="late" <%if(searchAlign != null 
 						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
@@ -153,7 +153,7 @@
 						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 			</form>
-			<form name ="frm2" action ="qnaList.jsp" method="get" id="frm2">
+			<form name ="frm2" action ="attendList.jsp" method="get" id="frm2">
 				<select name="searchType">
 					<option value="title" <%if(searchType != null 
 						&& searchType.equals("title")) out.print("selected"); %>>제목</option>
@@ -218,7 +218,7 @@
 	<%	//페이징영역
 		if(pagingVO.getStartPage()>pagingVO.getCntPage()){
 	%>
-			<a href="qnaList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>" class="pluspage">이전</a>
+			<a href="attendList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>" class="pluspage">이전</a>
 	<%
 		 }
 		
@@ -232,11 +232,11 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="qnaList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i %></a>
+					<a href="attendList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i %></a>
 				 <%
 				 }else{
 				 %>
-					<a href="qnaList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>"><%=i  %></a>
+					<a href="attendList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>"><%=i  %></a>
 				<%
 				 }
 			}
@@ -245,7 +245,7 @@
 		
 		if(pagingVO.getEndPage()<pagingVO.getLastPage()){
 		%>
-			<a href="qnaList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>" class="pluspage">다음</a>
+			<a href="attendList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>" class="pluspage">다음</a>
 		<%
 		}
 		%>

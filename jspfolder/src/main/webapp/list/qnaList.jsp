@@ -141,7 +141,7 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2>출석체크</h2>
+		<h2>질문게시판</h2>
 		<div class="frms">
 			<form name ="frm1" action ="qnaList.jsp" method="get" id="frm1">
 				<select name="searchAlign" onchange="document.frm1.submit()">

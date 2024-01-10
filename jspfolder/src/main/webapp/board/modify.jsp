@@ -5,7 +5,7 @@
 <%@ page import="Vo.Member" %>
 <%
 
-	//	- null체크(잘못된 접근입니다)에서 쓰기위함
+	//null체크(잘못된 접근입니다)에서 쓰기위함
 	Member member = (Member)session.getAttribute("login");
 
 	//bno
@@ -26,16 +26,16 @@
 	
 	//sql의 결과 행을 담을 객체 생성(선택)
 	Board board = new Board();
+	String foriginNm=null;
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
 		
 		//SQL문
-		String sql = "SELECT b.*, m.mnickNm "
-				   + "  FROM board b"
-				   + " INNER JOIN member m"
-				   + " ON b.mno = m.mno"
+		String sql = "SELECT b.*, m.mnickNm, f.foriginNm "
+				   + "  FROM (board b INNER JOIN member m ON b.mno = m.mno)"
+				   + " INNER JOIN uploadfile f ON b.bno = f.bno"
 				   + " WHERE b.bno = ?";
 		
 		psmt = conn.prepareStatement(sql);
@@ -51,6 +51,8 @@
 			board.setBtype(rs.getString("btype"));
 			board.setBcontent(rs.getString("bcontent"));
 			board.setBhit(rs.getInt("bhit"));
+
+			foriginNm = rs.getString("foriginNm");
 		}
 	}catch(Exception e){
 		e.printStackTrace();
@@ -104,6 +106,7 @@
 					<tr>
 						<th>첨부파일</th>
 						<td colspan="3">
+							<%=foriginNm %> 
 							<input type="file" name="uploadFile">
 						</td>
 					</tr>

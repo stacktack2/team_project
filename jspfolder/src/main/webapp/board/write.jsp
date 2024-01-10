@@ -7,7 +7,8 @@
 <%
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
-	String bnoParam = request.getParameter("bno");
+
+	
 	
 	String blist = request.getParameter("blist");
 	//null체크를 했어도(비정상 접근 차단 이유) 아래에서 메소드 사용시마다 널체크 해야함. if로 전체를 감싸지 않는이상 무조건 아래까지 실행되기 때문.
@@ -20,10 +21,7 @@
 		<%
 	}
 	
-	int bno = 0 ; //받아오는 이유 설명 필요
-	if(bnoParam != null && bnoParam.equals("")){
-		bno = Integer.parseInt(bnoParam);
-	}
+	
 	String mnickNm ="";
 	if(member == null){	//로그인이 안되어있는 경우 예외처리, 참고->( 이 경우 if문 아래의 자바코드도 실행되므로 아래 코드에서 member의 메소드를 null체크없이 사용하면 에러가 뜰 가능성이 있다.)
 	
@@ -63,14 +61,17 @@
 			location.href="<%=request.getContextPath() %>/list/gearList.jsp";
 		}else if(blist=="attend"){
 			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-		}else if(blist=="qna"){
+		}else if(blist=="QnA"){
 			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
+		}else{
+			location.href="<%=request.getContextPath() %>/index.jsp";
 		}
 	}
 </script>
+
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<body>
+<body >
 	<%@ include file ="/include/header.jsp" %>
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
@@ -80,27 +81,28 @@
 			//encytype이 있어야 전달받은 파일을 기계어로 백단에 그대로 파라미터로 보낼 수 있음(원래 파라미터는 문자열로만 전달가능하기에)
 			//라이브러리필요: cos.jar를 lib파일에 이게 있어야 알아서 bulid됨 
 		%>
+		
 		<form action="writeOk.jsp" method="post" name="frm" enctype="multipart/form-data">
 			<input type="hidden" name="blist" value="<%=blist%>">
 			<table border="1" class="writeTable">
 				<tbody>
 					<tr>
 						<th >제목</th>
-							<td>
+						<td>
 								<input type="text" name="btitle">
-							</td>
+						</td>
 						<th>카테고리</th>
 						<td>
-							<select name="btype" id="mainSelect" onchange="showSubSelect()">
-								<option value="자유게시판"> 자유게시판</option>
-								<option> 캠핑지역</option>
-								<option> 캠핑장비</option>
-								<option value="출석체크"> 출석체크</option>
-								<option value="QnA"> QnA</option>
+							<select name="btype" id="mainSelect" onchange="showSubSelect()" >
+								<option value="자유게시판" <%if(blist != null && blist.equals("free")) out.print("selected"); %>> 자유게시판</option>
+								<option value="캠핑지역" <%if(blist != null && blist.equals("zone")) out.print("selected"); %>> 캠핑지역</option>
+								<option value="캠핑장비" <%if(blist != null && blist.equals("gear")) out.print("selected"); %>> 캠핑장비</option>
+								<option value="출석체크" <%if(blist != null && blist.equals("attend")) out.print("selected"); %>> 출석체크</option>
+								<option value="QnA" <%if(blist != null && blist.equals("QnA")) out.print("selected"); %>> QnA</option>
 							<%
 							if(member != null && member.getMid().equals("admin")){ // member 메소드 사용 전 null체크 추가
 							%>
-								<option value="공지사항">공지사항</option>
+								<option value="공지사항" <%if(blist != null && blist.equals("notice")) out.print("selected"); %>>공지사항</option>
 							<%
 							}
 							%>
@@ -109,10 +111,12 @@
 					</tr>
 					<tr>
 						<th id="writerTh">작성자</th>
-						
+						<% 
+						if(blist != null && blist.equals("zone")){
+							
+						%>
 						<td id="writerTd"><%=mnickNm%></td>
-						
-						<th id="subSelectTh">세부카테고리</th>
+						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
 								<option value="캠핑지역_서울">서울</option>
@@ -125,6 +129,23 @@
 							</select>
 						</td>
 						
+						<%}else if(blist.equals("gear")){ %>
+						<td id="writerTd"><%=mnickNm%></td>
+						<th id="subSelectTh" >세부카테고리</th>
+						<td id="subSelectTd">
+							<select name="btype" id="subSelect">
+								<option value="캠핑장비_텐트">텐트/타프</option>
+								<option value="캠핑장비_침낭">침낭/매트</option>
+								<option value="캠핑장비_의자">의자/테이블</option>
+								<option value="캠핑장비_화기">화기/기타</option>
+								<option value="캠핑장비_차박">차박</option>
+							</select>
+						</td>
+						 
+						<%}else{%>
+						<td id="writerTd" colspan ="3"><%=mnickNm%></td>
+						
+						<% }%>
 					</tr>
 					<tr>
 						<td colspan="5">
@@ -145,24 +166,8 @@
 		</form>
 	</section>
 	</div>
-	<script>
-//		세부카테고리 이벤트
-		let writerTd = document.getElementById("writerTd");
-		let subSelectTh = document.getElementById("subSelectTh");
-		let subSelectTd = document.getElementById("subSelectTd");
-			
-		function showSubSelect(){
-			if(mainSelect.value != "zone"){
-				writerTd.parentNode.removeChild(subSelectTh);
-				writerTd.parentNode.removeChild(subSelectTd);
-				writerTd.setAttribute("colspan", 3);
-			}else{
-				writerTd.removeAttribute("colspan");
-				writerTd.parentElement.appendChild(subSelectTh);
-				writerTd.parentElement.appendChild(subSelectTd);
-			}
-		}
-	</script>
+	
 	<%@ include file ="/include/footer.jsp" %>
+	
 </body>
 </html>

@@ -104,7 +104,7 @@
 							String brdate = rs.getString("brdate");
 					%>
 						<li>
-							<a href="<%=request.getContextPath()%>/list/view.jsp?bno=<%=bno%>"><%=btitle %></a>
+							<a href="<%=request.getContextPath()%>/board/view.jsp?bno=<%=bno%>"><%=btitle %></a>
 							<span class="mlistdate"><%=brdate %></span>
 						</li>
 					<%

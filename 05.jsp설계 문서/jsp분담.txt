@@ -4,19 +4,19 @@
 QnA - QnA
 출석체크 - attend
 캠핑지역 - zone
-캠핑지역서울 - zoneseoul
-캠핑지역경기권 - zone
-캠핑지역강원권 - zone
-캠핑지역충청권 - zone
-캠핑지역영남권 - zone
-캠핑지역호남권 - zone
-캠핑지역제주 - zone
+캠핑지역서울 - zone_Seoul
+캠핑지역경기권 - zone_GG
+캠핑지역강원권 - zone_GW
+캠핑지역충청권 - zone_CC
+캠핑지역영남권 - zone_YN
+캠핑지역호남권 - zone_HN
+캠핑지역제주 - zone_JJ
 캠핑장비 - gear
-캠핑장비텐트 - gear
-캠핑장비침낭 - gear
-캠핑장비의자 - gear
-캠핑장비화기 - gear
-캠핑장비차박 - gear
+캠핑장비텐트 - gear_Tent
+캠핑장비침낭 - gear_Bad
+캠핑장비의자 - gear_Chair
+캠핑장비화기 - gear_Fire
+캠핑장비차박 - gear_Car
 
 파라미터만 있는 경우
 전체게시글 - all
@@ -66,23 +66,7 @@ pwfind.jsp 비밀번호 찾기
 pwfindOk.jsp
 
 zoneList.jsp
-sub카테고리
-	- 서울 value="zone_Seoul"
-	- 경기권 value="zone_GG"
-	- 강원권 value="zone_GW"
-	- 충청권 value="zone_CC"
-	- 영남권 value="zone_YN"
-	- 호남권 value="zone_HN"
-	- 제주 value="zone_JJ"
 gearList.jsp
-sub카테고리
-	- 서울 value="zone_Seoul"
-	- 경기권 value="zone_GG"
-	- 강원권 value="zone_GW"
-	- 충청권 value="zone_CC"
-	- 영남권 value="zone_YN"
-	- 호남권 value="zone_HN"
-	- 제주 value="zone_JJ"
 ----------------
 전용휘
 

@@ -8,22 +8,22 @@ BEGIN
         
     WHILE i <= 50 DO
         INSERT INTO member(mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)
-          VALUES(concat('id',i),concat('pw',i),concat('nick',i),concat('이름',i), i, concat('phone',i), 'M',concat('email',i) ,now());
+          VALUES(concat('id',i),concat('pw',i),concat('nick',i),concat('이름',i), i, concat('phone',i), 'M',concat('email',i) ,(DATE_ADD(NOW(), INTERVAL i SECOND)));
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'자유게시판',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -5+5*i SECOND)),i,'자유게시판',i);
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'공지사항',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -4+5*i SECOND)),i,'공지사항',i);
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'캠핑지역',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -3+5*i SECOND)),i,'캠핑지역',i);
         
         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'캠핑장비',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -2+5*i SECOND)),i,'캠핑장비',i);
 		
         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),now(),i,'QnA',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -1+5*i SECOND)),i,'QnA',i);
 		
 		INSERT INTO reply(rcontent,rrdate,mno,bno)
           VALUES(concat('rcontent',i),now(),i,i);
@@ -39,4 +39,3 @@ DELIMITER $$
 
 
 CALL loopInsert;
-

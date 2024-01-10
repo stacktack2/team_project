@@ -1,32 +1,27 @@
-
+	
 	//[댓글 등록]
 	function replyInsertFn(){
 		
-		//로그인 안했을 시 다른 실행 막아주기!
-		let loginMember = '<%=member%>';
-		
-		if(loginMember != 'null'){	//로그인돼있으면
-			// form태그 데이터를 파라미터값으로 가져오기
-			let params = $("form[name=replyfrm]").serialize();
-			
-			$.ajax({
-				url: "replyWriteOk.jsp",
-				type: "post",
-				data: params,
-				success:function(data){
-					if(data.trim() != "FAIL"){
-						$(".replyArea").prepend(data.trim());	//첫번째 자식으로
-					}
-				},error:function(){
-					console.log("error");
+		// form태그 데이터를 파라미터값으로 가져오기
+		let params = $("form[name=replyfrm]").serialize();
+		$.ajax({
+			url: "replyWriteOk.jsp",
+			type: "post",
+			data: params,
+			success:function(data){
+				console.log("error3");
+				if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
+					$(".replyArea").prepend(data.trim());	//첫번째 자식으로
+					
+				}else{
+					alert("댓글이 입력되지 않았습니다.")
 				}
-			});
-		}else{	//로그인 안했으면
-			alert("로그인 후에 처리하세요");
-		}
-	
-		//댓글 등록 후 댓글창 비우기
-		$("input[name=rcontent]").val("");
+			},error:function(){
+				console.log("error4");
+			}
+		});
+			//댓글 등록 후 댓글창 비우기
+			$("input[name=rcontent]").val("");
 	}
 	
 	//[댓글 삭제]
@@ -59,7 +54,7 @@
 		
 		if(!isModify){	//수정중이라면
 			//입력양식 초기값 얻어오기
-			let value = $(obj).parent().prev("span").text().trim();	//부모의 형 span
+			let value = $(obj).parent().prev("span").text().trim();	//부모의 형 span 기존 rcontent
 			
 			let html = "<input type='text' name = 'rcontent' value='"+value+"'>";
 			html += "<input type='hidden' name='rno' value='"+rno+"'>";
@@ -131,3 +126,7 @@
 		isModify = false;
 		
 	}
+	
+	
+	
+	

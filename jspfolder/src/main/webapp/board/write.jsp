@@ -12,13 +12,13 @@
 	//blist
 	String blist = request.getParameter("blist");
 	
-	int bno = 0 ;
+	int bno = 0 ; //받아오는 이유 설명 필요
 	if(bnoParam != null && bnoParam.equals("")){
 		bno = Integer.parseInt(bnoParam);
 	}
 	
 	 
-	if(member == null){	//로그인이 안돼있다면
+	if(member == null){	//로그인이 안되어있는 경우 예외처리, 참고->( 이 경우 if문 아래의 자바코드도 실행되므로 아래 코드에서 member의 메소드를 null체크없이 사용하면 에러가 뜰 가능성이 있다.)
 %>
 	<script>
 		alert("잘못된 접근입니다");
@@ -85,20 +85,25 @@
 						</td>
 						<th>카테고리</th>
 						<td>
-							<select name="btype">
-								<option> 자유게시판</option>
+							<select name="btype" id="mainSelect" onchange="showSubSelect()">
+								<option value= "null" > 자유게시판</option>
 								<option> 캠핑지역</option>
 								<option> 캠핑장비</option>
 								<option> 출석체크</option>
-								<option> Q&A</option>
+								<option> QnA</option>
 								<%
-								if(member.getMid().equals("admin")){
+								if(member != null && member.getMid().equals("admin")){ // member 메소드 사용 전 null체크 추가
 								%>
-									<option> 공지사항</option>
+									<option>공지사항</option>
 								<%
 								}
 								%>
-							</select>	
+							</select>
+							
+							<select name="btype" id="subSelect" >
+								<option> 자유게시판</option>
+							</select>
+							
 						</td>
 					</tr>
 					<tr>
@@ -122,6 +127,55 @@
 	</section>
 	</div>
 	<%@ include file ="/include/footer.jsp" %>
+<script>
+	function showSubSelect() {
+	    let mainSelect = document.getElementById("mainSelect");
+	    let subSelect = document.getElementById("subSelect");
+	    
+	    console.log("mainSelect:", mainSelect);  // 확인용 로그
+	    console.log("subSelect:", subSelect);    // 확인용 로그
+
+	    // 서브카테고리를 초기화
+	    subSelect.innerHTML = "";
+	    
+	    
+
+	    // 선택한 메인카테고리에 따라 서브카테고리를 설정
+	    if (mainSelect.value === "캠핑지역") {
+	        let options = ["서울", "경기권", "강원권", "충청권", "영남권", "호남권", "제주"];
+	        for (let i = 0; i < options.length; i++) {
+	            let option = document.createElement("option");
+	            option.text = options[i];
+	            subSelect.add(option);
+	        }
+	    }else if(mainSelect.value === "캠핑장비") {
+	        let options = ["텐트/타프", "침낭/매트", "의자/테이블", "화기/기타", "차박"];
+	        for (let i = 0; i < options.length; i++) {
+	            let option = document.createElement("option");
+	            option.text = options[i];
+	            subSelect.add(option);
+	        }
+	    }else if (mainSelect.value === "자유게시판") {
+            let option = document.createElement("option");
+            option.text = "자유게시판";
+            subSelect.add(option);
+	    }else if (mainSelect.value === "출석체크") {
+            let option = document.createElement("option");
+            option.text = "출석체크";
+            subSelect.add(option);
+	    }else if (mainSelect.value === "QnA") {
+            let option = document.createElement("option");
+            option.text = "QnA";
+            subSelect.add(option);
+	    }else if (mainSelect.value === "공지사항") {
+            let option = document.createElement("option");
+            option.text = "공지사항";
+            subSelect.add(option);
+	    }
+	}
 	
+	// mainCategory의 변경 이벤트를 감지하여 showSubCategory 함수 호출
+	document.getElementById("mainSelect").addEventListener("change", showSubSelect); // 이유 설명 필요
+</script>
 </body>
 </html>

@@ -7,7 +7,6 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%	
-	
 	request.setCharacterEncoding("UTF-8");
 	//blist
 	String blist = request.getParameter("blist");
@@ -111,8 +110,8 @@
 		//System.out.println("원본파일명: "+originFileNM);
 		
 		//3. [첨부파일]삽입
-		sql ="INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
-			+" VALUES(?,?,?, now())";
+		sql = " INSERT INTO uploadfile(bno,frealnm,foriginnm,frdate)"
+			+ " VALUES(?,?,?, now())";
 		
 		
 		psmt = conn.prepareStatement(sql);
@@ -126,7 +125,6 @@
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-
 			if(conn != null) conn.close();
 			if(psmt != null) psmt.close();
 		}

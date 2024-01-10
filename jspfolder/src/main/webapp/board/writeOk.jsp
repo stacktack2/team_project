@@ -61,7 +61,7 @@
 		psmt.setString(1, board.getBtitle());
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
-		// btype 분기점
+		// btype 분기점ㄹㄹㄹ
 		if(board.getBtype().equals("자유게시판")){
 			psmt.setString(4, "자유게시판");
 		}else if(board.getBtype().equals("캠핑지역")){

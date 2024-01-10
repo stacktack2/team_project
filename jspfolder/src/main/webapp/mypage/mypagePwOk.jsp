@@ -7,7 +7,13 @@
 	//[get방식 차단]
 	String method = request.getMethod();
 	if(method.equals("GET")){
-		response.sendRedirect("mypage.jsp");
+		%>
+		<script>
+			alert("비정상적인 접근입니다.");
+			location.href="mypagePw.jsp";
+		</script>
+		
+		<%
 	}
 	
 	request.setCharacterEncoding("UTF-8");

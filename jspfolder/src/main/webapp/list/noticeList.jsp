@@ -13,6 +13,9 @@
 	String searchAlign = request.getParameter("searchAlign");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
+	if(searchAlign ==null ){
+		searchAlign = "late";
+	}
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
@@ -185,7 +188,7 @@
 								<td id="td1"><%=pagingVO.getStart()+num %></td>
 								<td id="td2"><%=rs.getString("btype") %></td>
 								<td id="td3">
-									<a href="<%=request.getContextPath() %>/board/view.jsp?bno=<%=rs.getInt("bno")%>&blist=free"><%=rs.getString("btitle") %></a>
+									<a href="<%=request.getContextPath() %>/board/view.jsp?bno=<%=rs.getInt("bno")%>&blist=notice"><%=rs.getString("btitle") %></a>
 									<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 								</td>
 								<td id="td4"><%=rs.getString("mnickNm") %></td>
@@ -209,7 +212,7 @@
 	if(member != null){
 	%>
 		<div class="btnDiv">
-			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp';">글쓰기</button>
+			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=notice';">글쓰기</button>
 		</div>
 	<%	
 		}

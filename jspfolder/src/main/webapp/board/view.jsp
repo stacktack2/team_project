@@ -3,26 +3,48 @@
 <%@ page import="Vo.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*" %>
+<!DOCTYPE html>
+<html>
+<head>
 <%	
-	//이전글 다음글
+
 	
 
 	Member member = (Member)session.getAttribute("login");
 	
+	String blist = request.getParameter("blist");
+	//null체크를 했어도 아래에서 메소드 사용시마다 널체크 해야함.
+	if(blist==null){
+		%>
+		<script>
+			alert("잘못된 접근입니다");
+			location.href="<%= request.getContextPath() %>/index.jsp";
+		</script>
+		<%
+	}
 	String bnoParam = request.getParameter("bno");
+	
 	int bno=0;
+	// 넘버포맷익셉션 막는 예외처리
 	if(bnoParam != null && !bnoParam.equals("")){
 		bno = Integer.parseInt(bnoParam);
 	}else{
-		response.sendRedirect("/jspfolder/index.jsp");
+		%>
+		<script>
+			alert("잘못된 접근입니다");
+			location.href="<%= request.getContextPath() %>/index.jsp";
+		</script>
+		<%
 	}
+	
+	
+	
+	
 	
 	//이전글 다음글
 	int prebno=bno , nextbno=bno;
 	String prebnoTitle ="", nextbnoTitle=""; 
 	
-	//blist
-	String blist = request.getParameter("blist");
 	
 	Connection conn = null;	
 	PreparedStatement psmt = null;
@@ -167,17 +189,35 @@
 			rlist.add(reply);
 		} 
 		
+		//이전글 다음글 
+		String preSql = "select bno,btitle from board where bno < ? && ";
+		String nextSql = "select bno,btitle from board where bno > ? && ";
+		if(blist !=null){
+			if(blist.equals("notice")){
+				preSql += " btype = '공지사항' "; nextSql += " btype = '공지사항' ";
+			}else if(blist.equals("hot")){
+				preSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') "; 
+				nextSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') ";
+			}else if(blist.equals("free")){
+				preSql += " btype = '자유게시판' "; nextSql += " btype = '자유게시판' ";
+			}else if(blist.equals("zone")){
+				preSql += " btype = '캠핑지역' "; nextSql += " btype = '캠핑지역' ";
+			}else if(blist.equals("gear")){
+				preSql += " btype = '캠핑장비' "; nextSql += " btype = '캠핑장비' ";
+			}else if(blist.equals("attend")){
+				preSql += " btype = '출석체크' "; nextSql += " btype = '출석체크' ";
+			}else if(blist.equals("QnA")){
+				preSql += " btype = 'QnA' "; nextSql += " btype = 'QnA' ";
+			}else{
+				preSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항') ";
+				nextSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항') ";
+			}
+		}
+		preSql += " order by bno desc limit 1 ";
+		nextSql += " order by bno limit 1 ";
+		
 		//이전글 bno 받아오기
-		if(blist == "qna")
-			sql = "select bno,btitle from board where bno < ? && btype='QnA' order by bno desc limit 1 ";
-			sql = "select bno,btitle from board where bno < ? && (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') order by bno desc limit 1 ";
-			
-		
-		
-		
-		
-		
-		psmt = conn.prepareStatement(sql);
+		psmt = conn.prepareStatement(preSql);
 		psmt.setInt(1, board.getBno());
 		
 		rs = psmt.executeQuery();
@@ -189,8 +229,8 @@
 		if(rs != null) rs.close();
 		
 		//다음글 bno 받아오기
-		sql = "select bno,btitle from board where bno > ? && (btype = '자유게시판' or btype='캠핑지역' or btype='캠핑장비' or btype='공지사항') order by bno limit 1 ";
-		psmt = conn.prepareStatement(sql);
+		
+		psmt = conn.prepareStatement(nextSql);
 		psmt.setInt(1, board.getBno());
 		
 		rs = psmt.executeQuery();
@@ -201,6 +241,8 @@
 		if(psmt != null) psmt.close();
 		if(rs != null) rs.close();
 		
+		
+		
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{
@@ -208,14 +250,13 @@
 		if(psmt != null) psmt.close();
 		if(rs != null) rs.close();
 	}
+
 %>
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <title>게시글 상세보기</title>
-<link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/view.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/css/base.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/css/view.css" type="text/css" rel="stylesheet">
 <script src="<%=request.getContextPath() %>/js/jquery-3.7.1.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/view.js"></script>
 <script>
@@ -240,7 +281,7 @@
 			location.href="<%=request.getContextPath() %>/list/gearList.jsp";
 		}else if(blist=="attend"){
 			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-		}else if(blist=="qna"){
+		}else if(blist=="QnA"){
 			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
 		}else{
 			location.href="<%=request.getContextPath() %>/index.jsp";
@@ -288,10 +329,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="6"> <a href="view.jsp?bno=<%=nextbno%>">다음글 ▲ <%=nextbnoTitle %></a></td>
+					<td colspan="6"> <a href="view.jsp?bno=<%=nextbno%>&blist=<%=blist%>">다음글 ▲ <%=nextbnoTitle %></a></td>
 				</tr>
 				<tr>
-					<td colspan="6"> <a href="view.jsp?bno=<%=prebno%>">이전글 ▼ <%=prebnoTitle %></a> </td>
+					<td colspan="6"> <a href="view.jsp?bno=<%=prebno%>&blist=<%=blist%>">이전글 ▼ <%=prebnoTitle %></a> </td>
 				</tr>
 			</tbody>
 		</table>

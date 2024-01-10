@@ -90,8 +90,8 @@
 						sql = " SELECT b.* "
 								+" FROM board b INNER JOIN member m "
 								+" ON b.mno = m.mno "
-								+" WHERE (btype = '자유게시판' or btype='캠핑지역' "
-								+" or btype='캠핑장비' or btype='공지사항') "
+								+" WHERE (btype = '자유게시판' or btype like '캠핑지역%' "
+								+" or btype like '캠핑장비%' or btype='공지사항') "
 								+" ORDER BY bno desc "
 								+" LIMIT 6";
 							

@@ -21,7 +21,12 @@
 		mno = member.getMno();
 	}
 	if(mno ==0){
-		response.sendRedirect("/jspfolder/index.jsp");
+		%>
+		<script>
+			alert("잘못된 접근입니다.");
+			location.href='list.jsp';
+		</script>
+		<%
 	}
 	//bno 없이 들어왔을때 차단
 	String bnoParam = request.getParameter("bno");
@@ -31,7 +36,12 @@
 		bno = Integer.parseInt(bnoParam);
 	}
 	if(bno ==0 ){
-		response.sendRedirect("/jspfolder/index.jsp");
+		%>
+		<script>
+			alert("잘못된 접근입니다.");
+			location.href='list.jsp';
+		</script>
+		<%
 	}
 	
 

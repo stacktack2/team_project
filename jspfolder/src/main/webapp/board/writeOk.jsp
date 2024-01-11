@@ -1,3 +1,8 @@
+<%
+//btype을 받을때 정해진 데이터만 받는 부분 예외처리 미비
+%>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member"%>
@@ -62,15 +67,20 @@ try{
 		<%
 	}else{
 	
-	//파라미터를 담을 VO생성(import필요)
-	Board board = new Board();
-	//파라미터값 받아오기
-	board.setBtitle(multi.getParameter("btitle"));
-	board.setBcontent(multi.getParameter("bcontent"));
-	board.setBtype(multi.getParameter("btype"));
+		//파라미터를 담을 VO생성(import필요)
+		Board board = new Board();
+		//파라미터값 받아오기
+		board.setBtitle(multi.getParameter("btitle"));
+		board.setBcontent(multi.getParameter("bcontent"));
+		board.setBtype(multi.getParameter("btype"));
+	
+		String boardType = board.getBtype();
 
-//	캠핑지역 값 받아오기
-	String subtype = request.getParameter("subtype");
+
+
+			
+	//	캠핑지역 값 받아오기
+		String subtype = request.getParameter("subtype");
 	
 	
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -104,36 +114,36 @@ try{
 	
 		if(realFileNM != null && originFileNM != null){
 		
-			//2.[첨부파일]* 현재 등록(삽입)된 게시글에 대한 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
-			//(as bno이기에 bno로 찾음)
-			sql = "select max(bno) as bno from board";
-			psmt = conn.prepareStatement(sql);
-			
-			ResultSet rs = psmt.executeQuery();
-			
-			//bno값 가져오기
-			int bno = 0;
-			if(rs.next()){
-				bno = rs.getInt("bno");
-			}
-			
-			if(rs != null) rs.close();
-			if(psmt != null) psmt.close();
-			
-			
-			
-			//3. [첨부파일]삽입
-			sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
-				+ " VALUES(?,?,?, now())";
-			
-			
-			psmt = conn.prepareStatement(sql);
-			
-			psmt.setInt(1, bno);
-			psmt.setString(2,realFileNM );
-			psmt.setString(3,originFileNM );
-			
-			psmt.executeUpdate();
+		//2.[첨부파일]* 현재 등록(삽입)된 게시글에 대한 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
+		//(as bno이기에 bno로 찾음)
+		sql = "select max(bno) as bno from board";
+		psmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = psmt.executeQuery();
+		
+		//bno값 가져오기
+		int bno = 0;
+		if(rs.next()){
+			bno = rs.getInt("bno");
+		}
+		
+		if(rs != null) rs.close();
+		if(psmt != null) psmt.close();
+		
+		
+		
+		//3. [첨부파일]삽입
+		sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
+			+ " VALUES(?,?,?, now())";
+		
+		
+		psmt = conn.prepareStatement(sql);
+		
+		psmt.setInt(1, bno);
+		psmt.setString(2,realFileNM );
+		psmt.setString(3,originFileNM );
+		
+		psmt.executeUpdate();
 
 		}
 		
@@ -147,26 +157,28 @@ try{
 					location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
 				</script>
 				<%
-				}else{
+		}else{
 				%>
 				<script>
 					alert("게시글 등록되지 않았습니다.");
 					location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
 				</script>
 				<%	
-				}
+		}
+			
 		
-			}
+		
+	}
 		%>
 		
 	
 	<% 
-	}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			if(conn != null) conn.close();
-			if(psmt != null) psmt.close();
-		}
+}catch(Exception e){
+	e.printStackTrace();
+}finally{
+	if(conn != null) conn.close();
+	if(psmt != null) psmt.close();
+}
 	%>
 	
 </body>

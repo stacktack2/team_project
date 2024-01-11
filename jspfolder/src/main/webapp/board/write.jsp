@@ -39,10 +39,10 @@
 <title>게시글 작성</title>
 <link href="<%=request.getContextPath() %>/css/base.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/css/write.css" rel="stylesheet">
-
-</head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<body >
+<script src="<%=request.getContextPath()%>/js/write.js"></script>
+</head>
+<body>
 	<%@ include file ="/include/header.jsp" %>
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
@@ -64,7 +64,7 @@
 						</td>
 						<th>카테고리</th>
 						<td>
-							<select name="btype" id="mainSelect" onchange="showSubSelect()" >
+							<select name="btype" id="mainSelect" onchange="showSubSelect(this)" >
 								<option value="자유게시판" <%if(blist != null && blist.equals("free")) out.print("selected"); %>> 자유게시판</option>
 								<option value="캠핑지역" <%if(blist != null && blist.equals("zone")) out.print("selected"); %>> 캠핑지역</option>
 								<option value="캠핑장비" <%if(blist != null && blist.equals("gear")) out.print("selected"); %>> 캠핑장비</option>
@@ -80,13 +80,10 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr id="subTr">
 						<th id="writerTh">작성자</th>
-						<% 
-						if(blist != null && blist.equals("zone")){
-							
-						%>
 						<td id="writerTd"><%=mnickNm%></td>
+						<% if(blist != null && blist.equals("zone")){%>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
@@ -99,9 +96,7 @@
 								<option value="캠핑지역_제주">제주</option>
 							</select>
 						</td>
-						
-						<%}else if(blist.equals("gear")){ %>
-						<td id="writerTd"><%=mnickNm%></td>
+						<%}else if(blist != null && blist.equals("gear")){ %>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
@@ -112,10 +107,6 @@
 								<option value="캠핑장비_차박">차박</option>
 							</select>
 						</td>
-						 
-						<%}else{%>
-						<td id="writerTd" colspan ="3"><%=mnickNm%></td>
-						
 						<% }%>
 					</tr>
 					<tr>

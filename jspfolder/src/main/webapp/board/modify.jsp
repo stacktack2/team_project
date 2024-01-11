@@ -3,6 +3,9 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="Vo.Board" %>
 <%@ page import="Vo.Member" %>
+<!DOCTYPE html>
+<html>
+<head>
 <%
 
 	//null체크(잘못된 접근입니다)에서 쓰기위함
@@ -35,7 +38,7 @@
 		//SQL문
 		String sql = "SELECT b.*, m.mnickNm, f.foriginNm "
 				   + "  FROM (board b INNER JOIN member m ON b.mno = m.mno)"
-				   + " INNER JOIN uploadfile f ON b.bno = f.bno"
+				   + " left JOIN uploadfile f ON b.bno = f.bno"
 				   + " WHERE b.bno = ?";
 		
 		psmt = conn.prepareStatement(sql);
@@ -53,6 +56,7 @@
 			board.setBhit(rs.getInt("bhit"));
 
 			foriginNm = rs.getString("foriginNm");
+			
 		}
 	}catch(Exception e){
 		e.printStackTrace();
@@ -63,6 +67,8 @@
 	}
 	
 	//로그인이 안돼있거나 게시글을 쓴 본인이 아니면 => 점프
+	
+	
 	if(member == null || board.getMno() != member.getMno()){	
 	%>
 		<script>
@@ -72,9 +78,7 @@
 	<%
 	}
 %>
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <title>게시글 수정</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
@@ -114,7 +118,7 @@
 			</table>
 			<div class="writeBtns">
 			<button type="button" 
-				onclick="location.href='view.jsp?bno=<%=board.getBno()%>'">취소</button>
+				onclick="location.href='/jspfolder/list/allList.jsp'">취소</button>
 			<button>저장</button>
 			</div>
 		</form>

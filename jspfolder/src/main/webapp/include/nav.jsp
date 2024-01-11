@@ -42,19 +42,19 @@
 			<li><a href="<%=request.getContextPath()%>/list/hotList.jsp">인기글</a></li>
 			<li><a href="<%=request.getContextPath()%>/list/freeList.jsp">자유게시판</a></li>
 			<li>
-				<a href="<%=request.getContextPath()%>/list/zoneList.jsp">캠핑지역 소개/리뷰</a>
+				<a href="<%=request.getContextPath()%>/list/zoneListList.jsp">캠핑지역 소개/리뷰</a>
 				<ul class="submenu">
-					<li><a href="#">서울</a></li>
-					<li><a href="#">경기권</a></li>
-					<li><a href="#">강원권</a></li>
-					<li><a href="#">충청권</a></li>
-					<li><a href="#">영남권</a></li>
-					<li><a href="#">호남권</a></li>
-					<li><a href="#">제주</a></li>					
+					<li><a href="zone_SeoulList.jsp">서울</a></li>
+					<li><a href="zone_GGList.jsp">경기권</a></li>
+					<li><a href="zone_GWList.jsp">강원권</a></li>
+					<li><a href="zone_CCList.jsp">충청권</a></li>
+					<li><a href="zone_YNList.jsp">영남권</a></li>
+					<li><a href="zone_HNList.jsp">호남권</a></li>
+					<li><a href="zone_JJList.jsp">제주</a></li>			
 				</ul>
 			</li>
 			<li>
-				<a href="<%=request.getContextPath()%>/list/gearList.jsp">캠핑장비 소개/리뷰</a>
+				<a href="<%=request.getContextPath()%>/list/gearListList.jsp">캠핑장비 소개/리뷰</a>
 				<ul class="submenu">
 					<li><a href="<%=request.getContextPath()%>/list/gearList.jsp">텐트/타프</a></li>
 					<li><a href="<%=request.getContextPath()%>/list/gear_BadList.jsp">침낭/매트</a></li>

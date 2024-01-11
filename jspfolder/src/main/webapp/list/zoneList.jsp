@@ -156,6 +156,9 @@
 						searchAlign.equals("hit"))out.print("selected"); 
 					%>>인기순
 				</option>
+
+			</select>
+			<select>
 				<option value="Seoul" 
 					<%if(searchAlign != null && 
 						searchAlign.equals("Seoul"))out.print("selected"); 

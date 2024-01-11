@@ -17,7 +17,7 @@
 }
 .mboardmn h3{float:left;}
 .mboardmn .mainmore{float:right;}
-.mboardmn .mainmore:hover{color:white;}
+.mboardmn .mainmore:hover{color:white; transition:all .4s;}
 .mainlist li{
 	padding:5px 20px;
 	background-color: #efe6d9;
@@ -26,7 +26,7 @@
 .mainlist li a{
 	display:inline-block;
 }
-.mainlist li a:hover{color:white;}
+.mainlist li a:hover{color:white; transition:all .4s;}
 .mainlist .mlistdate{
 	font-size: 12px; color: #beb5a2;
 	float:right;

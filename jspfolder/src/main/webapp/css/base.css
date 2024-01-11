@@ -21,7 +21,7 @@ header{
 	padding:10px; background-color: #efe6d9;
 }
 header #top_banner a{margin-top: 5px;}
-header #top_banner a:hover{font-weight:bold; color: white;}
+header #top_banner a:hover{font-weight:bold; color: white; transition:all .4s;}
 header #logo{
 	background-color: #39504d; height:100px;
 	text-align:center; line-height:100px;
@@ -30,7 +30,7 @@ header #logo{
 #logo>a{display:inline-block; width:100%; color:#f0ede0;}
 
 #top_menu>a{font-weight: bold;}
-#top_menu>a:hover{color:white;}
+#top_menu>a:hover{color:white; transition:all .4s;}
 header #webserch{
 	width: 200px; height: 30px;
 	background-color: #ddd;
@@ -52,7 +52,7 @@ nav{
 	font-weight: bold; color:#dd6d2f; 
 	margin-left: 55px;
 	}
-#welcome a:hover{color: brown;}
+#welcome a:hover{color: brown; transition:all .4s;}
 /* 검색 */
 .searchMain{margin:10px 20px;}
 .searchMain input[type="text"]{
@@ -64,7 +64,7 @@ nav{
 	display: inline-block;
 	padding: 5px 10px;
 }
-.menu>li>a:hover{color: white;}
+.menu>li>a:hover{color: white; transition:all .4s;}
 .submenu>li{padding-left:10px;}
 
 #thecheat{

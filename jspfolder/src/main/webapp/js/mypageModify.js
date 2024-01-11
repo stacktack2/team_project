@@ -25,7 +25,7 @@
 			mpwTd.style.color = 'red';
 			return false;
 		}else if(!regRs){
-			mpwTd.innerHTML ='영문소문자, 영문대문자, 숫자, 특수문자를 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
+			mpwTd.innerHTML ='영문소문자, 영문대문자, 숫자, 특수문자를<br> 사용해야합니다.<br>특수문자는 !,@,#,$,%,^,&,* 만 가능합니다.';
 			mpwTd.style.color = 'red';
 			return false;
 		}else{
@@ -59,13 +59,13 @@
 	
 	function checkPhone1(obj){
 		let regId = /^\d{3}/g;
-		let regRs = !regId.test(obj.value); 
+		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mphoneTd.innerHTML = '3자리숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
@@ -78,13 +78,13 @@
 	
 	function checkPhone2(obj){
 		let regId = /^\d{3,4}/g;
-		let regRs = !regId.test(obj.value); 
+		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mphoneTd.innerHTML = '3,4자리 숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
@@ -97,13 +97,13 @@
 	
 	function checkPhone3(obj){
 		let regId = /^\d{4}/g;
-		let regRs = !regId.test(obj.value); 
+		let regRs = regId.test(obj.value); 
 		let mphoneTd = document.getElementById("mphoneTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			mphoneTd.innerHTML = '전화번호를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
-		}else if(regRs){
+		}else if(!regRs){
 			mphoneTd.innerHTML = '4자리 숫자만 사용가능합니다.';
 			mphoneTd.style.color = 'red';
 			return false;
@@ -118,7 +118,7 @@
 	
 	function checkEmail(obj){
 		let regId = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-		let regRs = !regId.test(obj.value); 
+		let regRs = regId.test(obj.value); 
 		let memailTd = document.getElementById("memailTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
 			memailTd.innerHTML = '이메일을 입력해주세요.';

@@ -32,12 +32,12 @@
 		<%
 		
 	}else{
-		int mno=0;
+		int sessionMno=0;
 		Member memberSession = (Member)session.getAttribute("login");
 		if(memberSession != null){
-			mno = memberSession.getMno();
+			sessionMno = memberSession.getMno();
 		}
-		if(mno ==0){
+		if(sessionMno ==0){
 			%>
 			<script>
 				alert("오류가 발생해 메인페이지로 이동합니다.");
@@ -82,17 +82,6 @@
 			location.href="/jspfolder/index.jsp";
 		</script>
 		<%
-	}
-	
-	
-	
-	if(!isPass){
-%>
-		<script>
-			alert("정보 수정에 실패했습니다. 다시 시도하세요.");
-			location.href="<%=request.getContextPath()%>";
-		</script>
-<%		
 	}else{
 	
 	
@@ -112,7 +101,7 @@
 			psmt.setString(1, member.getMpw());
 			psmt.setString(2, mphone);
 			psmt.setString(3, member.getMemail());
-			psmt.setInt(4,mno);
+			psmt.setInt(4,sessionMno);
 			
 			result = psmt.executeUpdate();
 			

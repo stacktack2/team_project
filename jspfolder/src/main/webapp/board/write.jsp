@@ -8,8 +8,6 @@
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
 
-	
-	
 	String blist = request.getParameter("blist");
 	//null체크를 했어도(비정상 접근 차단 이유) 아래에서 메소드 사용시마다 널체크 해야함. if로 전체를 감싸지 않는이상 무조건 아래까지 실행되기 때문.
 	if(blist==null){
@@ -39,44 +37,15 @@
 <title>게시글 작성</title>
 <link href="<%=request.getContextPath() %>/css/base.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/css/write.css" rel="stylesheet">
-<script>
-/*  blist 파라미터값을 가져오기 위해선 html에 미리 변수로 선언해줘야 하는데
- 	(파라미터로 받아왔다고 html에서 바로 쓸 수 없음)
-	표현식이라 문자열로 받아와야 변수로 사용할 수 있다.
-*/
- let blist='<%=blist%>';
-	
-	function wCancleFn(){
-		if(blist=="all"){
-			location.href="<%=request.getContextPath() %>/list/allList.jsp";
-		}else if(blist=="notice"){
-			location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-		}else if(blist=="hot"){
-			location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-		}else if(blist=="free"){
-			location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-		}else if(blist=="zone"){
-			location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-		}else if(blist=="gear"){
-			location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-		}else if(blist=="attend"){
-			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-		}else if(blist=="QnA"){
-			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-		}else{
-			location.href="<%=request.getContextPath() %>/index.jsp";
-		}
-	}
-</script>
-
-</head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<body >
+<script src="<%=request.getContextPath()%>/js/write.js"></script>
+</head>
+<body>
 	<%@ include file ="/include/header.jsp" %>
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2 class="hidden">게시글 등록</h2>
+		<h2>게시글 등록</h2>
 		<%	
 			//encytype이 있어야 전달받은 파일을 기계어로 백단에 그대로 파라미터로 보낼 수 있음(원래 파라미터는 문자열로만 전달가능하기에)
 			//라이브러리필요: cos.jar를 lib파일에 이게 있어야 알아서 bulid됨 
@@ -93,10 +62,10 @@
 						</td>
 						<th>카테고리</th>
 						<td>
-							<select name="btype" id="mainSelect" onchange="showSubSelect()" >
+							<select name="btype" id="mainSelect" onchange="showSubSelect(this)" >
 								<option value="자유게시판" <%if(blist != null && blist.equals("free")) out.print("selected"); %>> 자유게시판</option>
-								<option value="캠핑지역" <%if(blist != null && blist.equals("zone")) out.print("selected"); %>> 캠핑지역</option>
-								<option value="캠핑장비" <%if(blist != null && blist.equals("gear")) out.print("selected"); %>> 캠핑장비</option>
+								<option value="캠핑지역" <%if(blist != null && (blist.indexOf("zone") != -1)) out.print("selected"); %>> 캠핑지역</option>
+								<option value="캠핑장비" <%if(blist != null ){if(blist.indexOf("gear") != -1) out.print("selected");} %>> 캠핑장비</option>
 								<option value="출석체크" <%if(blist != null && blist.equals("attend")) out.print("selected"); %>> 출석체크</option>
 								<option value="QnA" <%if(blist != null && blist.equals("QnA")) out.print("selected"); %>> QnA</option>
 							<%
@@ -109,43 +78,37 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr id="subTr">
 						<th id="writerTh">작성자</th>
-						<% 
-						if(blist != null && blist.equals("zone")){
-							
-						%>
+						<% if(blist != null && (blist.indexOf("zone") != -1)){%>
 						<td id="writerTd"><%=mnickNm%></td>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
-								<option value="캠핑지역_서울">서울</option>
-								<option value="캠핑지역_경기권">경기권</option>
-								<option value="캠핑지역_강원권">강원권</option>
-								<option value="캠핑지역_충청권">충청권</option>
-								<option value="캠핑지역_영남권">영남권</option>
-								<option value="캠핑지역_호남권">호남권</option>
-								<option value="캠핑지역_제주">제주</option>
+								<option value="캠핑지역_서울" <%if(blist != null && blist.equals("zone_Seoul")) out.print("selected"); %>>서울</option>
+								<option value="캠핑지역_경기권" <%if(blist != null && blist.equals("zone_GG")) out.print("selected"); %>>경기권</option>
+								<option value="캠핑지역_강원권" <%if(blist != null && blist.equals("zone_GW")) out.print("selected"); %>>강원권</option>
+								<option value="캠핑지역_충청권" <%if(blist != null && blist.equals("zone_CC")) out.print("selected"); %>>충청권</option>
+								<option value="캠핑지역_영남권" <%if(blist != null && blist.equals("zone_YN")) out.print("selected"); %>>영남권</option>
+								<option value="캠핑지역_호남권" <%if(blist != null && blist.equals("zone_HN")) out.print("selected"); %>>호남권</option>
+								<option value="캠핑지역_제주" <%if(blist != null && blist.equals("zone_JJ")) out.print("selected"); %>>제주</option>
 							</select>
 						</td>
-						
-						<%}else if(blist.equals("gear")){ %>
+						<%}else if(blist != null && (blist.indexOf("gear") != -1)){ %>
 						<td id="writerTd"><%=mnickNm%></td>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
-								<option value="캠핑장비_텐트">텐트/타프</option>
-								<option value="캠핑장비_침낭">침낭/매트</option>
-								<option value="캠핑장비_의자">의자/테이블</option>
-								<option value="캠핑장비_화기">화기/기타</option>
-								<option value="캠핑장비_차박">차박</option>
+								<option value="캠핑장비_텐트" <%if(blist != null && blist.equals("gear_Tent")) out.print("selected"); %>>텐트/타프</option>
+								<option value="캠핑장비_침낭" <%if(blist != null && blist.equals("gear_Bad")) out.print("selected"); %>>침낭/매트</option>
+								<option value="캠핑장비_의자" <%if(blist != null && blist.equals("gear_Chair")) out.print("selected"); %>>의자/테이블</option>
+								<option value="캠핑장비_화기" <%if(blist != null && blist.equals("gear_Fire")) out.print("selected"); %>>화기/기타</option>
+								<option value="캠핑장비_차박" <%if(blist != null && blist.equals("gear_Car")) out.print("selected"); %>>차박</option>
 							</select>
 						</td>
-						 
-						<%}else{%>
-						<td id="writerTd" colspan ="3"><%=mnickNm%></td>
-						
-						<% }%>
+						<% }else{%>
+						<td id="writerTd" colspan="3"><%=mnickNm%></td>
+						<%} %>
 					</tr>
 					<tr>
 						<td colspan="5">
@@ -161,7 +124,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<button type="button" class="cancleBtn" onclick="wCancleFn()">취소</button>
+			<button type="button" class="cancleBtn" onclick="connectList()">취소</button>
 			<button class="saveBtn">저장</button>
 		</form>
 	</section>
@@ -169,5 +132,10 @@
 	
 	<%@ include file ="/include/footer.jsp" %>
 	
+	<script>
+		function connectList(){
+			location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
+		}
+	</script>
 </body>
 </html>

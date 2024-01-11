@@ -1,3 +1,6 @@
+<%
+//btype을 받을때 정해진 데이터만 받는 부분 예외처리 미비
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member"%>
@@ -6,6 +9,14 @@
 <%//[첨부파일] 첨부파일, 파일이름이 겹쳤을떄의 규칙 import %>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<head>
+<body>
 <%	
 request.setCharacterEncoding("UTF-8");
 Connection conn = null;
@@ -19,7 +30,7 @@ int result =0;
 try{
 
 	//[첨부파일] 업로드 위치 지정
-	/* String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload"; */
+	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	//String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	String directory = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
 	
@@ -54,15 +65,20 @@ try{
 		<%
 	}else{
 	
-	//파라미터를 담을 VO생성(import필요)
-	Board board = new Board();
-	//파라미터값 받아오기
-	board.setBtitle(multi.getParameter("btitle"));
-	board.setBcontent(multi.getParameter("bcontent"));
-	board.setBtype(multi.getParameter("btype"));
+		//파라미터를 담을 VO생성(import필요)
+		Board board = new Board();
+		//파라미터값 받아오기
+		board.setBtitle(multi.getParameter("btitle"));
+		board.setBcontent(multi.getParameter("bcontent"));
+		board.setBtype(multi.getParameter("btype"));
+	
+		String boardType = board.getBtype();
 
-//	캠핑지역 값 받아오기
-	String subtype = request.getParameter("subtype");
+
+
+			
+	//	캠핑지역 값 받아오기
+		String subtype = request.getParameter("subtype");
 	
 	
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -96,101 +112,72 @@ try{
 	
 		if(realFileNM != null && originFileNM != null){
 		
-			//2.[첨부파일]* 현재 등록(삽입)된 게시글에 대한 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
-			//(as bno이기에 bno로 찾음)
-			sql = "select max(bno) as bno from board";
-			psmt = conn.prepareStatement(sql);
-			
-			ResultSet rs = psmt.executeQuery();
-			
-			//bno값 가져오기
-			int bno = 0;
-			if(rs.next()){
-				bno = rs.getInt("bno");
-			}
-			
-			if(rs != null) rs.close();
-			if(psmt != null) psmt.close();
-			
-			
-			
-			//3. [첨부파일]삽입
-			sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
-				+ " VALUES(?,?,?, now())";
-			
-			
-			psmt = conn.prepareStatement(sql);
-			
-			psmt.setInt(1, bno);
-			psmt.setString(2,realFileNM );
-			psmt.setString(3,originFileNM );
-			
-			psmt.executeUpdate();
+		//2.[첨부파일]* 현재 등록(삽입)된 게시글에 대한 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
+		//(as bno이기에 bno로 찾음)
+		sql = "select max(bno) as bno from board";
+		psmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = psmt.executeQuery();
+		
+		//bno값 가져오기
+		int bno = 0;
+		if(rs.next()){
+			bno = rs.getInt("bno");
+		}
+		
+		if(rs != null) rs.close();
+		if(psmt != null) psmt.close();
+		
+		
+		
+		//3. [첨부파일]삽입
+		sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
+			+ " VALUES(?,?,?, now())";
+		
+		
+		psmt = conn.prepareStatement(sql);
+		
+		psmt.setInt(1, bno);
+		psmt.setString(2,realFileNM );
+		psmt.setString(3,originFileNM );
+		
+		psmt.executeUpdate();
 
 		}
 		
 		
+		
 			
 		if(result>0){ //insert 성공시
-			%>
+				%>
 				<script>
-					let blist = '<%=blist%>';
 					alert("게시물이 등록되었습니다.");
-					if(blist=="all"){
-						location.href="<%=request.getContextPath() %>/list/allList.jsp";
-					}else if(blist=="notice"){
-						location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-					}else if(blist=="hot"){
-						location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-					}else if(blist=="free"){
-						location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-					}else if(blist=="zone"){
-						location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-					}else if(blist=="gear"){
-						location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-					}else if(blist=="attend"){
-						location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-					}else if(blist=="QnA"){
-						location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-					}else{
-						location.href="<%=request.getContextPath() %>/index.jsp";
-					}
+					location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
 				</script>
 				<%
-				}else{
+		}else{
 				%>
 				<script>
 					alert("게시글 등록되지 않았습니다.");
-					if(blist=="all"){
-						location.href="<%=request.getContextPath() %>/list/allList.jsp";
-					}else if(blist=="notice"){
-						location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-					}else if(blist=="hot"){
-						location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-					}else if(blist=="free"){
-						location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-					}else if(blist=="zone"){
-						location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-					}else if(blist=="gear"){
-						location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-					}else if(blist=="attend"){
-						location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-					}else if(blist=="qna"){
-						location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-					}else{
-						location.href="<%=request.getContextPath() %>/index.jsp";
-					}
+					location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
 				</script>
 				<%	
-					
-				}
-	}
-		
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			if(conn != null) conn.close();
-			if(psmt != null) psmt.close();
 		}
-	%>
+			
 		
+		
+	}
+		%>
+		
+	
+	<% 
+}catch(Exception e){
+	e.printStackTrace();
+}finally{
+	if(conn != null) conn.close();
+	if(psmt != null) psmt.close();
+}
+	%>
+	
+</body>
+</html>

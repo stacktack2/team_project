@@ -11,20 +11,63 @@ BEGIN
           VALUES(concat('id',i),concat('pw',i),concat('nick',i),concat('이름',i), i, concat('phone',i), 'M',concat('email',i) ,(DATE_ADD(NOW(), INTERVAL i SECOND)));
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -5+5*i SECOND)),i,'자유게시판',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -30+30*i SECOND)),i,'자유게시판',i);
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -4+5*i SECOND)),i,'공지사항',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -29+30*i SECOND)),i,'공지사항',i);
+		
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -28+30*i SECOND)),i,'QnA',i);
+
+ 	
+          
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -3+5*i SECOND)),i,'캠핑지역',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -27+30*i SECOND)),i,'캠핑장비_텐트',i);
+		
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -26+30*i SECOND)),i,'캠핑장비_침낭',i);
         
         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -2+5*i SECOND)),i,'캠핑장비',i);
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -25+30*i SECOND)),i,'캠핑장비_의자',i);
+          
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -24+30*i SECOND)),i,'캠핑장비_화기',i);
+          
+         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -23+30*i SECOND)),i,'캠핑장비_차박',i); 
+        
+        
+        
+        
+        
+        
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -22+30*i SECOND)),i,'캠핑지역_서울',i);
 		
         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
-          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -1+5*i SECOND)),i,'QnA',i);
-		
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -21+30*i SECOND)),i,'캠핑지역_경기권',i);
+        
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -20+30*i SECOND)),i,'캠핑지역_강원권',i);
+          
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -19+30*i SECOND)),i,'캠핑지역_충청권',i);
+          
+         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -18+30*i SECOND)),i,'캠핑지역_영남권',i); 
+                  
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -17+30*i SECOND)),i,'캠핑지역_호남권',i);
+          
+         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -16+30*i SECOND)),i,'캠핑지역_제주',i); 
+        
+        
+        
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -15+30*i SECOND)),i,'출석체크',i);
+        
 		INSERT INTO reply(rcontent,rrdate,mno,bno)
           VALUES(concat('rcontent',i),now(),i,i);
           

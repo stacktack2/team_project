@@ -13,9 +13,9 @@
 	
 	
 	int mno=0;
-	Member memberSession = (Member)session.getAttribute("login");
-	if(memberSession != null){
-		mno = memberSession.getMno();
+	Member member = (Member)session.getAttribute("login");
+	if(member != null){
+		mno = member.getMno();
 	}
 	if(mno ==0){
 		%>
@@ -31,6 +31,9 @@
 	//[검색]
 	String searchAlign = request.getParameter("searchAlign");
 	String searchValue = request.getParameter("searchValue");
+	if(searchAlign ==null ){
+		searchAlign = "late";
+	}
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
@@ -63,61 +66,60 @@
 						+" where m.mno=? ";
 		
 
-		if(searchValue != null && !searchValue.equals("")){
-			totalSql += " && b.btitle LIKE CONCAT('%',?,'%') ";
+		//[검색]
+		if(searchValue != null){
+			totalSql += " and btitle like concat('%',?,'%') ";		
 		}
-		psmt = conn.prepareStatement(totalSql);
 		
-		psmt.setInt(1, mno);
-		if(searchValue != null && !searchValue.equals("")){
-			psmt.setString(2, searchValue);
+		psmt = conn.prepareStatement(totalSql);
+		psmt.setInt(1,mno);
+		if(searchValue != null ){
+			psmt.setString(2,searchValue);
 		}
 		
 		rs = psmt.executeQuery();
 		
-		
-		
+		//[페이징] 
 		int totalCnt =0;
 		if(rs.next()){
 			totalCnt = rs.getInt("cnt");
 		}
 		
-		
 		if(rs !=null)rs.close();
 		if(psmt !=null)psmt.close();
 		
-		
+		//[페이징]
 		pagingVO = new PagingVO(nowPage, totalCnt, 10); 
 		
 		rs=null;
 		
-		
 		//2. [게시글]
-			String sql = "select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
-			+" from board b inner join member m on b.mno = m.mno && m.mno = ? ";
-		
-		//[검색어 대입]
-		if(searchValue != null && !searchValue.equals("")){
-			sql+= " and b.btitle LIKE CONCAT('%',?,'%') "; 
+		String sql = "select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
+		+" from board b inner join member m on b.mno = m.mno where m.mno = ? ";
+	
+		//[검색]
+		if(searchValue != null){
+			sql += " and btitle like concat('%',?,'%')";		
 		}
-		//[인기순 최신순 정렬]
-		if(searchAlign != null && !searchAlign.equals("")){
+		
+		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " order by brdate desc ";
+				sql += " order by bno desc ";
 			}else if(searchAlign.equals("hit")){
 				sql += " order by bhit desc ";
 			}
 		}
-
-		sql +=" limit ?, ?";
 		
-		psmt = conn.prepareStatement(sql);
-
-		//[검색][페이징]
-		psmt.setInt(1, mno);
+		sql += " limit ?,? ";
 		
-		if(searchValue != null && !searchValue.equals("")){
-			psmt.setString(2, searchValue);
+		
+
+		
+ 		psmt = conn.prepareStatement(sql);
+ 		
+ 		psmt.setInt(1,mno);
+		if(searchValue != null){
+			psmt.setString(2,searchValue);
 			psmt.setInt(3, pagingVO.getStart()-1);
 			psmt.setInt(4, pagingVO.getPerPage());
 		}else{
@@ -126,7 +128,7 @@
 		}
 		
 		rs = psmt.executeQuery();
-
+		
 
 		
 	
@@ -151,8 +153,8 @@
 	<div class="container">
 	<nav>
 		<div id="mypagewelcome">
-			<span id="mypagenickname">닉네임</span>
-			<span id="mypagename">이름</span>
+			<span id="mypagenickname"><%if(member != null) out.print(member.getMnickNm()); %></span>
+			<span id="mypagename"><%if(member != null) out.print(member.getMname()); %></span>
 		</div>
 		<div>
 			<span id="span" class="mypagelist"><a href="mypage.jsp">내가 쓴 게시글</a></span>
@@ -165,9 +167,9 @@
 		<div id="boardname">내가 쓴 게시글</div>
 			<form name="frm" action="mypage.jsp" method="get">
 				<select id="select" name="searchAlign" onchange="document.frm.submit()">
-					<option value="late"<%if(searchAlign != null 
+					<option value="late" <%if(searchAlign != null 
 						&& searchAlign.equals("late")) out.print("selected"); %>>최신순</option>
-					<option value="hit"<%if(searchAlign != null 
+					<option value="hit" <%if(searchAlign != null 
 						&& searchAlign.equals("hit")) out.print("selected"); %>>인기순</option>
 				</select>
 				
@@ -205,7 +207,8 @@
 							<tr id ="tr">
 								<td id="td1"><%=pagingVO.getStart()+num %></td>
 								<td id="td2"><%=rs.getString("btype") %></td>
-								<td id="td3"><%=rs.getString("btitle") %><span id="replyspan">[<%=rs.getInt("rcnt") %>]</span></td>
+								<td id="td3"><a href="<%=request.getContextPath() %>/board/view.jsp?bno=<%=rs.getInt("bno")%>&blist=all">
+								<%=rs.getString("btitle") %></a><span id="replyspan">[<%=rs.getInt("rcnt") %>]</span></td>
 								<td id="td4"><%=rs.getString("mnickNm") %></td>
 								<td id="td5"><%=rs.getString("brdate") %></td>
 								<td id="td6"><%=rs.getInt("bhit") %></td>
@@ -217,6 +220,7 @@
 							num++;
 						}
 					}
+	
 				%> 
 				
 			</tbody>
@@ -225,6 +229,15 @@
 		
 		<!-- 페이징 영역 -->
 		 
+	<%
+	if(member != null){
+	%>
+		<div class="btnDiv">
+			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=all'">글쓰기</button>
+		</div>
+	<%	
+		}
+	%>
 	
 		
 	<div class="mainpaging">
@@ -233,8 +246,9 @@
 	%>
 			<span class="paging">
 		 		<a href="mypage.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-				&searchAlign=<%=searchAlign%>
-				&searchValue=<%=searchValue%>">이전</a>
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+						%>">이전</a>
 			</span>
 	<%
 		 }
@@ -247,17 +261,13 @@
 			 <%
 			 }else{
 				 		
-				 if(searchAlign != null){
 				 %>
 					<span class="pagingnum"><a href="mypage.jsp?nowPage=<%=i%>
-						&searchAlign=<%=searchAlign%>
-						&searchValue=<%=searchValue%>"><%=i %></a></span>
+						<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+						%>"><%=i %></a></span>
 				 <%
-				 }else{
-				 %>
-					<span class="pagingnum"><a href="mypage.jsp?nowPage=<%=i%>"><%=i  %></a></span>
-				<%
-				 }
+				
 			}
 			 	
 		}
@@ -266,8 +276,9 @@
 		%>
 			<span class="paging">
 			<a href="mypage.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
-				&searchAlign=<%=searchAlign%>
-				&searchValue=<%=searchValue%>">다음</a>
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+						%>">다음</a>
 			</span>
 		<%
 		}
@@ -283,7 +294,8 @@
 
 
 <%
-}catch(Exception e){
+
+	}catch(Exception e){
 		e.printStackTrace();
 	}finally{
 		if(conn != null) conn.close();

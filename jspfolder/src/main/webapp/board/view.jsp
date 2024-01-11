@@ -262,35 +262,6 @@
 <link href="<%=request.getContextPath() %>/css/view.css" type="text/css" rel="stylesheet">
 <script src="<%=request.getContextPath() %>/js/jquery-3.7.1.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/view.js"></script>
-<script>
-/*  blist 파라미터값을 가져오기 위해선 html에 미리 변수로 선언해줘야 하는데
- 	(파라미터로 받아왔다고 html에서 바로 쓸 수 없음)
-	표현식이라 문자열로 받아와야 변수로 사용할 수 있다.
-*/
- let blist='<%=blist%>';
-	
-	function listFn(){
-		if(blist=="all"){
-			location.href="<%=request.getContextPath() %>/list/allList.jsp";
-		}else if(blist=="notice"){
-			location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-		}else if(blist=="hot"){
-			location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-		}else if(blist=="free"){
-			location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-		}else if(blist=="zone"){
-			location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-		}else if(blist=="gear"){
-			location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-		}else if(blist=="attend"){
-			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-		}else if(blist=="QnA"){
-			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-		}else{
-			location.href="<%=request.getContextPath() %>/index.jsp";
-		}
-	}
-</script>
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
@@ -350,13 +321,13 @@
 				</tr>
 			</tbody>
 		</table>
-		<button onclick="listFn()" class="viewBtn">목록</button>
+		<button onclick="connectList()" class="viewBtn">목록</button>
 		
 		<div id="writeBtns">
 		<%	// 로그인한 유저가 쓴 게시글에서만 수정, 삭제 버튼 노출
 		if(member != null && member.getMno() == board.getMno()){
 		%>
-			<button onclick="location.href='modify.jsp?bno=<%=board.getBno()%>'" class="viewBtn">수정</button>
+			<button onclick="location.href='modify.jsp?bno=<%=board.getBno()%>&blist=<%=blist%>'" class="viewBtn">수정</button>
 			<button onclick="delFn()" class="viewBtn">삭제</button>
 			<script>
 				function delFn(){
@@ -372,6 +343,7 @@
 		%>
 		<form name="delfrm" action="delete.jsp" method="post">
 			<input type="hidden" name="bno" value="<%=bno%>">
+			<input type="hidden" name="blist" value="<%=blist %>">
 		</form>
 		</div>	
 
@@ -417,7 +389,14 @@
 	</section>
 	</div>
 	<%@ include file="/include/footer.jsp" %>
-	
+	<form name="connectfrm" method="get" action="connectList.jsp">
+			<input type="hidden" name="blist" value="<%=blist %>">
+	</form>
+	<script>
+		function connectList(){
+			document.connectfrm.submit();
+		}
+	</script>
 </body>
 
 </html>

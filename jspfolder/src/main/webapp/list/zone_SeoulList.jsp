@@ -12,7 +12,6 @@
 
 //	검색
 	String searchAlign = request.getParameter("searchAlign");
-	String searchAlignGear = request.getParameter("searchAlignGear");
 	String searchType = request.getParameter("searchType");
 	String searchValue = request.getParameter("searchValue");
 
@@ -20,18 +19,15 @@
 	if(searchAlign == null){
 		searchAlign = "late";
 	}
-	
-	if(searchAlignGear == null){
-		searchAlignGear = "gear_Tent";
-	}
 
 //	페이징
 	String nowPageParam = request.getParameter("nowPage"); // nowPage 파라미터 생성
-	
+
 	int nowPage = 1;
 	if(nowPageParam != null && !nowPageParam.equals("")){
 		nowPage = Integer.parseInt(nowPageParam); // 페이지 번호를 현재페이지로 변경
 	}
+
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
@@ -51,31 +47,17 @@
 						+ "   FROM board b "
 						+ "  INNER JOIN member m "
 						+ "     ON b.mno = m.mno "
-						+ "  WHERE btype like '캠핑장비%' ";
+						+ "  WHERE btype = '캠핑지역_서울'";
 		
 //		제목, 작성자 검색
 		if(searchType != null){
 			if(searchType.equals("title")){
-				totalSql += " AND btitle LIKE CONCAT('%',?,'%') ";
+				totalSql = " AND btitle LIKE CONCAT('%',?,'%')";
 			}else if(searchType.equals("writer")){
-				totalSql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
+				totalSql = " AND m.mnickNm LIKE CONCAT('%',?,'%')";
 			}
 		}
 
-		if(searchAlignGear != null){
-			if(searchAlignGear.equals("gear_Tent")){
-				totalSql += " and btype = '캠핑장비_텐트' ";
-			}else if(searchAlignGear.equals("gear_Bad")){
-				totalSql += " and btype = '캠핑장비_침낭' ";
-			}else if(searchAlignGear.equals("gear_Chair")){
-				totalSql += " and btype = '캠핑장비_의자' ";
-			}else if(searchAlignGear.equals("gear_Fire")){
-				totalSql += " and btype = '캠핑장비_화기' ";
-			}else if(searchAlignGear.equals("gear_Car")){
-				totalSql += " and btype = '캠핑장비_차박' ";
-			}
-		}
-		
 		psmt = conn.prepareStatement(totalSql);
 		
 		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
@@ -104,31 +86,8 @@
 				   + "   FROM board b"
 				   + "  INNER JOIN member m"
 				   + "     ON b.mno = m.mno"
-				   + "  WHERE btype like '캠핑장비%' ";
+				   + "  WHERE btype = '캠핑지역_서울'";
 		
-		if(searchAlignGear != null){
-			if(searchAlignGear.equals("gear_Tent")){
-				sql += " and btype = '캠핑장비_텐트' ";
-			}else if(searchAlignGear.equals("gear_Bad")){
-				sql += " and btype = '캠핑장비_침낭' ";
-			}else if(searchAlignGear.equals("gear_Chair")){
-				sql += " and btype = '캠핑장비_의자' ";
-			}else if(searchAlignGear.equals("gear_Fire")){
-				sql += " and btype = '캠핑장비_화기' ";
-			}else if(searchAlignGear.equals("gear_Car")){
-				sql += " and btype = '캠핑장비_차박' ";
-			}
-		}
-
-//		제목, 작성자 검색
-		if(searchType != null){
-			if(searchType.equals("title")){
-				sql += " AND btitle LIKE CONCAT('%',?,'%') ";
-			}else if(searchType.equals("writer")){
-				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
-			}
-		}
-
 //	option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
@@ -137,8 +96,10 @@
 				sql += " ORDER BY bhit DESC ";
 			}
 		}
+		
 
 		sql += " LIMIT ?, ? ";
+		
 		psmt = conn.prepareStatement(sql);
 		
 		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
@@ -149,15 +110,14 @@
 			psmt.setInt(1, pagingVO.getStart()-1);
 			psmt.setInt(2, pagingVO.getPerPage());
 		}
-		
-		
+	
 		rs = psmt.executeQuery();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>캠핑장비 게시판</title>
+<title>캠핑지역 게시판</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/list.css" type="text/css" rel="stylesheet">
 </head>
@@ -167,10 +127,10 @@
 <%@ include file="/include/nav.jsp" %>
 	<section>
 <!-- 게시판페이지 이름 -->
-		<h2>캠핑장비 게시판</h2>
+		<h2>캠핑지역[서울] 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
-		<form name="frm1" action="gearList.jsp" method="get" id="frm1">
+		<form name="frm1" action="zoneList.jsp" method="get" id="frm1">
 <!-- 게시글 정렬종류 -->
 			<select name="searchAlign" onchange="document.frm1.submit()" id="select">
 				<option value="late" 
@@ -185,36 +145,9 @@
 				</option>
 
 			</select>
-			<select name="searchAlignGear" onchange="document.frm1.submit()">
-				<option value="gear_Tent" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Tent"))out.print("selected"); 
-					%>>텐트/타프
-				</option>
-				<option value="gear_Bad" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Bad"))out.print("selected"); 
-					%>>침낭/매트
-				</option>
-				<option value="gear_Chair" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Chair"))out.print("selected"); 
-					%>>의자/테이블
-				</option>
-				<option value="gear_Fire" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Fire"))out.print("selected"); 
-					%>>화기/기타
-				</option>
-				<option value="gear_Car" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Car"))out.print("selected"); 
-					%>>차박
-				</option>
-			</select>
 		</form>
 <!-- 게시글 검색폼 -->
-		<form name="frm2" action="gearList.jsp" method="get" id="frm2">
+		<form name="frm2" action="zoneList.jsp" method="get" id="frm2">
 			<select name="searchType">
 				<option value="title" 
 					<%if(searchType != null && 
@@ -232,8 +165,6 @@
 				value="<%if(searchValue != null) out.print(searchValue); %>">
 			<input type="hidden" name="searchAlign"
 				 value="<%if(searchAlign != null) out.print(searchAlign); %>">
-			<input type="hidden" name="searchAlignGear"
-				 value="<%if(searchAlignGear != null) out.print(searchAlignGear); %>">
 			<button class="searchBtn">검색</button>
 		</form>
 		</div>
@@ -257,9 +188,8 @@
 %>
 			<tr><td id="td" colspan="6">아무것도 검색되지 않았습니다.</td></tr>
 <%	
-			}else{		
-			while(true){
-
+			}else{			
+			while(rs.next()){
 				int bno = rs.getInt("bno");
 				String btype = rs.getString("btype");
 				String btitle = rs.getString("btitle");
@@ -273,7 +203,7 @@
 				<td>
 					<!-- 제목 클릭시 view.jsp 이동 및 blist 파라미터 넘기기 -->
 					<a href="<%=request.getContextPath()%>
-							/board/view.jsp?bno=<%=bno%>&blist=gear"><%=btitle %></a>
+							/board/view.jsp?bno=<%=bno%>&blist=zone"><%=btitle %></a>
 					<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 				</td>
 				<td><%=mnickNm %></td>
@@ -281,9 +211,6 @@
 				<td><%=bhit %></td>
 			</tr>
 <%
-					if(!rs.next()){
-						break;
-					}
 				}
 			}
 %>
@@ -296,7 +223,7 @@
 	<div class="btnDiv">
 	<!-- 글쓰기 버튼: blist파라미터 넘기기 -->
 		<button class="writeBtn" 
-		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=gear'">글쓰기
+		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=zone'">글쓰기
 		</button>
 	</div>
 <% 
@@ -308,12 +235,11 @@
 	if(pagingVO.getStartPage() > pagingVO.getCntPage()){
 %>
 		<span class="paging">
-		<a href="gearList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-					<%if(searchAlignGear!=null && !searchAlignGear.equals("")) out.print("&searchAlignGear="+searchAlignGear);
-						if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
-						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
-						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
-						%>" class="pluspage">이전</a>
+		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+				%>" class="pluspage">이전</a>
 		</span>
 <%
 	}
@@ -324,29 +250,27 @@
 			<b><%=i %></b>
 <%
 		}else{
+			if(searchType != null){
 %>
 				<span class="pagingnum">
-				<a href="gearList.jsp?nowPage=<%=i%>
-					<%if(searchAlignGear!=null && !searchAlignGear.equals("")) out.print("&searchAlignGear="+searchAlignGear);
-						if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
-						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
-						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
-						%>"><%=i %></a>
+				<a href="zoneList.jsp?nowPage1=<%=i%>
+					<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+				%>"><%=i %></a>
 				</span>
 <%
-			
 		}
 	}
 	
 	if(pagingVO.getEndPage() < pagingVO.getLastPage()){
 %>
 		<span class="paging">
-		<a href="gearList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
-				<%if(searchAlignGear!=null && !searchAlignGear.equals("")) out.print("&searchAlignGear="+searchAlignGear);
-						if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
-						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
-						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
-						%> " class="pluspage">다음</a>
+		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+				%>" class="pluspage">다음</a>
 		</span>
 <%
 	}
@@ -358,6 +282,7 @@
 </body>
 </html>
 <%
+	}
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

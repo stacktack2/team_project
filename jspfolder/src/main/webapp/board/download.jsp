@@ -11,7 +11,7 @@
 	String foriginNm = request.getParameter("foriginNm");
 	
 	//웹앱 하위에 있는 업로드폴더 위치
-	/* String root = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload"; */
+	//String root = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	//String root = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	String root = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
 	

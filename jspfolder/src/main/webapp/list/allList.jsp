@@ -120,7 +120,6 @@
 			psmt.setInt(1, pagingVO.getStart()-1);
 			psmt.setInt(2, pagingVO.getPerPage());
 		}
-		
 		rs = psmt.executeQuery();
 	
 %>

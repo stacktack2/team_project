@@ -8,8 +8,6 @@
 	//(mnickNm)
 	Member member = (Member)session.getAttribute("login");
 
-	
-	
 	String blist = request.getParameter("blist");
 	//null체크를 했어도(비정상 접근 차단 이유) 아래에서 메소드 사용시마다 널체크 해야함. if로 전체를 감싸지 않는이상 무조건 아래까지 실행되기 때문.
 	if(blist==null){
@@ -87,13 +85,13 @@
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
-								<option value="캠핑지역_서울">서울</option>
-								<option value="캠핑지역_경기권">경기권</option>
-								<option value="캠핑지역_강원권">강원권</option>
-								<option value="캠핑지역_충청권">충청권</option>
-								<option value="캠핑지역_영남권">영남권</option>
-								<option value="캠핑지역_호남권">호남권</option>
-								<option value="캠핑지역_제주">제주</option>
+								<option value="캠핑지역_서울" <%if(blist != null && blist.equals("zone_Seoul")) out.print("selected"); %>>서울</option>
+								<option value="캠핑지역_경기권" <%if(blist != null && blist.equals("zone_GG")) out.print("selected"); %>>경기권</option>
+								<option value="캠핑지역_강원권" <%if(blist != null && blist.equals("zone_GW")) out.print("selected"); %>>강원권</option>
+								<option value="캠핑지역_충청권" <%if(blist != null && blist.equals("zone_CC")) out.print("selected"); %>>충청권</option>
+								<option value="캠핑지역_영남권" <%if(blist != null && blist.equals("zone_YN")) out.print("selected"); %>>영남권</option>
+								<option value="캠핑지역_호남권" <%if(blist != null && blist.equals("zone_HN")) out.print("selected"); %>>호남권</option>
+								<option value="캠핑지역_제주" <%if(blist != null && blist.equals("zone_JJ")) out.print("selected"); %>>제주</option>
 							</select>
 						</td>
 						<%}else if(blist != null && blist.equals("gear")){ %>
@@ -101,11 +99,11 @@
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
-								<option value="캠핑장비_텐트">텐트/타프</option>
-								<option value="캠핑장비_침낭">침낭/매트</option>
-								<option value="캠핑장비_의자">의자/테이블</option>
-								<option value="캠핑장비_화기">화기/기타</option>
-								<option value="캠핑장비_차박">차박</option>
+								<option value="캠핑장비_텐트" <%if(blist != null && blist.equals("gear_Tent")) out.print("selected"); %>>텐트/타프</option>
+								<option value="캠핑장비_침낭" <%if(blist != null && blist.equals("gear_Bad")) out.print("selected"); %>>침낭/매트</option>
+								<option value="캠핑장비_의자" <%if(blist != null && blist.equals("gear_Chair")) out.print("selected"); %>>의자/테이블</option>
+								<option value="캠핑장비_화기" <%if(blist != null && blist.equals("gear_Fire")) out.print("selected"); %>>화기/기타</option>
+								<option value="캠핑장비_차박" <%if(blist != null && blist.equals("gear_Car")) out.print("selected"); %>>차박</option>
 							</select>
 						</td>
 						<% }else{%>

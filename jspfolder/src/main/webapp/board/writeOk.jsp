@@ -1,8 +1,6 @@
 <%
 //btype을 받을때 정해진 데이터만 받는 부분 예외처리 미비
 %>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="Vo.Member"%>

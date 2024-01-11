@@ -22,7 +22,7 @@
 	}
 
 	if(searchAlignGear == null){
-		searchAlignGear = "";
+		searchAlignGear = "gear_Tent";
 	}
 
 //	페이징
@@ -148,7 +148,7 @@
 		<h2>캠핑지역 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
-		<form name="frm1" action="zoneList.jsp" method="get" id="frm1">
+		<form name="frm1" action="gearList.jsp" method="get" id="frm1">
 <!-- 게시글 정렬종류 -->
 			<select name="searchAlign" onchange="document.frm1.submit()" id="select">
 				<option value="late" 
@@ -163,31 +163,31 @@
 				</option>
 
 			</select>
-			<select>
-				<option value="gear_Bad" 
+			<select name="searchAlignGear" onchange="document.frm1.submit()">
+				<option value="gear_Tent" 
 					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Bad"))out.print("selected"); 
-					%>>서울
+							searchAlignGear.equals("gear_Tent"))out.print("selected"); 
+					%>>텐트/타프
+				</option>
+				<option value="gear_Car" 
+					<%if(searchAlignGear != null && 
+							searchAlignGear.equals("gear_Car"))out.print("selected"); 
+					%>>침낭/매트
+				</option>
+				<option value="gear_Chair" 
+					<%if(searchAlignGear != null && 
+							searchAlignGear.equals("gear_Chair"))out.print("selected"); 
+					%>>의자/테이블
+				</option>
+				<option value="gear_Fire" 
+					<%if(searchAlignGear != null && 
+							searchAlignGear.equals("gear_Fire"))out.print("selected"); 
+					%>>화기/기타
 				</option>
 				<option value="gear_Bad" 
 					<%if(searchAlignGear != null && 
 							searchAlignGear.equals("gear_Bad"))out.print("selected"); 
-					%>>경기권
-				</option>
-				<option value="gear_Bad" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Bad"))out.print("selected"); 
-					%>>강원권
-				</option>
-				<option value="gear_Bad" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("CC"))out.print("selected"); 
-					%>>충청권
-				</option>
-				<option value="gear_Bad" 
-					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("YN"))out.print("selected"); 
-					%>>영남권
+					%>>차박
 				</option>
 			</select>
 		</form>
@@ -210,6 +210,8 @@
 				value="<%if(searchValue != null) out.print(searchValue); %>">
 			<input type="hidden" name="searchAlign"
 				 value="<%if(searchAlign != null) out.print(searchAlign); %>">
+			<input type="hidden" name="searchAlignGear"
+				 value="<%if(searchAlignGear != null) out.print(searchAlignGear); %>">
 			<button class="searchBtn">검색</button>
 		</form>
 		</div>
@@ -248,7 +250,7 @@
 				<td>
 					<!-- 제목 클릭시 view.jsp 이동 및 blist 파라미터 넘기기 -->
 					<a href="<%=request.getContextPath()%>
-							/board/view.jsp?bno=<%=bno%>&blist=zone"><%=btitle %></a>
+							/board/view.jsp?bno=<%=bno%>&blist=gear"><%=btitle %></a>
 					<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 				</td>
 				<td><%=mnickNm %></td>
@@ -268,7 +270,7 @@
 	<div class="btnDiv">
 	<!-- 글쓰기 버튼: blist파라미터 넘기기 -->
 		<button class="writeBtn" 
-		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=zone'">글쓰기
+		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=gear'">글쓰기
 		</button>
 	</div>
 <% 
@@ -283,7 +285,8 @@
 		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 					&searchAlign=<%=searchAlign%>
 					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>" class="pluspage">이전</a>
+					&searchValue=<%=searchValue%>
+					&searchAlignGear=<%=searchAlignGear %>" class="pluspage">이전</a>
 		</span>
 <%
 	}
@@ -300,7 +303,8 @@
 				<a href="zoneList.jsp?nowPage1=<%=i%>
 					&searchAlign=<%=searchAlign%>
 					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>"><%=i %></a>
+					&searchValue=<%=searchValue%>
+					&searchAlignGear=<%=searchAlignGear %>"><%=i %></a>
 				</span>
 <%
 			}else{
@@ -318,7 +322,8 @@
 		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
 					&searchAlign=<%=searchAlign%>
 					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>" class="pluspage">다음</a>
+					&searchValue=<%=searchValue%>
+					&searchAlignGear=<%=searchAlignGear %>" class="pluspage">다음</a>
 		</span>
 <%
 	}

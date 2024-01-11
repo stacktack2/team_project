@@ -18,6 +18,8 @@ BEGIN
 		
         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
           VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -28+30*i SECOND)),i,'QnA',i);
+
+ 	
           
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
@@ -63,7 +65,8 @@ BEGIN
         
         
         
-        
+        INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
+          VALUES(concat('btitle',i),concat('bcontent',i),(DATE_ADD(NOW(), INTERVAL -15+30*i SECOND)),i,'출석체크',i);
         
 		INSERT INTO reply(rcontent,rrdate,mno,bno)
           VALUES(concat('rcontent',i),now(),i,i);

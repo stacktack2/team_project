@@ -6,7 +6,7 @@
 	Member memberNav = (Member)session.getAttribute("login");
 	
  	//[검색]
-	String navValue = request.getParameter("navValue");
+	String navValue = request.getParameter("searchValue");
  
 %>
 <!DOCTYPE html>
@@ -31,7 +31,7 @@
 		</div>
 		<div class=searchMain>
 			<form name="navFrm" action="<%=request.getContextPath()%>/list/allList.jsp" method="get">
-				<input type="text" name="navValue"
+				<input type="text" name="searchValue"
 					value="<%if(navValue!=null) out.print(navValue); %>"> 
 				<button>검색</button>
 			</form>

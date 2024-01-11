@@ -30,13 +30,22 @@
 }
 .replyTable{
 	width: 90%; margin: 10px 0 50px;
-	border: 1px solid gray;
 	}
+.replyTable tr{
+	border: 1px solid gray;
+	background-color: #e5e5e5;
+}
 .replyTable tr th{
-	width:80%; text-align: left; padding-left: 10px;
+	width:80%; float: left; padding-left: 10px;
+	text-align: left;
+}
+.rcontent{
+	font-weight: 300; padding-left: 10px;
 }
 .replyTable tr td{
-	width:20%; text-align: right; padding-right:10px;
+	width:20%; float: right; padding-right:10px;
+	text-align: right;
 }
+.replyBtn{padding-right:10px;}
 
 

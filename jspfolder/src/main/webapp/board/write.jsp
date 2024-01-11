@@ -64,8 +64,8 @@
 						<td>
 							<select name="btype" id="mainSelect" onchange="showSubSelect(this)" >
 								<option value="자유게시판" <%if(blist != null && blist.equals("free")) out.print("selected"); %>> 자유게시판</option>
-								<option value="캠핑지역" <%if(blist != null && blist.equals("zone")) out.print("selected"); %>> 캠핑지역</option>
-								<option value="캠핑장비" <%if(blist != null && blist.equals("gear")) out.print("selected"); %>> 캠핑장비</option>
+								<option value="캠핑지역" <%if(blist != null && blist.substring(0,4).equals("zone")) out.print("selected"); %>> 캠핑지역</option>
+								<option value="캠핑장비" <%if(blist != null && blist.substring(0,4).equals("gear")) out.print("selected"); %>> 캠핑장비</option>
 								<option value="출석체크" <%if(blist != null && blist.equals("attend")) out.print("selected"); %>> 출석체크</option>
 								<option value="QnA" <%if(blist != null && blist.equals("QnA")) out.print("selected"); %>> QnA</option>
 							<%
@@ -80,7 +80,7 @@
 					</tr>
 					<tr id="subTr">
 						<th id="writerTh">작성자</th>
-						<% if(blist != null && blist.equals("zone")){%>
+						<% if(blist != null && blist.substring(0,4).equals("zone")){%>
 						<td id="writerTd"><%=mnickNm%></td>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
@@ -94,7 +94,7 @@
 								<option value="캠핑지역_제주" <%if(blist != null && blist.equals("zone_JJ")) out.print("selected"); %>>제주</option>
 							</select>
 						</td>
-						<%}else if(blist != null && blist.equals("gear")){ %>
+						<%}else if(blist != null && blist.substring(0,4).equals("gear")){ %>
 						<td id="writerTd"><%=mnickNm%></td>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">

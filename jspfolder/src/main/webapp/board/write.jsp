@@ -47,7 +47,7 @@
 	<div class="container">
 	<%@ include file="/include/nav.jsp" %>
 	<section>
-		<h2 >게시글 등록</h2>
+		<h2>게시글 등록</h2>
 		<%	
 			//encytype이 있어야 전달받은 파일을 기계어로 백단에 그대로 파라미터로 보낼 수 있음(원래 파라미터는 문자열로만 전달가능하기에)
 			//라이브러리필요: cos.jar를 lib파일에 이게 있어야 알아서 bulid됨 

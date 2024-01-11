@@ -20,19 +20,18 @@
 	if(searchAlign == null){
 		searchAlign = "late";
 	}
-
+	
 	if(searchAlignGear == null){
 		searchAlignGear = "gear_Tent";
 	}
 
 //	페이징
 	String nowPageParam = request.getParameter("nowPage"); // nowPage 파라미터 생성
-
+	
 	int nowPage = 1;
 	if(nowPageParam != null && !nowPageParam.equals("")){
 		nowPage = Integer.parseInt(nowPageParam); // 페이지 번호를 현재페이지로 변경
 	}
-
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
@@ -57,12 +56,26 @@
 //		제목, 작성자 검색
 		if(searchType != null){
 			if(searchType.equals("title")){
-				totalSql = " AND btitle LIKE CONCAT('%',?,'%') ";
+				totalSql += " AND btitle LIKE CONCAT('%',?,'%') ";
 			}else if(searchType.equals("writer")){
-				totalSql = " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
+				totalSql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
 			}
 		}
 
+		if(searchAlignGear != null){
+			if(searchAlignGear.equals("gear_Tent")){
+				totalSql += " and btype = '캠핑장비_텐트' ";
+			}else if(searchAlignGear.equals("gear_Bad")){
+				totalSql += " and btype = '캠핑장비_침낭' ";
+			}else if(searchAlignGear.equals("gear_Chair")){
+				totalSql += " and btype = '캠핑장비_의자' ";
+			}else if(searchAlignGear.equals("gear_Fire")){
+				totalSql += " and btype = '캠핑장비_화기' ";
+			}else if(searchAlignGear.equals("gear_Car")){
+				totalSql += " and btype = '캠핑장비_차박' ";
+			}
+		}
+		
 		psmt = conn.prepareStatement(totalSql);
 		
 		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
@@ -93,31 +106,39 @@
 				   + "     ON b.mno = m.mno"
 				   + "  WHERE btype like '캠핑장비%' ";
 		
+		if(searchAlignGear != null){
+			if(searchAlignGear.equals("gear_Tent")){
+				sql += " and btype = '캠핑장비_텐트' ";
+			}else if(searchAlignGear.equals("gear_Bad")){
+				sql += " and btype = '캠핑장비_침낭' ";
+			}else if(searchAlignGear.equals("gear_Chair")){
+				sql += " and btype = '캠핑장비_의자' ";
+			}else if(searchAlignGear.equals("gear_Fire")){
+				sql += " and btype = '캠핑장비_화기' ";
+			}else if(searchAlignGear.equals("gear_Car")){
+				sql += " and btype = '캠핑장비_차박' ";
+			}
+		}
+
+//		제목, 작성자 검색
+		if(searchType != null){
+			if(searchType.equals("title")){
+				sql += " AND btitle LIKE CONCAT('%',?,'%') ";
+			}else if(searchType.equals("writer")){
+				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
+			}
+		}
+
 //	option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
 				sql += " ORDER BY bno DESC ";
 			}else if(searchAlign.equals("hit")){
 				sql += " ORDER BY bhit DESC ";
-			}else if(searchAlign.equals("Seoul")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("GG")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("GW")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("CC")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("YN")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("HN")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("JJ")){
-				sql += " ORDER BY btype DESC ";
 			}
 		}
 
 		sql += " LIMIT ?, ? ";
-		
 		psmt = conn.prepareStatement(sql);
 		
 		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
@@ -128,14 +149,15 @@
 			psmt.setInt(1, pagingVO.getStart()-1);
 			psmt.setInt(2, pagingVO.getPerPage());
 		}
-	
+		
+		
 		rs = psmt.executeQuery();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>캠핑지역 게시판</title>
+<title>캠핑장비 게시판</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/list.css" type="text/css" rel="stylesheet">
 </head>
@@ -145,7 +167,7 @@
 <%@ include file="/include/nav.jsp" %>
 	<section>
 <!-- 게시판페이지 이름 -->
-		<h2>캠핑지역 게시판</h2>
+		<h2>캠핑장비 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
 		<form name="frm1" action="gearList.jsp" method="get" id="frm1">
@@ -169,9 +191,9 @@
 							searchAlignGear.equals("gear_Tent"))out.print("selected"); 
 					%>>텐트/타프
 				</option>
-				<option value="gear_Car" 
+				<option value="gear_Bad" 
 					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Car"))out.print("selected"); 
+							searchAlignGear.equals("gear_Bad"))out.print("selected"); 
 					%>>침낭/매트
 				</option>
 				<option value="gear_Chair" 
@@ -184,15 +206,15 @@
 							searchAlignGear.equals("gear_Fire"))out.print("selected"); 
 					%>>화기/기타
 				</option>
-				<option value="gear_Bad" 
+				<option value="gear_Car" 
 					<%if(searchAlignGear != null && 
-							searchAlignGear.equals("gear_Bad"))out.print("selected"); 
+							searchAlignGear.equals("gear_Car"))out.print("selected"); 
 					%>>차박
 				</option>
 			</select>
 		</form>
 <!-- 게시글 검색폼 -->
-		<form name="frm2" action="zoneList.jsp" method="get" id="frm2">
+		<form name="frm2" action="gearList.jsp" method="get" id="frm2">
 			<select name="searchType">
 				<option value="title" 
 					<%if(searchType != null && 
@@ -201,7 +223,7 @@
 				</option>
 				<option value="writer" 
 					<%if(searchType != null && 
-						searchType.equals("title")) out.print("selected"); 
+						searchType.equals("writer")) out.print("selected"); 
 					%>>작성자
 				</option>
 			</select>
@@ -235,8 +257,9 @@
 %>
 			<tr><td id="td" colspan="6">아무것도 검색되지 않았습니다.</td></tr>
 <%	
-			}else{			
-			while(rs.next()){
+			}else{		
+			while(true){
+
 				int bno = rs.getInt("bno");
 				String btype = rs.getString("btype");
 				String btitle = rs.getString("btitle");
@@ -258,6 +281,9 @@
 				<td><%=bhit %></td>
 			</tr>
 <%
+					if(!rs.next()){
+						break;
+					}
 				}
 			}
 %>
@@ -282,11 +308,12 @@
 	if(pagingVO.getStartPage() > pagingVO.getCntPage()){
 %>
 		<span class="paging">
-		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-					&searchAlign=<%=searchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>
-					&searchAlignGear=<%=searchAlignGear %>" class="pluspage">이전</a>
+		<a href="gearList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+					<%if(searchAlignGear!=null && !searchAlignGear.equals("")) out.print("&searchAlignGear="+searchAlignGear);
+						if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+						%>" class="pluspage">이전</a>
 		</span>
 <%
 	}
@@ -297,33 +324,29 @@
 			<b><%=i %></b>
 <%
 		}else{
-			if(searchType != null){
 %>
 				<span class="pagingnum">
-				<a href="zoneList.jsp?nowPage1=<%=i%>
-					&searchAlign=<%=searchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>
-					&searchAlignGear=<%=searchAlignGear %>"><%=i %></a>
+				<a href="gearList.jsp?nowPage=<%=i%>
+					<%if(searchAlignGear!=null && !searchAlignGear.equals("")) out.print("&searchAlignGear="+searchAlignGear);
+						if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+						%>"><%=i %></a>
 				</span>
 <%
-			}else{
-%>
-				<a href="zoneList.jsp?nowPage1=<%=i%>
-					&searchAlign=<%=searchAlign%>"><%=i %></a>
-<%
-			}
+			
 		}
 	}
 	
 	if(pagingVO.getEndPage() < pagingVO.getLastPage()){
 %>
 		<span class="paging">
-		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
-					&searchAlign=<%=searchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>
-					&searchAlignGear=<%=searchAlignGear %>" class="pluspage">다음</a>
+		<a href="gearList.jsp?nowPage=<%=pagingVO.getEndPage()+1%>
+				<%if(searchAlignGear!=null && !searchAlignGear.equals("")) out.print("&searchAlignGear="+searchAlignGear);
+						if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+						if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+						if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+						%> " class="pluspage">다음</a>
 		</span>
 <%
 	}

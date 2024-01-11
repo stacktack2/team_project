@@ -45,22 +45,22 @@
 				<a href="<%=request.getContextPath()%>/list/zoneList.jsp">캠핑지역 소개/리뷰</a>
 				<ul class="submenu">
 					<li><a href="<%=request.getContextPath()%>/list/zone_SeoulList.jsp">서울</a></li>
-					<li><a href="<%=request.getContextPath()%>zone_GGList.jsp">경기권</a></li>
-					<li><a href="<%=request.getContextPath()%>zone_GWList.jsp">강원권</a></li>
-					<li><a href="<%=request.getContextPath()%>zone_CCList.jsp">충청권</a></li>
-					<li><a href="<%=request.getContextPath()%>zone_YNList.jsp">영남권</a></li>
-					<li><a href="<%=request.getContextPath()%>zone_HNList.jsp">호남권</a></li>
-					<li><a href="<%=request.getContextPath()%>zone_JJList.jsp">제주</a></li>			
+					<li><a href="<%=request.getContextPath()%>/list/zone_GGList.jsp">경기권</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/zone_GWList.jsp">강원권</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/zone_CCList.jsp">충청권</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/zone_YNList.jsp">영남권</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/zone_HNList.jsp">호남권</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/zone_JJList.jsp">제주</a></li>			
 				</ul>
 			</li>
 			<li>
 				<a href="<%=request.getContextPath()%>/list/gearList.jsp">캠핑장비 소개/리뷰</a>
 				<ul class="submenu">
-					<li><a href="<%=request.getContextPath()%>gear_TentList.jsp">텐트/타프</a></li>
-					<li><a href="<%=request.getContextPath()%>gear_BadList.jsp">침낭/매트</a></li>
-					<li><a href="<%=request.getContextPath()%>gear_ChairList.jsp">의자/테이블</a></li>
-					<li><a href="<%=request.getContextPath()%>gear_FireList.jsp">화기/기타</a></li>
-					<li><a href="<%=request.getContextPath()%>gear_CarList.jsp">차박</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gearList.jsp">텐트/타프</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_BadList.jsp">침낭/매트</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_ChairList.jsp">의자/테이블</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_FireList.jsp">화기/기타</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_TentList.jsp">차박</a></li>
 				</ul>
 			</li>
 			<li><a href="<%=request.getContextPath()%>/list/attendList.jsp">출석체크</a></li>

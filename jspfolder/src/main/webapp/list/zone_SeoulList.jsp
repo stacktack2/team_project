@@ -47,7 +47,7 @@
 						+ "   FROM board b "
 						+ "  INNER JOIN member m "
 						+ "     ON b.mno = m.mno "
-						+ "  WHERE btype = '캠핑지역'";
+						+ "  WHERE btype = '캠핑지역_서울'";
 		
 //		제목, 작성자 검색
 		if(searchType != null){
@@ -94,22 +94,9 @@
 				sql += " ORDER BY bno DESC ";
 			}else if(searchAlign.equals("hit")){
 				sql += " ORDER BY bhit DESC ";
-			}else if(searchAlign.equals("Seoul")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("GG")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("GW")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("CC")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("YN")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("HN")){
-				sql += " ORDER BY btype DESC ";
-			}else if(searchAlign.equals("JJ")){
-				sql += " ORDER BY btype DESC ";
 			}
 		}
+		
 
 		sql += " LIMIT ?, ? ";
 		
@@ -140,7 +127,7 @@
 <%@ include file="/include/nav.jsp" %>
 	<section>
 <!-- 게시판페이지 이름 -->
-		<h2>캠핑지역 게시판</h2>
+		<h2>캠핑지역[서울] 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
 		<form name="frm1" action="zoneList.jsp" method="get" id="frm1">
@@ -169,7 +156,7 @@
 				</option>
 				<option value="writer" 
 					<%if(searchType != null && 
-						searchType.equals("title")) out.print("selected"); 
+						searchType.equals("writer")) out.print("selected"); 
 					%>>작성자
 				</option>
 			</select>

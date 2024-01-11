@@ -42,7 +42,7 @@ public class Regular {
 	}
 //	아이디 정규식
 	public static boolean isId(String str) {
-		return Pattern.matches("^[a-z][a-z0-9]{4,20}$", str);
+		return Pattern.matches("^[a-z][a-z0-9]{3,20}$", str);
 	}
 //	비밀번호 정규식
 	public static boolean isPw(String str) {

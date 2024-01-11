@@ -10,65 +10,71 @@
 			location.href="<%= request.getContextPath() %>/index.jsp";
 		</script>
 		<%
-	}
-	
-	
-	if(blist.equals("all")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/allList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("notice")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/noticeList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("hot")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/hotList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("free")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/freeList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("zone")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/zoneList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("gear")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/gearList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("attend")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/attendList.jsp";
-		</script>
-		<%
-	}else if(blist.equals("QnA")){
-		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/QnAList.jsp";
-		</script>
-		<%
 	}else{
+		
 		%>
-		<script>
-			location.href="<%= request.getContextPath() %>/list/allList.jsp";
-		</script>
+			<%-- <script>
+				location.href="<%= request.getContextPath() %>/list/<%=blist%>List.jsp";
+			</script>  --%>
+		
 		<%
+		
+		if(blist.equals("all")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/allList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("notice")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/noticeList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("hot")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/hotList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("free")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/freeList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("zone")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/zoneList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("gear")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/gearList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("attend")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/attendList.jsp";
+			</script>
+			<%
+		}else if(blist.equals("QnA")){
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/QnAList.jsp";
+			</script>
+			<%
+		}else{
+			%>
+			<script>
+				location.href="<%= request.getContextPath() %>/list/allList.jsp";
+			</script>
+			<%
+		}
+	
 	}
-	
-	
 	
 %>

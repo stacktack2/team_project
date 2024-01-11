@@ -82,8 +82,8 @@
 					</tr>
 					<tr id="subTr">
 						<th id="writerTh">작성자</th>
-						<td id="writerTd" colspan="3"><%=mnickNm%></td>
 						<% if(blist != null && blist.equals("zone")){%>
+						<td id="writerTd"><%=mnickNm%></td>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
@@ -97,6 +97,7 @@
 							</select>
 						</td>
 						<%}else if(blist != null && blist.equals("gear")){ %>
+						<td id="writerTd"><%=mnickNm%></td>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">
 							<select name="btype" id="subSelect">
@@ -107,7 +108,9 @@
 								<option value="캠핑장비_차박">차박</option>
 							</select>
 						</td>
-						<% }%>
+						<% }else{%>
+						<td id="writerTd" colspan="3"><%=mnickNm%></td>
+						<%} %>
 					</tr>
 					<tr>
 						<td colspan="5">

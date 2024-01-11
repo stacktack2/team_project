@@ -56,11 +56,11 @@
 			<li>
 				<a href="<%=request.getContextPath()%>/list/gearList.jsp">캠핑장비 소개/리뷰</a>
 				<ul class="submenu">
-					<li><a href="#">텐트/타프</a></li>
-					<li><a href="#">침낭/매트</a></li>
-					<li><a href="#">의자/테이블</a></li>
-					<li><a href="#">화기/기타</a></li>
-					<li><a href="#">차박</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gearList.jsp">텐트/타프</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_BadList.jsp">침낭/매트</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_ChairList.jsp">의자/테이블</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_FireList.jsp">화기/기타</a></li>
+					<li><a href="<%=request.getContextPath()%>/list/gear_TentList.jsp">차박</a></li>
 				</ul>
 			</li>
 			<li><a href="<%=request.getContextPath()%>/list/attendList.jsp">출석체크</a></li>

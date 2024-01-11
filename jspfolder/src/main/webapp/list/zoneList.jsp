@@ -21,7 +21,7 @@
 		searchAlign = "late";
 	}
 	if(subSearchAlign == null){
-		subSearchAlign = "_서울";
+		subSearchAlign = "Seoul";
 	}
 
 //	페이징
@@ -90,35 +90,34 @@
 				   + "   FROM board b"
 				   + "  INNER JOIN member m"
 				   + "     ON b.mno = m.mno"
-				   + "  WHERE btype LIKE '캠핑지역%'"
-				   + "  ORDER BY ";
+				   + "  WHERE btype LIKE '캠핑지역%'";
 		
 //		option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
-				sql += " bno DESC ";
+				sql += " ORDER BY bno DESC ";
 			}else if(searchAlign.equals("hit")){
-				sql += " bhit DESC ";
+				sql += " ORDER BY bhit DESC ";
 			}
 		}
 
 		
 
 		if(subSearchAlign != null){
-			if(subSearchAlign.equals("_서울")){
-				sql += " btype DESC ";
-			}else if(subSearchAlign.equals("_경기권")){
-				sql += " btype DESC ";
-			}else if(subSearchAlign.equals("_강원권")){
-				sql += " btype DESC ";
-			}else if(subSearchAlign.equals("_충청권")){
-				sql += " btype DESC ";
-			}else if(subSearchAlign.equals("_영남권")){
-				sql += " btype DESC ";
-			}else if(subSearchAlign.equals("_호남권")){
-				sql += " btype DESC ";
-			}else if(subSearchAlign.equals("_제주")){
-				sql += " btype DESC ";
+			if(subSearchAlign.equals("Seoul")){
+				sql += " and btype = '캠핑지역_서울' ";
+			}else if(subSearchAlign.equals("GG")){
+				sql += " ORDER BY btype DESC ";
+			}else if(subSearchAlign.equals("GW")){
+				sql += " ORDER BY btype DESC ";
+			}else if(subSearchAlign.equals("CC")){
+				sql += " ORDER BY btype DESC ";
+			}else if(subSearchAlign.equals("YN")){
+				sql += " ORDER BY btype DESC ";
+			}else if(subSearchAlign.equals("HN")){
+				sql += " ORDER BY btype DESC ";
+			}else if(subSearchAlign.equals("JJ")){
+				sql += " ORDER BY btype DESC ";
 			}
 		}
 
@@ -147,7 +146,7 @@
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/list.css" type="text/css" rel="stylesheet">
 </head>
-<link rel="icon" href="data:;base64,iVBORw0K_경기권o=">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 <%@ include file="/include/header.jsp" %>
 	<div class="container">
@@ -173,37 +172,37 @@
 
 			</select>
 			<select name="subSearchAlign" onchange="document.frm1.submit()" id="subSelect">
-				<option value="_서울" 
+				<option value="Seoul" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("_서울"))out.print("selected"); 
+							subSearchAlign.equals("Seoul"))out.print("selected"); 
 					%>>서울
 				</option>
-				<option value="_경기권" 
+				<option value="GG" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("_경기권"))out.print("selected"); 
+							subSearchAlign.equals("GG"))out.print("selected"); 
 					%>>경기권
 				</option>
-				<option value="_강원권" 
+				<option value="GW" 
 					<%if(searchAlign != null && 
-							subSearchAlign.equals("_강원권"))out.print("selected"); 
+							subSearchAlign.equals("GW"))out.print("selected"); 
 					%>>강원권
 				</option>
-				<option value="_충청권" 
+				<option value="CC" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("_충청권"))out.print("selected"); 
+							subSearchAlign.equals("CC"))out.print("selected"); 
 					%>>충청권
 				</option>
-				<option value="_영남권" 
+				<option value="YN" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("_영남권"))out.print("selected"); 
+							subSearchAlign.equals("YN"))out.print("selected"); 
 					%>>영남권</option>
-				<option value="_호남권" 
+				<option value="HN" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("_호남권"))out.print("selected"); 
+							subSearchAlign.equals("HN"))out.print("selected"); 
 					%>>호남권</option>
-				<option value="_제주" 
+				<option value="JJ" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("_제주"))out.print("selected"); 
+							subSearchAlign.equals("JJ"))out.print("selected"); 
 					%>>제주
 				</option>
 			</select>

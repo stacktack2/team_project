@@ -82,7 +82,7 @@
 					</tr>
 					<tr id="subTr">
 						<th id="writerTh">작성자</th>
-						<td id="writerTd"><%=mnickNm%></td>
+						<td id="writerTd" colspan="3"><%=mnickNm%></td>
 						<% if(blist != null && blist.equals("zone")){%>
 						<th id="subSelectTh" >세부카테고리</th>
 						<td id="subSelectTd">

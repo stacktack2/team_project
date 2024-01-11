@@ -3,6 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="Vo.*" %>
+<!DOCTYPE html>
+<html>
+<head>
 <%
 	
 
@@ -34,9 +37,9 @@
 		}else{
 			
 			int mno=0;
-			Member memberSession = (Member)session.getAttribute("login");
-			if(memberSession != null){
-				mno = memberSession.getMno();
+			Member member = (Member)session.getAttribute("login");
+			if(member != null){
+				mno = member.getMno();
 			}
 			if(mno ==0){
 				%>
@@ -85,9 +88,7 @@
     
     
     
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
@@ -98,7 +99,7 @@
 	
 	
 	table{
-		margin:80px auto;
+		margin:50px auto;
 	}
 	
 	th{
@@ -116,16 +117,17 @@
 		font-weight:bold; text-decoration: underline;
 	}
 	
+	
 </style>
 
 </head>
 <body>
 	<%@ include file="/include/header.jsp" %>
-	<div class="container">
+	
 	<nav>
 		<div id="mypagewelcome">
-			<span id="mypagenickname">닉네임</span>
-			<span id="mypagename">이름</span>
+			<span id="mypagenickname"><%if(member != null) out.print(member.getMnickNm()); %></span>
+			<span id="mypagename"><%if(member != null) out.print(member.getMname()); %></span>
 		</div>
 		<div>
 			<span class="mypagelist"><a href="mypage.jsp">내가 쓴 게시글</a></span>
@@ -157,7 +159,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input value="<%=mpw %>" type="password" name="mpw" oninput="checkPw(this);checkPwRe();" class="textbox">
+							<input type="password" name="mpw" oninput="checkPw(this);checkPwRe();" class="textbox">
 						</td>
 					</tr>
 					<tr class="blur">
@@ -251,7 +253,7 @@
 			</form>
 		</article>
 	</section>
-	</div>
+	
 	<%@ include file="/include/footer.jsp" %>
 	<script src="<%=request.getContextPath()%>/js/mypageModify.js"></script>
 </body>

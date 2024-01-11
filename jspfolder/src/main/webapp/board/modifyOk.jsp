@@ -15,7 +15,7 @@
 	if(method.equals("GET")){
 	%>
 		<script>
-			alert("잘못된 접근입니다.");
+			alert("잘못된 접근입니다.2");
 			location.href='<%=request.getContextPath()%>';
 		</script>
 	<%
@@ -23,7 +23,8 @@
 
 	//[첨부파일] 업로드 위치 지정
 	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+	/* String directory = "D:\\dahee\\AWS\\JAVA\\workspace\\team_project\\jspfolder\\src\\main\\webapp\\upload"; */
+	String directory = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
 	
 	//[첨부파일] 사이즈정하기 100mb제한
 	int sizeLimit = 100*1024*1024;	
@@ -118,14 +119,14 @@
 		%>
 			<script>
 				alert("수정이 완료되었습니다.");
-				location.href='view.jsp?bno=<%=bno%>';
+				location.href='/jspfolder/list/allList.jsp';
 			</script>
 		<%
 		}else{
 		%>
 			<script>
 				alert("수정이 완료되지 않았습니다.");
-				location.href='view.jsp?bno=<%=bno%>';
+				location.href='/jspfolder/list/allList.jsp';
 			</script>
 		<%
 		}

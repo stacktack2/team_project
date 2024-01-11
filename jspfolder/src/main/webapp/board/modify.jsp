@@ -20,6 +20,17 @@
 		bno = Integer.parseInt(bnoParam);
 	}
 	
+	String blist = request.getParameter("blist");
+	//null체크를 했어도(비정상 접근 차단 이유) 아래에서 메소드 사용시마다 널체크 해야함. if로 전체를 감싸지 않는이상 무조건 아래까지 실행되기 때문.
+	if(blist==null){
+		%>
+		<script>
+			alert("잘못된 접근입니다.");
+			location.href="<%= request.getContextPath() %>/index.jsp";
+		</script>
+		<%
+	}
+	
 	Connection conn = null;	
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
@@ -93,6 +104,7 @@
 		<form name="frm" action="modifyOk.jsp" method="post" enctype="multipart/form-data">
 			<!-- hidden으로 bno값 보내기 -->
 			<input type="hidden" name="bno" value="<%=board.getBno()%>">
+			<input type="hidden" name="blist" value="<%=blist%>">
 			
 			<table border="1" class="writeTable">
 				<tbody>
@@ -118,7 +130,7 @@
 			</table>
 			<div class="writeBtns">
 			<button type="button" 
-				onclick="location.href='/jspfolder/list/allList.jsp'">취소</button>
+				onclick="location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>'">취소</button>
 			<button>저장</button>
 			</div>
 		</form>

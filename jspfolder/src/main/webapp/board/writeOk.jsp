@@ -6,6 +6,14 @@
 <%//[첨부파일] 첨부파일, 파일이름이 겹쳤을떄의 규칙 import %>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<head>
+<body>
 <%	
 request.setCharacterEncoding("UTF-8");
 Connection conn = null;
@@ -130,67 +138,36 @@ try{
 		}
 		
 		
+		
 			
 		if(result>0){ //insert 성공시
-			%>
+				%>
 				<script>
-					let blist = '<%=blist%>';
 					alert("게시물이 등록되었습니다.");
-					if(blist=="all"){
-						location.href="<%=request.getContextPath() %>/list/allList.jsp";
-					}else if(blist=="notice"){
-						location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-					}else if(blist=="hot"){
-						location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-					}else if(blist=="free"){
-						location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-					}else if(blist=="zone"){
-						location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-					}else if(blist=="gear"){
-						location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-					}else if(blist=="attend"){
-						location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-					}else if(blist=="QnA"){
-						location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-					}else{
-						location.href="<%=request.getContextPath() %>/index.jsp";
-					}
+					location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
 				</script>
 				<%
 				}else{
 				%>
 				<script>
 					alert("게시글 등록되지 않았습니다.");
-					if(blist=="all"){
-						location.href="<%=request.getContextPath() %>/list/allList.jsp";
-					}else if(blist=="notice"){
-						location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-					}else if(blist=="hot"){
-						location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-					}else if(blist=="free"){
-						location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-					}else if(blist=="zone"){
-						location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-					}else if(blist=="gear"){
-						location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-					}else if(blist=="attend"){
-						location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-					}else if(blist=="qna"){
-						location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-					}else{
-						location.href="<%=request.getContextPath() %>/index.jsp";
-					}
+					location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
 				</script>
 				<%	
-					
 				}
-	}
 		
-		}catch(Exception e){
+			}
+		%>
+		
+	
+	<% 
+	}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			if(conn != null) conn.close();
 			if(psmt != null) psmt.close();
 		}
 	%>
-		
+	
+</body>
+</html>

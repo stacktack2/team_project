@@ -39,35 +39,6 @@
 <title>게시글 작성</title>
 <link href="<%=request.getContextPath() %>/css/base.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/css/write.css" rel="stylesheet">
-<script>
-/*  blist 파라미터값을 가져오기 위해선 html에 미리 변수로 선언해줘야 하는데
- 	(파라미터로 받아왔다고 html에서 바로 쓸 수 없음)
-	표현식이라 문자열로 받아와야 변수로 사용할 수 있다.
-*/
- let blist='<%=blist%>';
-	
-	function wCancleFn(){
-		if(blist=="all"){
-			location.href="<%=request.getContextPath() %>/list/allList.jsp";
-		}else if(blist=="notice"){
-			location.href="<%=request.getContextPath() %>/list/noticeList.jsp";
-		}else if(blist=="hot"){
-			location.href="<%=request.getContextPath() %>/list/hotList.jsp";
-		}else if(blist=="free"){
-			location.href="<%=request.getContextPath() %>/list/freeList.jsp";
-		}else if(blist=="zone"){
-			location.href="<%=request.getContextPath() %>/list/zoneList.jsp";
-		}else if(blist=="gear"){
-			location.href="<%=request.getContextPath() %>/list/gearList.jsp";
-		}else if(blist=="attend"){
-			location.href="<%=request.getContextPath() %>/list/attendList.jsp";
-		}else if(blist=="QnA"){
-			location.href="<%=request.getContextPath() %>/list/qnaList.jsp";
-		}else{
-			location.href="<%=request.getContextPath() %>/index.jsp";
-		}
-	}
-</script>
 
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -161,7 +132,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<button type="button" class="cancleBtn" onclick="wCancleFn()">취소</button>
+			<button type="button" class="cancleBtn" onclick="connectList()">취소</button>
 			<button class="saveBtn">저장</button>
 		</form>
 	</section>
@@ -169,5 +140,10 @@
 	
 	<%@ include file ="/include/footer.jsp" %>
 	
+	<script>
+		function connectList(){
+			location.href='<%=request.getContextPath()%>/board/connectList.jsp?blist=<%=blist%>';
+		}
+	</script>
 </body>
 </html>

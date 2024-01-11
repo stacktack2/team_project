@@ -50,7 +50,7 @@
 					<li><a href="zone_CCList.jsp">충청권</a></li>
 					<li><a href="zone_YNList.jsp">영남권</a></li>
 					<li><a href="zone_HNList.jsp">호남권</a></li>
-					<li><a href="zone_JJList.jsp">제주</a></li>					
+					<li><a href="zone_JJList.jsp">제주</a></li>			
 				</ul>
 			</li>
 			<li>

@@ -25,66 +25,50 @@ header #logo{
 #top_menu>a{font-weight: bold;}
 /* **************************본문************************************ */
 section{
-	width:900px; height: 100vh;
-	background-color:#fff; 
-	margin-left:250px; margin-top: 20px;
-	margin-right:250px;
-	min-height: calc(100vh - 12vh);
-    position: relative;
-    padding-bottom: 60px;
-}
-#formDiv{
-	margin-right:210px;
-}
-#hello{
-	text-align: center;
-	margin-left: 15px;
-	margin-top: 35px;
-	margin-bottom: 20px;
-}
-/* 테이블 */
-input{
-	width:200px; height:25px;
-	font-size: 18px;
-	margin-left: 250px;
-}
-#idBox{
-	width:308px; height:30px;
-	font-size: 25px;
-	padding-top: 20px;
-	padding-bottom: 10px;
-	margin-left: 355px;
-}
-#pwBox{
-	width:308px; height: 30px;
-	font-size: 25px;
-	padding-top: 10px;
-	padding-bottom: 40px;
-	margin-left: 355px;
+	width:100%;
+	margin: 0 auto;
+	height: calc(100vh - 400px);
 }
 
+section h2{
+	text-align: center;
+	margin: 100px 0;
+}
+/* 테이블 */
+section form{
+	margin: 0 auto;
+}
+form input{
+	display: block; width:250px; height:30px;
+	font-size: 18px; margin: 0 auto; margin-bottom: 10px;
+	
+}
+
+#loginfrm{
+	margin: 0 auto;
+}
 /* 로그인 버튼 */
 #loginbutton{
-	font-weight:bold;
-	background-color:skyblue;
-	display:block;			
-	border-radius:9px;	
-	width:100px; height:35px;
-	margin-left: 300px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size : 20px;
+	display:block; width:100px; height:35px;
+	font-size : 20px; font-weight:bold;
+	margin: 50px auto;
+	background-color: #efe6d9;
+	border-radius:9px;
+}
+#loginbutton:hover{
+	cursor:pointer;
+	box-shadow: 2px 2px 5px 5px rgba(111,85,47,0.2) inset;
+	transition: all .4s;
 }
 #idpwFind{
 	margin: 0 auto;
+	text-align: center;
 }
 #idpwFind a:first-child{
 	display: inline-block;
-	margin-left: 255px;
 	padding: 5px;
 	font-weight: bold;
 	font-size: 15px;
-	border-radius: 10px;
 	color: #404040;
 }
 #idpwFind a:nth-child(2){
@@ -99,16 +83,18 @@ input{
 
 #joinQus{
 	text-align: center;
-	margin-right: 190px;
 	padding-top:20px;
+}
+#joinbutton{
+	margin-bottom: 150px;
 }
 #joinbutton a{
 	display: block;
 	padding-top: 10px;
 	font-weight: bold;
 	font-size: 15px;
-	margin-left: 325px;
 	color: #a50021;
+	text-align:center;
 }
 
 /* *************************푸터******************************** */

@@ -14,22 +14,16 @@
 <%@ include file="/include/joinHeader.jsp" %>
 <!-- 섹션 -->
 	<section>
-		<div id="formDiv">
-		<div id="hello"><h2>반갑습니다!</h2></div>
+		<div>
+		<h2>반갑습니다!</h2>
     	<form name="frm" action="loginOk.jsp" method="post">
-    		<table>
 <!-- 아이디 -->
-    			<tr>
-    				<td id="idBox">
-    					<input type="text" name="mid" id="id" placeholder="아이디">
-    				</td>
-    			</tr>
+			<div id="loginfrm">
+    		<input type="text" name="mid" id="id" placeholder="아이디">
 <!-- 비밀번호 -->
-    			<tr id="pwBox">
-    				<td><input type="password" name="mpw" id="pw" placeholder="비밀번호"></td>
-    			</tr>
-    		</table>
+    		<input type="password" name="mpw" id="pw" placeholder="비밀번호">
     		<button id="loginbutton">로그인</button>
+    		</div>
     	</form>
     	</div>
 <!-- 계정찾기 버튼 -->

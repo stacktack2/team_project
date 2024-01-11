@@ -15,10 +15,10 @@
 	<section>
 		<article>
 <!-- 회원가입 폼 -->
-			<div id="formDiv">
-				<div id="hello"><h2>회원가입</h2></div>
+			<div>
+			<h2>회원가입</h2>
 			<form name="frm" action="joinOk.jsp" method="post" onsubmit="return false;" >
-				<table>
+				<table class="joinTable">
 <!-- 아이디 -->
 					<tr id="trTitle">
 						<th>아이디</th>
@@ -142,6 +142,7 @@
 			</div>
 		</article>
 	</section>
+	<%@ include file="/include/footer.jsp" %>
 <script src="<%=request.getContextPath()%>/js/join.js"></script>
 </body>
 </html>

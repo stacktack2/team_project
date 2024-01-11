@@ -12,8 +12,11 @@
 	
 	section{
 		 margin: 0 auto;
+		 height: calc(100vh - 190px - 130px);
 	}
-
+	section form{
+		margin-top: 300px;
+	}
 </style>
 </head>
 <body>
@@ -23,7 +26,6 @@
 			<input type="text" id="mypagePwinput" name="checkmpw" placeholder="비밀번호를 입력하세요.">
 			<button id="mypagePwbutton">확인</button>
 		</form>
-		
 	</section>
 <%@ include file="/include/footer.jsp" %>
 </body>

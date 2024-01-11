@@ -25,35 +25,23 @@ header #logo{
 #top_menu>a{font-weight: bold;}
 /* **************************본문************************************ */
 section{
-	width:900px; height: 100vh;
-	background-color:#fff; 
-	margin-left:250px; margin-top: 20px;
-	margin-right:250px;
-	min-height: calc(100vh - 12vh);
-    position: relative;
-    padding-bottom: 60px;
+	width:100%;
+	margin: 0 auto;
 }
-#formDiv{
-	margin-right:210px;
-}
-#hello{
+
+section h2{
 	text-align: center;
-	margin-left: 15px;
-	margin-top: 35px;
-	margin-bottom: 20px;
+	margin: 50px 0;
 }
 /* 테이블 */
-table{
+.joinTable{
 	border-collapse:collapse;
-	margin:50px auto;
+	margin:0 auto;
 }
-#trTitle{
-   width: 200px;
-   height: 40px;
-   padding-top: 10px;
-   padding-right: 110px;
-   padding-bottom: 10px;
+.joinTable tr{
+    width: 300px;
 }
+.joinTable input{margin: 10px 0;}
 #trTitle th{
 	text-align: left;
 	font-size: 21px;
@@ -76,36 +64,48 @@ input[type=radio]{
 }
 /* 가입하기 버튼 */
 #joinButton{
-	font-weight:bold;
-	background-color:skyblue;
-	display:block;			
+	display:block; width:100px; height:35px;
+	font-size : 20px; font-weight:bold;
+	margin: 50px auto;
+	background-color: #efe6d9;
 	border-radius:9px;	
-	width:100px; height:35px;
-	margin-left: 285px;
-	font-size : 20px;
+}
+#joinButton:hover{
+	cursor:pointer;
+	box-shadow: 2px 2px 5px 5px rgba(111,85,47,0.2) inset;
+	transition: all .4s;
 }
 /* 테이블 버튼 */
 table button{
 	font-weight:bold;
-	background-color: skyblue;
+	background-color:#efe6d9;
 	border-radius:5px;
-	margin:5px;
+	margin:0 auto; margin-left: 10px;
 	font-size : 15px;
+}table button:hover{
+	cursor:pointer;
+	box-shadow: 2px 2px 5px 5px rgba(111,85,47,0.2) inset;
+	transition: all .4s;
 }
 #loginbutton{
 	padding-top:20px;
-	margin-right: 220px;
 	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 100px;
 }
 #loginbutton p{
 	font-size: 18px;
 }
 #loginbutton a{
-	display: block;
 	padding-top: 5px;
 	font-weight: bold;
 	font-size: 20px;
 	border-style: 1px solid black;
+	color:#39504d;
+}
+#loginbutton a:hover{
+	color: #efe6d9;
+	transition: all 0.4s;
 }
 
 /* *************************푸터******************************** */

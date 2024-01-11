@@ -40,12 +40,12 @@
 	text-align: left;
 }
 .rcontent{
-	font-weight: 300; padding-left: 10px;
+	font-weight: 300;
 }
 .replyTable tr td{
 	width:20%; float: right; padding-right:10px;
 	text-align: right;
 }
-.replyBtn{padding-right:10px;}
+
 
 

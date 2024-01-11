@@ -62,6 +62,24 @@
 			}
 		}
 
+		if(subSearchAlign != null){
+			if(subSearchAlign.equals("Seoul")){
+				totalSql += " AND btype = '캠핑지역_서울' ";
+			}else if(subSearchAlign.equals("GG")){
+				totalSql += " AND btype = '캠핑지역_경기권' ";
+			}else if(subSearchAlign.equals("GW")){
+				totalSql += " AND btype = '캠핑지역_강원권' ";
+			}else if(subSearchAlign.equals("CC")){
+				totalSql += " AND btype = '캠핑지역_충청권' ";
+			}else if(subSearchAlign.equals("YN")){
+				totalSql += " AND btype = '캠핑지역_영남권' ";
+			}else if(subSearchAlign.equals("HN")){
+				totalSql += " AND btype = '캠핑지역_호남권' ";
+			}else if(subSearchAlign.equals("JJ")){
+				totalSql += " AND btype = '캠핑지역_제주' ";
+			}
+		}
+
 		psmt = conn.prepareStatement(totalSql);
 		
 		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
@@ -92,6 +110,24 @@
 				   + "     ON b.mno = m.mno"
 				   + "  WHERE btype LIKE '캠핑지역%'";
 		
+		if(subSearchAlign != null){
+			if(subSearchAlign.equals("Seoul")){
+				sql += " AND btype = '캠핑지역_서울' ";
+			}else if(subSearchAlign.equals("GG")){
+				sql += " AND btype = '캠핑지역_경기권' ";
+			}else if(subSearchAlign.equals("GW")){
+				sql += " AND btype = '캠핑지역_강원권' ";
+			}else if(subSearchAlign.equals("CC")){
+				sql += " AND btype = '캠핑지역_충청권' ";
+			}else if(subSearchAlign.equals("YN")){
+				sql += " AND btype = '캠핑지역_영남권' ";
+			}else if(subSearchAlign.equals("HN")){
+				sql += " AND btype = '캠핑지역_호남권' ";
+			}else if(subSearchAlign.equals("JJ")){
+				sql += " AND btype = '캠핑지역_제주' ";
+			}
+		}
+		
 //		option value별 게시글 정렬
 		if(searchAlign != null){
 			if(searchAlign.equals("late")){
@@ -101,23 +137,12 @@
 			}
 		}
 
-		
-
-		if(subSearchAlign != null){
-			if(subSearchAlign.equals("Seoul")){
-				sql += " and btype = '캠핑지역_서울' ";
-			}else if(subSearchAlign.equals("GG")){
-				sql += " ORDER BY btype DESC ";
-			}else if(subSearchAlign.equals("GW")){
-				sql += " ORDER BY btype DESC ";
-			}else if(subSearchAlign.equals("CC")){
-				sql += " ORDER BY btype DESC ";
-			}else if(subSearchAlign.equals("YN")){
-				sql += " ORDER BY btype DESC ";
-			}else if(subSearchAlign.equals("HN")){
-				sql += " ORDER BY btype DESC ";
-			}else if(subSearchAlign.equals("JJ")){
-				sql += " ORDER BY btype DESC ";
+//		제목, 작성자 검색
+		if(searchType != null){
+			if(searchType.equals("title")){
+				sql += " AND btitle LIKE CONCAT('%',?,'%') ";
+			}else if(searchType.equals("writer")){
+				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
 			}
 		}
 
@@ -134,8 +159,6 @@
 			psmt.setInt(2, pagingVO.getPerPage());
 		}
 	
-		System.out.println(sql);
-		System.out.println(totalSql);
 		rs = psmt.executeQuery();
 %>
 <!DOCTYPE html>
@@ -297,10 +320,11 @@
 %>
 		<span class="paging">
 		<a href="zonelist.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-					&searchAlign=<%=searchAlign%>
-					&subSearchAlign=<%=subSearchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>" class="pluspage">이전</a>
+					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
+					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+					if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+					%>" class="pluspage">이전</a>
 		</span>
 <%
 	}
@@ -311,22 +335,16 @@
 			<b><%=i %></b>
 <%
 		}else{
-			if(searchType != null){
 %>
 				<span class="pagingnum">
 				<a href="zoneList.jsp?nowPage1=<%=i%>
-					&searchAlign=<%=searchAlign%>
-					&subSearchAlign=<%=subSearchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>"><%=i %></a>
+					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
+					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+					if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+					%>"><%=i %></a>
 				</span>
 <%
-			}else{
-%>
-				<a href="zoneList.jsp?nowPage1=<%=i%>
-					&searchAlign=<%=searchAlign%>"><%=i %></a>
-<%
-			}
 		}
 	}
 	
@@ -334,10 +352,11 @@
 %>
 		<span class="paging">
 		<a href="zonelist.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
-					&searchAlign=<%=searchAlign%>
-					&subSearchAlign=<%=subSearchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>" class="pluspage">다음</a>
+				<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
+					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+					if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+					%>" class="pluspage">다음</a>
 		</span>
 <%
 	}

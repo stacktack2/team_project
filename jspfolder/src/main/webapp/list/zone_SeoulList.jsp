@@ -236,9 +236,10 @@
 %>
 		<span class="paging">
 		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-					&searchAlign=<%=searchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>" class="pluspage">이전</a>
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+				%>" class="pluspage">이전</a>
 		</span>
 <%
 	}
@@ -253,17 +254,12 @@
 %>
 				<span class="pagingnum">
 				<a href="zoneList.jsp?nowPage1=<%=i%>
-					&searchAlign=<%=searchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>"><%=i %></a>
+					<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+				%>"><%=i %></a>
 				</span>
 <%
-			}else{
-%>
-				<a href="zoneList.jsp?nowPage1=<%=i%>
-					&searchAlign=<%=searchAlign%>"><%=i %></a>
-<%
-			}
 		}
 	}
 	
@@ -271,9 +267,10 @@
 %>
 		<span class="paging">
 		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
-					&searchAlign=<%=searchAlign%>
-					&searchType=<%=searchType%>
-					&searchValue=<%=searchValue%>" class="pluspage">다음</a>
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
+				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
+				%>" class="pluspage">다음</a>
 		</span>
 <%
 	}
@@ -285,6 +282,7 @@
 </body>
 </html>
 <%
+	}
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

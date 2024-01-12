@@ -47,24 +47,27 @@
 		
 		Cookie[] cookies = request.getCookies();
 		
+		//로그인을 안했거나 좋아요를 눌렀으면 true
 		for(Cookie tempCookie : cookies){
-			if(tempCookie.getName().equals(bno+"like"+mno) || mno ==0){
+			if(tempCookie.getName().equals(bno+"like"+mno) || mno==0){
 				islikeCookie = true;
 				break;	
 			}
 		}
 		
 		if(islikeCookie){
-			out.print("FAIL");
-			
-		}else{
-			if(!islikeCookie){
-				//1)쿠키생성()
-				Cookie cookie = new Cookie(bno+"like"+mno,"ok");	
-				cookie.setMaxAge(60*60*24);	
-				//2)쿠키원소추가
-				response.addCookie(cookie);
+			if(mno ==0){
+				out.print("FAIL");
 			}
+			out.print("FAIL");
+		}else{
+		
+			//1)쿠키생성()
+			Cookie cookie = new Cookie(bno+"like"+mno,"ok");	
+			cookie.setMaxAge(60*60*24);	
+			//2)쿠키원소추가
+			response.addCookie(cookie);
+			
 			
 		
 			//SQL
@@ -90,8 +93,6 @@
 			
 			if(rs.next()){
 				out.print(rs.getInt("blike"));
-			}else{
-				out.print("FAIL");
 			}
 				
 			

@@ -9,7 +9,10 @@
 			success:function(data){
 				if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
 					$("#like").val(data.trim());
+				}else if(data.trim() == "FAIL"){
+					alert("이미 좋아요한 게시물입니다.")
 				}else{
+					
 				}
 			},error:function(){
 			}

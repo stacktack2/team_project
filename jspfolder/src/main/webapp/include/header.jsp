@@ -38,7 +38,7 @@
 				<form name="googleForm" method="get" target="_blank">
 					<input type="text" name="googleText" value="검색어를 입력하세요" onclick="this.value='';">
 					<a href="#" target="_blank" onclick="googleFn()">
-						<img src="<%=request.getContextPath()%>/images/google.jpeg" alt="구글검색사진">
+						<img src="<%=request.getContextPath()%>/images/google.jpeg" alt="구글검색사진" width="50">
 					</a>
 				</form>
 			</div>

@@ -367,8 +367,10 @@
 		<form name="likefrm">
 			<input type="hidden" name="bno" value="<%=bno%>">
 			<input type="hidden" name="mno" value="<%if(member!=null) out.print(member.getMno()); %>">
-			<button type="button" onclick="likeInsertFn()">좋아요</button>
-			<input type="button" id="like" value="<%=board.getBlike() %>">
+			<div id="likeWrap">
+				<img id="likeWrapImg" src="<%=request.getContextPath() %>/images/like.png" alt="좋아요" width="80px" onclick="likeInsertFn(this)">
+				<div id="likeCount"><%=board.getBlike() %></div>
+			</div>
 		</form>
 		
 		

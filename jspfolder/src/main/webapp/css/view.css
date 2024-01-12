@@ -47,5 +47,18 @@
 	text-align: right;
 }
 
+#likeWrap{
+	position: relative;
+	text-align: center;
+}
 
+#likeWrapImg{
+	
+}
 
+#likeCount{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

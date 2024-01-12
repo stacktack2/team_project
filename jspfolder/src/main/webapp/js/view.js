@@ -1,5 +1,5 @@
 	//[좋아요]
-	function likeInsertFn(){
+	function likeInsertFn(obj){
 		// form태그 데이터를 파라미터값으로 가져오기
 		let params = $("form[name=likefrm]").serialize();
 		$.ajax({
@@ -8,7 +8,9 @@
 			data: params,
 			success:function(data){
 				if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
-					$("#like").val(data.trim());
+					$("#likeCount").html(data.trim());
+					obj.src = "/jspfolder/images/likeOk.png";
+					obj.nextElementSibling.style.color="white";
 				}else if(data.trim() == "FAIL"){
 					alert("이미 좋아요한 게시물입니다.")
 				}else{

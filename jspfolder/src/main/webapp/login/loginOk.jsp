@@ -23,7 +23,7 @@
 		String sql = " SELECT mid, mpw, mno, mname, mnickNm"
 				   + "   FROM member"
 				   + "  WHERE mid = ?"
-				   + "    AND mpw = ?";
+				   + "    AND mpw = md5(?)";
 		
 		psmt = conn.prepareStatement(sql);
 		

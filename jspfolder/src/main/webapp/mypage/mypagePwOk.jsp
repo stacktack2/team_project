@@ -47,7 +47,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, pass);
 		
-		String sql ="select mno from member where mpw = ? && mno = ?";
+		String sql ="select mno from member where mpw = md5(?) && mno = ?";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1,checkmpw);

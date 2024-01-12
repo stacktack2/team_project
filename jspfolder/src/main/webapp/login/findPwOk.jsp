@@ -88,7 +88,7 @@
 			alert('임시비밀번호는'+tempPw+'입니다.');
 <%		
 		sql = " UPDATE member"
-			+ "    SET mpw = ?"
+			+ "    SET mpw = md5(?)"
 			+ "  WHERE mno = ?";
 
 		psmt = conn.prepareStatement(sql);

@@ -66,7 +66,6 @@
 			rs.next();
 			
 			String mid = rs.getString("mid");
-			String mpw = rs.getString("mpw");
 			String mnickNm = rs.getString("mnickNm");
 			String mname = rs.getString("mname");
 			int mbirth = rs.getInt("mbirth");

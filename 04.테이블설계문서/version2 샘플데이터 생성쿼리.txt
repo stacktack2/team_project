@@ -8,7 +8,7 @@ BEGIN
         
     WHILE i <= 50 DO
         INSERT INTO member(mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)
-          VALUES(concat('testid',i),concat('testPw!',i),concat('테스트닉네임',i),concat('테스트이름',i), '19990101', 
+          VALUES(concat('testid',i),md5(concat('testPw!',i)),concat('테스트닉네임',i),concat('테스트이름',i), '19990101', 
           '0100000000', 'M','testemail@naver.com' ,(DATE_ADD(NOW(), INTERVAL i SECOND)));
           
 		INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)

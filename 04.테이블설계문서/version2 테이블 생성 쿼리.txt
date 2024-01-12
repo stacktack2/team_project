@@ -21,6 +21,7 @@ CREATE TABLE board
 	bhit int unsigned DEFAULT 0 NOT NULL,
 	btype varchar(20) NOT NULL,
 	mno int unsigned NOT NULL,
+    blike int unsigned default 0 NOT NULL,
 	PRIMARY KEY (bno)
 );
 

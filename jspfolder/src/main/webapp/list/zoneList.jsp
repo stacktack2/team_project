@@ -249,6 +249,8 @@
 				value="<%if(searchValue != null) out.print(searchValue); %>">
 			<input type="hidden" name="searchAlign"
 				 value="<%if(searchAlign != null) out.print(searchAlign); %>">
+				 <input type="hidden" name="searchAlign"
+				 value="<%if(subSearchAlign != null) out.print(subSearchAlign); %>">
 			<button class="searchBtn">검색</button>
 		</form>
 		</div>
@@ -273,7 +275,7 @@
 			<tr><td id="td" colspan="6">아무것도 검색되지 않았습니다.</td></tr>
 <%	
 			}else{			
-			while(rs.next()){
+			while(true){
 				int bno = rs.getInt("bno");
 				String btype = rs.getString("btype");
 				String btitle = rs.getString("btitle");
@@ -295,6 +297,9 @@
 				<td><%=bhit %></td>
 			</tr>
 <%
+				if(!rs.next()){
+					break;
+					}
 				}
 			}
 %>

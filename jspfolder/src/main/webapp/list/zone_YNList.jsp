@@ -52,9 +52,9 @@
 //		제목, 작성자 검색
 		if(searchType != null){
 			if(searchType.equals("title")){
-				totalSql = " AND btitle LIKE CONCAT('%',?,'%')";
+				totalSql += " AND btitle LIKE CONCAT('%',?,'%')";
 			}else if(searchType.equals("writer")){
-				totalSql = " AND m.mnickNm LIKE CONCAT('%',?,'%')";
+				totalSql += " AND m.mnickNm LIKE CONCAT('%',?,'%')";
 			}
 		}
 

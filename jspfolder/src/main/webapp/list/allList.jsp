@@ -19,7 +19,7 @@
 	if(searchAlign ==null ){
 		searchAlign = "late";
 	}
-	
+	System.out.println(searchValue);
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
@@ -49,14 +49,14 @@
 						+" FROM board b"
 						+" INNER JOIN member m "
 						+" ON b.mno = m.mno"
-						+"  WHERE btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항' ";
+						+"  WHERE (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항') ";
 		
 		//[검색]
 		if(searchType != null){
 			if(searchType.equals("title")){
-				totalSql += " and btitle like concat('%',?,'%')";				
+				totalSql += " and btitle like concat('%',?,'%') ";				
 			}else if(searchType.equals("writer")){
-				totalSql += " and m.mnickNm like concat('%',?,'%')";								
+				totalSql += " and m.mnickNm like concat('%',?,'%') ";								
 			}
 		}
 		
@@ -85,15 +85,15 @@
 			
 		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
 				 +" from board b inner join member m on b.mno = m.mno "
-				 +" WHERE btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항' ";
+				 +" WHERE (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항') ";
 				
 				
 		//[검색]
 		if(searchType != null){
 			if(searchType.equals("title")){
-				sql += " and btitle like concat('%',?,'%')";				
+				sql += " and btitle like concat('%',?,'%') ";				
 			}else if(searchType.equals("writer")){
-				sql += " and m.mnickNm like concat('%',?,'%')";								
+				sql += " and m.mnickNm like concat('%',?,'%') ";								
 			}
 		}
 		
@@ -107,7 +107,7 @@
 		
 		sql += " limit ?,? ";
 		
-		
+		System.out.println(sql);
 		
 		
  		psmt = conn.prepareStatement(sql);

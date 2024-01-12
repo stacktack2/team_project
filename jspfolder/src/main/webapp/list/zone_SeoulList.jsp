@@ -139,7 +139,7 @@
 		<h2>캠핑지역[서울] 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
-		<form name="frm1" action="zoneList.jsp" method="get" id="frm1">
+		<form name="frm1" action="zone_SeoulList.jsp" method="get" id="frm1">
 <!-- 게시글 정렬종류 -->
 			<select name="searchAlign" onchange="document.frm1.submit()" id="select">
 				<option value="late" 
@@ -156,7 +156,7 @@
 			</select>
 		</form>
 <!-- 게시글 검색폼 -->
-		<form name="frm2" action="zoneList.jsp" method="get" id="frm2">
+		<form name="frm2" action="zone_SeoulList.jsp" method="get" id="frm2">
 			<select name="searchType">
 				<option value="title" 
 					<%if(searchType != null && 
@@ -212,7 +212,7 @@
 				<td>
 					<!-- 제목 클릭시 view.jsp 이동 및 blist 파라미터 넘기기 -->
 					<a href="<%=request.getContextPath()%>
-							/board/view.jsp?bno=<%=bno%>&blist=zone"><%=btitle %></a>
+							/board/view.jsp?bno=<%=bno%>&blist=zone_Seoul"><%=btitle %></a>
 					<span id="replyspan">[<%=rs.getInt("rcnt") %>]</span>
 				</td>
 				<td><%=mnickNm %></td>
@@ -232,7 +232,7 @@
 	<div class="btnDiv">
 	<!-- 글쓰기 버튼: blist파라미터 넘기기 -->
 		<button class="writeBtn" 
-		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=zone'">글쓰기
+		 onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=zone_Seoul'">글쓰기
 		</button>
 	</div>
 <% 
@@ -244,7 +244,7 @@
 	if(pagingVO.getStartPage() > pagingVO.getCntPage()){
 %>
 		<span class="paging">
-		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
+		<a href="zone_SeoulList.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
 				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
@@ -262,7 +262,7 @@
 			if(searchType != null){
 %>
 				<span class="pagingnum">
-				<a href="zoneList.jsp?nowPage=<%=i%>
+				<a href="zone_SeoulList.jsp?nowPage=<%=i%>
 					<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
@@ -275,7 +275,7 @@
 	if(pagingVO.getEndPage() < pagingVO.getLastPage()){
 %>
 		<span class="paging">
-		<a href="zoneList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
+		<a href="zone_SeoulList.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
 				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);

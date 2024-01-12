@@ -32,8 +32,7 @@
 		<div class=searchMain>
 			<form name="navFrm" action="<%=request.getContextPath()%>/list/allList.jsp" method="get">
 				<input type="hidden" name="searchType" value="title">
-				<input type="text" name="searchValue"
-					value="<%if(navValue!=null) out.print(navValue); %>"> 
+				<input type="text" name="searchValue"> 
 				<button>검색</button>
 			</form>
 		</div>

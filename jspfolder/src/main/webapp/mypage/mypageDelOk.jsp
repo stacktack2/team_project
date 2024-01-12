@@ -47,7 +47,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, pass);
 		
-		String sql ="delete from member where mno = ? && mpw = ?";
+		String sql ="delete from member where mno = ? && mpw = md5(?)";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setInt(1,mno);

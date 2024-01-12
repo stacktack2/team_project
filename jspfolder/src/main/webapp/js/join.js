@@ -238,6 +238,7 @@
 				if(result == 0){
 					checkIdFlag = true;
 					midTd.innerHTML = '사용가능합니다.';
+					midTd.style.color = 'green';
 					alert("사용가능한 아이디입니다.");
 				}else if(result == -1){
 					checkIdFlag = false;
@@ -280,6 +281,7 @@
 			if(result == 0){
 				checkNickNmFlag = true;
 				mnickNmTd.innerHTML = '사용가능합니다.';
+				mnickNmTd.style.color = 'green';
 				alert("사용가능한 닉네임입니다.");
 			}else if(result == -1){
 				checkNickNmFlag = false;

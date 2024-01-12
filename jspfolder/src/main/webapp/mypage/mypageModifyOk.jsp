@@ -95,7 +95,7 @@
 			System.out.println("연결성공!");
 			
 			// mysql insert query문 작성 -> join.jsp에서 입력한 데이터 처리
-			String sql = " update member set mpw = ?, mphone = ?, memail = ? where mno = ?";
+			String sql = " update member set mpw = md5(?), mphone = ?, memail = ? where mno = ?";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, member.getMpw());

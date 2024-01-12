@@ -81,7 +81,7 @@
 		if(!Regular.isNum3_4(mphone2)){
 			isPass = false; System.out.println(7);
 		}
-		if(!Regular.isNum4(mphone2)){
+		if(!Regular.isNum4(mphone3)){
 			isPass = false; System.out.println(8);
 		}
 		
@@ -109,7 +109,7 @@
 			// mysql insert query문 작성 -> join.jsp에서 입력한 데이터 처리
 			sql = " INSERT INTO member"
 					   + " (mid, mpw, mnickNm, mname, mbirth, mphone, mgender, memail, mrdate)"
-					   + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, now())";
+					   + " VALUES(?, md5(?), ?, ?, ?, ?, ?, ?, now())";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, member.getMid());

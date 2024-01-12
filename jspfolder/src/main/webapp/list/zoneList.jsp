@@ -128,14 +128,6 @@
 			}
 		}
 		
-//		option value별 게시글 정렬
-		if(searchAlign != null){
-			if(searchAlign.equals("late")){
-				sql += " ORDER BY bno DESC ";
-			}else if(searchAlign.equals("hit")){
-				sql += " ORDER BY bhit DESC ";
-			}
-		}
 
 //		제목, 작성자 검색
 		if(searchType != null){
@@ -143,6 +135,15 @@
 				sql += " AND btitle LIKE CONCAT('%',?,'%') ";
 			}else if(searchType.equals("writer")){
 				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
+			}
+		}
+
+//		option value별 게시글 정렬
+		if(searchAlign != null){
+			if(searchAlign.equals("late")){
+				sql += " ORDER BY bno DESC ";
+			}else if(searchAlign.equals("hit")){
+				sql += " ORDER BY bhit DESC ";
 			}
 		}
 
@@ -342,7 +343,7 @@
 		}else{
 %>
 				<span class="pagingnum">
-				<a href="zoneList.jsp?nowPage1=<%=i%>
+				<a href="zoneList.jsp?nowPage=<%=i%>
 					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
 					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);

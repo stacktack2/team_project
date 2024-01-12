@@ -1,3 +1,21 @@
+	//[좋아요]
+	function likeInsertFn(){
+		// form태그 데이터를 파라미터값으로 가져오기
+		let params = $("form[name=likefrm]").serialize();
+		$.ajax({
+			url: "likeInsertOk.jsp",
+			type: "post",
+			data: params,
+			success:function(data){
+				if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
+					$("#like").val(data.trim());
+				}else{
+				}
+			},error:function(){
+			}
+		});
+	}
+
 	
 	//[댓글 등록]
 	function replyInsertFn(){
@@ -9,7 +27,6 @@
 			type: "post",
 			data: params,
 			success:function(data){
-				console.log("error3");
 				if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
 					$(".replyArea").prepend(data.trim());	//첫번째 자식으로
 					
@@ -17,7 +34,6 @@
 					alert("댓글이 입력되지 않았습니다.")
 				}
 			},error:function(){
-				console.log("error4");
 			}
 		});
 			//댓글 등록 후 댓글창 비우기

@@ -40,6 +40,11 @@
 		<%
 	}
 	
+	int mno =0;
+	if(member!=null){
+		mno= member.getMno();
+	}
+	
 	
 	
 	
@@ -82,6 +87,9 @@
 				break;	
 			}
 		}
+		
+		
+		
 		//4. 쿠키굽기			
 		if(!isBnoCookie){
 			//1)쿠키생성()
@@ -90,6 +98,7 @@
 			//2)쿠키원소추가
 			response.addCookie(cookie);
 		}
+		
 		
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -114,6 +123,9 @@
 			if(psmt != null) psmt.close();
 		}
 		
+		
+		
+		
 		//2. [게시글]
 		sql = "SELECT b.*, m.mnickNm "
 				+" FROM board b"
@@ -135,6 +147,7 @@
 			board.setBcontent(rs.getString("bcontent"));
 			board.setBtype(rs.getString("btype"));
 			board.setBhit(rs.getInt("bhit"));
+			board.setBlike(rs.getInt("blike"));
 		}
 		
 		if(psmt != null) psmt.close();
@@ -340,12 +353,26 @@
 			</script>
 		<%
 		}
+		
+		
 		%>
 		<form name="delfrm" action="delete.jsp" method="post">
 			<input type="hidden" name="bno" value="<%=bno%>">
 			<input type="hidden" name="blist" value="<%=blist %>">
 		</form>
 		</div>	
+		
+		<!-- 좋아요영역 -->
+		
+		<form name="likefrm">
+			<input type="hidden" name="bno" value="<%=bno%>">
+			<input type="hidden" name="mno" value="<%if(member!=null) out.print(member.getMno()); %>">
+			<button type="button" onclick="likeInsertFn()">좋아요</button>
+			<input type="button" id="like" value="<%=board.getBlike() %>">
+		</form>
+		
+		
+		
 
 		<!-- 댓글영역 -->
 		<%

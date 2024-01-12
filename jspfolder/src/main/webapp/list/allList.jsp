@@ -19,7 +19,6 @@
 	if(searchAlign ==null ){
 		searchAlign = "late";
 	}
-	System.out.println(searchValue);
 	
 	//[페이징]
 	String nowPageParam = request.getParameter("nowPage");
@@ -107,7 +106,6 @@
 		
 		sql += " limit ?,? ";
 		
-		System.out.println(sql);
 		
 		
  		psmt = conn.prepareStatement(sql);

@@ -11,7 +11,14 @@ public class Board extends Member {	//Member 부모지정
 	private Integer bhit;
 	private String btype;
 	private int mno;	//회원번호 FK
+	private int blike;
 	
+	public int getBlike() {
+		return blike;
+	}
+	public void setBlike(int blike) {
+		this.blike = blike;
+	}
 	//게터세터
 	public int getBno() {
 		return bno;

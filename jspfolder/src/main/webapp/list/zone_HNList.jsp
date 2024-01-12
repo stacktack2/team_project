@@ -262,11 +262,10 @@
 			<b><%=i %></b>
 <%
 		}else{
-			if(searchType != null){
 %>
 				<span class="pagingnum">
 				<a href="zone_HNList.jsp?nowPage=<%=i%>
-					<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
 				%>"><%=i %></a>
@@ -294,7 +293,6 @@
 </body>
 </html>
 <%
-	}
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

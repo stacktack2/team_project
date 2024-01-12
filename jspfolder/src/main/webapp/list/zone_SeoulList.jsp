@@ -112,7 +112,7 @@
 		psmt = conn.prepareStatement(sql);
 		
 		if(searchType != null && (searchType.equals("title") || searchType.equals("writer"))){
-			psmt.setString(1,searchValue);
+			psmt.setString(1, searchValue);
 			psmt.setInt(2, pagingVO.getStart()-1);
 			psmt.setInt(3, pagingVO.getPerPage());
 		}else{
@@ -136,7 +136,7 @@
 <%@ include file="/include/nav.jsp" %>
 	<section>
 <!-- 게시판페이지 이름 -->
-		<h2>캠핑지역[서울] 게시판</h2>
+		<h2>캠핑지역[충청권] 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
 		<form name="frm1" action="zone_SeoulList.jsp" method="get" id="frm1">
@@ -198,7 +198,7 @@
 			<tr><td id="td" colspan="6">아무것도 검색되지 않았습니다.</td></tr>
 <%	
 			}else{			
-			while(rs.next()){
+			while(true){
 				int bno = rs.getInt("bno");
 				String btype = rs.getString("btype");
 				String btitle = rs.getString("btitle");
@@ -220,6 +220,9 @@
 				<td><%=bhit %></td>
 			</tr>
 <%
+			if(!rs.next()){
+				break;
+					}
 				}
 			}
 %>
@@ -259,11 +262,10 @@
 			<b><%=i %></b>
 <%
 		}else{
-			if(searchType != null){
 %>
 				<span class="pagingnum">
 				<a href="zone_SeoulList.jsp?nowPage=<%=i%>
-					<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
+				<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
 				%>"><%=i %></a>
@@ -291,7 +293,6 @@
 </body>
 </html>
 <%
-	}
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

@@ -262,7 +262,6 @@
 			<b><%=i %></b>
 <%
 		}else{
-			if(searchType != null){
 %>
 				<span class="pagingnum">
 				<a href="zone_CCList.jsp?nowPage=<%=i%>
@@ -294,7 +293,6 @@
 </body>
 </html>
 <%
-	}
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

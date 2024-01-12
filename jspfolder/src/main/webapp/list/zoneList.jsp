@@ -250,8 +250,8 @@
 				value="<%if(searchValue != null) out.print(searchValue); %>">
 			<input type="hidden" name="searchAlign"
 				 value="<%if(searchAlign != null) out.print(searchAlign); %>">
-				 <input type="hidden" name="searchAlign"
-				 value="<%if(subSearchAlign != null) out.print(subSearchAlign); %>">
+			 <input type="hidden" name="subSearchAlign"
+			 value="<%if(subSearchAlign != null) out.print(subSearchAlign); %>">
 			<button class="searchBtn">검색</button>
 		</form>
 		</div>

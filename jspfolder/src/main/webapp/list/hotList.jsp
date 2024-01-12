@@ -39,7 +39,7 @@
 						+" FROM board b"
 						+" INNER JOIN member m "
 						+" ON b.mno = m.mno"
-						+"  WHERE btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' ";
+						+"  WHERE (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') ";
 		
 		
 		
@@ -64,7 +64,7 @@
 			
 		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
 				 +" from board b inner join member m on b.mno = m.mno "
-				 +" WHERE btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' order by bhit desc ";
+				 +" WHERE (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') order by bhit desc ";
 		
 		
 		sql += " limit ?,? ";

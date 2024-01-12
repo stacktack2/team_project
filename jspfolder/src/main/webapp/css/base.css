@@ -31,10 +31,12 @@ header #logo{
 
 #top_menu>a{font-weight: bold;}
 #top_menu>a:hover{color:white; transition:all .4s;}
-header #webserch{
-	width: 200px; height: 30px;
-	background-color: #ddd;
+#websearch form input[type="text"]{height:25px;}
+#websearch a{
+	display: inline-block; width: 60px; height:20px; 
+	border-radius:10px; overflow:hidden;
 	}
+#websearch a img{display: inline-block; width: 100%;}
 /* **********************메뉴********************************* */
 nav{
 	width: 200px; float:left;
@@ -55,9 +57,7 @@ nav{
 #welcome a:hover{color: brown; transition:all .4s;}
 /* 검색 */
 .searchMain{margin:10px 20px;}
-.searchMain input[type="text"]{
-	width:120px;
-}
+.searchMain input[type="text"]{width:120px;}
 .menu{padding:20px 10px;}
 .menu>li>a{
 	font-weight: bold; 
@@ -66,20 +66,12 @@ nav{
 }
 .menu>li>a:hover{color: white; transition:all .4s;}
 .submenu>li{padding-left:10px;}
-
-#thecheat{
-	width: 100px; height:50px;
-	background-color:grey;
-	margin-bottom: 150px;
-}
-
 /* **************************본문************************************ */
 section{
 	width:900px;
 	background-color:#fff; 
 	padding-top: 20px;
 	margin: 0 auto;
-	
 }
 /* *************************푸터******************************** */
 footer{

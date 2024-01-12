@@ -66,7 +66,7 @@
 			<li><a href="<%=request.getContextPath()%>/list/attendList.jsp">출석체크</a></li>
 			<li><a href="<%=request.getContextPath()%>/list/QnAList.jsp">Q&A</a></li>
 		</ul>
-		<div id="thecheat">더치트</div>
+		<!-- <div id="thecheat">더치트</div> -->
 	</nav>
 	
 	

@@ -34,8 +34,23 @@
 				<a href="<%=request.getContextPath()%>/list/zoneList.jsp">캠핑지역</a> | 
 				<a href="<%=request.getContextPath()%>/list/gearList.jsp">캠핑장비</a>
 			</div>
-			<div id="webserch" class="right"></div>
+			<div id="websearch" class="right">
+				<form name="googleForm" method="get" target="_blank">
+					<input type="text" name="googleText" value="검색어를 입력하세요" onclick="this.value='';">
+					<a href="#" target="_blank" onclick="googleFn()">
+						<img src="<%=request.getContextPath()%>/images/google.jpeg" alt="구글검색사진">
+					</a>
+				</form>
+			</div>
 		</div>
 	</header>
+		<script>
+		function googleFn(){
+			
+			let googleValue =  document.googleForm.googleText.value;
+			
+			location.href="https://www.google.co.kr/search?q="+googleValue;
+		}		
+	</script>
 </body>
 </html>

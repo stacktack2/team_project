@@ -21,7 +21,7 @@
 		searchAlign = "late";
 	}
 	if(subSearchAlign == null){
-		subSearchAlign = "Seoul";
+		subSearchAlign = "zone_Seoul";
 	}
 
 //	페이징
@@ -63,19 +63,19 @@
 		}
 
 		if(subSearchAlign != null){
-			if(subSearchAlign.equals("Seoul")){
+			if(subSearchAlign.equals("zone_Seoul")){
 				totalSql += " AND btype = '캠핑지역_서울' ";
-			}else if(subSearchAlign.equals("GG")){
+			}else if(subSearchAlign.equals("zone_GG")){
 				totalSql += " AND btype = '캠핑지역_경기권' ";
-			}else if(subSearchAlign.equals("GW")){
+			}else if(subSearchAlign.equals("zone_GW")){
 				totalSql += " AND btype = '캠핑지역_강원권' ";
-			}else if(subSearchAlign.equals("CC")){
+			}else if(subSearchAlign.equals("zone_CC")){
 				totalSql += " AND btype = '캠핑지역_충청권' ";
-			}else if(subSearchAlign.equals("YN")){
+			}else if(subSearchAlign.equals("zone_YN")){
 				totalSql += " AND btype = '캠핑지역_영남권' ";
-			}else if(subSearchAlign.equals("HN")){
+			}else if(subSearchAlign.equals("zone_HN")){
 				totalSql += " AND btype = '캠핑지역_호남권' ";
-			}else if(subSearchAlign.equals("JJ")){
+			}else if(subSearchAlign.equals("zone_JJ")){
 				totalSql += " AND btype = '캠핑지역_제주' ";
 			}
 		}
@@ -111,19 +111,19 @@
 				   + "  WHERE btype LIKE '캠핑지역%'";
 		
 		if(subSearchAlign != null){
-			if(subSearchAlign.equals("Seoul")){
+			if(subSearchAlign.equals("zone_Seoul")){
 				sql += " AND btype = '캠핑지역_서울' ";
-			}else if(subSearchAlign.equals("GG")){
+			}else if(subSearchAlign.equals("zone_GG")){
 				sql += " AND btype = '캠핑지역_경기권' ";
-			}else if(subSearchAlign.equals("GW")){
+			}else if(subSearchAlign.equals("zone_GW")){
 				sql += " AND btype = '캠핑지역_강원권' ";
-			}else if(subSearchAlign.equals("CC")){
+			}else if(subSearchAlign.equals("zone_CC")){
 				sql += " AND btype = '캠핑지역_충청권' ";
-			}else if(subSearchAlign.equals("YN")){
+			}else if(subSearchAlign.equals("zone_YN")){
 				sql += " AND btype = '캠핑지역_영남권' ";
-			}else if(subSearchAlign.equals("HN")){
+			}else if(subSearchAlign.equals("zone_HN")){
 				sql += " AND btype = '캠핑지역_호남권' ";
-			}else if(subSearchAlign.equals("JJ")){
+			}else if(subSearchAlign.equals("zone_JJ")){
 				sql += " AND btype = '캠핑지역_제주' ";
 			}
 		}
@@ -195,38 +195,38 @@
 				</option>
 
 			</select>
-			<select name="subSearchAlign" onchange="document.frm1.submit()" id="subSelect">
-				<option value="Seoul" 
+			<select name="subSearchAlign" onchange="document.frm1.submit()">
+				<option value="zone_Seoul" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("Seoul"))out.print("selected"); 
+							subSearchAlign.equals("zone_Seoul"))out.print("selected"); 
 					%>>서울
 				</option>
-				<option value="GG" 
+				<option value="zone_GG" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("GG"))out.print("selected"); 
+							subSearchAlign.equals("zone_GG"))out.print("selected"); 
 					%>>경기권
 				</option>
-				<option value="GW" 
+				<option value="zone_GW" 
 					<%if(searchAlign != null && 
-							subSearchAlign.equals("GW"))out.print("selected"); 
+							subSearchAlign.equals("zone_GW"))out.print("selected"); 
 					%>>강원권
 				</option>
-				<option value="CC" 
+				<option value="zone_CC" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("CC"))out.print("selected"); 
+							subSearchAlign.equals("zone_CC"))out.print("selected"); 
 					%>>충청권
 				</option>
-				<option value="YN" 
+				<option value="zone_YN" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("YN"))out.print("selected"); 
+							subSearchAlign.equals("zone_YN"))out.print("selected"); 
 					%>>영남권</option>
-				<option value="HN" 
+				<option value="zone_HN" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("HN"))out.print("selected"); 
+							subSearchAlign.equals("zone_HN"))out.print("selected"); 
 					%>>호남권</option>
-				<option value="JJ" 
+				<option value="zone_JJ" 
 					<%if(subSearchAlign != null && 
-							subSearchAlign.equals("JJ"))out.print("selected"); 
+							subSearchAlign.equals("zone_JJ"))out.print("selected"); 
 					%>>제주
 				</option>
 			</select>
@@ -326,7 +326,7 @@
 %>
 		<span class="paging">
 		<a href="zonelist.jsp?nowPage=<%=pagingVO.getStartPage()-1%>
-					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
+					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&subSearchAlign="+subSearchAlign);
 					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 					if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
@@ -344,7 +344,7 @@
 %>
 				<span class="pagingnum">
 				<a href="zoneList.jsp?nowPage=<%=i%>
-					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
+					<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&subSearchAlign="+subSearchAlign);
 					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 					if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);
@@ -358,7 +358,7 @@
 %>
 		<span class="paging">
 		<a href="zonelist.jsp?nowPage=<%=pagingVO.getStartPage()+1%>
-				<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&searchAlignGear="+subSearchAlign);
+				<%if(subSearchAlign!=null && !subSearchAlign.equals("")) out.print("&subSearchAlign="+subSearchAlign);
 					if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 					if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 					if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);

@@ -87,6 +87,15 @@
 				   + "  INNER JOIN member m"
 				   + "     ON b.mno = m.mno"
 				   + "  WHERE btype = '캠핑지역_호남권'";
+
+//		제목, 작성자 검색
+		if(searchType != null){
+			if(searchType.equals("title")){
+				sql += " AND btitle LIKE CONCAT('%',?,'%') ";
+			}else if(searchType.equals("writer")){
+				sql += " AND m.mnickNm LIKE CONCAT('%',?,'%') ";
+			}
+		}
 		
 //	option value별 게시글 정렬
 		if(searchAlign != null){
@@ -253,7 +262,7 @@
 			if(searchType != null){
 %>
 				<span class="pagingnum">
-				<a href="zoneList.jsp?nowPage1=<%=i%>
+				<a href="zoneList.jsp?nowPage=<%=i%>
 					<%if(searchAlign!=null && !searchAlign.equals("")) out.print("&searchAlign="+searchAlign);
 				if(searchType!=null && !searchAlign.equals("")) out.print("&searchType="+searchType);
 				if(searchValue!=null && !searchAlign.equals("")) out.print("&searchValue="+searchValue);

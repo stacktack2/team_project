@@ -49,6 +49,9 @@ CREATE TABLE reply
 	rrdate timestamp DEFAULT now() NOT NULL,
 	mno int unsigned NOT NULL,
 	bno int unsigned NOT NULL,
+   	rgroup int unsigned default 0 NOT NULL,
+   	rorder int unsigned default 0 NOT NULL,
+    	rdepth int unsigned default 0 NOT NULL,
 	PRIMARY KEY (rno)
 );
 

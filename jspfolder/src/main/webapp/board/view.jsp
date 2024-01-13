@@ -300,16 +300,19 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					
-					<%-- <% 이미지파일작업중
-						for(Uploadfile tempf: flist){
-					%>
-							<img src="<%=request.getContextPath()%>/upload/<%=java.net.URLEncoder.encode(tempf.getForiginNm(),"") %>" >
 					<%
-							
+						//내용에 이미지 표시
+						for(Uploadfile tempf: flist){
+							String FileNm =request.getContextPath()+"/upload/"+tempf.getFrealNm();
+							String ext = FileNm.substring(FileNm.lastIndexOf(".")+1);
+							if(ext.equalsIgnoreCase("jpg") || ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("png")){
+					%>	
+							<img src="<%=FileNm%>" alt="이미지" width="300px">
+					<%
+							}
 				       }
-					%>  --%>
-					<%=board.getBcontent() %>
+					%> 
+					<div><%=board.getBcontent() %></div>
 					</td>
 				</tr>
 				<tr>

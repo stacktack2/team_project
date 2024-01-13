@@ -206,9 +206,10 @@
 		} 
 		
 		//이전글 다음글 
-		String preSql = "select bno,btitle from board where bno < ? && ";
-		String nextSql = "select bno,btitle from board where bno > ? && ";
+		String preSql = "select bno,btitle from board where bno < ?  ";
+		String nextSql = "select bno,btitle from board where bno > ?  ";
 		if(blist !=null){
+			preSql += " && "; nextSql += " && ";
 			if(blist.equals("notice")){
 				preSql += " btype = '공지사항' "; nextSql += " btype = '공지사항' ";
 			}else if(blist.equals("hot")){
@@ -218,8 +219,32 @@
 				preSql += " btype = '자유게시판' "; nextSql += " btype = '자유게시판' ";
 			}else if(blist.equals("zone")){
 				preSql += " btype = '캠핑지역' "; nextSql += " btype = '캠핑지역' ";
+			}else if(blist.equals("zone_Seoul")){
+				preSql += " btype = '캠핑지역_서울' "; nextSql += " btype = '캠핑지역_서울' ";
+			}else if(blist.equals("zone_CC")){
+				preSql += " btype = '캠핑지역_충청권' "; nextSql += " btype = '캠핑지역_충청권' ";
+			}else if(blist.equals("zone_GG")){
+				preSql += " btype = '캠핑지역_경기권' "; nextSql += " btype = '캠핑지역_경기권' ";
+			}else if(blist.equals("zone_GW")){
+				preSql += " btype = '캠핑지역_강원권' "; nextSql += " btype = '캠핑지역_강원권' ";
+			}else if(blist.equals("zone_HN")){
+				preSql += " btype = '캠핑지역_호남권' "; nextSql += " btype = '캠핑지역_호남권' ";
+			}else if(blist.equals("zone_JJ")){
+				preSql += " btype = '캠핑지역_제주' "; nextSql += " btype = '캠핑지역_제주' ";
+			}else if(blist.equals("zone_YN")){
+				preSql += " btype = '캠핑지역_영남권' "; nextSql += " btype = '캠핑지역_영남권' ";
 			}else if(blist.equals("gear")){
 				preSql += " btype = '캠핑장비' "; nextSql += " btype = '캠핑장비' ";
+			}else if(blist.equals("gear_Tent")){
+				preSql += " btype = '캠핑장비_텐트' "; nextSql += " btype = '캠핑장비_텐트' ";
+			}else if(blist.equals("gear_Bad")){
+				preSql += " btype = '캠핑장비_침낭' "; nextSql += " btype = '캠핑장비_침낭' ";
+			}else if(blist.equals("gear_Chair")){
+				preSql += " btype = '캠핑장비_의자' "; nextSql += " btype = '캠핑장비_의자' ";
+			}else if(blist.equals("gear_Fire")){
+				preSql += " btype = '캠핑장비_화기' "; nextSql += " btype = '캠핑장비_화기' ";
+			}else if(blist.equals("gear_Car")){
+				preSql += " btype = '캠핑장비_차박' "; nextSql += " btype = '캠핑장비_차박' ";
 			}else if(blist.equals("attend")){
 				preSql += " btype = '출석체크' "; nextSql += " btype = '출석체크' ";
 			}else if(blist.equals("QnA")){
@@ -413,6 +438,7 @@
 					}
 				%>
 				<span><%=reply.getRrdate() %></span>
+				
 			</div>
 		<%
 			}	

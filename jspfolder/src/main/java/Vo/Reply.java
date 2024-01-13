@@ -10,7 +10,28 @@ public class Reply{
 	private int bno;	//게시글번호(FK)
 	//필요한 필드 추가
 	private String mnickNm;
+	private int rgroup;
+	private int rorder;
+	private int rdepth;
 	
+	public int getRgroup() {
+		return rgroup;
+	}
+	public void setRgroup(int rgroup) {
+		this.rgroup = rgroup;
+	}
+	public int getRorder() {
+		return rorder;
+	}
+	public void setRorder(int rorder) {
+		this.rorder = rorder;
+	}
+	public int getRdepth() {
+		return rdepth;
+	}
+	public void setRdepth(int rdepth) {
+		this.rdepth = rdepth;
+	}
 	//게터세터
 	public int getRno() {
 		return rno;

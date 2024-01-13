@@ -183,7 +183,7 @@
 				+" from reply r"
 				+" inner join member m"
 				+" on r.mno = m.mno"
-				+" where r.bno = ? order by r.rno desc";
+				+" where r.bno = ? order by rno desc";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setInt(1, board.getBno());
@@ -428,21 +428,39 @@
 				</span>
 				<%
 					//로그인이 되어있는 상태에서, 자기가 작성한 댓글만 보이는 제어문
+					
 					if(member != null && reply.getMno() == member.getMno()){
-				%>
-				<span>
-					<button onclick="modifyFn(this,<%=reply.getRno()%>)">수정</button>
-					<button onclick="replyDelFn(<%=reply.getRno()%>, this)">삭제</button>
-				</span>
-				<%
+						%>
+						<span>
+							<button onclick="modifyFn(this,<%=reply.getRno()%>)">수정</button>
+							<button onclick="replyDelFn(<%=reply.getRno()%>, this)">삭제</button>
+							
+						</span>
+						<%
 					}
+				
 				%>
+				
 				<span><%=reply.getRrdate() %></span>
 				
+				<%
+				// [대댓글 버튼]
+				if(member != null){
+				%>
+					<span>
+						<button onclick="rereplyInput(this,<%=reply.getRno()%>,<%=bno%>)">대댓글</button>
+					</span>
+				<%
+				}
+				//rereplyinput이 생성되는곳
+				%>
 			</div>
-		<%
+			<%
 			}	
-		%>
+			//대댓글 생성하는곳
+			%>
+		
+				
 		</div>
 	</section>
 	</div>

@@ -1,14 +1,53 @@
 	//[대댓글 입력란 생성]
 	
-	//[대댓글 저장버튼]
-	
-	//[대댓글 저장취소버튼]
-	
-	//[대댓글 수정버튼]
-	
-	//[대댓글 수정저장버튼]
-	
-	//[대댓글 수정취소버튼]
+	let isrereplyModify= false;
+	function rereplyInput(obj,parentRno,bno){
+		if(!isModify){	//수정중이라면
+			$(".rereplyInsert").remove();
+			
+			let html ='<div class="rereplyInput">'
+					+'<form name="rereplyfrm" class="rereplyfrm" >'
+					+'<input type="hidden" name="rno" value="'+parentRno+'">'
+					+'<input type="hidden" name="bno" value="'+bno+'">'
+					+'<input type="text" name="rcontent">'
+					+'<button type="button" onclick="rereplyInsert(this)">대댓글 작성</button>'
+					+'<button type="button" onclick="rereplyInsertCancel()">취소</button>'
+					+'</form>'
+					+'</div>';
+			$(obj).parent().after(html);
+			isrereplyModify= true;
+		}else{
+			alert("수정중인 댓글을 저장하세요");
+		}
+	}
+	//[대댓글 작성버튼]
+	function rereplyInsert(obj){
+		
+			let params = $(obj).parent().serialize();
+			$.ajax({
+				url: "rereplyWriteOk.jsp",
+				type: "post",
+				data: params,
+				async: false,
+				success:function(data){
+					if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
+						$(obj).parent().parent().parent().after(data.trim());
+						$(".rereplyInput").remove(); //비동기라서 ajax밖에있으면 안됨
+					}else{
+						alert("대댓글이 입력되지 않았습니다123.");
+					}
+				},error:function(){
+					alert("대댓글이 입력되지 않았습니다.");
+				}
+			});
+		isrereplyModify= false;
+		
+	}
+	//[대댓글 작성취소버튼]
+	function rereplyInsertCancel(){
+		$(".rereplyInput").remove();
+		isrereplyModify= false;
+	}
 	
 	
 	//[좋아요]
@@ -86,7 +125,7 @@
 
 		//동시다발적 수정하는것 방지(하나 수정중일때는 다른것 수정안됨)
 		
-		if(!isModify){	//수정중이라면
+		if(!isModify && !isrereplyModify){	//수정중이라면
 			//입력양식 초기값 얻어오기
 			let value = $(obj).parent().prev("span").text().trim();	//부모의 형 span 기존 rcontent
 			

@@ -11,12 +11,12 @@
 	if(method.equals("GET")){
 		response.sendRedirect("/jspfolder/index.jsp");
 	}
-//자바빈즈: 댓글 reply
+//자바빈즈: rno: 부모의 rno, rercontent: 대댓글 내용, bno: 게시글의 bno
 %>
 <jsp:useBean id="reply" class="Vo.Reply"/>
 <jsp:setProperty name="reply" property="*"/>
 <%	
-	//(게시글 mno필요)
+	//현재 대댓글 작성자 - (게시글 mno필요)
 	Member member = (Member)session.getAttribute("login");
 
 	if(member != null){	//로그인이 돼있다면
@@ -35,25 +35,38 @@
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn=DriverManager.getConnection(url,user,pass);
-			//댓글 group의 최대값 구하기
-			String sql = "select max(rgroup) as rgroup from reply where bno = ? ";
-
+			
+			int rgroup=0; int rdepth=0; int rorder=0;
+			//부모의 group,depth 값 찾고, 그중 가장 큰 order 값도 찾기
+			String sql = " select rgroup, rdepth from reply where rno=? ";
 			psmt=conn.prepareStatement(sql);
-			psmt.setInt(1,reply.getBno());
+			psmt.setInt(1,reply.getRno());
 			rs = psmt.executeQuery();
 			
-			int rgroup = 0;
 			if(rs.next()){
 				rgroup = rs.getInt("rgroup");
+				rdepth = rs.getInt("rdepth");
 			}
 			
-			if(psmt != null) psmt.close();
 			if(rs != null) rs.close();
+			if(psmt != null) psmt.close();
 			
-				
+			sql = " select rorder from reply where rgroup =? && rdepth=? ";
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1,rgroup);
+			psmt.setInt(2,rdepth);
+			rs = psmt.executeQuery();
+					
+			if(rs.next()){
+				rorder = rs.getInt("rorder");
+			}
+			
+			if(rs != null) rs.close();
+			if(psmt != null) psmt.close();
+			
 			//SQL
-			sql = " INSERT INTO reply(bno, mno, rcontent, rrdate, rgroup)"
-						+" VALUES(?,?,?,now(),?)";
+			sql = " INSERT INTO reply(bno, mno, rcontent, rrdate, rgroup, rorder, rdepth)"
+						+" VALUES(?,?,?,now(),?,?,?)";
 			
 			psmt=conn.prepareStatement(sql);
 			
@@ -61,12 +74,14 @@
 			psmt.setInt(2,reply.getMno());
 			psmt.setString(3,reply.getRcontent());
 			psmt.setInt(4,rgroup);
+			psmt.setInt(5,rorder);
+			psmt.setInt(6,rdepth);
 			
 			int result = psmt.executeUpdate();	
 			
 			//(삽입됐다면) => 작성자:댓글내용 출력
 			if(result>0){	
-			
+				System.out.println("삽입됨");
 				/*
 					댓글이 등록된 후에는 rno를 따로 가지고 있지 않기 때문에
 					현재 삭제버튼에 제공되고 있는 rno값은 객체의 초기값 0이 전달되고 있다.
@@ -91,14 +106,13 @@
 					rno=rs.getInt("rno");
 					rrdate = rs.getString("rrdate");
 				}
-				if(rs != null) rs.close();
 				
 				
 				
 				
 				//출력내용(아래)
 			%>
-				<div class="replyRow">
+				<div class="rereplyInsert ">
 					<%=member.getMnickNm() %>: 
 					<span>
 						<%=reply.getRcontent() %>

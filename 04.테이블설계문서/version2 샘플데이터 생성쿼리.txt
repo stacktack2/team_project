@@ -69,8 +69,6 @@ BEGIN
         INSERT INTO board(btitle,bcontent,brdate,bhit,btype,mno)
           VALUES(concat('테스트게시물입니다.',i),concat('테스트내용입니다.',i),(DATE_ADD(NOW(), INTERVAL -15+30*i SECOND)),i,'출석체크',i);
         
-		INSERT INTO reply(rcontent,rrdate,mno,bno)
-          VALUES(concat('테스트댓글입니다.',i),now(),i,i);
           
 		
         SET i = i + 1;

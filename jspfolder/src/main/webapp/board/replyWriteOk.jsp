@@ -35,32 +35,17 @@
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn=DriverManager.getConnection(url,user,pass);
-			//댓글 group의 최대값 구하기
-			String sql = "select max(rgroup) as rgroup from reply where bno = ? ";
-
-			psmt=conn.prepareStatement(sql);
-			psmt.setInt(1,reply.getBno());
-			rs = psmt.executeQuery();
-			
-			int rgroup = 0;
-			if(rs.next()){
-				rgroup = rs.getInt("rgroup");
-			}
-			
-			if(psmt != null) psmt.close();
-			if(rs != null) rs.close();
 			
 				
 			//SQL
-			sql = " INSERT INTO reply(bno, mno, rcontent, rrdate, rgroup)"
-						+" VALUES(?,?,?,now(),?)";
+			String sql = " INSERT INTO reply(bno, mno, rcontent, rrdate)"
+						+" VALUES(?,?,?,now())";
 			
 			psmt=conn.prepareStatement(sql);
 			
 			psmt.setInt(1,reply.getBno());
 			psmt.setInt(2,reply.getMno());
 			psmt.setString(3,reply.getRcontent());
-			psmt.setInt(4,rgroup);
 			
 			int result = psmt.executeUpdate();	
 			
@@ -80,7 +65,7 @@
 				//max를 쓰는 이유는 auto_increment기떄문
 				//현재 등록된 댓글의 rno(PK)는 rno의 최댓값(max(rno))
 				//현재 등록된 댓글의 PK값(rno)을 가져와 reply객체의 rno필드에 값을 추가 
-				sql = "select rno, rrdate from reply where rno = (SELECT max(rno) from reply);";
+				sql = "select rno, rrdate from reply where rno = (SELECT max(rno) from reply) ";
 				psmt = conn.prepareStatement(sql);
 				rs = psmt.executeQuery();
 				
@@ -91,7 +76,21 @@
 					rno=rs.getInt("rno");
 					rrdate = rs.getString("rrdate");
 				}
+				
 				if(rs != null) rs.close();
+				if(psmt != null) psmt.close();
+				
+				// 대댓글 구현시 댓글에서 해야하는것 - rgroup에 rno 넣기
+				sql =  " update reply set rgroup= ? where rno =? ";
+				
+				psmt=conn.prepareStatement(sql);
+				
+				psmt.setInt(1,rno);
+				psmt.setInt(2,rno);
+				
+				psmt.executeUpdate();	
+				
+				
 				
 				
 				
@@ -109,7 +108,7 @@
 					</span>
 					<span><%=rrdate%></span>
 					<span>
-						<button onclick="rereplyInput(this)">대댓글</button>
+						<button onclick="rereplyInput(this,<%=rno%>,<%=reply.getBno()%>)">대댓글</button>
 					</span>
 				</div>	
 			<%

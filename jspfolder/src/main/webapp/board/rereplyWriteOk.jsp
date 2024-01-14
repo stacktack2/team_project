@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="Vo.Member" %>
+<%@page import="org.json.simple.JSONArray" %>
+<%@page import="org.json.simple.JSONObject" %>
+
 <%
 
 	request.setCharacterEncoding("UTF-8");
@@ -36,34 +39,37 @@
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn=DriverManager.getConnection(url,user,pass);
 			
-			int rgroup=0; int rdepth=0; int rorder=0;
-			//부모의 group,depth 값 찾고, 그중 가장 큰 order 값도 찾기
-			String sql = " select rgroup, rdepth from reply where rno=? ";
+			int parentrgroup=0; int parentrorder=0; int parentrdepth=0;
+			//부모의 group,order,depth 값 찾고,order 실행문 실행하고, 넣기
+			String sql = " select rgroup, rorder, rdepth from reply where rno=? ";
 			psmt=conn.prepareStatement(sql);
 			psmt.setInt(1,reply.getRno());
 			rs = psmt.executeQuery();
 			
 			if(rs.next()){
-				rgroup = rs.getInt("rgroup");
-				rdepth = rs.getInt("rdepth");
+				parentrgroup = rs.getInt("rgroup");
+				parentrorder = rs.getInt("rorder");
+				parentrdepth = rs.getInt("rdepth");
 			}
 			
 			if(rs != null) rs.close();
 			if(psmt != null) psmt.close();
 			
-			sql = " select rorder from reply where rgroup =? && rdepth=? ";
-			psmt=conn.prepareStatement(sql);
-			psmt.setInt(1,rgroup);
-			psmt.setInt(2,rdepth);
-			rs = psmt.executeQuery();
-					
-			if(rs.next()){
-				rorder = rs.getInt("rorder");
-			}
 			
-			if(rs != null) rs.close();
-			if(psmt != null) psmt.close();
+ 			//대댓글 - rorder 값 수정 실행문
+ 			sql = " update reply set rorder = rorder+1 where bno = ? && rgroup = ? && ? < rorder ";
 			
+ 			psmt=conn.prepareStatement(sql);
+			
+ 			psmt.setInt(1,reply.getBno());
+ 			psmt.setInt(2,parentrgroup);
+ 			psmt.setInt(3,parentrorder);
+			
+ 			psmt.executeUpdate();	
+ 			
+ 			if(rs != null) rs.close();
+ 			if(psmt != null) psmt.close();
+ 			
 			//SQL
 			sql = " INSERT INTO reply(bno, mno, rcontent, rrdate, rgroup, rorder, rdepth)"
 						+" VALUES(?,?,?,now(),?,?,?)";
@@ -73,15 +79,21 @@
 			psmt.setInt(1,reply.getBno());
 			psmt.setInt(2,reply.getMno());
 			psmt.setString(3,reply.getRcontent());
-			psmt.setInt(4,rgroup);
-			psmt.setInt(5,rorder);
-			psmt.setInt(6,rdepth);
+			psmt.setInt(4,parentrgroup);
+			psmt.setInt(5,parentrorder+1);
+			psmt.setInt(6,parentrdepth+1);
 			
 			int result = psmt.executeUpdate();	
 			
-			//(삽입됐다면) => 작성자:댓글내용 출력
+			//(삽입됐다면) => rorder값 수정 후 작성자:댓글내용 출력
 			if(result>0){	
-				System.out.println("삽입됨");
+				
+				
+				
+	 			if(psmt != null) psmt.close();
+	 			if(rs != null) rs.close();
+				
+				
 				/*
 					댓글이 등록된 후에는 rno를 따로 가지고 있지 않기 때문에
 					현재 삭제버튼에 제공되고 있는 rno값은 객체의 초기값 0이 전달되고 있다.
@@ -110,23 +122,24 @@
 				
 				
 				
-				//출력내용(아래)
-			%>
-				<div class="rereplyInsert ">
-					<%=member.getMnickNm() %>: 
-					<span>
-						<%=reply.getRcontent() %>
-						</span>
-					<span>
-						<button onclick="modifyFn(this,<%=rno%>)">수정</button>
-						<button onclick="replyDelFn(<%=rno%>, this)">삭제</button>
-					</span>
-					<span><%=rrdate%></span>
-					<span>
-						<button onclick="rereplyInput(this)">대댓글</button>
-					</span>
-				</div>	
-			<%
+					//출력내용(아래) json방식
+				JSONArray jlist = new JSONArray();//[]
+				JSONObject jobj = new JSONObject();//{}
+				jobj.put("mnickNm",member.getMnickNm());//{"title":"테스트데이터"}
+				jobj.put("rcontent",reply.getRcontent());
+				jobj.put("rno",rno);
+				jobj.put("rrdate",rrdate);
+				jobj.put("bno",reply.getBno());
+				jlist.add(jobj);
+				%>
+				
+				
+				
+				<%=jlist.toJSONString()%>
+				
+				
+						
+				<%
 				
 			}else{ //삽입(댓글등록)이 안됐다면
 				out.print("FAIL");

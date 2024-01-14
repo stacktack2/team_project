@@ -183,7 +183,7 @@
 				+" from reply r"
 				+" inner join member m"
 				+" on r.mno = m.mno"
-				+" where r.bno = ? order by rno desc";
+				+" where r.bno = ? order by rgroup desc, rorder asc ";
 		
 		psmt = conn.prepareStatement(sql);
 		psmt.setInt(1, board.getBno());
@@ -200,6 +200,7 @@
 			reply.setMnickNm(rs.getString("mnickNm"));
 			reply.setRcontent(rs.getString("rcontent"));
 			reply.setRrdate(rs.getString("rrdate"));
+			reply.setRdepth(rs.getInt("rdepth"));
 			
 			//댓글 목록변수에 댓글원소객체 추가
 			rlist.add(reply);

@@ -3,10 +3,10 @@
 	let isrereplyModify= false;
 	function rereplyInput(obj,parentRno,bno){
 		if(!isModify){	//수정중이라면
-			$(".rereplyInsert").remove();
+			$(".rereplyInput").remove();
 			
 			let html ='<div class="rereplyInput">'
-					+'<form name="rereplyfrm" class="rereplyfrm" >'
+					+'<form class="rereplyfrm" >'
 					+'<input type="hidden" name="rno" value="'+parentRno+'">'
 					+'<input type="hidden" name="bno" value="'+bno+'">'
 					+'<input type="text" name="rcontent">'
@@ -28,10 +28,17 @@
 				url: "rereplyWriteOk.jsp",
 				type: "post",
 				data: params,
-				async: false,
 				success:function(data){
 					if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
-						$(obj).parent().parent().parent().after(data.trim());
+						let origindata = JSON.parse(data.trim());
+						let _data = origindata[0];
+						let html = '<div class="rereplyInsert ">'
+						+_data.mnickNm+': <span>'+_data.rcontent+'</span>'
+						+'<span><button onclick="modifyFn(this,'+_data.rno+')">수정</button>'
+						+'<button onclick="replyDelFn('+_data.rno+', this)">삭제</button></span>'
+						+'<span>'+_data.rrdate+'</span>'
+						+'<span><button onclick="rereplyInput(this,'+_data.rno+','+_data.bno+')">대댓글</button></span></div>'
+						$(obj).parent().parent().parent().after(html);
 						$(".rereplyInput").remove(); //비동기라서 ajax밖에있으면 안됨
 					}else{
 						alert("대댓글이 입력되지 않았습니다123.");

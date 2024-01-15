@@ -14,6 +14,7 @@
 	//String root = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	String root = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	//String  root = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
+
 	
 	InputStream in = null; //실제 파일 읽음
 	OutputStream os = null;	//사용자 Pc에 써줌

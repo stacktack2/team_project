@@ -9,9 +9,9 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost:3306/campingweb";
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 	String user = "cteam";
-	String pass ="ezen";
+	String pass = "ezen";
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,12 +36,16 @@
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/main.css" type="text/css" rel="stylesheet">
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 	<%@ include file="/include/header.jsp" %>
 	<div class="container">
 		<%@ include file="/include/nav.jsp" %>
 		<section>
-			<div id="weather">날씨예보입니다.</div>
+			<div id="weather">
+         		<span></span>
+				<span></span>
+			</div>
 			<div id="youtube">
 				<iframe width="440" height="250" src="https://www.youtube.com/embed/YvgKD1VfA6E?si=Cr2fSTvCdzgS42eN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 				<iframe width="440" height="250" src="https://www.youtube.com/embed/QNBHV2_e9-A?si=LbOXFALWzT4ZP2UD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -117,6 +121,7 @@
 	</div>
 	<%@ include file="/include/footer.jsp" %>
 </body>
+<script src="<%=request.getContextPath()%>/js/weather.js"></script>
 </html>
 	<%
 		} catch (Exception e) {

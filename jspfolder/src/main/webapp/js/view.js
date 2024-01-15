@@ -83,7 +83,7 @@
 	
 	//[댓글 등록]
 	function replyInsertFn(){
-		
+		if(!isModify && !isrereplyModify){	//수정중이 아니라면
 		// form태그 데이터를 파라미터값으로 가져오기
 		let params = $("form[name=replyfrm]").serialize();
 		$.ajax({
@@ -102,6 +102,10 @@
 		});
 			//댓글 등록 후 댓글창 비우기
 			$("input[name=rcontent]").val("");
+			
+		}else{
+			alert("수정중인 댓글을 저장하세요");
+		}
 	}
 	
 	//[댓글 삭제]
@@ -132,7 +136,7 @@
 
 		//동시다발적 수정하는것 방지(하나 수정중일때는 다른것 수정안됨)
 		
-		if(!isModify && !isrereplyModify){	//수정중이라면
+		if(!isModify && !isrereplyModify){	//수정중이 아니라면
 			//입력양식 초기값 얻어오기
 			let value = $(obj).parent().prev("span").text().trim();	//부모의 형 span 기존 rcontent
 			
@@ -152,6 +156,7 @@
 			alert("수정중인 댓글을 저장하세요");
 		}
 	}
+	
 	
 	//[댓글 수정-저장]
 	function saveFn(obj){

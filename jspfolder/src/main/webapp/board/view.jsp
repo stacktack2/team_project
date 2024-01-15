@@ -435,12 +435,6 @@
 						<span>
 							<button onclick="modifyFn(this,<%=reply.getRno()%>)">수정</button>
 							<button onclick="replyDelFn(<%=reply.getRno()%>, this)">삭제</button>
-							
-							
-							
-							
-							
-							
 						</span>
 						<%
 					}
@@ -465,8 +459,6 @@
 			}	
 			//대댓글 생성하는곳
 			%>
-		
-				
 		</div>
 	</section>
 	</div>

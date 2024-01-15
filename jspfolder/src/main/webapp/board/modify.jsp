@@ -77,16 +77,20 @@
 		if(rs != null) rs.close();
 	}
 	
-	//로그인이 안돼있거나 게시글을 쓴 본인이 아니면 => 점프
+	//로그인이 안돼있거나 게시글을 쓴 본인이 아니면, 관리자 => 점프
 	
 	
-	if(member == null || board.getMno() != member.getMno()){	
+	if(member == null || board == null || board.getMno() != member.getMno())
+	{
+		if(!member.getMid().equals("admin"))
+		{
 	%>
 		<script>
 			alert("잘못된 접근입니다.");
 			location.href="<%=request.getContextPath()%>";
 		</script>
 	<%
+		}
 	}
 %>
 
@@ -122,8 +126,15 @@
 					<tr>
 						<th>첨부파일</th>
 						<td colspan="3">
+						<%
+							if(foriginNm != null){
+						%>
 							<%=foriginNm %> 
+						<%
+							}
+						%>
 							<input type="file" name="uploadFile">
+
 						</td>
 					</tr>
 				</tbody>

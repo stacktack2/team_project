@@ -209,7 +209,7 @@
 		
 		
 	<%
-	if(member != null){
+	if(member != null && member.getMid().equals("admin")){
 	%>
 		<div class="btnDiv">
 			<button class="writeBtn" onclick="location.href='<%=request.getContextPath()%>/board/write.jsp?blist=notice';">글쓰기</button>

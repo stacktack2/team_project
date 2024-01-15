@@ -9,7 +9,7 @@
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
-	String url = "jdbc:mysql://localhost:3306/campingweb";
+	String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 	String user = "cteam";
 	String pass ="ezen";
 	
@@ -41,7 +41,10 @@
 	<div class="container">
 		<%@ include file="/include/nav.jsp" %>
 		<section>
-			<div id="weather">날씨예보입니다.</div>
+			<div id="weather">
+         		<span></span>
+				<span></span>
+			</div>
 			<div id="youtube">
 				<iframe width="440" height="250" src="https://www.youtube.com/embed/YvgKD1VfA6E?si=Cr2fSTvCdzgS42eN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 				<iframe width="440" height="250" src="https://www.youtube.com/embed/QNBHV2_e9-A?si=LbOXFALWzT4ZP2UD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -117,6 +120,28 @@
 	</div>
 	<%@ include file="/include/footer.jsp" %>
 </body>
+<script>
+	const API_KEY = "9e9bd3ff3286421c3fbdc567b6aab1f7";
+	
+	function onGeoOk(position){
+	    const lat = position.coords.latitude;
+	    const lon = position.coords.longitude;
+	    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+	    fetch(url).then(response => response.json())
+	    .then((data) => {
+	        const weather = document.querySelector("#weather span:first-child");
+	        const city = document.querySelector("#weather span:last-child");
+	        city.innerText = data.name;
+	        weather.innerText = `${data.weather[0].main} / ${data.main.temp}`;
+	    });
+	}
+	function onGeoError(){
+	    let weather = document.getElementById("weather");
+	    weather.innerHTML = "위치를 가져올 수 없습니다.";
+	}
+	
+	navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+</script>
 </html>
 	<%
 		} catch (Exception e) {

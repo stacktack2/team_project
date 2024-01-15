@@ -326,18 +326,6 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<%
-						//내용에 이미지 표시
-						for(Uploadfile tempf: flist){
-							String FileNm =request.getContextPath()+"/upload/"+tempf.getFrealNm();
-							String ext = FileNm.substring(FileNm.lastIndexOf(".")+1);
-							if(ext.equalsIgnoreCase("jpg") || ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("png")){
-					%>	
-							<img src="<%=FileNm%>" alt="이미지" width="300px">
-					<%
-							}
-				       }
-					%> 
 					<div><%=board.getBcontent() %></div>
 					</td>
 				</tr>
@@ -346,11 +334,13 @@
 					<td colspan="5">
 					<%
 						for(Uploadfile tempf: flist){
+							if(tempf.getForiginNm() != null){
 					%>		
 							<a href="download.jsp?frealNm=<%=tempf.getFrealNm()%>&foriginNm=<%=tempf.getForiginNm()%>">
 								<%= tempf.getForiginNm()%>
 							</a><br>
 					<%
+							}
 						}
 					%> 
 					</td>
@@ -366,8 +356,8 @@
 		<button onclick="connectList()" class="viewBtn">목록</button>
 		
 		<div id="writeBtns">
-		<%	// 로그인한 유저가 쓴 게시글에서만 수정, 삭제 버튼 노출
-		if(member != null && member.getMno() == board.getMno()){
+		<%	// 로그인한 유저가 쓴 게시글에서만 수정, 삭제 버튼 노출 , 관리자
+		if(member != null && (member.getMno() == board.getMno() ||  member.getMid().equals("admin"))){
 		%>
 			<button onclick="location.href='modify.jsp?bno=<%=board.getBno()%>&blist=<%=blist%>'" class="viewBtn">수정</button>
 			<button onclick="delFn()" class="viewBtn">삭제</button>
@@ -407,7 +397,7 @@
 
 		<!-- 댓글영역 -->
 		<%
-					//로그인이 되어있는 상태에서만 보이는 제어문
+			//로그인이 되어있는 상태에서만 보이는 제어문
 			if(member != null){
 		%>
 		<form name="replyfrm" class="replyfrm" >
@@ -428,9 +418,9 @@
 					<%=reply.getRcontent() %>
 				</span>
 				<%
-					//로그인이 되어있는 상태에서, 자기가 작성한 댓글만 보이는 제어문
+					//로그인이 되어있는 상태에서, 자기가 작성한 댓글만 보이는 제어문, 관리자
 					
-					if(member != null && reply.getMno() == member.getMno()){
+					if(member != null && (reply.getMno() == member.getMno()||member.getMid().equals("admin"))){
 						%>
 						<span>
 							<button onclick="modifyFn(this,<%=reply.getRno()%>)">수정</button>

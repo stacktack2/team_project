@@ -32,11 +32,11 @@
 					if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
 						let origindata = JSON.parse(data.trim());
 						let _data = origindata[0];
-						let html = '<div class="rereplyInsert ">'
-						+_data.mnickNm+': <span>'+_data.rcontent+'</span>'
-						+'<span><button onclick="modifyFn(this,'+_data.rno+')">수정</button>'
-						+'<button onclick="replyDelFn('+_data.rno+', this)">삭제</button></span>'
-						+'<span>'+_data.rrdate+'</span>'
+						let html = '<div class="rereplyInsert" style="margin-left:'+_data.rdepth*40+'px">'
+						+_data.mnickNm+' : <span>'+_data.rcontent+' </span>'
+						+'<span><button onclick="modifyFn(this,'+_data.rno+')">수정 </button>'
+						+'<button onclick="replyDelFn('+_data.rno+', this)">삭제 </button></span>'
+						+'<span>'+_data.rrdate+' </span>'
 						+'<span><button onclick="rereplyInput(this,'+_data.rno+','+_data.bno+')">대댓글</button></span></div>'
 						$(obj).parent().parent().parent().after(html);
 						$(".rereplyInput").remove(); //비동기라서 ajax밖에있으면 안됨

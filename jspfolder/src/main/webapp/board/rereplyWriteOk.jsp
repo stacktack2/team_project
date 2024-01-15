@@ -130,6 +130,7 @@
 				jobj.put("rno",rno);
 				jobj.put("rrdate",rrdate);
 				jobj.put("bno",reply.getBno());
+				jobj.put("rdepth",parentrdepth+1);
 				jlist.add(jobj);
 				%>
 				

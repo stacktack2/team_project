@@ -201,6 +201,7 @@
 			reply.setRcontent(rs.getString("rcontent"));
 			reply.setRrdate(rs.getString("rrdate"));
 			reply.setRdepth(rs.getInt("rdepth"));
+			reply.setRdepth(rs.getInt("rdelyn"));
 			
 			//댓글 목록변수에 댓글원소객체 추가
 			rlist.add(reply);
@@ -411,14 +412,20 @@
 		%>
 		<div class="replyArea">
 	<%
+		
 		for(Reply reply: rlist){
 	%>
 			<div class="replyRow" style="margin-left:<%=reply.getRdepth()*40+"px"%>">
-				<%=reply.getMnickNm() %> : 
-				<span>
-					<%=reply.getRcontent() %>
-				</span>
-				<%
+			<%
+				//댓글의 삭제여부 확인
+				if(reply.getRdelyn()==0){
+			%>
+					<%=reply.getMnickNm() %> : 
+					<span>
+						<%=reply.getRcontent() %>
+					</span>
+					<%
+		
 					//로그인이 되어있는 상태에서, 자기가 작성한 댓글만 보이는 제어문, 관리자
 					
 					if(member != null && (reply.getMno() == member.getMno()||member.getMid().equals("admin"))){
@@ -429,25 +436,32 @@
 						</span>
 						<%
 					}
-				
-				%>
-				
-				<span><%=reply.getRrdate() %></span>
-				
-				<%
-				// [대댓글 버튼]
-				if(member != null){
-				%>
-					<span>
-						<button onclick="rereplyInput(this,<%=reply.getRno()%>,<%=bno%>)">대댓글</button>
-					</span>
-				<%
+					
+					%>
+					
+					<span><%=reply.getRrdate() %></span>
+					
+					<%
+					// [대댓글 버튼]
+					if(member != null){
+					%>
+						<span>
+							<button onclick="rereplyInput(this,<%=reply.getRno()%>,<%=bno%>)">대댓글</button>
+						</span>
+					<%
+					}
+				}else{
+					%>
+						<span>삭제된 게시글입니다.</span>
+					<%
 				}
-				//rereplyinput이 생성되는곳
-				%>
+					
+					//rereplyinput이 생성되는곳
+					%>
 			</div>
 			<%
-			}	
+			
+		}	
 			//대댓글 생성하는곳
 			%>
 		</div>

@@ -53,7 +53,7 @@
 				
 			
 				//SQL
-				sql = "DELETE from reply where rno = ?";
+				sql = "update reply set rdelyn = 1 where rno = ? ";
 				
 				psmt=conn.prepareStatement(sql);
 				

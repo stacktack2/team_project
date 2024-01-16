@@ -13,7 +13,14 @@ public class Reply{
 	private int rgroup;
 	private int rorder;
 	private int rdepth;
+	private int rdelyn;
 	
+	public int getRdelyn() {
+		return rdelyn;
+	}
+	public void setRdelyn(int rdelyn) {
+		this.rdelyn = rdelyn;
+	}
 	public int getRgroup() {
 		return rgroup;
 	}

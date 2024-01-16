@@ -1,6 +1,16 @@
 @charset "UTF-8";
 
-#weader{margin-top:20px;}
+#weather{
+	margin-top:20px;
+	display: inline-block;
+	margin-left: 360px;
+	background-color: black;
+	font-family: math;
+    font-size: 36px;
+}
+#weather span{
+	color: white;
+}
 #youtube{margin: 20px auto;}
 #youtube>iframe:nth-child(1){margin-right:5px;}
 #adbanner{

@@ -201,7 +201,7 @@
 			reply.setRcontent(rs.getString("rcontent"));
 			reply.setRrdate(rs.getString("rrdate"));
 			reply.setRdepth(rs.getInt("rdepth"));
-			reply.setRdepth(rs.getInt("rdelyn"));
+			reply.setRdelyn(rs.getInt("rdelyn"));
 			
 			//댓글 목록변수에 댓글원소객체 추가
 			rlist.add(reply);
@@ -452,7 +452,7 @@
 					}
 				}else{
 					%>
-						<span>삭제된 게시글입니다.</span>
+						<div>삭제된 댓글입니다.</div>
 					<%
 				}
 					

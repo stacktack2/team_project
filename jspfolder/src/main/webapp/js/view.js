@@ -118,7 +118,7 @@
 				if(data.trim() == 'SUCCESS'){
 					alert("댓글이 삭제되었습니다.");
 					let target = $(obj).parent().parent();
-					target.remove();
+					target.html("삭제된 게시글입니다.");
 				}else{
 					alert("댓글이 삭제되지 못했습니다.");
 				}

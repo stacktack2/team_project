@@ -24,8 +24,8 @@
 	
 	//[첨부파일] 업로드 위치 지정
 	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	//String directory = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
+	//String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+	String directory = "C:\\Users\\MYCOM\\git\\team_project7\\jspfolder\\src\\main\\webapp\\upload";
 	
 	//[첨부파일] 사이즈정하기 100mb제한
 	int sizeLimit = 100*1024*1024;	
@@ -45,6 +45,7 @@
 		
 		Connection conn = null;	
 		PreparedStatement psmt = null;
+		ResultSet rs = null;
 		
 		String url = "jdbc:mysql://127.0.0.1:3306/campingweb";
 		String user = "cteam";
@@ -82,68 +83,70 @@
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn=DriverManager.getConnection(url,user,pass);
 			
-			//1. 게시글 수정
-			if(!board.getBtype().equals("notice")){	//공지사항x
-			String	sql = "UPDATE board "
-						 +" SET btitle = ?"
-					 	 +", bcontent = ? "
-					 	 +", brdate = now()"
-						 +" WHERE bno = ?";
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, board.getBtitle());
-			psmt.setString(2, board.getBcontent());
-			psmt.setInt(3, bno);
-			}else{//공지사항o
-				if(!member.getMid().equals("admin")){	//관리자x
-					%>
-					<script>
-						alert("권한이 없습니다.");
-						location.href='<%=request.getContextPath()%>';
-					</script>
-					<%
-
+			// 세션의 맴버 mno와 현재 bno의 mno가 일치하는 지 확인해야함.
+			// 확인하는 이유: 주소를 알고 파라미터를 알면 내가 작성하지 않더라도 삭제 요청을 보낼 수 있다.
+			// 예외처리 - 관리자일경우 세션의 맴버 mno와 현재 bno의 mno가 달라도 삭제가능하도록 해야한다.
+			String sql =" select mno, btype from board where bno = ?";
+			
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1,bno);
+			rs = psmt.executeQuery();
+			
+			
+			if(!rs.next() || member == null){
+				response.sendRedirect("/jspfolder/index.jsp");
+				//존재하지 않는 게시물 삭제 요청 - 비정상 접근 차단
+			}else{
+				if(!member.getMid().equals("admin") && rs.getInt("mno") != member.getMno()){
+					// 관리자가 아닐경우, 세션의 맴버 mno와 현재 bno의 mno가 불일치하면 비정상 접근 차단
+						response.sendRedirect("/jspfolder/index.jsp");
+				}else if(rs.getString("btype").equals("공지사항") && !member.getMid().equals("admin")){
+					// 만약 현재 가져온 bno의 btype값이 공지사항일때, 세션의 맴버 mid가 admin이 아니면 차단 및 코드 미실행
+						response.sendRedirect("/jspfolder/index.jsp");
 				}else{
-					String	sql = "UPDATE board "
+					
+					if(rs != null) rs.close();
+					if(psmt != null) psmt.close();
+					
+					sql = "UPDATE board "
 							 +" SET btitle = ?"
 						 	 +", bcontent = ? "
 						 	 +", brdate = now()"
 							 +" WHERE bno = ?";
 
-				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, board.getBtitle());
-				psmt.setString(2, board.getBcontent());
-				psmt.setInt(3, bno);
+					psmt = conn.prepareStatement(sql);
+					psmt.setString(1, board.getBtitle());
+					psmt.setString(2, board.getBcontent());
+					psmt.setInt(3, bno);
+						
+					//수정된 행 수 반환
+					result = psmt.executeUpdate();
+					
+					if(psmt != null) psmt.close();
+					
+					//2. 첨부파일 수정
+					if(frealNm != null && foriginNm != null){
+					
+						//2-1.첨부파일 지우기
+						String sql2 = "DELETE FROM uploadfile "
+									+ " WHERE bno = ? ";
+						psmt = conn.prepareStatement(sql2);
+						psmt.setInt(1, bno);
+						psmt.executeUpdate();
+						
+						if(psmt != null) psmt.close();
+						
+						//2-1. 첨부파일 삽입 
+						String sql3 = "INSERT INTO uploadfile (foriginNm, frealNm, bno) "
+									+" VALUES(?, ?, ?)";
+						psmt = conn.prepareStatement(sql3);
+						psmt.setString(1, foriginNm);
+						psmt.setString(2, frealNm);
+						psmt.setInt(3, bno);
+						psmt.executeUpdate();
+					}
 				}
 			}
-			
-			//수정된 행 수 반환
-			result = psmt.executeUpdate();
-			
-			if(psmt != null) psmt.close();
-			
-			//2. 첨부파일 수정
-			if(frealNm != null && foriginNm != null){
-				
-				//2-1.첨부파일 지우기
-				String sql2 = "DELETE FROM uploadfile "
-							+ " WHERE bno = ? ";
-				psmt = conn.prepareStatement(sql2);
-				psmt.setInt(1, bno);
-				psmt.executeUpdate();
-				
-				if(psmt != null) psmt.close();
-				
-				//2-1. 첨부파일 삽입 
-				String sql3 = "INSERT INTO uploadfile (foriginNm, frealNm, bno) "
-							+" VALUES(?, ?, ?)";
-				psmt = conn.prepareStatement(sql3);
-				psmt.setString(1, foriginNm);
-				psmt.setString(2, frealNm);
-				psmt.setInt(3, bno);
-				psmt.executeUpdate();
-			}
-
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

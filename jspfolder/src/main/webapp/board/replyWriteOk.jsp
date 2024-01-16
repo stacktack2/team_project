@@ -11,7 +11,7 @@
 	if(method.equals("GET")){
 		response.sendRedirect("/jspfolder/index.jsp");
 	}
-//자바빈즈: 댓글 reply
+//자바빈즈: 댓글 reply (NPE가 발생할수 있는 취약점)
 %>
 <jsp:useBean id="reply" class="Vo.Reply"/>
 <jsp:setProperty name="reply" property="*"/>

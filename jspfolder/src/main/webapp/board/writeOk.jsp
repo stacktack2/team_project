@@ -31,8 +31,8 @@ try{
 	
 	//[첨부파일] 업로드 위치 지정
 	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	//String directory = "C:\\Users\\MYCOM\\git\\team_project5\\jspfolder\\src\\main\\webapp\\upload";
+	//String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+	String directory = "C:\\Users\\MYCOM\\git\\team_project7\\jspfolder\\src\\main\\webapp\\upload";
 	
 	//[첨부파일] 사이즈정하기
 	int sizeLimit = 100*1024*1024;	//100mb제한
@@ -86,85 +86,74 @@ try{
 		String sql = "";
 		
 		//1.[게시글] 작성 
-		if(!board.getBtype().equals("notice")){
-		sql = " INSERT INTO board(btitle, bcontent, mno, brdate, btype) "
-				   + " VALUES(?,?,?,NOW(),?) ";
-		psmt = conn.prepareStatement(sql);
-		psmt.setString(1, board.getBtitle());
-		psmt.setString(2, board.getBcontent());
-		psmt.setInt(3,member.getMno());
-		psmt.setString(4, board.getBtype());
+		
+		if(board.getBtype().equals("공지사항") && !member.getMid().equals("admin")){
+			// 만약 현재 btype값이 공지사항일때, 세션의 맴버 mid가 admin이 아니면 차단 및 코드 미실행
+			response.sendRedirect("/jspfolder/index.jsp");
 		}else{
-			if(!member.getMid().equals("admin")){
-				%>
-				<script>
-					alert("권한이 없습니다.");
-					location.href="<%= request.getContextPath() %>/index.jsp";
-				</script>
-				<%
-
-			}else{
-				sql = " INSERT INTO board(btitle, bcontent, mno, brdate) "
-						   + " VALUES(?,?,?,NOW()) ";
+			
+			sql = " INSERT INTO board(btitle, bcontent, mno, brdate, btype) "
+					   + " VALUES(?,?,?,NOW(),?) ";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, board.getBtitle());
+			psmt.setString(2, board.getBcontent());
+			psmt.setInt(3,member.getMno());
+			psmt.setString(4, board.getBtype());
+			
+	
+		
+			//삽입된 행 수 반환
+			result = psmt.executeUpdate();
+			
+			if(psmt != null) psmt.close();	
+			
+			//[첨부파일]
+			//업로드된 실제파일명(멀티파트에서 가져오기)
+			//넘어온 업로드파일명
+			String realFileNM = multi.getFilesystemName("uploadFile");
+			
+			//원본파일명
+			String originFileNM = multi.getOriginalFileName("uploadFile");
+			
+			//파일명 잘 넘어왔나 콘솔찍기
+			//System.out.println("실제파일명: "+realFileNM);
+			//System.out.println("원본파일명: "+originFileNM);
+		
+			if(realFileNM != null && originFileNM != null){
+			
+				//2.[첨부파일]* 현재 등록(삽입)된 게시글에 대한 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
+				//(as bno이기에 bno로 찾음)
+				sql = "select max(bno) as bno from board";
 				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, board.getBtitle());
-				psmt.setString(2, board.getBcontent());
-				psmt.setInt(3,member.getMno());
+				
+				ResultSet rs = psmt.executeQuery();
+				
+				//bno값 가져오기
+				int bno = 0;
+				if(rs.next()){
+					bno = rs.getInt("bno");
+				}
+				
+				if(rs != null) rs.close();
+				if(psmt != null) psmt.close();
+				
+				
+				
+				//3. [첨부파일]삽입
+				sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
+					+ " VALUES(?,?,?, now())";
+				
+				
+				psmt = conn.prepareStatement(sql);
+				
+				psmt.setInt(1, bno);
+				psmt.setString(2,realFileNM );
+				psmt.setString(3,originFileNM );
+				
+				psmt.executeUpdate();
+	
 			}
 		}
-		
-		//삽입된 행 수 반환
-		result = psmt.executeUpdate();
-		
-		if(psmt != null) psmt.close();	
-		
-		//[첨부파일]
-		//업로드된 실제파일명(멀티파트에서 가져오기)
-		//넘어온 업로드파일명
-		String realFileNM = multi.getFilesystemName("uploadFile");
-		
-		//원본파일명
-		String originFileNM = multi.getOriginalFileName("uploadFile");
-		
-		//파일명 잘 넘어왔나 콘솔찍기
-		//System.out.println("실제파일명: "+realFileNM);
-		//System.out.println("원본파일명: "+originFileNM);
-	
-		if(realFileNM != null && originFileNM != null){
-		
-		//2.[첨부파일]* 현재 등록(삽입)된 게시글에 대한 PK값(기본키 bno) 가져오기(insert된 후, conn 종료전)
-		//(as bno이기에 bno로 찾음)
-		sql = "select max(bno) as bno from board";
-		psmt = conn.prepareStatement(sql);
-		
-		ResultSet rs = psmt.executeQuery();
-		
-		//bno값 가져오기
-		int bno = 0;
-		if(rs.next()){
-			bno = rs.getInt("bno");
-		}
-		
-		if(rs != null) rs.close();
-		if(psmt != null) psmt.close();
-		
-		
-		
-		//3. [첨부파일]삽입
-		sql = " INSERT INTO uploadfile(bno, frealNm, foriginNm, frdate)"
-			+ " VALUES(?,?,?, now())";
-		
-		
-		psmt = conn.prepareStatement(sql);
-		
-		psmt.setInt(1, bno);
-		psmt.setString(2,realFileNM );
-		psmt.setString(3,originFileNM );
-		
-		psmt.executeUpdate();
-
-		}
-		
 		
 		
 			

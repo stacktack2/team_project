@@ -72,59 +72,37 @@
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
-		//세션의 맴버 mno와 현재 bno의 mno가 일치하는 지 확인해야함.
+		// 세션의 맴버 mno와 현재 bno의 mno가 일치하는 지 확인해야함.
 		// 확인하는 이유: 주소를 알고 파라미터를 알면 내가 작성하지 않더라도 삭제 요청을 보낼 수 있다.
-		String sql =" select mno from board where bno = ?";
+		// 예외처리 - 관리자일경우 세션의 맴버 mno와 현재 bno의 mno가 달라도 삭제가능하도록 해야한다.
+		String sql =" select mno, btype from board where bno = ?";
 		
 		psmt=conn.prepareStatement(sql);
 		psmt.setInt(1,bno);
 		rs = psmt.executeQuery();
 		
-		if(!rs.next()){
+		if(!rs.next() || member == null){
 			response.sendRedirect("/jspfolder/index.jsp");
 			//존재하지 않는 게시물 삭제 요청 - 비정상 접근 차단
 		}else{
-			if(rs.getInt("mno") != member.getMno()){
-				if(!member.getMid().equals("admin")){	//관리자아닐때
+			if(!member.getMid().equals("admin") && rs.getInt("mno") != member.getMno()){ 
+				// 관리자가 아닐경우, 세션의 맴버 mno와 현재 bno의 mno가 불일치하면 비정상 접근 차단
 					response.sendRedirect("/jspfolder/index.jsp");
-					// 세션의 맴버 mno와 현재 bno의 mno가 불일치. 비정상 접근 차단
-					//관리자가 아닐때도 -> 점프
-				}
-				
-			}
-				
+			}else if(rs.getString("btype").equals("공지사항") && !member.getMid().equals("admin")){ 
+				// 만약 현재 가져온 bno의 btype값이 공지사항일때, 세션의 맴버 mid가 admin이 아니면 차단 및 코드 미실행
+					response.sendRedirect("/jspfolder/index.jsp");
+			}else{
 				if(psmt != null) psmt.close();
 				if(rs != null) rs.close();
 				
-				
-				
-				//게시글 삭제
-				if(!btype.equals("notice")){	//공지사항x
 				sql = "DELETE from board WHERE bno = ?";
 				psmt = conn.prepareStatement(sql);
-				
 				psmt.setInt(1,bno);
-				}else{	//공지사항o
-					if(!member.getMid().equals("admin")){	//관리자x
-						%>
-						<script>
-							alert("권한이 없습니다.");
-							location.href="<%= request.getContextPath() %>/index.jsp";
-						</script>
-						<%
-					}else{
-
-						sql = "DELETE from board WHERE bno = ?";
-						psmt = conn.prepareStatement(sql);
-						
-						psmt.setInt(1,bno);
-					}
-				}
 				result = psmt.executeUpdate();	
 		
 			}
 		
-				
+		}
 				
 				
 	}catch(Exception e){

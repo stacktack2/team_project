@@ -95,20 +95,21 @@ try{
 		psmt.setInt(3,member.getMno());
 		psmt.setString(4, board.getBtype());
 		}else{
-			if(member.getMid().equals("admin")){
-				sql = " INSERT INTO board(btitle, bcontent, mno, brdate) "
-						   + " VALUES(?,?,?,NOW()) ";
-				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, board.getBtitle());
-				psmt.setString(2, board.getBcontent());
-				psmt.setInt(3,member.getMno());
-			}else{
+			if(!member.getMid().equals("admin")){
 				%>
 				<script>
 					alert("권한이 없습니다.");
 					location.href="<%= request.getContextPath() %>/index.jsp";
 				</script>
 				<%
+
+			}else{
+				sql = " INSERT INTO board(btitle, bcontent, mno, brdate) "
+						   + " VALUES(?,?,?,NOW()) ";
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, board.getBtitle());
+				psmt.setString(2, board.getBcontent());
+				psmt.setInt(3,member.getMno());
 			}
 		}
 		

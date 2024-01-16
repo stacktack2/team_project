@@ -106,17 +106,18 @@
 				psmt.setInt(1,bno);
 				}else{	//공지사항o
 					if(!member.getMid().equals("admin")){	//관리자x
-						sql = "DELETE from board WHERE bno = ?";
-						psmt = conn.prepareStatement(sql);
-						
-						psmt.setInt(1,bno);
-					}else{
 						%>
 						<script>
 							alert("권한이 없습니다.");
 							location.href="<%= request.getContextPath() %>/index.jsp";
 						</script>
 						<%
+					}else{
+
+						sql = "DELETE from board WHERE bno = ?";
+						psmt = conn.prepareStatement(sql);
+						
+						psmt.setInt(1,bno);
 					}
 				}
 				result = psmt.executeUpdate();	

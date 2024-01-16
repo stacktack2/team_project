@@ -75,7 +75,7 @@ section{
 }
 /* *************************푸터******************************** */
 footer{
-	height:130px; width:100%; padding:30px 0;
+	height:100px; width:100%; padding:20px 0;
 	background-color: #353631;
 }
 footer>div{text-align:center; margin-bottom:5px; color:#fff;}

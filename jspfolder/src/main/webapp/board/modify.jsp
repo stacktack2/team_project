@@ -109,6 +109,7 @@
 			<!-- hidden으로 bno값 보내기 -->
 			<input type="hidden" name="bno" value="<%=board.getBno()%>">
 			<input type="hidden" name="blist" value="<%=blist%>">
+			<input type="hidden" name="btype" value="<%=board.getBtype()%>">
 			
 			<table border="1" class="writeTable">
 				<tbody>

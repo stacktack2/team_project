@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="Vo.Board" %>
+<%@ page import="Vo.Member" %>
 <%//[첨부파일] 첨부파일, 파일이름이 겹쳤을떄의 규칙 import %>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
@@ -59,7 +60,7 @@
 			</script>
 			<%
 		}
-		
+		Member member =(Member)session.getAttribute("login");
 		//Board
 		Board board = new Board();
 		//파라미터 받기
@@ -70,6 +71,9 @@
 		if(bnoParam != null && !bnoParam.equals("")){
 			bno = Integer.parseInt(bnoParam);
 		}
+		board.setBtype(multi.getParameter("btype"));
+		//String btype = multi.getParameter("btype");
+
 
 		int result = 0;
 		
@@ -79,6 +83,7 @@
 			conn=DriverManager.getConnection(url,user,pass);
 			
 			//1. 게시글 수정
+			if(!board.getBtype().equals("notice")){
 			String	sql = "UPDATE board "
 						 +" SET btitle = ?"
 					 	 +", bcontent = ? "
@@ -89,7 +94,21 @@
 			psmt.setString(1, board.getBtitle());
 			psmt.setString(2, board.getBcontent());
 			psmt.setInt(3, bno);
-			//System.out.println(bno);
+			}else{
+				if(member.getMid().equals("admin")){
+					String	sql = "UPDATE board "
+							 +" SET btitle = ?"
+						 	 +", bcontent = ? "
+						 	 +", brdate = now()"
+							 +" WHERE bno = ?";
+
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, board.getBtitle());
+				psmt.setString(2, board.getBcontent());
+				psmt.setInt(3, bno);
+				}
+			}
+			
 			//수정된 행 수 반환
 			result = psmt.executeUpdate();
 			

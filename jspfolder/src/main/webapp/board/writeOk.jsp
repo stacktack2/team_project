@@ -28,7 +28,7 @@ String pass ="ezen";
 	
 int result =0;
 try{
-
+	
 	//[첨부파일] 업로드 위치 지정
 	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
 	String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
@@ -72,26 +72,38 @@ try{
 		board.setBcontent(multi.getParameter("bcontent"));
 		board.setBtype(multi.getParameter("btype"));
 	
-		String boardType = board.getBtype();
 
 
 
 			
 	//	캠핑지역 값 받아오기
-		String subtype = request.getParameter("subtype");
+	//	String subtype = request.getParameter("subtype");
 	
 	
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn=DriverManager.getConnection(url,user,pass);
+		
+		String sql = "";
+		
 		//1.[게시글] 작성 
-		String sql = " INSERT INTO board(btitle, bcontent, mno, brdate, btype) "
+		if(!board.getBtype().equals("notice")){
+		sql = " INSERT INTO board(btitle, bcontent, mno, brdate, btype) "
 				   + " VALUES(?,?,?,NOW(),?) ";
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1, board.getBtitle());
 		psmt.setString(2, board.getBcontent());
 		psmt.setInt(3,member.getMno());
 		psmt.setString(4, board.getBtype());
-		
+		}else{
+			if(member.getMid().equals("admin")){
+				sql = " INSERT INTO board(btitle, bcontent, mno, brdate) "
+						   + " VALUES(?,?,?,NOW()) ";
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, board.getBtitle());
+				psmt.setString(2, board.getBcontent());
+				psmt.setInt(3,member.getMno());
+			}
+		}
 		
 		//삽입된 행 수 반환
 		result = psmt.executeUpdate();

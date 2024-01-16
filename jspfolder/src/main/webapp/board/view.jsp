@@ -390,6 +390,7 @@
 		<form name="delfrm" action="delete.jsp" method="post">
 			<input type="hidden" name="bno" value="<%=bno%>">
 			<input type="hidden" name="blist" value="<%=blist %>">
+			<input type="hidden" name="btype" value="<%=board.getBtype() %>">
 		</form>
 		</div>	
 		

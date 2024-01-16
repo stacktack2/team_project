@@ -10,7 +10,7 @@
 	%>
 		<script>
 			alert("잘못된 접근입니다.");
-			location.href='list.jsp';
+			location.href='<%= request.getContextPath() %>/index.jsp';
 		</script>
 	<%
 	}
@@ -55,7 +55,8 @@
 		<%
 	}
 	
-
+	//파라미터 받기
+	String btype = request.getParameter("btype");
 	Connection conn = null;	
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
@@ -84,9 +85,13 @@
 			//존재하지 않는 게시물 삭제 요청 - 비정상 접근 차단
 		}else{
 			if(rs.getInt("mno") != member.getMno()){
-				response.sendRedirect("/jspfolder/index.jsp");
-				// 세션의 맴버 mno와 현재 bno의 mno가 불일치. 비정상 접근 차단
-			}else{
+				if(!member.getMid().equals("admin")){
+					response.sendRedirect("/jspfolder/index.jsp");
+					// 세션의 맴버 mno와 현재 bno의 mno가 불일치. 비정상 접근 차단
+					//관리자가 아닐때도 -> 점프
+				}
+				
+			}
 				
 				if(psmt != null) psmt.close();
 				if(rs != null) rs.close();
@@ -94,15 +99,23 @@
 				
 				
 				//게시글 삭제
+				if(!btype.equals("notice")){
 				sql = "DELETE from board WHERE bno = ?";
 				psmt = conn.prepareStatement(sql);
 				
 				psmt.setInt(1,bno);
-				
+				}else{
+					if(member.getMid().equals("admin")){
+						sql = "DELETE from board WHERE bno = ?";
+						psmt = conn.prepareStatement(sql);
+						
+						psmt.setInt(1,bno);
+					}
+				}
 				result = psmt.executeUpdate();	
 		
 			}
-		}
+		
 				
 				
 				

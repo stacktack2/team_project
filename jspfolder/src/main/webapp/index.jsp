@@ -33,9 +33,8 @@
 <head>
 <meta charset="UTF-8">
 <title>index</title>
-<%-- <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet"> --%>
-<%-- <link href="<%=request.getContextPath()%>/css/main.css" type="text/css" rel="stylesheet"> --%>
-<link href="bootstrap-4.4.1-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>

@@ -102,6 +102,13 @@ try{
 				psmt.setString(1, board.getBtitle());
 				psmt.setString(2, board.getBcontent());
 				psmt.setInt(3,member.getMno());
+			}else{
+				%>
+				<script>
+					alert("권한이 없습니다.");
+					location.href="<%= request.getContextPath() %>/index.jsp";
+				</script>
+				<%
 			}
 		}
 		

@@ -85,7 +85,7 @@
 			//존재하지 않는 게시물 삭제 요청 - 비정상 접근 차단
 		}else{
 			if(rs.getInt("mno") != member.getMno()){
-				if(!member.getMid().equals("admin")){
+				if(!member.getMid().equals("admin")){	//관리자아닐때
 					response.sendRedirect("/jspfolder/index.jsp");
 					// 세션의 맴버 mno와 현재 bno의 mno가 불일치. 비정상 접근 차단
 					//관리자가 아닐때도 -> 점프
@@ -99,17 +99,24 @@
 				
 				
 				//게시글 삭제
-				if(!btype.equals("notice")){
+				if(!btype.equals("notice")){	//공지사항x
 				sql = "DELETE from board WHERE bno = ?";
 				psmt = conn.prepareStatement(sql);
 				
 				psmt.setInt(1,bno);
-				}else{
-					if(member.getMid().equals("admin")){
+				}else{	//공지사항o
+					if(!member.getMid().equals("admin")){	//관리자x
 						sql = "DELETE from board WHERE bno = ?";
 						psmt = conn.prepareStatement(sql);
 						
 						psmt.setInt(1,bno);
+					}else{
+						%>
+						<script>
+							alert("권한이 없습니다.");
+							location.href="<%= request.getContextPath() %>/index.jsp";
+						</script>
+						<%
 					}
 				}
 				result = psmt.executeUpdate();	

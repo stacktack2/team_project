@@ -101,7 +101,6 @@
 			%>
 			<script>
 				alert("회원가입에 실패했습니다. 다시 시도하세요.");
-				
 			</script>
 			<%		
 		}else{
@@ -137,6 +136,10 @@
 		<script>
 			alert("회원가입이 완료되었습니다. 로그인을 시도하세요.");
 			location.href="<%=request.getContextPath()%>";
+<%
+			session.invalidate();
+			response.sendRedirect(request.getContextPath());
+%>
 		</script>
 <%
 	}else{

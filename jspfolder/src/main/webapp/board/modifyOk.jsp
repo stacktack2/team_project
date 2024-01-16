@@ -83,7 +83,7 @@
 			conn=DriverManager.getConnection(url,user,pass);
 			
 			//1. 게시글 수정
-			if(!board.getBtype().equals("notice")){
+			if(!board.getBtype().equals("notice")){	//공지사항x
 			String	sql = "UPDATE board "
 						 +" SET btitle = ?"
 					 	 +", bcontent = ? "
@@ -94,8 +94,8 @@
 			psmt.setString(1, board.getBtitle());
 			psmt.setString(2, board.getBcontent());
 			psmt.setInt(3, bno);
-			}else{
-				if(member.getMid().equals("admin")){
+			}else{//공지사항o
+				if(member.getMid().equals("admin")){	//관리자o
 					String	sql = "UPDATE board "
 							 +" SET btitle = ?"
 						 	 +", bcontent = ? "
@@ -106,6 +106,13 @@
 				psmt.setString(1, board.getBtitle());
 				psmt.setString(2, board.getBcontent());
 				psmt.setInt(3, bno);
+				}else{
+					%>
+					<script>
+						alert("권한이 없습니다.");
+						location.href='<%=request.getContextPath()%>';
+					</script>
+				<%
 				}
 			}
 			

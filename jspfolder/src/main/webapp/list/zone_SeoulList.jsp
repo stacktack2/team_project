@@ -136,7 +136,7 @@
 <%@ include file="/include/nav.jsp" %>
 	<section>
 <!-- 게시판페이지 이름 -->
-		<h2>캠핑지역[충청권] 게시판</h2>
+		<h2>캠핑지역[서울] 게시판</h2>
 		<div class="frms">
 <!-- 게시글 정렬폼 -->
 		<form name="frm1" action="zone_SeoulList.jsp" method="get" id="frm1">

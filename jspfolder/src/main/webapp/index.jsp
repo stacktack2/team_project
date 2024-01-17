@@ -32,7 +32,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index</title>
+<title>캠핑 여행 커뮤니티</title>
 <link href="<%=request.getContextPath()%>/css/base.css" type="text/css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/main.css" type="text/css" rel="stylesheet">
 </head>

@@ -94,6 +94,8 @@
 				if(data.trim() != "FAIL" && data.trim() != "FAILFAIL"){
 					$(".replyArea").prepend(data.trim());	//첫번째 자식으로
 					
+				}else if(data.trim() == "FAIL"){
+					alert("로그인 후 이용해 주세요.")
 				}else{
 					alert("댓글이 입력되지 않았습니다.")
 				}
@@ -118,7 +120,7 @@
 				if(data.trim() == 'SUCCESS'){
 					alert("댓글이 삭제되었습니다.");
 					let target = $(obj).parent().parent();
-					target.html("삭제된 게시글입니다.");
+					target.html("삭제된 댓글입니다.");
 				}else{
 					alert("댓글이 삭제되지 못했습니다.");
 				}

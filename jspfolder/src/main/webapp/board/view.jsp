@@ -215,12 +215,12 @@
 			if(blist.equals("notice")){
 				preSql += " btype = '공지사항' "; nextSql += " btype = '공지사항' ";
 			}else if(blist.equals("hot")){
-				preSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') "; 
-				nextSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') ";
+				preSql += " (btype = '자유게시판' or btype like concat('캠핑장비','%') or  btype like concat('캠핑지역','%'))  "; 
+				nextSql += " (btype = '자유게시판' or btype like concat('캠핑장비','%') or  btype like concat('캠핑지역','%'))  ";
 			}else if(blist.equals("free")){
 				preSql += " btype = '자유게시판' "; nextSql += " btype = '자유게시판' ";
 			}else if(blist.equals("zone")){
-				preSql += " btype = '캠핑지역' "; nextSql += " btype = '캠핑지역' ";
+				preSql += " btype like concat('캠핑지역','%') "; nextSql += " btype like concat('캠핑지역','%') ";
 			}else if(blist.equals("zone_Seoul")){
 				preSql += " btype = '캠핑지역_서울' "; nextSql += " btype = '캠핑지역_서울' ";
 			}else if(blist.equals("zone_CC")){
@@ -236,7 +236,7 @@
 			}else if(blist.equals("zone_YN")){
 				preSql += " btype = '캠핑지역_영남권' "; nextSql += " btype = '캠핑지역_영남권' ";
 			}else if(blist.equals("gear")){
-				preSql += " btype = '캠핑장비' "; nextSql += " btype = '캠핑장비' ";
+				preSql += " btype like concat('캠핑장비','%') "; nextSql += " btype like concat('캠핑장비','%') ";
 			}else if(blist.equals("gear_Tent")){
 				preSql += " btype = '캠핑장비_텐트' "; nextSql += " btype = '캠핑장비_텐트' ";
 			}else if(blist.equals("gear_Bad")){
@@ -252,8 +252,8 @@
 			}else if(blist.equals("QnA")){
 				preSql += " btype = 'QnA' "; nextSql += " btype = 'QnA' ";
 			}else{
-				preSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항') ";
-				nextSql += " (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%' or btype='공지사항') ";
+				preSql += " (btype = '자유게시판' or btype like concat('캠핑장비','%') or  btype like concat('캠핑지역','%') or btype='공지사항') ";
+				nextSql += " (btype = '자유게시판' or btype like concat('캠핑장비','%') or  btype like concat('캠핑지역','%') or btype='공지사항') ";
 			}
 		}
 		preSql += " order by bno desc limit 1 ";
@@ -398,18 +398,12 @@
 		
 
 		<!-- 댓글영역 -->
-		<%
-			//로그인이 되어있는 상태에서만 보이는 제어문
-			if(member != null){
-		%>
 		<form name="replyfrm" class="replyfrm" >
 			<input type="hidden" name="bno" value="<%=board.getBno() %>">
 			<input type="text" name="rcontent">
 			<button type="button" onclick="replyInsertFn()">댓글</button>
 		</form>
-		<%
-			}
-		%>
+		
 		<div class="replyArea">
 	<%
 		

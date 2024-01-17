@@ -23,7 +23,7 @@
 <%@ include file="/include/header.jsp" %>
 	<section>
 		<form name="frm" method="post" action="mypagePwOk.jsp">
-			<input type="text" id="mypagePwinput" name="checkmpw" placeholder="비밀번호를 입력하세요.">
+			<input type="password" id="mypagePwinput" name="checkmpw" placeholder="비밀번호를 입력하세요.">
 			<button id="mypagePwbutton">확인</button>
 		</form>
 	</section>

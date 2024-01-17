@@ -138,7 +138,6 @@
 			location.href="<%=request.getContextPath()%>";
 <%
 			session.invalidate();
-			response.sendRedirect(request.getContextPath());
 %>
 		</script>
 <%

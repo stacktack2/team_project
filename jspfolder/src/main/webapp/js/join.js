@@ -140,7 +140,7 @@
 			return false;
 		}else if(!regRs){
 			check = false;
-			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '3자리 숫자를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{
@@ -160,7 +160,7 @@
 			mphoneTd.style.color = 'red';
 			return false;
 		}else if(!regRs){
-			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '3~4자리 숫자를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{
@@ -179,7 +179,7 @@
 			mphoneTd.style.color = 'red';
 			return false;
 		}else if(!regRs){
-			mphoneTd.innerHTML = '숫자만 사용가능합니다.';
+			mphoneTd.innerHTML = '4자리 숫자를 입력해주세요.';
 			mphoneTd.style.color = 'red';
 			return false;
 		}else{

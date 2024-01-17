@@ -42,11 +42,15 @@
 	<div class="container">
 		<%@ include file="/include/nav.jsp" %>
 		<section>
+			<div id="location">위치 
+				<span></span>
+			</div>
+			<div id="temp">기온 
+				<span></span>
+			</div>
 			<div id="weather">
-         		<span></span>
-         		<span></span>
          		<span id="weatherIcon"></span>
-         		<span></span>
+				<span></span>
 			</div>
 			<div id="youtube">
 				<iframe width="440" height="250" src="https://www.youtube.com/embed/YvgKD1VfA6E?si=Cr2fSTvCdzgS42eN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

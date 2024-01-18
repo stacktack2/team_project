@@ -3,6 +3,7 @@
 <%@ page import="Vo.Member" %>
 <%@ page import="java.sql.*" %>
 <%
+	
 	String mid = request.getParameter("mid");
 	String mpw = request.getParameter("mpw");
 	

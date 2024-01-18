@@ -40,7 +40,7 @@
 	
 	//sql의 결과 행을 담을 객체 생성(선택)
 	Board board = new Board();
-	String foriginNm=null;
+	String foriginNm = null;
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -77,19 +77,26 @@
 		if(rs != null) rs.close();
 	}
 	
-	//로그인이 안돼있거나 게시글을 쓴 본인이 아니면, 관리자 => 점프
+	//로그인이 안되어있거나 게시글을 쓴 본인이 아니면 뒤로
+	// 예외처리- 어드민은 게시글을 쓴 본인이 아니어도 통과
 	
 	
-	if(member == null || board == null || board.getMno() != member.getMno())
-	{
-		if(!member.getMid().equals("admin"))
-		{
+	if(member == null){
 	%>
 		<script>
 			alert("잘못된 접근입니다.");
 			location.href="<%=request.getContextPath()%>";
 		</script>
-	<%
+	<%	
+	}else if(member != null && (board.getMno() != member.getMno())){
+		if(member.getMid().equals("admin")){
+		}else{
+	%>
+		<script>
+			alert("잘못된 접근입니다.");
+			location.href="<%=request.getContextPath()%>";
+		</script>
+	<%	
 		}
 	}
 %>

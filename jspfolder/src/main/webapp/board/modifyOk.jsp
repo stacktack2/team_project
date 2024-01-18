@@ -22,22 +22,25 @@
 	<%
 	}
 	
-	//[첨부파일] 업로드 위치 지정
-	//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	//String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
-	String directory = "C:\\Users\\MYCOM\\git\\team_project7\\jspfolder\\src\\main\\webapp\\upload";
-	
-	//[첨부파일] 사이즈정하기 100mb제한
-	int sizeLimit = 100*1024*1024;	
-	
-	//[첨부파일]multipart request로 바꿈
-	//MultipartRequest 객체 생성()
-	MultipartRequest multi 
-		= new MultipartRequest
-			(request, directory, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
-	
-	
-	//[첨부파일] 파라미터 
+
+	if(request.getContentType() != null && -1 < request.getContentType().indexOf("multipart/form-data")) {
+		//[첨부파일] 업로드 위치 지정
+		//String directory = "E:\\98.팀프로젝트\\01.1차프로젝트\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+		//String directory = "D:\\team\\team_project\\jspfolder\\src\\main\\webapp\\upload";
+		String directory = "C:\\Users\\MYCOM\\git\\team_project7\\jspfolder\\src\\main\\webapp\\upload";
+		
+		//[첨부파일] 사이즈정하기 100mb제한
+		int sizeLimit = 100*1024*1024;	
+		
+		
+		
+		//[첨부파일]multipart request로 바꿈
+		//MultipartRequest 객체 생성()
+		MultipartRequest multi 
+			= new MultipartRequest(request, directory, sizeLimit, "UTF-8", new DefaultFileRenamePolicy());
+		
+		
+		//[첨부파일] 파라미터 
 		//넘어온 업로드파일명(바뀐)
 		String frealNm = multi.getFilesystemName("uploadFile");
 		//원본파일명
@@ -74,11 +77,11 @@
 		}
 		board.setBtype(multi.getParameter("btype"));
 		//String btype = multi.getParameter("btype");
-
-
+	
+	
 		int result = 0;
 		
-
+	
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn=DriverManager.getConnection(url,user,pass);
@@ -113,7 +116,7 @@
 						 	 +", bcontent = ? "
 						 	 +", brdate = now()"
 							 +" WHERE bno = ?";
-
+	
 					psmt = conn.prepareStatement(sql);
 					psmt.setString(1, board.getBtitle());
 					psmt.setString(2, board.getBcontent());
@@ -170,5 +173,6 @@
 			</script>
 		<%
 		}
-	
-	%>
+	}
+
+%>

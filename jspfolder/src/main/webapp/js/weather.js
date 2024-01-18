@@ -28,3 +28,5 @@ function onGeoError(){
 }
 
 navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+console.log(onGeoOk);
+console.log(onGeoError);

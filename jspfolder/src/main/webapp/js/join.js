@@ -115,11 +115,11 @@
 		let regRs = regId.test(obj.value); 
 		let mbirthTd = document.getElementById("mbirthTd"); 
 		if(obj.value == "" || obj.value === null || obj.value === undefined){
-			mbirthTd.innerHTML = '생년월일을 입력해주세요.';
+			mbirthTd.innerHTML = '생년월일 8자리를 입력해주세요.';
 			mbirthTd.style.color = 'red';
 			return false;
 		}else if(!regRs){
-			mbirthTd.innerHTML = '숫자만 사용가능하고 생년월일 입력양식을 맞춰주세요.';
+			mbirthTd.innerHTML = '숫자만 사용가능하고 생년월일 8자리를 입력해주세요.';
 			mbirthTd.style.color = 'red';
 			return false;
 		}else{

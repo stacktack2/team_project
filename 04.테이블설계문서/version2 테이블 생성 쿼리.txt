@@ -51,8 +51,10 @@ CREATE TABLE reply
 	bno int unsigned NOT NULL,
    	rgroup int unsigned default 0 NOT NULL,
    	rorder int unsigned default 0 NOT NULL,
-    	rdepth int unsigned default 0 NOT NULL,
+	rdepth int unsigned default 0 NOT NULL,
 	rdelyn boolean default false NOT NULL,
+    parentrno int unsigned default 0 NOT NULL,
+    isAllChildDelyn boolean default 1 NOT NULL,
 	PRIMARY KEY (rno)
 );
 

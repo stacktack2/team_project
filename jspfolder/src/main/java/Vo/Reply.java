@@ -14,9 +14,23 @@ public class Reply{
 	private int rorder;
 	private int rdepth;
 	private int rdelyn;
+	private int parentrno;
+	private int isAllChildDelyn;
 	
 	public int getRdelyn() {
 		return rdelyn;
+	}
+	public int getParentrno() {
+		return parentrno;
+	}
+	public void setParentrno(int parentrno) {
+		this.parentrno = parentrno;
+	}
+	public int getIsAllChildDelyn() {
+		return isAllChildDelyn;
+	}
+	public void setIsAllChildDelyn(int isAllChildDelyn) {
+		this.isAllChildDelyn = isAllChildDelyn;
 	}
 	public void setRdelyn(int rdelyn) {
 		this.rdelyn = rdelyn;

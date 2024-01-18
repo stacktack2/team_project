@@ -71,8 +71,8 @@
  			if(psmt != null) psmt.close();
  			
 			//SQL
-			sql = " INSERT INTO reply(bno, mno, rcontent, rrdate, rgroup, rorder, rdepth)"
-						+" VALUES(?,?,?,now(),?,?,?)";
+			sql = " INSERT INTO reply(bno, mno, rcontent, rrdate, rgroup, rorder, rdepth, parentrno)"
+						+" VALUES(?,?,?,now(),?,?,?,?)";
 			
 			psmt=conn.prepareStatement(sql);
 			
@@ -82,6 +82,7 @@
 			psmt.setInt(4,parentrgroup);
 			psmt.setInt(5,parentrorder+1);
 			psmt.setInt(6,parentrdepth+1);
+			psmt.setInt(7,reply.getRno());
 			
 			int result = psmt.executeUpdate();	
 			
@@ -90,9 +91,20 @@
 				
 				
 				
+				if(psmt != null) psmt.close();
+	 			if(rs != null) rs.close();
+	 			
+	 			//부모의 isAllChildDelyn을 0 으로 바꿔야함.
+	 			sql = " update reply set isAllChildDelyn = 0 where rno = ? ";
+			
+	 			psmt=conn.prepareStatement(sql);
+				
+	 			psmt.setInt(1,reply.getRno());
+				
+	 			psmt.executeUpdate();	
+	 			
 	 			if(psmt != null) psmt.close();
 	 			if(rs != null) rs.close();
-				
 				
 				/*
 					댓글이 등록된 후에는 rno를 따로 가지고 있지 않기 때문에
@@ -102,7 +114,6 @@
 					rno필드에 값을 추가하는 로직이 필요하다
 				*/
 				
-				if(psmt != null) psmt.close();
 				
 				//max를 쓰는 이유는 auto_increment기떄문
 				//현재 등록된 댓글의 rno(PK)는 rno의 최댓값(max(rno))

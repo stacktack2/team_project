@@ -202,6 +202,8 @@
 			reply.setRrdate(rs.getString("rrdate"));
 			reply.setRdepth(rs.getInt("rdepth"));
 			reply.setRdelyn(rs.getInt("rdelyn"));
+			reply.setParentrno(rs.getInt("parentrno"));
+			reply.setIsAllChildDelyn(rs.getInt("isAllChildDelyn"));
 			
 			//댓글 목록변수에 댓글원소객체 추가
 			rlist.add(reply);
@@ -445,9 +447,11 @@
 					<%
 					}
 				}else{
+					if(reply.getIsAllChildDelyn() == 0){
 					%>
 						<div>삭제된 댓글입니다.</div>
 					<%
+					}	
 				}
 					
 					//rereplyinput이 생성되는곳

@@ -11,11 +11,21 @@
 	if(method.equals("GET")){
 		response.sendRedirect("findId.jsp");
 	}
-
+	
 	String mid = "";
 	String mname = request.getParameter("mname");
 	String mbirthStr = request.getParameter("mbirth");
-	int mbirth = Integer.parseInt(mbirthStr);
+	int mbirth = 0;
+	try{
+		mbirth = Integer.parseInt(mbirthStr);		
+	}catch(NumberFormatException e){
+%>
+	<script>
+		alert("회원정보를 다시 입력해주세요.");
+		location.href="findId.jsp";
+	</script>
+<%		
+	}
 	String mphone1 = request.getParameter("mphone1");
 	String mphone2 = request.getParameter("mphone2");
 	String mphone3 = request.getParameter("mphone3");

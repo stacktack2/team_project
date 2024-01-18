@@ -3,6 +3,11 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="regular.Regular"%>
 <%
+	String method = request.getMethod();
+	if(method.equals("GET")){
+		response.sendRedirect("join.jsp");
+	}
+
 //	사용자가 입력하여 전달한 아이디 값이 DB에 있는지 확인
 	String nick = request.getParameter("nick"); // join.jsp id 받아오기
 	

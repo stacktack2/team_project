@@ -230,7 +230,7 @@
 			
 		$.ajax({
 			url : "checkId.jsp",
-			type : "get",
+			type : "post",
 			data : {id : id},
 			success : function(data){
 				let result = data.trim();
@@ -273,7 +273,7 @@
 			
 		$.ajax({
 			url : "checkNickNm.jsp",
-			type : "get",
+			type : "post",
 			data : {nick : nick},
 			success : function(data){
 			let result = data.trim();

@@ -231,7 +231,7 @@
 				 		
 				 if(searchType != null){
 				 %>
-					<a href="freeList.jsp?nowPage1=<%=i%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i%></a>
+					<a href="freeList.jsp?nowPage=<%=i%>&searchAlign=<%=searchAlign%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i%></a>
 				 <%
 				 }else{
 				 %>	

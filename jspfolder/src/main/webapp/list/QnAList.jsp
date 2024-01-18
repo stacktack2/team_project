@@ -160,6 +160,7 @@
 				</select>
 				<input type="text" name="searchValue" 
 				  value="<%if(searchValue!=null) out.print(searchValue); %>">
+				<input type="hidden" name="searchAlign" value="<%if(searchAlign!=null) out.print(searchAlign); %>">
 				<button class="searchBtn">검색</button>
 			</form>
 		</div>

@@ -22,7 +22,7 @@
 	//현재 대댓글 작성자 - (게시글 mno필요)
 	Member member = (Member)session.getAttribute("login");
 
-	if(member != null){	//로그인이 돼있다면
+	if(member != null && reply.getBno() != 0 && reply.getRcontent() != null){	//로그인이 되어있고 존재하는 게시글이고 내용이 null이 아닐때
 		
 		reply.setMno(member.getMno());
 		

@@ -91,7 +91,6 @@ form>select{
 	display: inline-block;
 	width: 25px; height:25px;
 	border: 1px solid black;	
-	margin-bottom: 150px;
 }
 .paging .pluspage{
 	width: 40px;

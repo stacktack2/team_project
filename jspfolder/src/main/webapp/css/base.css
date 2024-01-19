@@ -88,7 +88,7 @@ nav{
 	}
 #welcome a{
 	font-weight: bold; color:#dd6d2f; 
-	margin-left: 55px;
+	margin-left: 57px;
 	}
 #welcome a:hover{color: brown; transition:all .4s;}
 /* 검색 */
@@ -102,11 +102,13 @@ nav{
 }
 .menu>li>a:hover{color: white; transition:all .4s;}
 .submenu>li{padding-left:20px;}
+.submenu>li>a:hover{color: white; transition:all .4s;}
 /* **************************본문************************************ */
 section{
 	width:900px;
 	background-color:#fff; 
 	padding-top: 20px;
+	padding-bottom: 100px;
 	margin: 0 auto;
 }
 /* *************************푸터******************************** */

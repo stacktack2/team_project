@@ -21,7 +21,7 @@
 	font-size: 17px;
 }
 #writeBtns{float:right;}
-.replyfrm{margin-top: 20px;}
+.replyfrm{margin-top: 20px; margin-bottom:10px;}
 .replyfrm input[type="text"]{
 	width: 800px; padding: 5px;
 }

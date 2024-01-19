@@ -48,8 +48,14 @@
 }
 
 /*write*/
+.cancleBtn{
+	margin-left:43%;
+	margin-top: 20px;
+	padding: 2px 5px;
+    font-size: 17px;
+}
 .saveBtn{
-	margin-left:45%;
+	margin-left: 2%;
 	margin-top: 20px;
 	padding: 2px 5px;
 	font-size: 17px;

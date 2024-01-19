@@ -12,9 +12,10 @@
     font-style: normal;
 }
 
-*{
+/* *{
 	font-family: 'Pretendard-Regular';
-}
+} */
+section{padding-bottom: 50px;}
 #location {
     background-color: white;
     display: inline-block;
@@ -24,6 +25,7 @@
     margin-left: 260px;
 }
 #location span{
+	font-family: 'Pretendard-Regular';
 	font-size: 15px;
 }
 #temp {
@@ -34,6 +36,7 @@
     margin-right: 45px;
 }
 #temp span{
+	font-family: 'Pretendard-Regular';
 	background-color: white;
 	font-size: 15px;
 }
@@ -52,6 +55,7 @@
 	margin: -16px 0;
 }
 #weather span:last-child{
+	font-family: 'Pretendard-Regular';
 	font-size: 15px;
 	color: black;
 }
@@ -71,7 +75,7 @@
 	padding: 10px 20px;
 	background-color:gray;
 }
-.mboardmn h3{float:left;}
+.mboardmn h3{float:left; color: floralwhite;}
 .mboardmn .mainmore{float:right;}
 .mboardmn .mainmore:hover{color:white; transition:all .4s;}
 .mainlist li{

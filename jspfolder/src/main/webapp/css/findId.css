@@ -25,13 +25,11 @@ header #logo{
 #top_menu>a{font-weight: bold;}
 /* **************************본문************************************ */
 section{
-	width:900px; height: 100vh;
+	width:900px;
 	background-color:#fff; 
-	margin-left:250px; margin-top: 20px;
-	margin-right:250px;
-	min-height: calc(100vh - 12vh);
-    position: relative;
-    padding-bottom: 60px;
+	margin:20px 250px 50px;
+    padding-bottom: 200px;
+    padding-top:50px;
 }
 #formDiv{
 	margin-right:210px;
@@ -75,12 +73,17 @@ table{
 /* 아이디 조회 버튼 */
 #idSearchButton{
 	font-weight:bold;
-	background-color:skyblue;
+	background-color:#efe6d9;
 	display:block;			
 	border-radius:9px;	
 	width: 200px; height:40px;
 	margin-left: 250px;
 	font-size : 20px;
+}
+#idSearchButton:hover{
+	cursor:pointer;
+	box-shadow: 2px 2px 5px 5px rgba(111,85,47,0.2) inset;
+	transition: all .4s;
 }
 /* 버튼 */
 #findPwQus{
@@ -96,6 +99,7 @@ table{
 	margin-left: 300px;
 	color: #a50021;
 }
+
 
 /* *************************푸터******************************** */
 footer{

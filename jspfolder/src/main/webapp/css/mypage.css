@@ -16,12 +16,16 @@ nav{
 	width: 100%; font-size:30px;
 	margin-top:70px;
 	text-align: center;
+	color:#39504d;
+	font-weight:bold;
 }
 	
 #mypagename{
 	display: inline-block; 
 	width: 100%; height:100px;
 	text-align: center;
+	color:#39504d;
+	font-weight:bold;
 }
 
 .mypagelist{
@@ -45,8 +49,6 @@ nav{
 	width: 100%; height:50px;
 	text-align: center;
 	margin-top:50px;
-	margin-bottom:150px;
-	
 }
 
 .paging{

@@ -81,7 +81,7 @@
 		
 		//2. [게시글] [댓글]
 			String sql = "SELECT b.bno, btitle, b.mno, m.mnickNm, brdate ,bhit, btype"
-					+" , (select count(*) from reply r where r.bno = b.bno) as rcnt"
+					+" , (select count(*) from reply r where r.bno = b.bno && rdelyn = 0) as rcnt"
 					+" FROM board b "
 					+" INNER JOIN member m "
 					+" ON b.mno = m.mno"

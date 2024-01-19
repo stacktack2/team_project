@@ -100,7 +100,7 @@
 		
 //		게시글 list 쿼리문
 		String sql = " SELECT b.*, m.mnickNm, "
-				   + " (SELECT COUNT(*) FROM reply r WHERE r.bno = b.bno) AS rcnt"
+				   + " (SELECT COUNT(*) FROM reply r WHERE r.bno = b.bno && rdelyn = 0) AS rcnt"
 				   + "   FROM board b"
 				   + "  INNER JOIN member m"
 				   + "     ON b.mno = m.mno"

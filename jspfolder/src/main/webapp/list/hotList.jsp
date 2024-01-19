@@ -62,7 +62,7 @@
 		
 		//2. [게시글]
 			
-		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
+		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno && rdelyn = 0) as rcnt "
 				 +" from board b inner join member m on b.mno = m.mno "
 				 +" WHERE (btype = '자유게시판' or btype LIKE '캠핑장비%' or  btype LIKE '캠핑지역%') order by bhit desc ";
 		

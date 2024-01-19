@@ -79,7 +79,7 @@
 		
 		//2. [게시글]
 			
-		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno) as rcnt "
+		String sql = " select b.*, m.mnickNm , (select count(*) from reply r where r.bno = b.bno && rdelyn = 0) as rcnt "
 				 +" from board b inner join member m on b.mno = m.mno "
 				 +" WHERE btype='공지사항' ";
 				

@@ -32,7 +32,7 @@ https://www.canva.com/design/DAF_05bERDE/35r3Yqup0xYRNzMWkWL3Cw/edit?utm_content
 <b>마이페이지 전체 구현-</b><br>
 세션 인증을 활용한 비밀번호 변경
 
-<b>게시물 페이지 전체-</b><br>
-조회,작성,수정,삭제 기본 페이지 구현<br>
+<b>게시물 페이지-</b><br>
+조회,작성,수정,삭제 기본 페이지 구현 및 검색 기능 구현<br>
 무한 <b>계층형 게시판</b> 구현(댓글,대댓글의 작성, 수정, 삭제)<br>
 JSON 파싱을 활용한 ajax 통신 구현

@@ -13,7 +13,8 @@
 언어 및 기술 : HTML, CSS, JavaScript, jQuery, JAVA(JSP, JDBC), MySQL 8.0.35<br>
 개발도구 : Eclipse 2021_11, StarUML, ERMaster
 
-
+#### PPT 주소
+https://www.canva.com/design/DAF_05bERDE/35r3Yqup0xYRNzMWkWL3Cw/edit?utm_content=DAF_05bERDE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 
 

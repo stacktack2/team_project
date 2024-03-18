@@ -6,9 +6,12 @@
 <b>팀</b> : C팀<br>
 <b>팀원</b> : 이준택, 전용휘, 최낙범, 정다희<br>
 <b>기획의도</b> : 캠핑 여행지와 캠핑 장비에 대한 정보제공을 통해 커뮤니티 이용자의 원활한 캠핑 유도<br>
-<b>기획목적</b> : JAVA, JSP의 이해와 실력 향상
+<b>기획목적</b> : JAVA, JSP의 이해와 실력 향상<br>
+<b>개발환경</b> : tomcat 9.0, MySQL 8.0.35, JDK 13.0.2, GitHub<br>
+<b>언어 및 기술</b> : HTML, CSS, JavaScript, jQuery, JAVA(JSP, JDBC), MySQL 8.0.35<br>
+<b>개발도구</b> : Eclipse 2021_11, StarUML, ERMaster
 
-![image](https://github.com/stacktack2/team_project/assets/155036059/d2368595-a9df-4fb2-9ca5-492e5f97188d)
+
 
 
 

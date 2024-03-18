@@ -7,7 +7,8 @@
 <b>팀원</b> : 이준택, 전용휘, 최낙범, 정다희<br>
 <b>기획의도</b> : 캠핑 여행지와 캠핑 장비에 대한 정보제공을 통해 커뮤니티 이용자의 원활한 캠핑 유도<br>
 <b>기획목적</b> : JAVA, JSP의 이해와 실력 향상<br>
-#
+
+#### 개발환경
 개발환경 : tomcat 9.0, MySQL 8.0.35, JDK 13.0.2, GitHub<br>
 언어 및 기술 : HTML, CSS, JavaScript, jQuery, JAVA(JSP, JDBC), MySQL 8.0.35<br>
 개발도구 : Eclipse 2021_11, StarUML, ERMaster

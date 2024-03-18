@@ -10,7 +10,7 @@
 
 #### 개발환경
 개발환경 : tomcat 9.0, MySQL 8.0.35, JDK 13.0.2, GitHub<br>
-언어 및 기술 : HTML, CSS, JavaScript, jQuery, JAVA(JSP, JDBC), MySQL 8.0.35<br>
+언어 및 기술 : HTML, CSS, JavaScript, jQuery, JAVA(JSP, JDBC)<br>
 개발도구 : Eclipse 2021_11, StarUML, ERMaster
 
 #### PPT 주소
